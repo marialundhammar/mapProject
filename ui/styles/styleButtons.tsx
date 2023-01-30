@@ -12,7 +12,6 @@ const styleButtons = StyleSheet.create({
     borderWidth: 2,
     padding: 8,
   },
-  //hejhej
 
   //ButtonText
   buttonDefaultText: {
