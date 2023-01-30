@@ -1,10 +1,9 @@
 {
   "expo": {
-    "name": "play-around",
-    "slug": "play-around",
+    "name": "MapProject",
+    "slug": "map",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -14,20 +13,26 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mariah4ara.Map",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDgUVls77NjkK8OXXqdX3MshQJqHb-ISb4"
+      }
     },
+
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "52a4c29a-4a9d-4d85-86f1-b4ed6ca2bfa2"
+      }
+    },
+    "owner": "maryh4ara"
   }
 }
