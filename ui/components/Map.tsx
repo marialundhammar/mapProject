@@ -1,7 +1,8 @@
 import React from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import styleMap from '../styles/styleMap';
 
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 const Map = () => {
   return (
@@ -11,9 +12,7 @@ const Map = () => {
       }}
     >
       <MapView
-        style={{
-          flex: 1,
-        }}
+        style={styleMap.container}
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
         initialRegion={{
