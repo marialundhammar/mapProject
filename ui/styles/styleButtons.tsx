@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native-web';
 
 const styleButtons = StyleSheet.create({
   //Buttons
-  buttonDefault: {
+  buttonNavigation: {
+    height: 40,
     width: 160,
     alignItems: 'center',
     justifyContent: 'center',
@@ -14,7 +15,7 @@ const styleButtons = StyleSheet.create({
   },
 
   //ButtonText
-  buttonDefaultText: {
+  buttonNavigationText: {
     fontWeight: 'bold',
   },
 });

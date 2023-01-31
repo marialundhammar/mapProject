@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import Map from '../components/Map';
+import NavigationButton from '../components/NavigatonButton';
 
 const MapScreen = ({ navigation }) => {
   return (
@@ -11,6 +12,8 @@ const MapScreen = ({ navigation }) => {
       }}
     >
       <Map />
+
+      <NavigationButton navigation={navigation} navigateTo={'Home'} />
     </View>
   );
 };

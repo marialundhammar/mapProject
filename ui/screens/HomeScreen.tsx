@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Pressable, Text } from 'react-native';
-import styleButtons from '../styles/styleButtons';
+import { View } from 'react-native';
+import Button from '../components/NavigatonButton';
 
 const HomeScreen = ({ navigation }) => {
+  const navigateTo = 'Map';
   return (
     <View
       style={{
@@ -12,12 +13,7 @@ const HomeScreen = ({ navigation }) => {
         alignItems: 'center',
       }}
     >
-      <Pressable
-        style={styleButtons.buttonDefault}
-        onPress={() => navigation.navigate('Map')}
-      >
-        <Text style={styleButtons.buttonDefaultText}> Check this map out </Text>
-      </Pressable>
+      <Button navigation={navigation} navigateTo={'Map'} />
     </View>
   );
 };
