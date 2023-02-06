@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
-import Button from '../components/NavigatonButton';
+import { View, Text } from 'react-native';
+import Button from '../ui/atoms/NavigatonButton';
 
-const HomeScreen = ({ navigation }) => {
+const BarScreen = ({ navigation }) => {
   const navigateTo = 'Map';
   return (
     <View
@@ -13,9 +13,10 @@ const HomeScreen = ({ navigation }) => {
         alignItems: 'center',
       }}
     >
+      <Text>You're at a bar 🍻 </Text>
       <Button navigation={navigation} navigateTo={'Map'} />
     </View>
   );
 };
 
-export default HomeScreen;
+export default BarScreen;

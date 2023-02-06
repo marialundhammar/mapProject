@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import Map from '../components/Map';
-import NavigationButton from '../components/NavigatonButton';
+import Map from '../ui/molecules/Map';
+import NavigationButton from '../ui/atoms/NavigatonButton';
 
 const MapScreen = ({ navigation }) => {
   return (
@@ -11,7 +11,7 @@ const MapScreen = ({ navigation }) => {
         height: '100%',
       }}
     >
-      <Map />
+      <Map navigation={navigation} />
 
       <NavigationButton navigation={navigation} navigateTo={'Home'} />
     </View>
