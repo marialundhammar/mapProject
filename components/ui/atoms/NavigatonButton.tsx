@@ -7,25 +7,21 @@ type NavigationButtonType = {
   navigateTo: string;
 };
 
-const Button = ({ navigation, navigateTo }: NavigationButtonType) => {
+const NavigationButton = ({ navigation, navigateTo }: NavigationButtonType) => {
   return (
     <View
       style={{
-        justifyContent: 'center',
-        alignItems: 'center',
         padding: 8,
       }}
     >
       <Pressable
-        style={styleButtons.buttonNavigation}
+        style={styleButtons.buttonDefault}
         onPress={() => navigation.navigate(navigateTo)}
       >
-        <Text style={styleButtons.buttonNavigationText}>
-          Go to {navigateTo}
-        </Text>
+        <Text style={styleButtons.buttonDefaultText}>Go to {navigateTo}</Text>
       </Pressable>
     </View>
   );
 };
 
-export default Button;
+export default NavigationButton;
