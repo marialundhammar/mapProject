@@ -10,7 +10,6 @@ import NavigationButton from '../atoms/NavigatonButton';
 
 type ModalType = {
   showModal: boolean;
-  setShowModal: any;
   content: string;
   header: string;
   showButton?: boolean;
@@ -21,7 +20,6 @@ type ModalType = {
 export const BarModal = ({
   navigation,
   showModal,
-  setShowModal,
   content,
   header,
   image,
@@ -29,18 +27,22 @@ export const BarModal = ({
 }: ModalType) => {
   const imagePath = image ? image : null;
 
-  const navigateToBar = () => {};
+  //storage state 
+  const [isModalVisible, setModalVisible] = useState(false);
 
   return (
     <View>
-      <Modal isVisible={showModal} onBackdropPress={() => setShowModal(false)}>
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={() => setModalVisible(false)}
+      >
         <View style={styles.modalStyle}>
           <View style={styleModals.header}>
             <Text style={styleText.h2}>{header}</Text>
 
             <Pressable
               style={styleButtons.closeIcon}
-              onPress={() => setShowModal(!showModal)}
+              onPress={() => setModalVisible(false)}
             >
               <AntDesign name="closecircleo" size={24} color="black" />
             </Pressable>

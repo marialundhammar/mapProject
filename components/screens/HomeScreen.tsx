@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import Button from '../ui/atoms/NavigatonButton';
 
 const HomeScreen = ({ navigation }) => {
-  const navigateTo = 'Map';
   return (
     <View
       style={{

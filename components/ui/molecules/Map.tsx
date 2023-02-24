@@ -6,6 +6,7 @@ import * as Location from 'expo-location';
 import { arrayOfBars } from '../../../configs/bars';
 import { calculateDistanceFunction, delay } from '../../../utils/helpers';
 import { BarType } from '../../../types';
+import { BarModal } from './BarModal';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -22,6 +23,7 @@ const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
   const [userLocation, setUserLocation] = useState({ lat: 0, long: 0 });
   const [barName, setbarName] = useState('');
+  const [showMarkerModal, setShowMarkerModal] = useState(false);
   const closeBars: BarType[] = [];
   const [arrayOfNearbyBars, setArrayOfNerbyBars] = useState(closeBars);
 
@@ -56,6 +58,11 @@ const Map = ({ navigation }) => {
     });
 
     console.log('checkCheck');
+  };
+
+  const onPressMarker = () => {
+    console.log('Pressed on marker hejhej');
+    setShowMarkerModal(true);
   };
 
   //onMount and every time userLocation is updated. Not sure if this is the correct way due to delay function??
@@ -106,9 +113,18 @@ const Map = ({ navigation }) => {
               longitude: bar.long,
             }}
             key={i}
+            onPress={onPressMarker}
           />
         ))}
       </MapView>
+
+      <BarModal
+        showModal={showMarkerModal}
+        showButton={true}
+        navigation={navigation}
+        content={''}
+        header={''}
+      />
     </View>
   );
 };

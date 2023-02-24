@@ -22,7 +22,6 @@ const MapScreen = ({ navigation }) => {
     >
       <BarModal
         showModal={showModal}
-        setShowModal={setShowModal}
         content={content}
         header={header}
         image={arrayOfBars[0].image}
@@ -39,7 +38,7 @@ const MapScreen = ({ navigation }) => {
         }}
       >
         <Pressable
-          onPress={() => setShowModal(!showModal)}
+          onPress={() => setShowModal(true)}
           style={styleButtons.buttonDefault}
         >
           <Text>Open Modal</Text>
