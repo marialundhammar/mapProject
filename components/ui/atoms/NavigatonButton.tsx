@@ -22,18 +22,18 @@ const NavigationButton = ({
         padding: 8,
       }}
     >
-      <LinearGradient
-        colors={isFilled ? ['#F46D6D', '#CE7C7C'] : []}
-        style={
-          isFilled
-            ? styleButtons.buttonDefault
-            : styleButtons.buttonDefaultBorder
-        }
-      >
-        <Pressable onPress={() => navigation.navigate(navigateTo)}>
+      <Pressable onPress={() => navigation.navigate(navigateTo)}>
+        <LinearGradient
+          colors={isFilled ? ['#F46D6D', '#CE7C7C'] : []}
+          style={
+            isFilled
+              ? styleButtons.buttonDefault
+              : styleButtons.buttonDefaultBorder
+          }
+        >
           <Text style={styleButtons.buttonDefaultText}> {buttonText}</Text>
-        </Pressable>
-      </LinearGradient>
+        </LinearGradient>
+      </Pressable>
     </View>
   );
 };

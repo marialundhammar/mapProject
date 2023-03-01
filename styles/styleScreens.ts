@@ -13,8 +13,22 @@ const styleScreens = StyleSheet.create({
     backgroundColor: '#1B274A',
     width: '100%',
     height: '100%',
+    flexDirection: 'column',
+    padding: 16,
+  },
+
+  left: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    justifyContent: 'flex-end',
+    marginTop: 32,
+    marginRight: 8,
+  },
+
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40,
+    marginBottom: 20,
   },
 });
 

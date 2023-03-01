@@ -44,7 +44,11 @@ const MapScreen = ({ navigation }) => {
           <Text>Open Modal</Text>
         </Pressable>
 
-        <NavigationButton navigation={navigation} navigateTo={'Home'} />
+        <NavigationButton
+          navigation={navigation}
+          navigateTo={'Bar'}
+          buttonText={'GÅ TILL BAR'}
+        />
       </View>
     </View>
   );

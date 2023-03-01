@@ -10,7 +10,6 @@ const styleButtons = StyleSheet.create({
     borderRadius: 10,
     padding: 8,
     paddingTop: 12,
-    marginTop: 24,
   },
 
   buttonDefaultBorder: {
@@ -21,7 +20,7 @@ const styleButtons = StyleSheet.create({
     borderRadius: 10,
     padding: 8,
     paddingTop: 12,
-    marginTop: 24,
+
     borderColor: '#FFD3D3',
     borderWidth: 1,
   },

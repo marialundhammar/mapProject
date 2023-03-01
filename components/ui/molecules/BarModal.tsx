@@ -3,7 +3,7 @@ import { Text, View, Button, Pressable, Image } from 'react-native';
 import Modal from 'react-native-modal';
 import styleButtons from '../../../styles/styleButtons';
 import styleText from '../../../styles/styleTexts';
-import styleModals from '../../../styles/styleModals';
+import styleModals from '../../../styles/styleComponents';
 import { StyleSheet } from 'react-native-web';
 import { AntDesign } from '@expo/vector-icons';
 import NavigationButton from '../atoms/NavigatonButton';
@@ -19,7 +19,7 @@ type ModalType = {
 
 export const BarModal = ({
   navigation,
-  showModal,
+
   content,
   header,
   image,
@@ -27,7 +27,7 @@ export const BarModal = ({
 }: ModalType) => {
   const imagePath = image ? image : null;
 
-  //storage state 
+  //storage state
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
