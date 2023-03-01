@@ -10,20 +10,37 @@ import { LinearGradient } from 'expo-linear-gradient';
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const logInUser = async (auth, email, password) => {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-    console.log('user logged in', userCredential.user.email);
+      console.log('user logged in', userCredential.user.email);
 
-    await navigation.navigate('Home');
+      await navigation.navigate('Home');
+    } catch (error) {
+      if (error.code === 'auth/user-not-found') {
+        setErrorMessage('Användare finns inte');
+      } else if (
+        error.code === 'auth/invalid-email' ||
+        error.code === 'auth/wrong-password'
+      ) {
+        setErrorMessage('Fel användarnamn eller lösenord');
+      } else {
+        console.log(error);
+        // Handle other errors
+      }
+    }
   };
+
   return (
     <View style={styleScreens.defaultScreen}>
+      {errorMessage && <Text> {errorMessage}</Text>}
       <TextInput
         style={styleTexts.textInput}
         placeholder="Email"

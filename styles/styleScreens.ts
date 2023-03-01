@@ -8,6 +8,14 @@ const styleScreens = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  onboardingScreen: {
+    backgroundColor: '#1B274A',
+    width: '100%',
+    height: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
 });
 
 export default styleScreens;

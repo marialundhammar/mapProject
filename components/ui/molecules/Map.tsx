@@ -92,6 +92,8 @@ const Map = ({ navigation }) => {
     <View
       style={{
         flex: 1,
+        width: 400,
+        height: 200,
       }}
     >
       <MapView

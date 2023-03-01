@@ -6,6 +6,12 @@ const styleTexts = StyleSheet.create({
   h2: {
     fontSize: 30,
   },
+  h3: {
+    fontWeight: 'bold',
+    fontFamily: 'Passion-One',
+    fontSize: 24,
+    color: '#FFD3D3',
+  },
 
   bodyText: {
     fontSize: 16,
@@ -22,7 +28,7 @@ const styleTexts = StyleSheet.create({
     width: 224,
     borderRadius: 8,
     height: 40,
-    fontFamily: 'Assistant-Regular',
+    /*  fontFamily: 'Assistant-Regular', */
     color: '#FFD3D3',
   },
 });
