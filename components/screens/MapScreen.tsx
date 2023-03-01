@@ -5,6 +5,8 @@ import NavigationButton from '../ui/atoms/NavigatonButton';
 import { BarModal } from '../ui/molecules/BarModal';
 import styleButtons from '../../styles/styleButtons';
 import { arrayOfBars } from '../../configs/bars';
+import TopHeader from '../ui/molecules/TopHeader';
+import styleScreens from '../../styles/styleScreens';
 
 const MapScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
@@ -14,41 +16,46 @@ const MapScreen = ({ navigation }) => {
   const header = 'Header';
 
   return (
-    <View
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
-    >
-      <BarModal
-        showModal={showModal}
-        content={content}
-        header={header}
-        image={arrayOfBars[0].image}
-        showButton={true}
+    <View>
+      <TopHeader
         navigation={navigation}
+        navigateTo={'Map'}
+        showBackButton={true}
       />
-      <Map navigation={navigation} />
 
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: 8,
-        }}
-      >
-        <Pressable
-          onPress={() => setShowModal(true)}
-          style={styleButtons.buttonDefault}
-        >
-          <Text>Open Modal</Text>
-        </Pressable>
-
-        <NavigationButton
+      <View style={styleScreens.defaultScreen}>
+        <BarModal
+          showModal={showModal}
+          content={content}
+          header={header}
+          image={arrayOfBars[0].image}
+          showButton={true}
           navigation={navigation}
-          navigateTo={'Bar'}
-          buttonText={'GÅ TILL BAR'}
         />
+        <Map navigation={navigation} />
+
+        <View
+          style={{
+            justifyContent: 'center',
+            position: 'absolute',
+
+            zIndex: 1,
+            backgroundColor: 'black',
+          }}
+        >
+          <Pressable
+            onPress={() => setShowModal(true)}
+            style={styleButtons.buttonDefault}
+          >
+            <Text>Open Modal</Text>
+          </Pressable>
+
+          <NavigationButton
+            navigation={navigation}
+            navigateTo={'Bar'}
+            buttonText={'GÅ TILL BAR'}
+          />
+        </View>
       </View>
     </View>
   );

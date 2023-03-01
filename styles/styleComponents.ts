@@ -43,6 +43,20 @@ const styleModals = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 20,
   },
+
+  topHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#1B274A',
+    height: 90,
+    padding: 16,
+    paddingTop: 46,
+  },
+  leftComponent: {
+    flexDirection: 'column',
+    marginLeft: 'auto',
+  },
 });
 
 export default styleModals;

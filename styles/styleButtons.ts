@@ -69,6 +69,11 @@ const styleButtons = StyleSheet.create({
     borderRadius: 20,
   },
 
+  buttonBackText: {
+    fontSize: 18,
+    color: '#FFD3D3',
+  },
+
   icon: {
     fontSize: 46,
     alignItems: 'center',

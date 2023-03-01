@@ -17,7 +17,7 @@ const styleScreens = StyleSheet.create({
     padding: 16,
   },
 
-  left: {
+  between: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginTop: 32,
