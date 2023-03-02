@@ -7,6 +7,7 @@ import { arrayOfBars } from '../../../configs/bars';
 import { calculateDistanceFunction, delay } from '../../../utils/helpers';
 import { BarType } from '../../../types';
 import { BarModal } from './BarModal';
+import mapStyle from '../../../assets/mapStyle';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -89,15 +90,10 @@ const Map = ({ navigation }) => {
   //add userLocation
 
   return (
-    <View
-      style={{
-        flex: 1,
-        width: 400,
-        height: 200,
-      }}
-    >
+    <View style={{ flex: 1 }}>
       <MapView
         style={styleMap.container}
+        customMapStyle={mapStyle}
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
         initialRegion={{

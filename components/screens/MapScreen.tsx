@@ -7,6 +7,7 @@ import styleButtons from '../../styles/styleButtons';
 import { arrayOfBars } from '../../configs/bars';
 import TopHeader from '../ui/molecules/TopHeader';
 import styleScreens from '../../styles/styleScreens';
+import BottomContainer from '../ui/molecules/BottomContainer';
 
 const MapScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
@@ -17,13 +18,9 @@ const MapScreen = ({ navigation }) => {
 
   return (
     <View>
-      <TopHeader
-        navigation={navigation}
-        navigateTo={'Map'}
-        showBackButton={true}
-      />
-
-      <View style={styleScreens.defaultScreen}>
+      <TopHeader navigation={navigation} showBackButton={true} />
+      <View style={styleScreens.mapScreen}>
+        <Map navigation={navigation} />
         <BarModal
           showModal={showModal}
           content={content}
@@ -32,30 +29,7 @@ const MapScreen = ({ navigation }) => {
           showButton={true}
           navigation={navigation}
         />
-        <Map navigation={navigation} />
-
-        <View
-          style={{
-            justifyContent: 'center',
-            position: 'absolute',
-
-            zIndex: 1,
-            backgroundColor: 'black',
-          }}
-        >
-          <Pressable
-            onPress={() => setShowModal(true)}
-            style={styleButtons.buttonDefault}
-          >
-            <Text>Open Modal</Text>
-          </Pressable>
-
-          <NavigationButton
-            navigation={navigation}
-            navigateTo={'Bar'}
-            buttonText={'GÅ TILL BAR'}
-          />
-        </View>
+        <BottomContainer navigation={navigation} />
       </View>
     </View>
   );

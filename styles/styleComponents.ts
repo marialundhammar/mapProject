@@ -18,6 +18,9 @@ const styleModals = StyleSheet.create({
   content: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#1B274A',
+    padding: 20,
+    paddingBottom: 100,
   },
 
   progressItem: {

@@ -17,6 +17,13 @@ const styleScreens = StyleSheet.create({
     padding: 16,
   },
 
+  mapScreen: {
+    backgroundColor: '#1B274A',
+    width: '100%',
+    height: '95%',
+    flexDirection: 'column',
+  },
+
   between: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
