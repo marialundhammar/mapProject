@@ -6,6 +6,8 @@ import * as Location from 'expo-location';
 import { arrayOfBars } from '../../../configs/bars';
 import { calculateDistanceFunction, delay } from '../../../utils/helpers';
 import { BarType } from '../../../types';
+import { BarModal } from './BarModal';
+import mapStyle from '../../../assets/mapStyle';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -21,9 +23,10 @@ interface CalculateUserAndBarType extends CalculateDistanceFunctionType {
 const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
   const [userLocation, setUserLocation] = useState({ lat: 0, long: 0 });
-  const [locationTracking, setLocationTracking] = useState(false);
   const [barName, setbarName] = useState('');
-  const arrayOfNearbyBars: BarType[] = [];
+  const [showMarkerModal, setShowMarkerModal] = useState(false);
+  const closeBars: BarType[] = [];
+  const [arrayOfNearbyBars, setArrayOfNerbyBars] = useState(closeBars);
 
   const checkDistance = ({
     lat1,
@@ -35,18 +38,13 @@ const Map = ({ navigation }) => {
     const distance = calculateDistanceFunction({ lat1, lon1, lat2, lon2 });
     if (distance < 0.03) {
       setbarName(name);
+      console.log(name);
       //navigation.navigate('Bar');
     }
     if (distance < 0.5) {
-      arrayOfNearbyBars.push({ lat: lat1, long: lon1, name: name });
+      closeBars.push({ lat: lat1, long: lon1, name: name, id: name });
+      setArrayOfNerbyBars(closeBars);
     }
-  };
-
-  const updateUserLocation = async (lat: number, long: number) => {
-    setUserLocation({
-      lat: lat,
-      long: long,
-    });
   };
 
   const checkDistanceToAllBars = () => {
@@ -60,10 +58,15 @@ const Map = ({ navigation }) => {
       });
     });
 
-    console.log(arrayOfNearbyBars);
+    console.log('checkCheck');
   };
 
-  //onMount
+  const onPressMarker = () => {
+    console.log('Pressed on marker hejhej');
+    setShowMarkerModal(true);
+  };
+
+  //onMount and every time userLocation is updated. Not sure if this is the correct way due to delay function??
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
@@ -73,38 +76,24 @@ const Map = ({ navigation }) => {
         return;
       } else {
         let location = await Location.getCurrentPositionAsync({});
-        await updateUserLocation(
-          location.coords.latitude,
-          location.coords.longitude
-        );
-        setLocationTracking(true);
-      }
-    })();
-  }, []);
-
-  //this is done when map is mounted
-  useEffect(() => {
-    (async () => {
-      //requestForeground -> only when the app is on, requestBackground while the app is running in the background
-      if (locationTracking) {
-        let location = await Location.getCurrentPositionAsync({});
         await delay(1000);
+        await setUserLocation({
+          lat: location.coords.latitude,
+          long: location.coords.longitude,
+        });
         console.log(userLocation);
       }
     })();
-  }, [userLocation]);
+
+    checkDistanceToAllBars();
+  }, []);
+  //add userLocation
 
   return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
-      {barName && <Text>Close to the bar: {barName} </Text>}
-
-      <Button title="distance" onPress={checkDistanceToAllBars}></Button>
+    <View style={{ flex: 1 }}>
       <MapView
         style={styleMap.container}
+        customMapStyle={mapStyle}
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
         initialRegion={{
@@ -122,9 +111,18 @@ const Map = ({ navigation }) => {
               longitude: bar.long,
             }}
             key={i}
+            onPress={onPressMarker}
           />
         ))}
       </MapView>
+
+      <BarModal
+        showModal={showMarkerModal}
+        showButton={true}
+        navigation={navigation}
+        content={''}
+        header={''}
+      />
     </View>
   );
 };

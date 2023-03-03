@@ -2,6 +2,8 @@ export type BarType = {
   lat: number;
   long: number;
   name: string;
+  id: string;
+  image?: any;
 };
 
 interface CalculateDistanceFunctionType {
