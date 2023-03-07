@@ -7,7 +7,15 @@ import DrinkPreferences from '../molecules/DrinkPreferences';
 
 const StepOne = () => {
   return (
-    <View>
+    <View
+      style={{
+        /*   position: 'sticky', */
+        bottom: 0,
+        height: 420,
+        width: '100%',
+        zIndex: 100,
+      }}
+    >
       <Text style={styleTexts.h3}>Vad gillar du? </Text>
       <DrinkPreferences />
     </View>

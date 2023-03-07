@@ -7,6 +7,7 @@ const styleScreens = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'column',
   },
 
   onboardingScreen: {
@@ -34,8 +35,19 @@ const styleScreens = StyleSheet.create({
   center: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
-    marginBottom: 20,
+
+    backgroundColor: '#1B274A',
+  },
+
+  container: {
+    backgroundColor: '#1B274A',
+    flex: 1,
+    flexDirection: 'column',
+  },
+  halfScreen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

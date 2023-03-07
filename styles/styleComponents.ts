@@ -60,6 +60,35 @@ const styleModals = StyleSheet.create({
     flexDirection: 'column',
     marginLeft: 'auto',
   },
+
+  bottomNavigation: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    height: 120,
+    paddingBottom: 40,
+  },
+
+  cardStyle: {
+    borderWidth: 1,
+    height: 100,
+    width: 300,
+    borderColor: '#E68383',
+    paddingTop: 10,
+    borderRadius: 10,
+    marginTop: 8,
+    zIndex: -10,
+  },
+  cardStyleIsFilled: {
+    borderWidth: 1,
+    height: 100,
+    width: 300,
+    backgroundColor: '#E68383',
+    paddingTop: 10,
+    borderRadius: 10,
+    marginTop: 8,
+    zIndex: -10,
+  },
 });
 
 export default styleModals;

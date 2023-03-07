@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import styleScreens from '../../styles/styleScreens';
-import DrinkPreferences from '../ui/molecules/DrinkPreferences';
 import Progressbar from '../ui/molecules/Progressbar';
-import styleTexts from '../../styles/styleTexts';
-import BurgerMenu from '../ui/atoms/BurgerMenu';
 import StepOne from '../ui/organisms/StepOne';
 import NavigationButton from '../ui/atoms/NavigatonButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import styleButtons from '../../styles/styleButtons';
 import StepTwo from '../ui/organisms/StepTwo';
 import StepThree from '../ui/organisms/StepThree';
-import Loading from '../ui/organisms/Loading';
 import TopHeader from '../ui/molecules/TopHeader';
 
 const OnboardingScreen = ({ navigation }) => {

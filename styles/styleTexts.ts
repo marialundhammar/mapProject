@@ -21,6 +21,12 @@ const styleTexts = StyleSheet.create({
     color: '#FFD3D3',
   },
 
+  miniText: {
+    fontSize: 12,
+    color: '#FFD3D3',
+    padding: 10,
+  },
+
   textInput: {
     borderWidth: 1,
     borderColor: '#FFD3D3',
