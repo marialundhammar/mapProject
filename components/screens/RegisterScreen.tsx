@@ -4,7 +4,7 @@ import styleTexts from '../../styles/styleTexts';
 import styleButtons from '../../styles/styleButtons';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { auth, db } from '../../firebase';
+import { auth, db } from '../../firebase/firebase';
 import styleScreens from '../../styles/styleScreens';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Formik, Form, Field } from 'formik';

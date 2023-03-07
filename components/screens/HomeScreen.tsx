@@ -29,8 +29,8 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <View style={styleScreens.halfScreen}>
         <ScrollView>
-          {arrayOfGroups.map((group) => (
-            <GroupCard text={group.title} />
+          {arrayOfGroups.map((group, i) => (
+            <GroupCard text={group.title} key={i} />
           ))}
         </ScrollView>
       </View>

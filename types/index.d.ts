@@ -12,3 +12,8 @@ interface CalculateDistanceFunctionType {
   lat2: number;
   lon2: number;
 }
+
+export type ContextStoreType = {
+  step: number;
+  setStep: (number) => void;
+};

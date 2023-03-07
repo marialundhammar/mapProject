@@ -4,7 +4,7 @@ import styleTexts from '../../styles/styleTexts';
 import styleButtons from '../../styles/styleButtons';
 import styleScreens from '../../styles/styleScreens';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth } from '../../firebase/firebase';
 import { LinearGradient } from 'expo-linear-gradient';
 import TopHeader from '../ui/molecules/TopHeader';
 
