@@ -12,20 +12,15 @@ import TopHeader from '../ui/molecules/TopHeader';
 import { ContextStore } from '../../context/ContextStore';
 
 const OnboardingScreen = ({ navigation }) => {
-  const [stepOne, setStepOne] = useState(true);
-  const [stepTwo, setStepTwo] = useState(false);
-  const [stepThree, setStepThree] = useState(false);
   const { step, setStep } = useContext(ContextStore);
 
   const nextStepHandler = () => {
     if (step === 1) {
       setStep(2);
-      setStepTwo(true);
     }
 
     if (step === 2) {
       setStep(3);
-      setStepThree(true);
     }
   };
 
@@ -43,7 +38,7 @@ const OnboardingScreen = ({ navigation }) => {
           <StepThree navigation={navigation} />
         )}
 
-        {!stepThree && (
+        {!(step === 3) && (
           <View style={styleScreens.center}>
             <Pressable onPress={nextStepHandler}>
               <LinearGradient
