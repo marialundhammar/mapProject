@@ -7,13 +7,6 @@ import NavigationButton from '../atoms/NavigatonButton';
 const BottomContainer = ({ navigation }) => {
   return (
     <View style={styleComponents.content}>
-      {/*       <Pressable
-        onPress={() => setShowModal(true)}
-        style={styleButtons.buttonDefault}
-      >
-        <Text>Open Modal</Text>
-      </Pressable> */}
-
       <NavigationButton
         navigation={navigation}
         navigateTo={'Bar'}

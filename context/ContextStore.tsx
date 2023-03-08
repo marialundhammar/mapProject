@@ -5,9 +5,10 @@ export const ContextStore = createContext<ContextStoreType | null>(null!);
 
 const ContextStoreProvider = ({ children }) => {
   const [step, setStep] = useState(1);
+  const [user, setUser] = useState(null);
 
   return (
-    <ContextStore.Provider value={{ step, setStep }}>
+    <ContextStore.Provider value={{ step, setStep, user, setUser }}>
       {children}
     </ContextStore.Provider>
   );

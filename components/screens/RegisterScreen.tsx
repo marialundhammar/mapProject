@@ -7,7 +7,6 @@ import { collection, addDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase/firebase';
 import styleScreens from '../../styles/styleScreens';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Formik, Form, Field } from 'formik';
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -59,6 +58,7 @@ const RegisterScreen = ({ navigation }) => {
 
       console.log('user created');
       await addDoc(collection(db, 'users'), {
+        uid: auth.currentUser.uid,
         username: username,
         email: email,
       });

@@ -4,8 +4,6 @@ import styleTexts from '../../../styles/styleTexts';
 import Button from '../atoms/Button';
 import Slider from '@react-native-community/slider';
 import styleScreens from '../../../styles/styleScreens';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import styleButtons from '../../../styles/styleButtons';
 
 const StepTwo = () => {
   const [sliderValue, setSliderValue] = useState(0);

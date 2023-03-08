@@ -1,20 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, ScrollView } from 'react-native';
 import styleComponents from '../../../styles/styleComponents';
-import styleScreens from '../../../styles/styleScreens';
 import styleTexts from '../../../styles/styleTexts';
 import GroupCard from '../atoms/GroupCard';
 import NavigationButton from '../atoms/NavigatonButton';
+import { arrayOfGroups } from '../../../configs/groups';
+import { ContextStore } from '../../../context/ContextStore';
 
-const arrayOfGroups = [
-  { title: 'tjejkväll' },
-  { title: 'datenight <3' },
-  { title: 'Party med polarna' },
-  { title: 'Jöbbet' },
-  { title: 'Jöbbet' },
-  { title: 'Jöbbet' },
-  { title: 'Jöbbet' },
-];
 const StepThree = ({ navigation }) => {
   return (
     <View

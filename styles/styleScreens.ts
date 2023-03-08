@@ -15,7 +15,6 @@ const styleScreens = StyleSheet.create({
     width: '100%',
     height: '100%',
     flexDirection: 'column',
-    padding: 16,
   },
 
   mapScreen: {
@@ -47,7 +46,12 @@ const styleScreens = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  halfScreen: {
+  halfScreenBottom: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingLeft: 20,
+  },
+  halfScreenTop: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

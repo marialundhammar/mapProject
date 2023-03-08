@@ -3,16 +3,12 @@ import { StyleSheet } from 'react-native-web';
 const styleTexts = StyleSheet.create({
   //h2
 
-  h2: {
-    fontSize: 30,
-  },
   h3: {
     fontWeight: 'bold',
     fontFamily: 'Passion-One',
     fontSize: 24,
     color: '#FFD3D3',
-    marginBottom: 40,
-    marginLeft: 16,
+    marginBottom: 10,
   },
 
   bodyText: {
@@ -24,7 +20,6 @@ const styleTexts = StyleSheet.create({
   miniText: {
     fontSize: 12,
     color: '#FFD3D3',
-    padding: 10,
   },
 
   textInput: {

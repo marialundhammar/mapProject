@@ -6,6 +6,15 @@ export type BarType = {
   image?: any;
 };
 
+export type GroupType = {
+  title: string;
+};
+
+export type BarTourTypes = {
+  title: string;
+  numbersOfBars: number;
+};
+
 interface CalculateDistanceFunctionType {
   lat1: number;
   lon1: number;
@@ -16,4 +25,6 @@ interface CalculateDistanceFunctionType {
 export type ContextStoreType = {
   step: number;
   setStep: (number) => void;
+  user: { email: string; uid: number };
+  setUser: (number) => void;
 };

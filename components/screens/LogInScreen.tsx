@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Pressable, TextInput, View, Text } from 'react-native';
 import styleTexts from '../../styles/styleTexts';
 import styleButtons from '../../styles/styleButtons';
@@ -7,11 +7,14 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import { LinearGradient } from 'expo-linear-gradient';
 import TopHeader from '../ui/molecules/TopHeader';
+import { ContextStore } from '../../context/ContextStore';
 
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { user, setUser } = useContext(ContextStore);
 
   const logInUser = async (auth, email, password) => {
     try {
@@ -22,6 +25,8 @@ const LogInScreen = ({ navigation }) => {
       );
 
       console.log('user logged in', userCredential.user.email);
+      setUser(userCredential.user);
+      console.log('THSI IS USER', user, userCredential);
 
       await navigation.navigate('Home');
     } catch (error) {
