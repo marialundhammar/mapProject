@@ -4,6 +4,8 @@ import styleTexts from '../../../styles/styleTexts';
 import Button from '../atoms/Button';
 import Slider from '@react-native-community/slider';
 import styleScreens from '../../../styles/styleScreens';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import styleButtons from '../../../styles/styleButtons';
 
 const StepTwo = () => {
   const [sliderValue, setSliderValue] = useState(0);
@@ -18,12 +20,12 @@ const StepTwo = () => {
       style={{
         /*   position: 'sticky', */
         bottom: 0,
-        height: 420,
+        height: 500,
         width: '100%',
         zIndex: 100,
       }}
     >
-      <View>
+      <View style={styleScreens.space}>
         <Text style={styleTexts.h3}>Var vill du barhoppa?</Text>
         <View style={styleScreens.center}>
           <Button buttonText={'Använd min position'} isFilled={true} />

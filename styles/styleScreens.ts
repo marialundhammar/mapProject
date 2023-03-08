@@ -35,8 +35,11 @@ const styleScreens = StyleSheet.create({
   center: {
     justifyContent: 'center',
     alignItems: 'center',
-
     backgroundColor: '#1B274A',
+  },
+
+  space: {
+    marginBottom: 60,
   },
 
   container: {

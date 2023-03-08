@@ -11,8 +11,8 @@ const styleTexts = StyleSheet.create({
     fontFamily: 'Passion-One',
     fontSize: 24,
     color: '#FFD3D3',
-    marginBottom: 20,
-    marginLeft: 12,
+    marginBottom: 40,
+    marginLeft: 16,
   },
 
   bodyText: {

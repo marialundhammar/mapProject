@@ -21,7 +21,7 @@ const StepThree = ({ navigation }) => {
       style={{
         /*   position: 'sticky', */
         bottom: 0,
-        height: 420,
+        height: 500,
         width: '100%',
         zIndex: 100,
       }}
