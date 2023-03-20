@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import styleMap from '../../../styles/styleMap';
 import { Button, View, Text } from 'react-native';
@@ -8,6 +8,7 @@ import { calculateDistanceFunction, delay } from '../../../utils/helpers';
 import { BarType } from '../../../types';
 import { BarModal } from './BarModal';
 import mapStyle from '../../../assets/mapStyle';
+import { ContextStore } from '../../../context/ContextStore';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -27,6 +28,11 @@ const Map = ({ navigation }) => {
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const closeBars: BarType[] = [];
   const [arrayOfNearbyBars, setArrayOfNerbyBars] = useState(closeBars);
+  const { barTour } = useContext(ContextStore);
+
+  const bars = barTour[0].bars;
+
+  console.log('THIS IS BARS', bars);
 
   const checkDistance = ({
     lat1,
@@ -48,7 +54,7 @@ const Map = ({ navigation }) => {
   };
 
   const checkDistanceToAllBars = () => {
-    arrayOfBars.map((bar) => {
+    bars.map((bar) => {
       checkDistance({
         lat1: userLocation.lat,
         lon1: userLocation.long,
@@ -104,7 +110,7 @@ const Map = ({ navigation }) => {
           longitudeDelta: 0.021,
         }}
       >
-        {arrayOfBars.map((bar, i) => (
+        {bars.map((bar, i) => (
           <Marker
             coordinate={{
               latitude: bar.lat,
