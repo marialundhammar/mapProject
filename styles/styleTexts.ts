@@ -12,7 +12,7 @@ const styleTexts = StyleSheet.create({
   },
 
   bodyText: {
-    fontSize: 16,
+    fontSize: 14,
     paddingVertical: 24,
     color: '#FFD3D3',
   },
@@ -38,6 +38,13 @@ const styleTexts = StyleSheet.create({
   icons: {
     color: '#FFD3D3',
     fontSize: 35,
+  },
+
+  linkText: {
+    fontSize: 14,
+    paddingVertical: 24,
+    color: '#F46D6D',
+    fontWeight: 'bold',
   },
 });
 

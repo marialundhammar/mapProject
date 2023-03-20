@@ -38,7 +38,13 @@ const styleScreens = StyleSheet.create({
   },
 
   space: {
-    marginBottom: 60,
+    marginBottom: 40,
+  },
+
+  bottom: {
+    position: 'absolute',
+    bottom: 10,
+    flexDirection: 'row',
   },
 
   container: {

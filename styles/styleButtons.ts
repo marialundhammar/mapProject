@@ -20,7 +20,6 @@ const styleButtons = StyleSheet.create({
     borderRadius: 10,
     padding: 8,
     paddingTop: 12,
-
     borderColor: '#FFD3D3',
     borderWidth: 1,
   },

@@ -107,6 +107,7 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
         placeholderTextColor={'#FFD3D3'}
       />
+
       <LinearGradient
         colors={['#F46D6D', '#CE7C7C']}
         style={
@@ -122,6 +123,12 @@ const RegisterScreen = ({ navigation }) => {
           <Text style={styleButtons.buttonDefaultText}>REGGA MIG</Text>
         </Pressable>
       </LinearGradient>
+
+      <View>
+        <Pressable onPress={() => navigation.navigate('LogIn')}>
+          <Text style={styleTexts.bodyText}>Tillbaka till login</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };

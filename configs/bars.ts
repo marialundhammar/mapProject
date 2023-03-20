@@ -26,4 +26,11 @@ export const arrayOfBars: BarType[] = [
     name: 'Vin-Vanjas',
     id: 'vin-vanjas',
   },
+
+  {
+    lat: 55.59325579503047,
+    long: 13.010034844195687,
+    name: 'Vin-Vanjas',
+    id: 'vin-vanjas',
+  },
 ];

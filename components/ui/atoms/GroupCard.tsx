@@ -5,6 +5,8 @@ import styleComponents from '../../../styles/styleComponents';
 import styleTexts from '../../../styles/styleTexts';
 import { db } from '../../../firebase/firebase';
 import { ContextStore } from '../../../context/ContextStore';
+import { arrayOfBarTours } from '../../../configs/barTours';
+
 import {
   collection,
   getDocs,
@@ -21,31 +23,35 @@ type GroupCardType = {
 
 const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
   const [isClicked, setIsClicked] = useState(false);
-  const { user } = useContext(ContextStore);
+  const { user, setBarTour } = useContext(ContextStore);
+
+  console.log(arrayOfBarTours);
 
   const handleIsClicked = () => {
     setIsClicked(!isClicked);
   };
 
-  const choosBarTourHandler = () => {
+  const chooseBarTourHandler = () => {
     const userCollectionRef = collection(db, 'users');
     const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
+
+    const barTour = arrayOfBarTours.filter((bar) => bar.title === text);
+    setBarTour(barTour);
 
     getDocs(userQuery)
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           const userDocRef = doc.ref;
           return updateDoc(userDocRef, {
-            barTour: text,
-            numberOfBars: numberOfBars,
+            barTour: barTour,
           });
         });
       })
       .then(() => {
-        console.log('User document updated successfully');
+        console.log('No success');
       })
       .catch((error) => {
-        console.log('Error updating user document: ', error);
+        console.log('Errroooor: ', error);
       });
 
     navigation.navigate('Map');
@@ -63,14 +69,12 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
       <View style={{ padding: 8 }}>
         <Text style={styleTexts.h3}>{text}</Text>
         {numberOfBars && (
-          <Text style={styleTexts.miniText}>
-            Number of bars: {numberOfBars}
-          </Text>
+          <Text style={styleTexts.miniText}>Antal stopp {numberOfBars}</Text>
         )}
         {isClicked && numberOfBars && (
           <View>
             <Text style={styleTexts.miniText}>Show all bars here ...</Text>
-            <Pressable onPress={choosBarTourHandler}>
+            <Pressable onPress={chooseBarTourHandler}>
               <Text style={styleButtons.buttonDefaultText}>VÄLJ RUNDA</Text>
             </Pressable>
           </View>

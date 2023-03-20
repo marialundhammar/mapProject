@@ -13,6 +13,7 @@ export type GroupType = {
 export type BarTourTypes = {
   title: string;
   numbersOfBars: number;
+  bars: BarType[];
 };
 
 interface CalculateDistanceFunctionType {
@@ -27,4 +28,6 @@ export type ContextStoreType = {
   setStep: (number) => void;
   user: { email: string; uid: number };
   setUser: (number) => void;
+  barTour: BarTourTypes;
+  setBarTour: (object) => void;
 };

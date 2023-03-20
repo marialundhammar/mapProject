@@ -5,10 +5,13 @@ import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
 import GroupCard from '../ui/atoms/GroupCard';
 import Button from '../ui/atoms/NavigatonButton';
+import TopHeader from '../ui/molecules/TopHeader';
 
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styleScreens.container}>
+      <TopHeader navigation={navigation} showBackButton={false} />
+
       <View style={styleScreens.halfScreenTop}>
         <Button
           navigation={navigation}

@@ -26,7 +26,7 @@ const OnboardingScreen = ({ navigation }) => {
 
   return (
     <View>
-      <TopHeader navigation={navigation} showBackButton={false} />
+      <TopHeader navigation={navigation} showBackButton={true} />
 
       <View style={styleScreens.onboardingScreen}>
         <Progressbar />
