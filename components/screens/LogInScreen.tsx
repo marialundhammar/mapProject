@@ -6,7 +6,6 @@ import styleScreens from '../../styles/styleScreens';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import { LinearGradient } from 'expo-linear-gradient';
-import TopHeader from '../ui/molecules/TopHeader';
 import { ContextStore } from '../../context/ContextStore';
 
 const LogInScreen = ({ navigation }) => {
@@ -23,10 +22,7 @@ const LogInScreen = ({ navigation }) => {
         email,
         password
       );
-
-      console.log('user logged in', userCredential.user.email);
       setUser(userCredential.user);
-      console.log('THSI IS USER', user, userCredential);
 
       await navigation.navigate('Home');
     } catch (error) {
@@ -39,7 +35,6 @@ const LogInScreen = ({ navigation }) => {
         setErrorMessage('Fel användarnamn eller lösenord');
       } else {
         console.log(error);
-        // Handle other errors
       }
     }
   };
@@ -77,7 +72,7 @@ const LogInScreen = ({ navigation }) => {
       <View style={styleScreens.bottom}>
         <Text style={styleTexts.bodyText}>Inte medlem än? </Text>
         <Pressable onPress={() => navigation.navigate('Register')}>
-          <Text style={styleTexts.linkText}>Registrera dig här</Text>
+          <Text style={styleTexts.linkText}>Regga dig här</Text>
         </Pressable>
       </View>
     </View>

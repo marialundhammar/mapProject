@@ -27,9 +27,9 @@ const styleModals = StyleSheet.create({
     borderColor: '#E68383',
     borderWidth: 1,
     height: 16,
-    width: 100,
+    width: 110,
     borderRadius: 20,
-    margin: 8,
+    marginRight: 12,
   },
 
   progressItemFilled: {
@@ -37,9 +37,9 @@ const styleModals = StyleSheet.create({
     backgroundColor: '#E68383',
     borderWidth: 1,
     height: 16,
-    width: 100,
+    width: 110,
     borderRadius: 20,
-    margin: 8,
+    marginRight: 12,
   },
 
   progressBar: {

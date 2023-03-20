@@ -11,7 +11,6 @@ const StepThree = ({ navigation }) => {
   return (
     <View
       style={{
-        /*   position: 'sticky', */
         bottom: 0,
         height: 500,
         width: '100%',
@@ -25,7 +24,6 @@ const StepThree = ({ navigation }) => {
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-          /*   position: 'sticky', */
         }}
       >
         <ScrollView>

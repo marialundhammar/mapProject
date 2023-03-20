@@ -16,7 +16,9 @@ const StepOne = () => {
         zIndex: 100,
       }}
     >
-      <Text style={styleTexts.h3}>Vad gillar du? </Text>
+      <View style={{ marginLeft: 0 }}>
+        <Text style={styleTexts.h3}>Vad gillar du? </Text>
+      </View>
       <DrinkPreferences />
     </View>
   );
