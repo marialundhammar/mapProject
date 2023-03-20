@@ -6,8 +6,6 @@ import { arrayOfBars } from '../../configs/bars';
 import TopHeader from '../ui/molecules/TopHeader';
 import styleScreens from '../../styles/styleScreens';
 import BottomContainer from '../ui/molecules/BottomContainer';
-import { ContextStore } from '..';
-
 
 const MapScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
