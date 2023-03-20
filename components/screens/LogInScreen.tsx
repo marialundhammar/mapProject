@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Pressable, TextInput, View, Text } from 'react-native';
 import styleTexts from '../../styles/styleTexts';
 import styleButtons from '../../styles/styleButtons';
 import styleScreens from '../../styles/styleScreens';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth } from '../../firebase/firebase';
 import { LinearGradient } from 'expo-linear-gradient';
 import TopHeader from '../ui/molecules/TopHeader';
+import { ContextStore } from '../../context/ContextStore';
 
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { user, setUser } = useContext(ContextStore);
+  console.log('HERE IS USER LOGGED IN???', user);
 
   const logInUser = async (auth, email, password) => {
     try {
@@ -22,6 +25,8 @@ const LogInScreen = ({ navigation }) => {
       );
 
       console.log('user logged in', userCredential.user.email);
+      setUser(userCredential.user);
+      console.log('THSI IS USER', user, userCredential);
 
       await navigation.navigate('Home');
     } catch (error) {
@@ -40,11 +45,9 @@ const LogInScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <TopHeader navigation={navigation} showBackButton={false} />
-
-      <View style={styleScreens.defaultScreen}>
-        {errorMessage && <Text> {errorMessage}</Text>}
+    <View style={styleScreens.defaultScreen}>
+      {errorMessage && <Text> {errorMessage}</Text>}
+      <View style={styleScreens.space}>
         <TextInput
           style={styleTexts.textInput}
           placeholder="Email"
@@ -60,23 +63,25 @@ const LogInScreen = ({ navigation }) => {
           value={password}
           placeholderTextColor={'#FFD3D3'}
         />
-        <LinearGradient
-          colors={['#F46D6D', '#CE7C7C']}
-          style={styleButtons.buttonDefault}
-        >
-          <Pressable onPress={() => logInUser(auth, email, password)}>
-            <Text style={styleButtons.buttonDefaultText}>LOG IN</Text>
-          </Pressable>
-        </LinearGradient>
+      </View>
 
-        <View>
-          <Text style={styleTexts.bodyText}>Inte medlem än? </Text>
-          <Pressable onPress={() => navigation.navigate('Register')}>
-            <Text style={styleTexts.bodyText}>Registrera dig här</Text>
-          </Pressable>
-        </View>
+      <LinearGradient
+        colors={['#F46D6D', '#CE7C7C']}
+        style={styleButtons.buttonDefault}
+      >
+        <Pressable onPress={() => logInUser(auth, email, password)}>
+          <Text style={styleButtons.buttonDefaultText}>LOG IN</Text>
+        </Pressable>
+      </LinearGradient>
+
+      <View style={styleScreens.bottom}>
+        <Text style={styleTexts.bodyText}>Inte medlem än? </Text>
+        <Pressable onPress={() => navigation.navigate('Register')}>
+          <Text style={styleTexts.linkText}>Registrera dig här</Text>
+        </Pressable>
       </View>
     </View>
   );
 };
+
 export default LogInScreen;

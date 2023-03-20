@@ -4,10 +4,9 @@ import styleTexts from '../../styles/styleTexts';
 import styleButtons from '../../styles/styleButtons';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { auth, db } from '../../firebase';
+import { auth, db } from '../../firebase/firebase';
 import styleScreens from '../../styles/styleScreens';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Formik, Form, Field } from 'formik';
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -59,6 +58,7 @@ const RegisterScreen = ({ navigation }) => {
 
       console.log('user created');
       await addDoc(collection(db, 'users'), {
+        uid: auth.currentUser.uid,
         username: username,
         email: email,
       });
@@ -107,6 +107,7 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
         placeholderTextColor={'#FFD3D3'}
       />
+
       <LinearGradient
         colors={['#F46D6D', '#CE7C7C']}
         style={
@@ -122,6 +123,12 @@ const RegisterScreen = ({ navigation }) => {
           <Text style={styleButtons.buttonDefaultText}>REGGA MIG</Text>
         </Pressable>
       </LinearGradient>
+
+      <View>
+        <Pressable onPress={() => navigation.navigate('LogIn')}>
+          <Text style={styleTexts.bodyText}>Tillbaka till login</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };

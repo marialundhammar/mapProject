@@ -1,47 +1,35 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import styleScreens from '../../styles/styleScreens';
-import DrinkPreferences from '../ui/molecules/DrinkPreferences';
 import Progressbar from '../ui/molecules/Progressbar';
-import styleTexts from '../../styles/styleTexts';
-import BurgerMenu from '../ui/atoms/BurgerMenu';
 import StepOne from '../ui/organisms/StepOne';
 import NavigationButton from '../ui/atoms/NavigatonButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import styleButtons from '../../styles/styleButtons';
 import StepTwo from '../ui/organisms/StepTwo';
 import StepThree from '../ui/organisms/StepThree';
-import Loading from '../ui/organisms/Loading';
 import TopHeader from '../ui/molecules/TopHeader';
+import { ContextStore } from '../../context/ContextStore';
 
 const OnboardingScreen = ({ navigation }) => {
-  const [step, setStep] = useState(1);
-  const [stepOne, setStepOne] = useState(true);
-  const [stepTwo, setStepTwo] = useState(false);
-  const [stepThree, setStepThree] = useState(false);
+  const { step, setStep } = useContext(ContextStore);
 
   const nextStepHandler = () => {
     if (step === 1) {
       setStep(2);
-      setStepTwo(true);
     }
 
     if (step === 2) {
       setStep(3);
-      setStepThree(true);
     }
   };
 
   return (
     <View>
-      <TopHeader navigation={navigation} showBackButton={false} />
+      <TopHeader navigation={navigation} showBackButton={true} />
 
       <View style={styleScreens.onboardingScreen}>
-        <Progressbar
-          stepOne={stepOne}
-          stepTwo={stepTwo}
-          stepThree={stepThree}
-        />
+        <Progressbar />
         {step === 1 ? (
           <StepOne />
         ) : step === 2 ? (
@@ -50,7 +38,7 @@ const OnboardingScreen = ({ navigation }) => {
           <StepThree navigation={navigation} />
         )}
 
-        {!stepThree && (
+        {!(step === 3) && (
           <View style={styleScreens.center}>
             <Pressable onPress={nextStepHandler}>
               <LinearGradient

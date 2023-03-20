@@ -1,16 +1,38 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
+import { arrayOfBarTours } from '../../configs/barTours';
 import styleScreens from '../../styles/styleScreens';
+import styleTexts from '../../styles/styleTexts';
+import GroupCard from '../ui/atoms/GroupCard';
 import Button from '../ui/atoms/NavigatonButton';
+import TopHeader from '../ui/molecules/TopHeader';
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <View style={styleScreens.defaultScreen}>
-      <Button
-        navigation={navigation}
-        navigateTo={'Onboarding'}
-        buttonText={'SKAPA RUNDA'}
-      />
+    <View style={styleScreens.container}>
+      <TopHeader navigation={navigation} showBackButton={false} />
+
+      <View style={styleScreens.halfScreenTop}>
+        <Button
+          navigation={navigation}
+          navigateTo={'Onboarding'}
+          buttonText={'SKAPA RUNDA'}
+        />
+      </View>
+
+      <View style={styleScreens.halfScreenBottom}>
+        <Text style={styleTexts.h3}>RUNDOR</Text>
+        <ScrollView>
+          {arrayOfBarTours.map((group, i) => (
+            <GroupCard
+              navigation={navigation}
+              text={group.title}
+              numberOfBars={group.numbersOfBars}
+              key={i}
+            />
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 };

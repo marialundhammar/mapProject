@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View, Pressable, Text } from 'react-native';
 import Map from '../ui/molecules/Map';
-import NavigationButton from '../ui/atoms/NavigatonButton';
 import { BarModal } from '../ui/molecules/BarModal';
-import styleButtons from '../../styles/styleButtons';
 import { arrayOfBars } from '../../configs/bars';
 import TopHeader from '../ui/molecules/TopHeader';
 import styleScreens from '../../styles/styleScreens';
 import BottomContainer from '../ui/molecules/BottomContainer';
+import { ContextStore } from '..';
+
 
 const MapScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);

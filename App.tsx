@@ -14,6 +14,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import ChallengeScreen from './components/screens/ChallengeScreen';
 import ProfileScreen from './components/screens/ProfileScreen';
 import { StatusBar } from 'react-native';
+import { ProviderContext } from 'react-native-maps/lib/decorateMapComponent';
+import ContextStoreProvider from './context/ContextStore';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,52 +35,53 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Onboarding"
-          component={OnboardingScreen}
-          options={{ headerShown: false }}
-        />
+    <ContextStoreProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="LogIn"
+            component={LogInScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Onboarding"
+            component={OnboardingScreen}
+            options={{ headerShown: false }}
+          />
 
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Map"
-          component={MapScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Bar"
-          component={BarScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Challenge"
-          component={ChallengeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{ headerShown: false }}
-        />
-
-        <Stack.Screen
-          name="LogIn"
-          component={LogInScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen
+            name="Map"
+            component={MapScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Bar"
+            component={BarScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Challenge"
+            component={ChallengeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={ProfileScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ContextStoreProvider>
   );
 };
 

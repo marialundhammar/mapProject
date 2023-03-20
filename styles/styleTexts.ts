@@ -3,21 +3,22 @@ import { StyleSheet } from 'react-native-web';
 const styleTexts = StyleSheet.create({
   //h2
 
-  h2: {
-    fontSize: 30,
-  },
   h3: {
     fontWeight: 'bold',
     fontFamily: 'Passion-One',
     fontSize: 24,
     color: '#FFD3D3',
-    marginBottom: 20,
-    marginLeft: 12,
+    marginBottom: 10,
   },
 
   bodyText: {
-    fontSize: 16,
+    fontSize: 14,
     paddingVertical: 24,
+    color: '#FFD3D3',
+  },
+
+  miniText: {
+    fontSize: 12,
     color: '#FFD3D3',
   },
 
@@ -37,6 +38,13 @@ const styleTexts = StyleSheet.create({
   icons: {
     color: '#FFD3D3',
     fontSize: 35,
+  },
+
+  linkText: {
+    fontSize: 14,
+    paddingVertical: 24,
+    color: '#F46D6D',
+    fontWeight: 'bold',
   },
 });
 

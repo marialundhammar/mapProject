@@ -45,6 +45,8 @@ const styleModals = StyleSheet.create({
   progressBar: {
     flexDirection: 'row',
     marginBottom: 20,
+    width: '100%',
+    justifyContent: 'center',
   },
 
   topHeader: {
@@ -59,6 +61,34 @@ const styleModals = StyleSheet.create({
   leftComponent: {
     flexDirection: 'column',
     marginLeft: 'auto',
+  },
+
+  bottomNavigation: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    height: 120,
+    paddingBottom: 40,
+  },
+
+  cardStyle: {
+    borderWidth: 1,
+    height: 100,
+    width: 330,
+    borderColor: '#E68383',
+    borderRadius: 10,
+    marginTop: 8,
+    zIndex: -10,
+  },
+
+  cardStyleIsFilled: {
+    borderWidth: 1,
+    height: 120,
+    width: 330,
+    backgroundColor: '#E68383',
+    borderRadius: 10,
+    marginTop: 8,
+    zIndex: -10,
   },
 });
 

@@ -7,6 +7,7 @@ const styleScreens = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'column',
   },
 
   onboardingScreen: {
@@ -14,7 +15,6 @@ const styleScreens = StyleSheet.create({
     width: '100%',
     height: '100%',
     flexDirection: 'column',
-    padding: 16,
   },
 
   mapScreen: {
@@ -34,8 +34,33 @@ const styleScreens = StyleSheet.create({
   center: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
-    marginBottom: 20,
+    backgroundColor: '#1B274A',
+  },
+
+  space: {
+    marginBottom: 40,
+  },
+
+  bottom: {
+    position: 'absolute',
+    bottom: 10,
+    flexDirection: 'row',
+  },
+
+  container: {
+    backgroundColor: '#1B274A',
+    flex: 1,
+    flexDirection: 'column',
+  },
+  halfScreenBottom: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingLeft: 20,
+  },
+  halfScreenTop: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
