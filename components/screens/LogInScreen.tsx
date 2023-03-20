@@ -6,7 +6,6 @@ import styleScreens from '../../styles/styleScreens';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import { LinearGradient } from 'expo-linear-gradient';
-import TopHeader from '../ui/molecules/TopHeader';
 import { ContextStore } from '../../context/ContextStore';
 
 const LogInScreen = ({ navigation }) => {

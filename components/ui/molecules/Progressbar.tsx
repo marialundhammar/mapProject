@@ -9,7 +9,7 @@ const Progressbar = () => {
   const { step } = useContext(ContextStore);
 
   return (
-    <View style={styleScreens.center}>
+    <View>
       <View style={styleComponents.progressBar}>
         <ProgressbarItem isFilled={step >= 1 ? true : false} index={1} />
         <ProgressbarItem isFilled={step >= 2 ? true : false} index={2} />
