@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import styleMap from '../../../styles/styleMap';
 import { View } from 'react-native';
@@ -33,7 +33,6 @@ const Map = ({ navigation }) => {
     lat: 55.595,
     long: 13.0099,
   });
-  const [barName] = useState({ name: '', distance: 0 });
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const closeBars: CloseBarsType[] = [];
   const { barTour } = useContext(ContextStore);
