@@ -2,8 +2,9 @@ export type BarType = {
   lat: number;
   long: number;
   name: string;
-  id: string;
+  id?: string;
   image?: any;
+  distance?: number;
 };
 
 export type GroupType = {
@@ -23,6 +24,11 @@ interface CalculateDistanceFunctionType {
   lon2: number;
 }
 
+interface CoordsType {
+  lat: number;
+  long: number;
+}
+
 export type ContextStoreType = {
   step: number;
   setStep: (number) => void;
@@ -30,4 +36,6 @@ export type ContextStoreType = {
   setUser: (number) => void;
   barTour: BarTourTypes;
   setBarTour: (object) => void;
+  userLocation: CoordsType;
+  setUserLocation: (CoordsType) => void;
 };

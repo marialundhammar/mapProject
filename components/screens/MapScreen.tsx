@@ -6,6 +6,7 @@ import { arrayOfBars } from '../../configs/bars';
 import TopHeader from '../ui/molecules/TopHeader';
 import styleScreens from '../../styles/styleScreens';
 import BottomContainer from '../ui/molecules/BottomContainer';
+import FakeUserLocationButton from '../ui/atoms/FakeButtons';
 
 const MapScreen = ({ navigation }) => {
   const [showModal] = useState(false);
@@ -17,6 +18,12 @@ const MapScreen = ({ navigation }) => {
   return (
     <View>
       <TopHeader navigation={navigation} showBackButton={true} />
+
+      <FakeUserLocationButton
+        fakeLat={55.59184715874535}
+        fakeLong={13.010633954699994}
+      />
+
       <View style={styleScreens.mapScreen}>
         <Map navigation={navigation} />
         <BarModal

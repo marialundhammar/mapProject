@@ -8,6 +8,7 @@ import { BarModal } from './BarModal';
 import DistanceBanner from '../atoms/DistanceBanner';
 import mapStyle from '../../../assets/mapStyle';
 import { ContextStore } from '../../../context/ContextStore';
+import { BarType } from '../../../types';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -20,24 +21,13 @@ interface CalculateUserAndBarType extends CalculateDistanceFunctionType {
   name: string;
 }
 
-interface CloseBarsType {
-  lat: number;
-  long: number;
-  name: string;
-  distance: number;
-}
-
 const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
-  const [userLocation, setUserLocation] = useState({
-    lat: 55.595,
-    long: 13.0099,
-  });
-  const [showMarkerModal, setShowMarkerModal] = useState(false);
-  const closeBars: CloseBarsType[] = [];
-  const { barTour } = useContext(ContextStore);
-  const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
 
+  const [showMarkerModal, setShowMarkerModal] = useState(false);
+  const closeBars: BarType[] = [];
+  const { barTour, userLocation, setUserLocation } = useContext(ContextStore);
+  const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
   const bars = barTour[0].bars;
 
   const checkDistance = ({
@@ -98,11 +88,12 @@ const Map = ({ navigation }) => {
           long: location.coords.longitude,
         });
       }
-
       checkDistanceToAllBars();
     })();
   }, []);
   //add userLocation
+
+  const pinColor = '#000000';
 
   return (
     <View style={{ flex: 1 }}>
@@ -110,6 +101,7 @@ const Map = ({ navigation }) => {
         distance={distanceBar.distance}
         barName={distanceBar.name}
       />
+
       <MapView
         style={styleMap.container}
         customMapStyle={mapStyle}
@@ -133,6 +125,14 @@ const Map = ({ navigation }) => {
             onPress={onPressMarker}
           />
         ))}
+
+        <Marker
+          coordinate={{
+            latitude: userLocation.lat,
+            longitude: userLocation.long,
+          }}
+          pinColor={pinColor}
+        />
       </MapView>
 
       <BarModal
