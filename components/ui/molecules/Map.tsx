@@ -1,13 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import styleMap from '../../../styles/styleMap';
-import { Button, View, Text } from 'react-native';
+import { View } from 'react-native';
 import * as Location from 'expo-location';
-import { arrayOfBars } from '../../../configs/bars';
 import { calculateDistanceFunction, delay } from '../../../utils/helpers';
-import { BarType } from '../../../types';
 import { BarModal } from './BarModal';
+import DistanceBanner from '../atoms/DistanceBanner';
 import mapStyle from '../../../assets/mapStyle';
+import { ContextStore } from '../../../context/ContextStore';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -20,13 +20,25 @@ interface CalculateUserAndBarType extends CalculateDistanceFunctionType {
   name: string;
 }
 
+interface CloseBarsType {
+  lat: number;
+  long: number;
+  name: string;
+  distance: number;
+}
+
 const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
-  const [userLocation, setUserLocation] = useState({ lat: 0, long: 0 });
-  const [barName, setbarName] = useState('');
+  const [userLocation, setUserLocation] = useState({
+    lat: 55.595,
+    long: 13.0099,
+  });
   const [showMarkerModal, setShowMarkerModal] = useState(false);
-  const closeBars: BarType[] = [];
-  const [arrayOfNearbyBars, setArrayOfNerbyBars] = useState(closeBars);
+  const closeBars: CloseBarsType[] = [];
+  const { barTour } = useContext(ContextStore);
+  const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
+
+  const bars = barTour[0].bars;
 
   const checkDistance = ({
     lat1,
@@ -36,19 +48,17 @@ const Map = ({ navigation }) => {
     name,
   }: CalculateUserAndBarType) => {
     const distance = calculateDistanceFunction({ lat1, lon1, lat2, lon2 });
-    if (distance < 0.03) {
-      setbarName(name);
-      console.log(name);
-      //navigation.navigate('Bar');
-    }
-    if (distance < 0.5) {
-      closeBars.push({ lat: lat1, long: lon1, name: name, id: name });
-      setArrayOfNerbyBars(closeBars);
-    }
+    closeBars.push({
+      lat: lat1,
+      long: lon1,
+      name: name,
+      distance: distance,
+    });
   };
 
+  //sort array of closebars in descending order and then take the first to display as distance
   const checkDistanceToAllBars = () => {
-    arrayOfBars.map((bar) => {
+    bars.map((bar) => {
       checkDistance({
         lat1: userLocation.lat,
         lon1: userLocation.long,
@@ -58,11 +68,17 @@ const Map = ({ navigation }) => {
       });
     });
 
-    console.log('checkCheck');
+    closeBars.sort((a, b) => {
+      return a.distance - b.distance;
+    });
+
+    setDistanceBar({
+      distance: closeBars[0].distance,
+      name: closeBars[0].name,
+    });
   };
 
   const onPressMarker = () => {
-    console.log('Pressed on marker hejhej');
     setShowMarkerModal(true);
   };
 
@@ -81,16 +97,19 @@ const Map = ({ navigation }) => {
           lat: location.coords.latitude,
           long: location.coords.longitude,
         });
-        console.log(userLocation);
       }
-    })();
 
-    checkDistanceToAllBars();
+      checkDistanceToAllBars();
+    })();
   }, []);
   //add userLocation
 
   return (
     <View style={{ flex: 1 }}>
+      <DistanceBanner
+        distance={distanceBar.distance}
+        barName={distanceBar.name}
+      />
       <MapView
         style={styleMap.container}
         customMapStyle={mapStyle}
@@ -104,7 +123,7 @@ const Map = ({ navigation }) => {
           longitudeDelta: 0.021,
         }}
       >
-        {arrayOfBars.map((bar, i) => (
+        {bars.map((bar, i) => (
           <Marker
             coordinate={{
               latitude: bar.lat,

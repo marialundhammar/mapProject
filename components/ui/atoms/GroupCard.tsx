@@ -6,7 +6,6 @@ import styleTexts from '../../../styles/styleTexts';
 import { db } from '../../../firebase/firebase';
 import { ContextStore } from '../../../context/ContextStore';
 import { arrayOfBarTours } from '../../../configs/barTours';
-
 import {
   collection,
   getDocs,
@@ -25,7 +24,7 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
   const [isClicked, setIsClicked] = useState(false);
   const { user, setBarTour } = useContext(ContextStore);
 
-  console.log(arrayOfBarTours);
+  console.log('hohoho', arrayOfBarTours.length);
 
   const handleIsClicked = () => {
     setIsClicked(!isClicked);
@@ -34,9 +33,11 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
   const chooseBarTourHandler = () => {
     const userCollectionRef = collection(db, 'users');
     const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
-
     const barTour = arrayOfBarTours.filter((bar) => bar.title === text);
+
     setBarTour(barTour);
+
+    console.log('barTour####', barTour);
 
     getDocs(userQuery)
       .then((querySnapshot) => {
