@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Pressable, Text } from 'react-native';
+import { ContextStore } from '../../../context/ContextStore';
 import styleButtons from '../../../styles/styleButtons';
 
 interface NavigationButtonType {
@@ -16,13 +17,19 @@ const NavigationButton = ({
   buttonText,
   isFilled = true,
 }: NavigationButtonType) => {
+  const { setShowModal } = useContext(ContextStore);
+
+  const handleNavigation = () => {
+    setShowModal(false);
+    navigation.navigate(navigateTo);
+  };
   return (
     <View
       style={{
         padding: 8,
       }}
     >
-      <Pressable onPress={() => navigation.navigate(navigateTo)}>
+      <Pressable onPress={handleNavigation}>
         <LinearGradient
           colors={isFilled ? ['#F46D6D', '#CE7C7C'] : []}
           style={

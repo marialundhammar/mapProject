@@ -20,7 +20,6 @@ const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
-
 const db = getFirestore(app);
 
 import firebase from 'firebase/app';

@@ -23,12 +23,14 @@ interface CalculateUserAndBarType extends CalculateDistanceFunctionType {
 
 const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
-
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const closeBars: BarType[] = [];
-  const { barTour, userLocation, setUserLocation } = useContext(ContextStore);
+  const { barTour, userLocation, showModal, setShowModal, setUserLocation } =
+    useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
+
   const bars = barTour[0].bars;
+  console.log(barTour[0]);
 
   const checkDistance = ({
     lat1,
@@ -46,8 +48,7 @@ const Map = ({ navigation }) => {
     });
   };
 
-  //sort array of closebars in descending order and then take the first to display as distance
-  const checkDistanceToAllBars = () => {
+  const checkDistanceToAllBars = (bars: BarType[]) => {
     bars.map((bar) => {
       checkDistance({
         lat1: userLocation.lat,
@@ -66,6 +67,10 @@ const Map = ({ navigation }) => {
       distance: closeBars[0].distance,
       name: closeBars[0].name,
     });
+
+    if (closeBars[0].distance < 0.09) {
+      setShowModal(true);
+    }
   };
 
   const onPressMarker = () => {
@@ -76,7 +81,7 @@ const Map = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      /*     let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setStatus('Permission to access location was denied');
         return;
@@ -87,10 +92,10 @@ const Map = ({ navigation }) => {
           lat: location.coords.latitude,
           long: location.coords.longitude,
         });
-      }
-      checkDistanceToAllBars();
+      } */
+      checkDistanceToAllBars(bars);
     })();
-  }, []);
+  }, [userLocation]);
   //add userLocation
 
   const pinColor = '#000000';
@@ -127,6 +132,7 @@ const Map = ({ navigation }) => {
         ))}
 
         <Marker
+          //fake users location
           coordinate={{
             latitude: userLocation.lat,
             longitude: userLocation.long,
@@ -136,11 +142,10 @@ const Map = ({ navigation }) => {
       </MapView>
 
       <BarModal
-        showModal={showMarkerModal}
         showButton={true}
         navigation={navigation}
-        content={''}
-        header={''}
+        content={'Du verkar befinna dig i närheten av '}
+        header={'Hallå där!'}
       />
     </View>
   );

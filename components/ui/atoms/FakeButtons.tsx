@@ -1,22 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
 
-const FakeUserLocationButton = ({ fakeLat, fakeLong }) => {
+const FakeUserLocationButton = () => {
   const { setUserLocation, userLocation } = useContext(ContextStore);
+  const [toggleCoords, setToggleCoords] = useState(false);
 
   const changeUserLocation = () => {
-    setUserLocation({ lat: fakeLat, long: fakeLong });
+    if (toggleCoords) {
+      setUserLocation({ lat: 55.592296775105524, long: 13.01675573718772 });
+    } else {
+      setUserLocation({ lat: 55.59184715874535, long: 13.010633954699994 });
+    }
+    setToggleCoords(!toggleCoords);
   };
 
   return (
     <View>
       <Pressable onPress={changeUserLocation}>
         <Text>
-          Change Userlocation to {fakeLat}, {fakeLong}
-        </Text>
-        <Text>
-          --->{userLocation.lat}, {userLocation.long}
+          {userLocation.lat}, {userLocation.long}
         </Text>
       </Pressable>
     </View>

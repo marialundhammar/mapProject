@@ -19,15 +19,11 @@ const MapScreen = ({ navigation }) => {
     <View>
       <TopHeader navigation={navigation} showBackButton={true} />
 
-      <FakeUserLocationButton
-        fakeLat={55.59184715874535}
-        fakeLong={13.010633954699994}
-      />
+      <FakeUserLocationButton />
 
       <View style={styleScreens.mapScreen}>
         <Map navigation={navigation} />
         <BarModal
-          showModal={showModal}
           content={content}
           header={header}
           image={arrayOfBars[0].image}

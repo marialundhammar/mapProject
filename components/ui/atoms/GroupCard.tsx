@@ -24,8 +24,6 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
   const [isClicked, setIsClicked] = useState(false);
   const { user, setBarTour } = useContext(ContextStore);
 
-  console.log('hohoho', arrayOfBarTours.length);
-
   const handleIsClicked = () => {
     setIsClicked(!isClicked);
   };
@@ -36,8 +34,6 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
     const barTour = arrayOfBarTours.filter((bar) => bar.title === text);
 
     setBarTour(barTour);
-
-    console.log('barTour####', barTour);
 
     getDocs(userQuery)
       .then((querySnapshot) => {
