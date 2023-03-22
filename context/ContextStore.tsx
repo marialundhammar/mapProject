@@ -8,9 +8,11 @@ const ContextStoreProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [barTour, setBarTour] = useState(null);
   const [userLocation, setUserLocation] = useState({
-    lat: 55.595,
-    long: 13.0099,
+    lat: 55.592296775105524,
+    long: 13.01675573718772,
   });
+
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <ContextStore.Provider
@@ -23,6 +25,8 @@ const ContextStoreProvider = ({ children }) => {
         setBarTour,
         userLocation,
         setUserLocation,
+        showModal,
+        setShowModal,
       }}
     >
       {children}

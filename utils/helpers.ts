@@ -1,8 +1,17 @@
+import { useContext, useState } from 'react';
+import DistanceBanner from '../components/ui/atoms/DistanceBanner';
+import { ContextStore } from '../context/ContextStore';
+import { BarType } from '../types';
+
 interface CalculateDistanceFunctionType {
   lat1: number;
   lon1: number;
   lat2: number;
   lon2: number;
+}
+
+interface CalculateUserAndBarType extends CalculateDistanceFunctionType {
+  name: string;
 }
 
 export const calculateDistanceFunction = ({

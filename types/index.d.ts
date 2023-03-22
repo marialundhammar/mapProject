@@ -38,4 +38,6 @@ export type ContextStoreType = {
   setBarTour: (object) => void;
   userLocation: CoordsType;
   setUserLocation: (CoordsType) => void;
+  showModal: boolean;
+  setShowModal: (boolean) => void;
 };

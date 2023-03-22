@@ -13,7 +13,6 @@ const LogInScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { user, setUser } = useContext(ContextStore);
-  console.log('HERE IS USER LOGGED IN???', user);
 
   const logInUser = async (auth, email, password) => {
     try {
