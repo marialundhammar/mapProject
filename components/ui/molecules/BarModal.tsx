@@ -10,12 +10,18 @@ import NavigationButton from '../atoms/NavigatonButton';
 import { ContextStore } from '../../../context/ContextStore';
 
 type ModalType = {
-  content: string;
+  content?: {
+    lat: number;
+    long: number;
+    name: string;
+    distance: number;
+  } | null;
   header: string;
   showButton?: boolean;
   image?: any;
   navigation: any;
-  setModalVisible?: (showModal: boolean) => void;
+  visible: boolean;
+  onClose: () => void;
 };
 
 export const BarModal = ({
@@ -24,29 +30,28 @@ export const BarModal = ({
   header,
   image,
   showButton = false,
+  visible,
+  onClose,
 }: ModalType) => {
   const imagePath = image ? image : null;
 
-  const { showModal, setShowModal } = useContext(ContextStore);
+  // const {  setShowModal } = useState();
 
   return (
     <View>
-      <Modal isVisible={showModal} onBackdropPress={() => setShowModal(false)}>
+      <Modal isVisible={visible} onBackdropPress={onClose}>
         <View style={styles.modalStyle}>
           <View style={styleModals.header}>
             <Text style={styleText.h2}>{header}</Text>
 
-            <Pressable
-              style={styleButtons.closeIcon}
-              onPress={() => setShowModal(false)}
-            >
+            <Pressable style={styleButtons.closeIcon} onPress={onClose}>
               <AntDesign name="closecircleo" size={24} color="black" />
             </Pressable>
           </View>
 
           <View style={styleModals.content}>
             {image && <Image source={imagePath} style={styleModals.image} />}
-            <Text style={styleText.bodyText}>{content}</Text>
+            <Text style={styleText.bodyText}>{content?.name}</Text>
 
             {showButton && (
               <NavigationButton

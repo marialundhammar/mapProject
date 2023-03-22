@@ -9,12 +9,6 @@ import BottomContainer from '../ui/molecules/BottomContainer';
 import FakeUserLocationButton from '../ui/atoms/FakeButtons';
 
 const MapScreen = ({ navigation }) => {
-  const [showModal] = useState(false);
-
-  const content =
-    'sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nquia consequuntur magni dolores eos qui ratione voluptatem sequi n';
-  const header = 'Header';
-
   return (
     <View>
       <TopHeader navigation={navigation} showBackButton={true} />
@@ -23,13 +17,7 @@ const MapScreen = ({ navigation }) => {
 
       <View style={styleScreens.mapScreen}>
         <Map navigation={navigation} />
-        <BarModal
-          content={content}
-          header={header}
-          image={arrayOfBars[0].image}
-          showButton={true}
-          navigation={navigation}
-        />
+
         <BottomContainer navigation={navigation} />
       </View>
     </View>

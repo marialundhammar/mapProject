@@ -31,7 +31,7 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
   const chooseBarTourHandler = () => {
     const userCollectionRef = collection(db, 'users');
     const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
-    const barTour = arrayOfBarTours.filter((bar) => bar.title === text);
+    const barTour = arrayOfBarTours.find((bar) => bar.title === text);
 
     setBarTour(barTour);
 
@@ -43,9 +43,6 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
             barTour: barTour,
           });
         });
-      })
-      .then(() => {
-        console.log('No success');
       })
       .catch((error) => {
         console.log('Errroooor: ', error);

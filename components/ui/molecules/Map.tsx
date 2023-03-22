@@ -24,52 +24,45 @@ interface CalculateUserAndBarType extends CalculateDistanceFunctionType {
 const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
   const [showMarkerModal, setShowMarkerModal] = useState(false);
-  const closeBars: BarType[] = [];
+  const [barModal, setBarModal] = useState({ visible: false, content: null });
+  // const closeBars: BarType[] = [];
   const { barTour, userLocation, showModal, setShowModal, setUserLocation } =
     useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
 
-  const bars = barTour[0].bars;
-  console.log(barTour[0]);
+  const bars = barTour.bars;
+  //WHY?? fattar noll
 
-  const checkDistance = ({
-    lat1,
-    lon1,
-    lat2,
-    lon2,
-    name,
-  }: CalculateUserAndBarType) => {
-    const distance = calculateDistanceFunction({ lat1, lon1, lat2, lon2 });
-    closeBars.push({
-      lat: lat1,
-      long: lon1,
-      name: name,
-      distance: distance,
-    });
+  const getClosestBar = () => {
+    const closeBars = bars
+      .map((bar) => ({
+        lat: bar.lat,
+        long: bar.long,
+        name: bar.name,
+        distance: calculateDistanceFunction({
+          lat1: userLocation.lat,
+          lon1: userLocation.long,
+          lat2: bar.lat,
+          lon2: bar.long,
+        }),
+      }))
+      .sort((a, b) => {
+        return a.distance - b.distance;
+      });
+
+    return closeBars[0];
   };
 
   const checkDistanceToAllBars = (bars: BarType[]) => {
-    bars.map((bar) => {
-      checkDistance({
-        lat1: userLocation.lat,
-        lon1: userLocation.long,
-        lat2: bar.lat,
-        lon2: bar.long,
-        name: bar.name,
-      });
-    });
-
-    closeBars.sort((a, b) => {
-      return a.distance - b.distance;
-    });
+    const closestBar = getClosestBar();
 
     setDistanceBar({
-      distance: closeBars[0].distance,
-      name: closeBars[0].name,
+      distance: closestBar.distance,
+      name: closestBar.name,
     });
 
-    if (closeBars[0].distance < 0.09) {
-      setShowModal(true);
+    if (closestBar.distance < 0.09) {
+      setBarModal({ visible: true, content: closestBar });
     }
   };
 
@@ -144,8 +137,12 @@ const Map = ({ navigation }) => {
       <BarModal
         showButton={true}
         navigation={navigation}
-        content={'Du verkar befinna dig i närheten av '}
+        content={barModal.content}
         header={'Hallå där!'}
+        visible={barModal.visible}
+        onClose={() =>
+          setBarModal((current) => ({ ...current, visible: false }))
+        }
       />
     </View>
   );
