@@ -17,12 +17,10 @@ const NavigationButton = ({
   buttonText,
   isFilled = true,
 }: NavigationButtonType) => {
-  const { setShowModal } = useContext(ContextStore);
-
   const handleNavigation = () => {
-    setShowModal(false);
     navigation.navigate(navigateTo);
   };
+
   return (
     <View
       style={{

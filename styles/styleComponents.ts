@@ -15,12 +15,18 @@ const styleModals = StyleSheet.create({
     paddingBottom: 24,
   },
 
-  content: {
-    justifyContent: 'center',
+  bottomContainerOpen: {
     alignItems: 'center',
-    backgroundColor: '#1B274A',
     padding: 20,
-    paddingBottom: 100,
+    paddingBottom: 40,
+    height: 400,
+  },
+
+  bottomContainer: {
+    alignItems: 'center',
+    padding: 20,
+    paddingBottom: 60,
+    height: 300,
   },
 
   progressItem: {
@@ -69,6 +75,14 @@ const styleModals = StyleSheet.create({
     flexDirection: 'column',
     height: 120,
     paddingBottom: 40,
+  },
+
+  modalStyle: {
+    backgroundColor: '#E68383',
+    justifyContent: 'space-between',
+    borderRadius: 8,
+    padding: 16,
+    paddingVertical: 24,
   },
 
   cardStyle: {

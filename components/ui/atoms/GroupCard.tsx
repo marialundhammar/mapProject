@@ -22,7 +22,7 @@ type GroupCardType = {
 
 const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
   const [isClicked, setIsClicked] = useState(false);
-  const { user, setBarTour } = useContext(ContextStore);
+  const { user, setCurrentBarTour } = useContext(ContextStore);
 
   const handleIsClicked = () => {
     setIsClicked(!isClicked);
@@ -33,7 +33,7 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
     const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
     const barTour = arrayOfBarTours.find((bar) => bar.title === text);
 
-    setBarTour(barTour);
+    setCurrentBarTour(barTour);
 
     getDocs(userQuery)
       .then((querySnapshot) => {

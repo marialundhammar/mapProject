@@ -7,7 +7,7 @@ const styleButtons = StyleSheet.create({
     width: 224,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 8,
     paddingTop: 12,
   },
@@ -17,11 +17,12 @@ const styleButtons = StyleSheet.create({
     width: 224,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 8,
     paddingTop: 12,
     borderColor: '#FFD3D3',
     borderWidth: 1,
+    backgroundColor: '#1B274A',
   },
   buttonDisable: {
     height: 50,
@@ -33,6 +34,12 @@ const styleButtons = StyleSheet.create({
     paddingTop: 12,
     marginTop: 24,
     opacity: 0.4,
+  },
+
+  buttonBlue: {
+    height: 50,
+    width: 224,
+    backgroundColor: '#1B274A',
   },
 
   //ButtonText

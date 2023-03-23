@@ -34,10 +34,8 @@ export type ContextStoreType = {
   setStep: (number) => void;
   user: { email: string; uid: number };
   setUser: (number) => void;
-  barTour: BarTourTypes;
-  setBarTour: (object) => void;
+  currentBarTour: BarTourTypes;
+  setCurrentBarTour: (object) => void;
   userLocation: CoordsType;
   setUserLocation: (CoordsType) => void;
-  showModal: boolean;
-  setShowModal: (boolean) => void;
 };

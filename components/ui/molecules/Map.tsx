@@ -25,14 +25,11 @@ const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const [barModal, setBarModal] = useState({ visible: false, content: null });
-  // const closeBars: BarType[] = [];
-  const { barTour, userLocation, showModal, setShowModal, setUserLocation } =
+  const { currentBarTour, userLocation, setUserLocation } =
     useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
 
-  const bars = barTour.bars;
-  //WHY?? fattar noll
-
+  const bars = currentBarTour.bars;
   const getClosestBar = () => {
     const closeBars = bars
       .map((bar) => ({
@@ -60,7 +57,6 @@ const Map = ({ navigation }) => {
       distance: closestBar.distance,
       name: closestBar.name,
     });
-
     if (closestBar.distance < 0.09) {
       setBarModal({ visible: true, content: closestBar });
     }
