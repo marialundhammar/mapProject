@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, Pressable, Image } from 'react-native';
 import Modal from 'react-native-modal';
 import styleButtons from '../../../styles/styleButtons';
 import styleText from '../../../styles/styleTexts';
 import styleModals from '../../../styles/styleComponents';
-import { StyleSheet } from 'react-native-web';
 import { AntDesign } from '@expo/vector-icons';
 import NavigationButton from '../atoms/NavigatonButton';
 import styleComponents from '../../../styles/styleComponents';
+import { BarType } from '../../../types';
+import { ContextStore } from '../../../context/ContextStore';
 
 type ModalType = {
   content?: {
@@ -22,6 +23,7 @@ type ModalType = {
   navigation: any;
   visible: boolean;
   onClose: () => void;
+  currentBarHej: BarType;
 };
 
 export const BarModal = ({
@@ -32,18 +34,25 @@ export const BarModal = ({
   showButton = false,
   visible,
   onClose,
+  currentBarHej,
 }: ModalType) => {
   const imagePath = image ? image : null;
+
+  const { setCurrentBar } = useContext(ContextStore);
+
+  const handleSetCurrentBar = () => {
+    setCurrentBar(currentBarHej);
+  };
 
   return (
     <View>
       <Modal isVisible={visible} onBackdropPress={onClose}>
         <View style={styleComponents.modalStyle}>
           <View style={styleModals.header}>
-            <Text style={styleText.h2}>{header}</Text>
+            <Text style={styleText.h1}>{header}</Text>
 
             <Pressable style={styleButtons.closeIcon} onPress={onClose}>
-              <AntDesign name="closecircleo" size={24} color="black" />
+              <AntDesign name="closecircleo" size={24} color="#FFD3D3" />
             </Pressable>
           </View>
 
@@ -53,14 +62,17 @@ export const BarModal = ({
               Du verkar befinna dig på {content?.name}, stämmer det?
             </Text>
 
-            {showButton && (
-              <NavigationButton
-                navigation={navigation}
-                navigateTo={'Bar'}
-                buttonText={'Yes det stämmer'}
-                isFilled={false}
-              />
-            )}
+            <View style={styleComponents.centered}>
+              {showButton && (
+                <NavigationButton
+                  navigation={navigation}
+                  navigateTo={'Bar'}
+                  buttonText={'Yes det stämmer'}
+                  isFilled={false}
+                  currentBar={currentBarHej}
+                />
+              )}
+            </View>
           </View>
         </View>
       </Modal>

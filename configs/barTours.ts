@@ -6,6 +6,7 @@ export const arrayOfBarTours: BarTourTypes[] = [
     title: 'TALKATIVERUNDAN',
     numbersOfBars: 4,
     bars: [arrayOfBars[0], arrayOfBars[1], arrayOfBars[2], arrayOfBars[3]],
+    description: 'Det här är den bästa rundan enligt oss/ Talkative',
   },
   {
     title: 'Short tour',

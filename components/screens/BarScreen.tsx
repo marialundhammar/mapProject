@@ -1,29 +1,38 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { ContextStore } from '../../context/ContextStore';
+import styleComponents from '../../styles/styleComponents';
 import styleScreens from '../../styles/styleScreens';
+import styleTexts from '../../styles/styleTexts';
 import Button from '../ui/atoms/NavigatonButton';
+import BottomContainer from '../ui/molecules/BottomContainer';
+import DoChallenge from '../ui/molecules/DoChallange';
+import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
 
 const BarScreen = ({ navigation }) => {
   const navigateTo = 'Map';
-  return (
-    <View>
-      <TopHeader navigation={navigation} showBackButton={false} />
+  const { currentBar } = useContext(ContextStore);
 
-      <View style={styleScreens.defaultScreen}>
-        <Text>You're at a bar 🍻 </Text>
-        <Button
-          navigation={navigation}
-          navigateTo={'Challenge'}
-          buttonText={'GÅ TILL CHALLENGE'}
-        />
-        <Button
-          navigation={navigation}
-          navigateTo={'Map'}
-          buttonText={'GÅ TILLBAKA TILL KARTA'}
-          isFilled={false}
-        />
-      </View>
+  return (
+    <View style={{ flex: 1, justifyContent: 'space-between' }}>
+      <ScrollView>
+        <TopHeader navigation={navigation} showBackButton={false} />
+
+        <View style={styleScreens.onboardingScreen}>
+          <Text style={styleTexts.h2}>VÄLKOMMEN TILL {currentBar.name}</Text>
+          <TimeLine />
+
+          <DoChallenge navigation={navigation} />
+        </View>
+      </ScrollView>
+
+      <Button
+        navigation={navigation}
+        navigateTo={'Map'}
+        buttonText={'GÅ FRÅN BAR'}
+        isFilled={false}
+      />
     </View>
   );
 };

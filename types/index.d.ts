@@ -15,6 +15,7 @@ export type BarTourTypes = {
   title: string;
   numbersOfBars: number;
   bars: BarType[];
+  description?: string;
 };
 
 interface CalculateDistanceFunctionType {
@@ -38,4 +39,6 @@ export type ContextStoreType = {
   setCurrentBarTour: (object) => void;
   userLocation: CoordsType;
   setUserLocation: (CoordsType) => void;
+  currentBar: BarType;
+  setCurrentBar: (BarType) => void;
 };

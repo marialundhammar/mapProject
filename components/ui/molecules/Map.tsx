@@ -25,7 +25,7 @@ const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const [barModal, setBarModal] = useState({ visible: false, content: null });
-  const { currentBarTour, userLocation, setUserLocation } =
+  const { currentBarTour, setCurrentBar, userLocation, setUserLocation } =
     useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
 
@@ -59,6 +59,7 @@ const Map = ({ navigation }) => {
     });
     if (closestBar.distance < 0.09) {
       setBarModal({ visible: true, content: closestBar });
+      //setCurrentBar(closestBar);
     }
   };
 
@@ -90,57 +91,59 @@ const Map = ({ navigation }) => {
   const pinColor = '#000000';
 
   return (
-    <View style={{ flex: 1 }}>
+    <>
       <DistanceBanner
         distance={distanceBar.distance}
         barName={distanceBar.name}
       />
-
-      <MapView
-        style={styleMap.container}
-        customMapStyle={mapStyle}
-        provider={PROVIDER_GOOGLE}
-        showsUserLocation={true}
-        initialRegion={{
-          latitude: 55.59542958317019,
-          longitude: 13.009905375241077,
-          //The region is defined by the center coordinates and the span of coordinates to display.
-          latitudeDelta: 0.022,
-          longitudeDelta: 0.021,
-        }}
-      >
-        {bars.map((bar, i) => (
-          <Marker
-            coordinate={{
-              latitude: bar.lat,
-              longitude: bar.long,
-            }}
-            key={i}
-            onPress={onPressMarker}
-          />
-        ))}
-
-        <Marker
-          //fake users location
-          coordinate={{
-            latitude: userLocation.lat,
-            longitude: userLocation.long,
+      <View style={{ flex: 1 }}>
+        <MapView
+          style={styleMap.container}
+          customMapStyle={mapStyle}
+          provider={PROVIDER_GOOGLE}
+          showsUserLocation={true}
+          initialRegion={{
+            latitude: 55.59542958317019,
+            longitude: 13.009905375241077,
+            //The region is defined by the center coordinates and the span of coordinates to display.
+            latitudeDelta: 0.022,
+            longitudeDelta: 0.021,
           }}
-          pinColor={pinColor}
-        />
-      </MapView>
+        >
+          {bars.map((bar, i) => (
+            <Marker
+              coordinate={{
+                latitude: bar.lat,
+                longitude: bar.long,
+              }}
+              key={i}
+              onPress={onPressMarker}
+            />
+          ))}
 
-      <BarModal
-        showButton={true}
-        navigation={navigation}
-        content={barModal.content}
-        header={'Hallå där!'}
-        visible={barModal.visible}
-        onClose={() =>
-          setBarModal((current) => ({ ...current, visible: false }))
-        }
-      />
-    </View>
+          <Marker
+            //fake users location
+            coordinate={{
+              latitude: userLocation.lat,
+              longitude: userLocation.long,
+            }}
+            pinColor={pinColor}
+          />
+        </MapView>
+
+        <BarModal
+          showButton={true}
+          navigation={navigation}
+          content={barModal.content}
+          header={'Hallå där!'}
+          visible={barModal.visible}
+          onClose={() =>
+            setBarModal((current) => ({ ...current, visible: false }))
+          }
+          currentBarHej={getClosestBar()}
+        />
+      </View>
+    </>
   );
 };
 

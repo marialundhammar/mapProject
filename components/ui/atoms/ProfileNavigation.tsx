@@ -1,17 +1,15 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import styleTexts from '../../../styles/styleTexts';
-import styleScreens from '../../../styles/styleScreens';
 import styleComponents from '../../../styles/styleComponents';
-const BurgerMenu = ({ navigation }) => {
+import { FontAwesome5 } from '@expo/vector-icons';
+const ProfileNavigation = ({ navigation }) => {
   return (
     <View style={styleComponents.leftComponent}>
       <Pressable onPress={() => navigation.navigate('Profile')}>
-        <Feather name="menu" style={styleTexts.icons} />
+        <FontAwesome5 name="user" size={24} color="#FFD3D3" />
       </Pressable>
     </View>
   );
 };
 
-export default BurgerMenu;
+export default ProfileNavigation;

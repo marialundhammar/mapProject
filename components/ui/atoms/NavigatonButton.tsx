@@ -3,12 +3,14 @@ import React, { useContext } from 'react';
 import { View, Pressable, Text } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
 import styleButtons from '../../../styles/styleButtons';
+import { BarType } from '../../../types';
 
 interface NavigationButtonType {
   navigation: any;
   navigateTo: string;
   buttonText?: string;
   isFilled?: boolean;
+  currentBar?: BarType;
 }
 
 const NavigationButton = ({
@@ -16,9 +18,15 @@ const NavigationButton = ({
   navigateTo,
   buttonText,
   isFilled = true,
+  currentBar,
 }: NavigationButtonType) => {
+  const { setCurrentBar } = useContext(ContextStore);
   const handleNavigation = () => {
     navigation.navigate(navigateTo);
+
+    if (currentBar) {
+      setCurrentBar(currentBar);
+    }
   };
 
   return (

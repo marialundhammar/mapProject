@@ -28,7 +28,7 @@ const styleScreens = StyleSheet.create({
   between: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginTop: 32,
+    marginTop: 8,
     marginRight: 8,
   },
 
@@ -46,6 +46,7 @@ const styleScreens = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
     flexDirection: 'row',
+    alignItems: 'center',
   },
 
   container: {

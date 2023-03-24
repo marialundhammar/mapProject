@@ -7,6 +7,7 @@ import TopHeader from '../ui/molecules/TopHeader';
 import styleScreens from '../../styles/styleScreens';
 import BottomContainer from '../ui/molecules/BottomContainer';
 import FakeUserLocationButton from '../ui/atoms/FakeButtons';
+import DistanceBanner from '../ui/atoms/DistanceBanner';
 
 const MapScreen = ({ navigation }) => {
   return (

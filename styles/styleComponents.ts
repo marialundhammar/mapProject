@@ -13,20 +13,28 @@ const styleModals = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 8,
     paddingBottom: 24,
+    padding: 8,
   },
 
   bottomContainerOpen: {
-    alignItems: 'center',
-    padding: 20,
-    paddingBottom: 40,
     height: 400,
+    padding: 8,
   },
 
   bottomContainer: {
-    alignItems: 'center',
-    padding: 20,
+    padding: 8,
     paddingBottom: 60,
-    height: 300,
+    height: 260,
+  },
+
+  centered: {
+    alignItems: 'center',
+    padding: 8,
+  },
+
+  start: {
+    aligntItems: 'flex-start',
+    flexDirection: 'row',
   },
 
   progressItem: {
@@ -53,6 +61,14 @@ const styleModals = StyleSheet.create({
     marginBottom: 20,
     width: '100%',
     justifyContent: 'center',
+  },
+
+  barContentContainer: {
+    borderWidth: 1,
+    borderColor: '#FFD3D3',
+    width: '95%',
+    borderRadius: 8,
+    margin: 10,
   },
 
   topHeader: {
@@ -83,6 +99,11 @@ const styleModals = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     paddingVertical: 24,
+  },
+
+  distanceBanner: {
+    backgroundColor: '#E68383',
+    alignItems: 'center',
   },
 
   cardStyle: {

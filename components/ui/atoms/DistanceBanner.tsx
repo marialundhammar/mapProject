@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import styleComponents from '../../../styles/styleComponents';
 import styleTexts from '../../../styles/styleTexts';
 
 interface DistanceBannerType {
@@ -8,10 +9,12 @@ interface DistanceBannerType {
 }
 
 const DistanceBanner = ({ distance, barName }: DistanceBannerType) => {
+  const distanceMeter = Math.round(distance * 100) * 10;
+
   return (
-    <View>
+    <View style={styleComponents.distanceBanner}>
       <Text style={styleTexts.bodyText}>
-        Du är {distance} från {barName}
+        Du är {distanceMeter} meter från {barName}
       </Text>
     </View>
   );

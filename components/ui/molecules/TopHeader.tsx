@@ -3,14 +3,14 @@ import { View } from 'react-native';
 import styleComponents from '../../../styles/styleComponents';
 import BackButton from '../atoms/Backbutton';
 
-import BurgerMenu from '../atoms/BurgerMenu';
+import ProfileNavigation from '../atoms/ProfileNavigation';
 import NavigationButton from '../atoms/NavigatonButton';
 
 const TopHeader = ({ navigation, showBackButton }) => {
   return (
     <View style={styleComponents.topHeader}>
       <View>{showBackButton && <BackButton navigation={navigation} />}</View>
-      <BurgerMenu navigation={navigation} />
+      <ProfileNavigation navigation={navigation} />
     </View>
   );
 };

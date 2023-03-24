@@ -3,17 +3,30 @@ import { StyleSheet } from 'react-native-web';
 const styleTexts = StyleSheet.create({
   //h2
 
+  h1: {
+    fontWeight: 'bold',
+    fontFamily: 'Passion-One',
+    fontSize: 38,
+    color: '#FFD3D3',
+  },
+
+  h2: {
+    fontWeight: 'bold',
+    fontFamily: 'Passion-One',
+    fontSize: 32,
+    color: '#E68383',
+  },
+
   h3: {
     fontWeight: 'bold',
     fontFamily: 'Passion-One',
     fontSize: 24,
     color: '#FFD3D3',
-    marginBottom: 10,
   },
 
   bodyText: {
     fontSize: 14,
-    paddingVertical: 24,
+    paddingVertical: 4,
     color: '#FFD3D3',
   },
 

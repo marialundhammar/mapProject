@@ -12,6 +12,14 @@ const ContextStoreProvider = ({ children }) => {
     long: 13.01675573718772,
   });
 
+  const [currentBar, setCurrentBar] = useState({
+    lat: 0,
+    long: 0,
+    name: '',
+    distance: 0,
+    description: '',
+  });
+
   return (
     <ContextStore.Provider
       value={{
@@ -23,6 +31,8 @@ const ContextStoreProvider = ({ children }) => {
         setCurrentBarTour,
         userLocation,
         setUserLocation,
+        currentBar,
+        setCurrentBar,
       }}
     >
       {children}
