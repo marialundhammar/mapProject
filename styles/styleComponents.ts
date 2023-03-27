@@ -106,6 +106,13 @@ const styleModals = StyleSheet.create({
     alignItems: 'center',
   },
 
+  barNavigationBanner: {
+    backgroundColor: '#E68383',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+
   cardStyle: {
     borderWidth: 1,
     height: 100,

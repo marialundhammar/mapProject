@@ -49,8 +49,10 @@ const BottomContainer = ({ navigation }) => {
           )}
 
           <View style={styleComponents.start}>
-            {arrayOfBars.map((bar) => (
-              <Text style={styleTexts.bodyText}>{bar.name} | </Text>
+            {arrayOfBars.map((bar, i) => (
+              <Text style={styleTexts.bodyText} key={i}>
+                {bar.name} |{' '}
+              </Text>
             ))}
           </View>
 

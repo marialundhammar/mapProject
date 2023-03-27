@@ -41,4 +41,6 @@ export type ContextStoreType = {
   setUserLocation: (CoordsType) => void;
   currentBar: BarType;
   setCurrentBar: (BarType) => void;
+  events: string[];
+  setEvents: (events: string[]) => void;
 };

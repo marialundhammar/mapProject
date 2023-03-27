@@ -4,6 +4,8 @@ import { View, Pressable, Text } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
 import styleButtons from '../../../styles/styleButtons';
 import { BarType } from '../../../types';
+import { saveEvents } from '../../../utils/helpers';
+import DefaultButton from './DefaultButton';
 
 interface NavigationButtonType {
   navigation: any;
@@ -11,6 +13,8 @@ interface NavigationButtonType {
   buttonText?: string;
   isFilled?: boolean;
   currentBar?: BarType;
+  onClose?: () => void;
+  visible: boolean;
 }
 
 const NavigationButton = ({
@@ -19,14 +23,23 @@ const NavigationButton = ({
   buttonText,
   isFilled = true,
   currentBar,
+  onClose,
+  visible,
 }: NavigationButtonType) => {
-  const { setCurrentBar } = useContext(ContextStore);
+  const { setCurrentBar, events, setEvents, user } = useContext(ContextStore);
+
+  const currentTime = new Date().toLocaleTimeString();
+
   const handleNavigation = () => {
     navigation.navigate(navigateTo);
 
     if (currentBar) {
       setCurrentBar(currentBar);
+      const event = `${currentTime} Ni anlände till ${currentBar.name}`;
+      setEvents([event, ...events]);
+      onClose();
     }
+    saveEvents(user, events);
   };
 
   return (

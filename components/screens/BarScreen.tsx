@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { ContextStore } from '../../context/ContextStore';
 import styleComponents from '../../styles/styleComponents';
 import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
+import BarMapNavigation from '../ui/atoms/BarMapNavigation';
 import Button from '../ui/atoms/NavigatonButton';
+import Timer from '../ui/atoms/Timer';
 import BottomContainer from '../ui/molecules/BottomContainer';
 import DoChallenge from '../ui/molecules/DoChallange';
 import TimeLine from '../ui/molecules/TimeLine';
@@ -20,6 +22,8 @@ const BarScreen = ({ navigation }) => {
         <TopHeader navigation={navigation} showBackButton={false} />
 
         <View style={styleScreens.onboardingScreen}>
+          <BarMapNavigation />
+
           <Text style={styleTexts.h2}>VÄLKOMMEN TILL {currentBar.name}</Text>
           <TimeLine />
 

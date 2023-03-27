@@ -20,6 +20,16 @@ const ContextStoreProvider = ({ children }) => {
     description: '',
   });
 
+  const [events, setEvents] = useState([
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+  ]);
+
+  console.log(events);
+
   return (
     <ContextStore.Provider
       value={{
@@ -33,6 +43,8 @@ const ContextStoreProvider = ({ children }) => {
         setUserLocation,
         currentBar,
         setCurrentBar,
+        events,
+        setEvents,
       }}
     >
       {children}

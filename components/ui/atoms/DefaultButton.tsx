@@ -4,9 +4,10 @@ import styleButtons from '../../../styles/styleButtons';
 
 type DefaultButtonType = {
   text: string;
+  onClose?: () => void;
 };
 
-const Button = ({ text }: DefaultButtonType) => {
+const Button = ({ text, onClose }: DefaultButtonType) => {
   return (
     <View
       style={{
@@ -15,7 +16,7 @@ const Button = ({ text }: DefaultButtonType) => {
         padding: 8,
       }}
     >
-      <Pressable style={styleButtons.buttonDefault}>
+      <Pressable onPress={onClose} style={styleButtons.buttonDefault}>
         <Text style={styleButtons.buttonDefaultText}>{text}</Text>
       </Pressable>
     </View>

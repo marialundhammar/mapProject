@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import styleComponents from '../../../styles/styleComponents';
 import { FontAwesome5 } from '@expo/vector-icons';
+
 const ProfileNavigation = ({ navigation }) => {
   return (
     <View style={styleComponents.leftComponent}>

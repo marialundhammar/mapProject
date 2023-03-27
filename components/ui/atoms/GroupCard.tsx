@@ -45,7 +45,7 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
         });
       })
       .catch((error) => {
-        console.log('Errroooor: ', error);
+        console.log('Error: ', error);
       });
 
     navigation.navigate('Map');

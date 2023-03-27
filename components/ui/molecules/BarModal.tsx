@@ -9,6 +9,7 @@ import NavigationButton from '../atoms/NavigatonButton';
 import styleComponents from '../../../styles/styleComponents';
 import { BarType } from '../../../types';
 import { ContextStore } from '../../../context/ContextStore';
+import DefaultButton from '../atoms/DefaultButton';
 
 type ModalType = {
   content?: {
@@ -22,8 +23,8 @@ type ModalType = {
   image?: any;
   navigation: any;
   visible: boolean;
-  onClose: () => void;
-  currentBarHej: BarType;
+  onClose?: () => void;
+  currentBar: BarType;
 };
 
 export const BarModal = ({
@@ -34,15 +35,11 @@ export const BarModal = ({
   showButton = false,
   visible,
   onClose,
-  currentBarHej,
+  currentBar,
 }: ModalType) => {
   const imagePath = image ? image : null;
 
-  const { setCurrentBar } = useContext(ContextStore);
-
-  const handleSetCurrentBar = () => {
-    setCurrentBar(currentBarHej);
-  };
+  console.log('HERE IS VISIBLE', visible);
 
   return (
     <View>
@@ -62,6 +59,8 @@ export const BarModal = ({
               Du verkar befinna dig på {content?.name}, stämmer det?
             </Text>
 
+            <DefaultButton onClose={onClose} text={'Nej gick bara förbi'} />
+
             <View style={styleComponents.centered}>
               {showButton && (
                 <NavigationButton
@@ -69,7 +68,9 @@ export const BarModal = ({
                   navigateTo={'Bar'}
                   buttonText={'Yes det stämmer'}
                   isFilled={false}
-                  currentBar={currentBarHej}
+                  currentBar={currentBar}
+                  onClose={onClose}
+                  visible={visible}
                 />
               )}
             </View>

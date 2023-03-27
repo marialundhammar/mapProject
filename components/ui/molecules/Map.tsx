@@ -59,7 +59,6 @@ const Map = ({ navigation }) => {
     });
     if (closestBar.distance < 0.09) {
       setBarModal({ visible: true, content: closestBar });
-      //setCurrentBar(closestBar);
     }
   };
 
@@ -140,7 +139,7 @@ const Map = ({ navigation }) => {
           onClose={() =>
             setBarModal((current) => ({ ...current, visible: false }))
           }
-          currentBarHej={getClosestBar()}
+          currentBar={getClosestBar()}
         />
       </View>
     </>
