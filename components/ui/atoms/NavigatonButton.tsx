@@ -14,7 +14,6 @@ interface NavigationButtonType {
   isFilled?: boolean;
   currentBar?: BarType;
   onClose?: () => void;
-  visible: boolean;
 }
 
 const NavigationButton = ({
@@ -24,7 +23,6 @@ const NavigationButton = ({
   isFilled = true,
   currentBar,
   onClose,
-  visible,
 }: NavigationButtonType) => {
   const { setCurrentBar, events, setEvents, user } = useContext(ContextStore);
 
@@ -38,8 +36,8 @@ const NavigationButton = ({
       const event = `${currentTime} Ni anlände till ${currentBar.name}`;
       setEvents([event, ...events]);
       onClose();
+      saveEvents(user, events);
     }
-    saveEvents(user, events);
   };
 
   return (

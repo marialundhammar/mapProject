@@ -5,6 +5,7 @@ import {
   initializeAuth,
   getReactNativePersistence,
 } from 'firebase/auth/react-native';
+import { getStorage } from 'firebase/storage';
 
 //add to your .env file
 const firebaseConfig = {
@@ -22,7 +23,6 @@ const auth = initializeAuth(app, {
 });
 const db = getFirestore(app);
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+const storage = getStorage(app);
 
-export { app as default, auth, db };
+export { app as default, auth, db, storage };

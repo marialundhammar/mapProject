@@ -6,24 +6,31 @@ import styleButtons from '../../../styles/styleButtons';
 interface NavigationButtonType {
   buttonText: string;
   isFilled?: boolean;
-  onStartRound?: (boolean) => void;
-  startedRound?: boolean;
+  onIsOpen?: () => void;
+  isOpen?: boolean;
+  onStartedRound?: () => void;
 }
 
 const Button = ({
   buttonText,
   isFilled = true,
-  onStartRound,
-  startedRound,
+  onIsOpen,
+  isOpen,
+  onStartedRound,
 }: NavigationButtonType) => {
+  const handlePressable = () => {
+    onStartedRound();
+    onIsOpen();
+  };
+
   return (
     <View
       style={{
         padding: 8,
       }}
     >
-      {!startedRound && (
-        <Pressable onPress={onStartRound}>
+      {!isOpen && (
+        <Pressable onPress={handlePressable}>
           <LinearGradient
             colors={isFilled ? ['#F46D6D', '#CE7C7C'] : []}
             style={

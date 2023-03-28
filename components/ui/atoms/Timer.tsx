@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import styleTexts from '../../../styles/styleTexts';
+import DoChallenge from '../molecules/DoChallange';
 import NewChallenge from '../molecules/NewChallenge';
 
-const Timer = () => {
+//useNavigation
+const Timer = ({ navigation }) => {
   const INTERVALS = [2, 5, 10];
   const DURATION = 10;
 
@@ -32,7 +34,7 @@ const Timer = () => {
       {!showNewChallenge && (
         <Text style={styleTexts.bodyText}> Ny utmaning om {time} </Text>
       )}
-      {showNewChallenge && <NewChallenge />}
+      {showNewChallenge && <DoChallenge navigation={navigation} />}
     </View>
   );
 };
