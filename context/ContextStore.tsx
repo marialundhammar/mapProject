@@ -7,18 +7,13 @@ const ContextStoreProvider = ({ children }) => {
   const [step, setStep] = useState(1);
   const [user, setUser] = useState(null);
   const [currentBarTour, setCurrentBarTour] = useState(null);
+  const [onBar, setOnBar] = useState(false);
   const [userLocation, setUserLocation] = useState({
     lat: 55.592296775105524,
     long: 13.01675573718772,
   });
 
-  const [currentBar, setCurrentBar] = useState({
-    lat: 0,
-    long: 0,
-    name: '',
-    distance: 0,
-    description: '',
-  });
+  const [currentBar, setCurrentBar] = useState(null);
 
   const [events, setEvents] = useState([
     'test',
@@ -43,6 +38,8 @@ const ContextStoreProvider = ({ children }) => {
         setCurrentBar,
         events,
         setEvents,
+        setOnBar,
+        onBar,
       }}
     >
       {children}
