@@ -2,6 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useContext } from 'react';
 import { View, Pressable, Text } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
+import useAddEvents from '../../../Hooks/useAddEvent';
 import styleButtons from '../../../styles/styleButtons';
 import { BarType } from '../../../types';
 import DefaultButton from './DefaultButton';
@@ -32,8 +33,7 @@ const NavigationButton = ({
 
     if (currentBar) {
       setCurrentBar(currentBar);
-      const event = `${currentTime} Ni anlände till ${currentBar.name}`;
-      setEvents([event, ...events]);
+
       onClose();
     }
   };

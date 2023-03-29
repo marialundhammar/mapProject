@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import { ContextStore } from '../../context/ContextStore';
+import useAddEvents from '../../Hooks/useAddEvent';
 import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
 import BarMapNavigation from '../ui/atoms/BarMapNavigation';
@@ -8,10 +9,40 @@ import Button from '../ui/atoms/NavigatonButton';
 import DoChallenge from '../ui/molecules/DoChallange';
 import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
+import {
+  collection,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
+import { db } from '../../firebase/firebase';
+import useGetEvents from '../../Hooks/useGetEvents';
 
 const BarScreen = ({ navigation }) => {
   const navigateTo = 'Map';
-  const { currentBar } = useContext(ContextStore);
+  const { currentBar, user } = useContext(ContextStore);
+
+  const events = useGetEvents(user);
+
+  const [updatedEvents, setUpdatedEvents] = useState([...events, 'MAJJJJ']);
+
+  const handleAddEvents = () => {
+    console.log('hejhej');
+
+    const userCollectionRef = collection(db, 'users');
+    const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
+    getDocs(userQuery)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const userDocRef = doc.ref;
+          return updateDoc(userDocRef, { events: updatedEvents });
+        });
+      })
+      .catch((error) => {
+        console.log('Error: ', error);
+      });
+  };
 
   return (
     <View
@@ -32,6 +63,9 @@ const BarScreen = ({ navigation }) => {
 
           <DoChallenge navigation={navigation} />
         </View>
+        <Pressable onPress={handleAddEvents}>
+          <Text>TEST ADD</Text>
+        </Pressable>
       </ScrollView>
 
       <Button

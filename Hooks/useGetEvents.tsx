@@ -8,11 +8,11 @@
 
 //events: [{ id: '', text: '', type: 'enteredBar/challenge/leftBar', barId: '', createDate: '', mediaUrl:'', mediaType: '' }]
 
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
-const useEvents = (user) => {
+const useGetEvents = (user) => {
   const [events, setEvents] = useState([]);
   const fetchEvents = () => {
     const userCollectionRef = collection(db, 'users');
@@ -39,4 +39,4 @@ const useEvents = (user) => {
   return events;
 };
 
-export default useEvents;
+export default useGetEvents;
