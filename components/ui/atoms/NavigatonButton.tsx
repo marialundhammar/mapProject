@@ -25,6 +25,7 @@ const NavigationButton = ({
   onClose,
 }: NavigationButtonType) => {
   const { setCurrentBar, events, setEvents, user } = useContext(ContextStore);
+  //useAddEvents(user, 'majsan testar test');
 
   const currentTime = new Date().toLocaleTimeString();
 
@@ -33,7 +34,6 @@ const NavigationButton = ({
 
     if (currentBar) {
       setCurrentBar(currentBar);
-
       onClose();
     }
   };

@@ -24,24 +24,11 @@ const BarScreen = ({ navigation }) => {
   const { currentBar, user } = useContext(ContextStore);
 
   const events = useGetEvents(user);
+  const loading = useAddEvents(user, currentBar.name);
 
-  const [updatedEvents, setUpdatedEvents] = useState([...events, 'MAJJJJ']);
-
+  console.log('this is loading', loading);
   const handleAddEvents = () => {
     console.log('hejhej');
-
-    const userCollectionRef = collection(db, 'users');
-    const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
-    getDocs(userQuery)
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const userDocRef = doc.ref;
-          return updateDoc(userDocRef, { events: updatedEvents });
-        });
-      })
-      .catch((error) => {
-        console.log('Error: ', error);
-      });
   };
 
   return (
