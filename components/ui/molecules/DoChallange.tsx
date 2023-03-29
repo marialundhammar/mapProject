@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import styleComponents from '../../../styles/styleComponents';
-import styleTexts from '../../../styles/styleTexts';
 import NavigationButton from '../atoms/NavigatonButton';
 
 const DoChallenge = ({ navigation }) => {
+  const currentTime = new Date().toLocaleTimeString();
+
   return (
     <View style={styleComponents.barContentContainer}>
       <NavigationButton

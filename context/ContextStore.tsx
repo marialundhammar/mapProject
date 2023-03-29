@@ -28,8 +28,6 @@ const ContextStoreProvider = ({ children }) => {
     'test',
   ]);
 
-  console.log(events);
-
   return (
     <ContextStore.Provider
       value={{

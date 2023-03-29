@@ -6,7 +6,7 @@ import styleTexts from '../../styles/styleTexts';
 import BarMapNavigation from '../ui/atoms/BarMapNavigation';
 import Button from '../ui/atoms/NavigatonButton';
 import DoChallenge from '../ui/molecules/DoChallange';
-import TimeLine from '../ui/molecules/Timeline';
+import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
 
 const BarScreen = ({ navigation }) => {

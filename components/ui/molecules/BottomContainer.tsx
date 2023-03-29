@@ -7,7 +7,7 @@ import styleScreens from '../../../styles/styleScreens';
 import styleTexts from '../../../styles/styleTexts';
 import Button from '../atoms/Button';
 import { Animated } from 'react-native';
-import TimeLine from './Timeline';
+import TimeLine from './TimeLine';
 
 const BottomContainer = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);

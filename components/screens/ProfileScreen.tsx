@@ -6,7 +6,7 @@ import TopHeader from '../ui/molecules/TopHeader';
 import styleScreens from '../../styles/styleScreens';
 import { getAuth, signOut } from 'firebase/auth';
 import { ContextStore } from '../../context/ContextStore';
-import TimeLine from '../ui/molecules/Timeline';
+import TimeLine from '../ui/molecules/TimeLine';
 
 const ProfileScreen = ({ navigation }) => {
   const navigateTo = 'Map';
@@ -32,6 +32,7 @@ const ProfileScreen = ({ navigation }) => {
       <View style={styleScreens.defaultScreen}>
         <View>
           <TimeLine navigation={navigation} />
+
           <Button
             navigation={navigation}
             navigateTo={'Map'}

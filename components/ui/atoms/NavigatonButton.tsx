@@ -4,7 +4,6 @@ import { View, Pressable, Text } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
 import styleButtons from '../../../styles/styleButtons';
 import { BarType } from '../../../types';
-import { saveEvents } from '../../../utils/helpers';
 import DefaultButton from './DefaultButton';
 
 interface NavigationButtonType {
@@ -36,7 +35,6 @@ const NavigationButton = ({
       const event = `${currentTime} Ni anlände till ${currentBar.name}`;
       setEvents([event, ...events]);
       onClose();
-      saveEvents(user, events);
     }
   };
 

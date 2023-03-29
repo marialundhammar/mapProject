@@ -1,13 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
+import useGetEvents from '../../../Hooks/useGetEvents';
+import useEvents from '../../../Hooks/useGetEvents';
 import styleComponents from '../../../styles/styleComponents';
 import TimeLineEvent from '../atoms/TimeLineEvent';
 import Timer from '../atoms/Timer';
 
 const TimeLine = ({ navigation }) => {
   const [showAllEvents, setShowAllEvents] = useState(false);
-  const { events } = useContext(ContextStore);
+  const { user } = useContext(ContextStore);
+
+  const events = useGetEvents(user);
 
   const handleOpenTimeLine = () => {
     setShowAllEvents(!showAllEvents);
