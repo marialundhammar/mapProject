@@ -4,32 +4,20 @@ import { ContextStore } from '../../context/ContextStore';
 import useAddEvents from '../../Hooks/useAddEvent';
 import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
-import BarMapNavigation from '../ui/atoms/BarMapNavigation';
 import Button from '../ui/atoms/NavigatonButton';
 import DoChallenge from '../ui/molecules/DoChallange';
 import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
-import {
-  collection,
-  getDocs,
-  query,
-  updateDoc,
-  where,
-} from 'firebase/firestore';
-import { db } from '../../firebase/firebase';
+
 import useGetEvents from '../../Hooks/useGetEvents';
-
-const BarScreen = ({ navigation }) => {
-  const navigateTo = 'Map';
-
-  const events = useGetEvents(user);
-  const loading = useAddEvents(user, currentBar.name);
 import Map from '../ui/molecules/Map';
 
 const BarScreen = ({ navigation }) => {
   const navigateTo = 'Map';
-  const { currentBar, onBar, user } = useContext(ContextStore);
+  const { user, currentBar, onBar } = useContext(ContextStore);
 
+  const events = useGetEvents(user);
+  const loading = useAddEvents(user, currentBar.name);
 
   return (
     <View
