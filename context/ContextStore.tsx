@@ -7,7 +7,7 @@ const ContextStoreProvider = ({ children }) => {
   const [step, setStep] = useState(1);
   const [user, setUser] = useState(null);
   const [currentBarTour, setCurrentBarTour] = useState(null);
-  const [onBar, setOnBar] = useState(false);
+  const [onBar, setOnBar] = useState(true);
   const [userLocation, setUserLocation] = useState({
     lat: 55.592296775105524,
     long: 13.01675573718772,

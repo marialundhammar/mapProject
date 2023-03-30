@@ -12,8 +12,6 @@ const TimeLine = ({ navigation }) => {
   const { user } = useContext(ContextStore);
 
   const events = useGetEvents(user);
-  console.log(events);
-
   const handleOpenTimeLine = () => {
     setShowAllEvents(!showAllEvents);
   };

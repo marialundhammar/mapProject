@@ -5,6 +5,7 @@ export type BarType = {
   id?: string;
   image?: any;
   distance?: number;
+  description?: string;
 };
 
 export type GroupType = {
