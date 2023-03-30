@@ -13,6 +13,21 @@ const useAddEvents = (user, text) => {
   const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [eventMessage, setEventMessage] = useState('');
+
+  const eventMessages = {
+    enteredBar: 'Anlände till ',
+    leftBar: 'Lämnade ',
+    madeChallenge: 'Gjorde utmaningen',
+    barTourStarted: 'Barrundan började!!',
+    barTourEnded: 'Barrundan slutade',
+  };
+
+  const checkEventMessage = () => {
+    if (text === 'enteredBar') {
+      setEventMessage;
+    }
+  };
 
   useEffect(() => {
     const fetchEvents = async () => {

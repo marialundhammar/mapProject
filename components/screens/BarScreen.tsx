@@ -27,7 +27,7 @@ const BarScreen = ({ navigation }) => {
       style={{
         flex: 1,
         justifyContent: 'space-between',
-        backgroundColor: '1B274A',
+        backgroundColor: '#1B274A',
       }}
     >
       <TopHeader navigation={navigation} showBackButton={false} />
@@ -35,7 +35,6 @@ const BarScreen = ({ navigation }) => {
       {onBar ? (
         <>
           <ScrollView>
-            <View></View>
             <View style={styleScreens.onboardingScreen}>
               <Text style={styleTexts.h2}>
                 VÄLKOMMEN TILL {currentBar.name}
@@ -50,7 +49,7 @@ const BarScreen = ({ navigation }) => {
               navigation={navigation}
               navigateTo={'Map'}
               buttonText={'GÅ FRÅN BAR'}
-              isFilled={false}
+              isFilled={true}
             />
           </View>
         </>
