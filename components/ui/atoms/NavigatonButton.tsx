@@ -26,7 +26,7 @@ const NavigationButton = ({
 }: NavigationButtonType) => {
   const { setCurrentBar, events, setEvents, user } = useContext(ContextStore);
   //useAddEvents(user, 'majsan testar test');
-
+  const loading = useAddEvents(user, 'left bar');
   const currentTime = new Date().toLocaleTimeString();
 
   const handleNavigation = () => {

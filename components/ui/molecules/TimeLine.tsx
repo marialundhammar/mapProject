@@ -24,7 +24,8 @@ const TimeLine = ({ navigation }) => {
       onPress={handleOpenTimeLine}
     >
       <View>
-        <Timer navigation={navigation} />
+        {/*         <Timer navigation={navigation} />
+         */}
         {showAllEvents
           ? events.map((item, i) => (
               <TimeLineEvent timeLineEvent={item} key={i} />

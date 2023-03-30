@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import {
   collection,
   getDocs,
@@ -7,7 +7,6 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import useGetEvents from './useGetEvents';
 
 const useAddEvents = (user, text) => {
   const userCollectionRef = collection(db, 'users');

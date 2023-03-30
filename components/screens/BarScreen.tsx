@@ -26,11 +26,6 @@ const BarScreen = ({ navigation }) => {
   const events = useGetEvents(user);
   const loading = useAddEvents(user, currentBar.name);
 
-  console.log('this is loading', loading);
-  const handleAddEvents = () => {
-    console.log('hejhej');
-  };
-
   return (
     <View
       style={{
@@ -50,9 +45,6 @@ const BarScreen = ({ navigation }) => {
 
           <DoChallenge navigation={navigation} />
         </View>
-        <Pressable onPress={handleAddEvents}>
-          <Text>TEST ADD</Text>
-        </Pressable>
       </ScrollView>
 
       <Button
