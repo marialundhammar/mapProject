@@ -8,35 +8,39 @@
 
 //events: [{ id: '', text: '', type: 'enteredBar/challenge/leftBar', barId: '', createDate: '', mediaUrl:'', mediaType: '' }]
 
-import { useState, useEffect, useContext } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  where,
+} from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
-const useEvents = (user) => {
+const useGetEvents = (user) => {
   const [events, setEvents] = useState([]);
-  const fetchEvents = () => {
-    const userCollectionRef = collection(db, 'users');
-    const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
-
-    getDocs(userQuery)
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          if (data.events) {
-            setEvents(data.events);
-          }
-        });
-      })
-      .catch((error) => {
-        console.log('Error: ', error);
-      });
-  };
 
   useEffect(() => {
-    fetchEvents();
-  }, []);
+    const userCollectionRef = collection(db, 'users');
+    const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
+    const unsubscribe = onSnapshot(
+      userQuery,
+      (querySnapshot) => {
+        const userDoc = querySnapshot.docs[0];
+        const data = userDoc.data();
+        if (data.events) {
+          setEvents(data.events);
+        }
+      },
+      (error) => {
+        console.log('Error: ', error);
+      }
+    );
+    return unsubscribe;
+  }, [user]);
 
   return events;
 };
 
-export default useEvents;
+export default useGetEvents;

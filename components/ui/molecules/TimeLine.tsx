@@ -12,6 +12,7 @@ const TimeLine = ({ navigation }) => {
   const { user } = useContext(ContextStore);
 
   const events = useGetEvents(user);
+  console.log(events);
 
   const handleOpenTimeLine = () => {
     setShowAllEvents(!showAllEvents);
@@ -23,7 +24,8 @@ const TimeLine = ({ navigation }) => {
       onPress={handleOpenTimeLine}
     >
       <View>
-        <Timer navigation={navigation} />
+        {/*         <Timer navigation={navigation} />
+         */}
         {showAllEvents
           ? events.map((item, i) => (
               <TimeLineEvent timeLineEvent={item} key={i} />
