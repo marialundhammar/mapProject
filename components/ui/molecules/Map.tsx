@@ -43,6 +43,8 @@ const Map = ({ navigation }) => {
         lat: bar.lat,
         long: bar.long,
         name: bar.name,
+        description: bar.description,
+        image: bar.image,
         distance: calculateDistanceFunction({
           lat1: userLocation.lat,
           lon1: userLocation.long,

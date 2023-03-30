@@ -68,7 +68,9 @@ const styleModals = StyleSheet.create({
     borderColor: '#FFD3D3',
     width: '95%',
     borderRadius: 8,
-    margin: 10,
+    marginBottom: 16,
+    marginTop: 16,
+    padding: 8,
   },
 
   topHeader: {

@@ -15,13 +15,7 @@ const ContextStoreProvider = ({ children }) => {
 
   const [currentBar, setCurrentBar] = useState(null);
 
-  const [events, setEvents] = useState([
-    'test',
-    'test',
-    'test',
-    'test',
-    'test',
-  ]);
+  console.log('Here is currentbar', currentBar);
 
   return (
     <ContextStore.Provider
@@ -36,8 +30,7 @@ const ContextStoreProvider = ({ children }) => {
         setUserLocation,
         currentBar,
         setCurrentBar,
-        events,
-        setEvents,
+
         setOnBar,
         onBar,
       }}

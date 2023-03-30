@@ -6,6 +6,7 @@ export type BarType = {
   image?: any;
   distance?: number;
   description?: string;
+  challenges?: number;
 };
 
 export type GroupType = {
@@ -42,8 +43,7 @@ export type ContextStoreType = {
   setUserLocation: (CoordsType) => void;
   currentBar: BarType;
   setCurrentBar: (BarType) => void;
-  events: string[];
-  setEvents: (events: string[]) => void;
+
   setOnBar: (boolean) => void;
   onBar: boolean;
 };

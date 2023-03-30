@@ -10,7 +10,7 @@ const BarMapNavigation = ({ navigation }) => {
 
   return (
     <View style={styleComponents.barNavigationBanner}>
-      <View style={styleComponents.barNavigationItem}>
+      <View style={[styleComponents.barNavigationItem, styleMargin.m10Right]}>
         <Pressable onPress={() => setOnBar(false)}>
           <Text
             style={
@@ -24,7 +24,7 @@ const BarMapNavigation = ({ navigation }) => {
         </Pressable>
       </View>
 
-      <View style={styleComponents.barNavigationItem}>
+      <View style={[styleComponents.barNavigationItem]}>
         <Pressable onPress={() => setOnBar(true)}>
           <Text
             style={

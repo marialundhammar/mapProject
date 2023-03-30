@@ -12,6 +12,7 @@ import TopHeader from '../ui/molecules/TopHeader';
 import useGetEvents from '../../Hooks/useGetEvents';
 import Map from '../ui/molecules/Map';
 import styleComponents from '../../styles/styleComponents';
+import BarContent from '../ui/molecules/BarContent';
 
 const BarScreen = ({ navigation }) => {
   const navigateTo = 'Map';
@@ -20,14 +21,12 @@ const BarScreen = ({ navigation }) => {
   const events = useGetEvents(user);
   const loading = useAddEvents(user, currentBar.name);
 
-  console.log('HERE IS CURRENTBAR', currentBar);
-
   return (
     <View
       style={{
         flex: 1,
         justifyContent: 'space-between',
-        backgroundColor: '1B274A',
+        backgroundColor: '#1B274A',
       }}
     >
       <TopHeader navigation={navigation} showBackButton={false} />
@@ -40,6 +39,8 @@ const BarScreen = ({ navigation }) => {
               <Text style={styleTexts.h2}>
                 VÄLKOMMEN TILL {currentBar.name}
               </Text>
+
+              <BarContent />
               <TimeLine navigation={navigation} />
 
               <DoChallenge navigation={navigation} />
@@ -50,7 +51,7 @@ const BarScreen = ({ navigation }) => {
               navigation={navigation}
               navigateTo={'Map'}
               buttonText={'GÅ FRÅN BAR'}
-              isFilled={false}
+              isFilled={true}
             />
           </View>
         </>
