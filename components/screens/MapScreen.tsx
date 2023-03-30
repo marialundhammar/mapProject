@@ -14,11 +14,9 @@ const MapScreen = ({ navigation }) => {
     <View>
       <TopHeader navigation={navigation} showBackButton={true} />
 
-      <FakeUserLocationButton />
-
       <View style={styleScreens.mapScreen}>
         <Map navigation={navigation} />
-
+        <FakeUserLocationButton />
         <BottomContainer navigation={navigation} />
       </View>
     </View>

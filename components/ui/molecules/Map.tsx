@@ -9,6 +9,7 @@ import DistanceBanner from '../atoms/DistanceBanner';
 import mapStyle from '../../../assets/mapStyle';
 import { ContextStore } from '../../../context/ContextStore';
 import { BarType } from '../../../types';
+import BarMapNavigation from '../atoms/BarMapNavigation';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -25,8 +26,14 @@ const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const [barModal, setBarModal] = useState({ visible: false, content: null });
-  const { currentBarTour, setCurrentBar, userLocation, setUserLocation } =
-    useContext(ContextStore);
+  const {
+    currentBarTour,
+    setCurrentBar,
+    userLocation,
+    setUserLocation,
+    currentBar,
+    onBar,
+  } = useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
 
   const bars = currentBarTour.bars;
@@ -57,7 +64,7 @@ const Map = ({ navigation }) => {
       distance: closestBar.distance,
       name: closestBar.name,
     });
-    if (closestBar.distance < 0.09) {
+    if (closestBar.distance < 0.09 && currentBar === null) {
       setBarModal({ visible: true, content: closestBar });
     }
   };
@@ -88,13 +95,17 @@ const Map = ({ navigation }) => {
   //add userLocation
 
   const pinColor = '#000000';
+  console.log('currentBar', currentBar);
 
   return (
     <>
-      <DistanceBanner
-        distance={distanceBar.distance}
-        barName={distanceBar.name}
-      />
+      {!currentBar && (
+        <DistanceBanner
+          distance={distanceBar.distance}
+          barName={distanceBar.name}
+        />
+      )}
+
       <View style={{ flex: 1 }}>
         <MapView
           style={styleMap.container}

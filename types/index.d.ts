@@ -43,4 +43,6 @@ export type ContextStoreType = {
   setCurrentBar: (BarType) => void;
   events: string[];
   setEvents: (events: string[]) => void;
+  setOnBar: (boolean) => void;
+  onBar: boolean;
 };

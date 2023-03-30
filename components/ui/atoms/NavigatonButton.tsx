@@ -36,6 +36,10 @@ const NavigationButton = ({
       setCurrentBar(currentBar);
       onClose();
     }
+
+    if (buttonText === 'GÅ FRÅN BAR') {
+      setCurrentBar(null);
+    }
   };
 
   return (

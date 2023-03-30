@@ -24,6 +24,14 @@ const styleTexts = StyleSheet.create({
     color: '#FFD3D3',
   },
 
+  h3dark: {
+    fontWeight: 'bold',
+    fontFamily: 'Passion-One',
+    fontSize: 24,
+    color: '#1B274A',
+    textDecorationLine: 'underline',
+  },
+
   bodyText: {
     fontSize: 14,
     paddingVertical: 4,

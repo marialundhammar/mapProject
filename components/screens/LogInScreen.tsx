@@ -45,7 +45,7 @@ const LogInScreen = ({ navigation }) => {
         <TextInput
           style={styleTexts.textInput}
           placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => setEmail(text.toLowerCase())}
           value={email}
           placeholderTextColor={'#FFD3D3'}
         />

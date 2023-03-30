@@ -21,10 +21,15 @@ import useGetEvents from '../../Hooks/useGetEvents';
 
 const BarScreen = ({ navigation }) => {
   const navigateTo = 'Map';
-  const { currentBar, user } = useContext(ContextStore);
 
   const events = useGetEvents(user);
   const loading = useAddEvents(user, currentBar.name);
+import Map from '../ui/molecules/Map';
+
+const BarScreen = ({ navigation }) => {
+  const navigateTo = 'Map';
+  const { currentBar, onBar, user } = useContext(ContextStore);
+
 
   return (
     <View
@@ -34,25 +39,32 @@ const BarScreen = ({ navigation }) => {
         backgroundColor: '1B274A',
       }}
     >
-      <ScrollView>
-        <TopHeader navigation={navigation} showBackButton={false} />
+      <TopHeader navigation={navigation} showBackButton={false} />
 
-        <View style={styleScreens.onboardingScreen}>
-          <BarMapNavigation />
+      {onBar ? (
+        <>
+          <ScrollView>
+            <View style={styleScreens.onboardingScreen}>
+              <Text style={styleTexts.h2}>
+                VÄLKOMMEN TILL {currentBar.name}
+              </Text>
+              <TimeLine navigation={navigation} />
 
-          <Text style={styleTexts.h2}>VÄLKOMMEN TILL {currentBar.name}</Text>
-          <TimeLine navigation={navigation} />
-
-          <DoChallenge navigation={navigation} />
-        </View>
-      </ScrollView>
-
-      <Button
-        navigation={navigation}
-        navigateTo={'Map'}
-        buttonText={'GÅ FRÅN BAR'}
-        isFilled={false}
-      />
+              <DoChallenge navigation={navigation} />
+            </View>
+          </ScrollView>
+          <Button
+            navigation={navigation}
+            navigateTo={'Map'}
+            buttonText={'GÅ FRÅN BAR'}
+            isFilled={false}
+          />
+        </>
+      ) : (
+        <>
+          <Map navigation={navigation} />
+        </>
+      )}
     </View>
   );
 };
