@@ -1,21 +1,23 @@
 const challenge1 = {
-  id: 'test-2',
-  name: 'fdfd',
-  description: 'fdffdff',
+  id: 'test-1',
+  name: 'Fråga bartendern',
+  description:
+    'Be om ett glas mjölk som du sedan frgåar bordsgrannen om hen vill ha',
   type: 'countdown',
   mediaType: 'video',
 };
 
 const challenge2 = {
   id: 'test-2',
-  name: 'fdfd',
-  description: 'fdffdff',
+  name: 'Fråga bartendern',
+  description:
+    'Be om ett glas mjölk från bartendern och ge det sedan till grannbordet',
   type: 'countdown',
   mediaType: 'video',
 };
 
 const challenge3 = {
-  id: 'test-2',
+  id: 'test-3',
   name: 'fdfd',
   description: 'fdffdff',
   type: 'countdown',

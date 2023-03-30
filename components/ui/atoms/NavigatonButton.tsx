@@ -24,10 +24,12 @@ const NavigationButton = ({
   currentBar,
   onClose,
 }: NavigationButtonType) => {
-  const { setCurrentBar, events, setEvents, user } = useContext(ContextStore);
+  const { setCurrentBar, user, currentBarTour } = useContext(ContextStore);
   //useAddEvents(user, 'majsan testar test');
   const loading = useAddEvents(user, 'left bar');
   const currentTime = new Date().toLocaleTimeString();
+
+  console.log('CURRENTBARTOUR', currentBarTour);
 
   const handleNavigation = () => {
     navigation.navigate(navigateTo);

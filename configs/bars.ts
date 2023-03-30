@@ -8,6 +8,7 @@ export const arrayOfBars: BarType[] = [
     id: 'majsans-olhak',
     image: require('../assets/bar-example.jpg'),
     description: 'Vi är specialister på goda drinkar och rökig whsikey 🍹',
+    challenges: 3,
   },
   {
     lat: 55.59278926498726,
