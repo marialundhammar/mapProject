@@ -1,8 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Pressable, Text } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
-import useAddEvents from '../../../Hooks/useAddEvent';
+import useAddEvent from '../../../Hooks/useAddEvent';
 import styleButtons from '../../../styles/styleButtons';
 import { BarType } from '../../../types';
 import DefaultButton from './DefaultButton';
@@ -25,21 +25,25 @@ const NavigationButton = ({
   onClose,
 }: NavigationButtonType) => {
   const { setCurrentBar, user, currentBarTour } = useContext(ContextStore);
-  //useAddEvents(user, 'majsan testar test');
-  const loading = useAddEvents(user, 'left bar');
-  const currentTime = new Date().toLocaleTimeString();
+  const [bar, setBar] = useState(null);
 
-  console.log('CURRENTBARTOUR', currentBarTour);
+  const { addEvents } = useAddEvent(user);
 
-  const handleNavigation = () => {
+  const handleNavigation = async () => {
     navigation.navigate(navigateTo);
 
-    if (currentBar) {
-      setCurrentBar(currentBar);
+    if (buttonText === 'Yes det stämmer') {
+      console.log('INSIDE');
+
+      await setCurrentBar(currentBar);
+      console.log('####', currentBar);
+
       onClose();
+      addEvents('enteredBar', currentBar);
     }
 
     if (buttonText === 'GÅ FRÅN BAR') {
+      addEvents('leftBar', currentBar);
       setCurrentBar(null);
     }
   };

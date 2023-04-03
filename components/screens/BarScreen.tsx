@@ -9,7 +9,7 @@ import DoChallenge from '../ui/molecules/DoChallange';
 import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
 
-import useGetEvents from '../../Hooks/useGetEvents';
+import useGetEvent from '../../Hooks/useGetEvents';
 import Map from '../ui/molecules/Map';
 import styleComponents from '../../styles/styleComponents';
 import BarContent from '../ui/molecules/BarContent';
@@ -18,8 +18,7 @@ const BarScreen = ({ navigation }) => {
   const navigateTo = 'Map';
   const { user, currentBar, onBar } = useContext(ContextStore);
 
-  const events = useGetEvents(user);
-  const loading = useAddEvents(user, currentBar.name);
+  const events = useGetEvent(user);
 
   return (
     <View
