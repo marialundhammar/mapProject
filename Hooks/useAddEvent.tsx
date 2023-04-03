@@ -61,11 +61,11 @@ const useAddEvent = (user) => {
     switch (type) {
       case 'leftBar':
         setLoading(true);
-        saveEvents(`${currentTime} left ${currentBar.name}`, type);
+        saveEvents(`${currentTime} lämnade ${currentBar.name}`, type);
         break;
       case 'enteredBar':
         setLoading(true);
-        saveEvents(`${currentTime} entered bar `, type);
+        saveEvents(`${currentTime} kom till baren `, type);
         break;
 
       default:
