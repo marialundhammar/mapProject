@@ -1,8 +1,7 @@
 const challenge1 = {
   id: 'test-1',
   name: 'Fråga bartendern',
-  description:
-    'Be om ett glas mjölk som du sedan frgåar bordsgrannen om hen vill ha',
+  description: 'T en bild på dig och ditt sällskap framför ',
   type: 'countdown',
   mediaType: 'video',
 };

@@ -52,8 +52,6 @@ const styleButtons = StyleSheet.create({
     color: '#FFD3D3',
   },
 
-  closeIcon: {},
-
   buttonDrink: {
     borderColor: '#445385',
     borderWidth: 1,
@@ -61,20 +59,26 @@ const styleButtons = StyleSheet.create({
     width: 100,
     margin: 8,
     borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   buttonDrinkText: {
+    margin: 6,
     fontSize: 12,
     color: '#FFD3D3',
     textAlign: 'center',
   },
 
   buttonClicked: {
-    backgroundColor: '#E68383',
+    borderWidth: 4,
+    borderColor: '#445385',
     height: 100,
     width: 100,
     margin: 8,
     borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   buttonBackText: {

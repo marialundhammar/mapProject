@@ -5,6 +5,10 @@ const styleMargin = StyleSheet.create({
     padding: 6,
   },
 
+  m10: {
+    margin: 20,
+  },
+
   m10Right: {
     marginRight: 120,
   },

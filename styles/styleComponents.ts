@@ -123,20 +123,19 @@ const styleModals = StyleSheet.create({
   },
 
   cardStyle: {
-    borderWidth: 1,
-    height: 100,
-    width: 330,
-    borderColor: '#E68383',
+    height: 120,
+    width: '90%',
+    backgroundColor: '#1B274A',
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,
   },
 
   cardStyleIsFilled: {
-    borderWidth: 1,
-    height: 120,
-    width: 330,
-    backgroundColor: '#E68383',
+    height: 140,
+    width: '90%',
+    borderColor: '#1B274A',
+    borderWidth: 2,
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,

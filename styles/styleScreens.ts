@@ -58,11 +58,12 @@ const styleScreens = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingLeft: 20,
+    backgroundColor: '#E68383',
   },
   halfScreenTop: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: 'absolute',
+    top: '20%',
+    right: '20%',
   },
 });
 

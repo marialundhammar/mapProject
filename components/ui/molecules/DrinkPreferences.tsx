@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import styleScreens from '../../../styles/styleScreens';
+import { View, Text } from 'react-native';
 import DrinkPreferenceButton from '../atoms/DrinkPreferenceButton';
 
 const DrinkPreferences = () => {
@@ -10,17 +9,18 @@ const DrinkPreferences = () => {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        marginTop: 24,
       }}
     >
-      <DrinkPreferenceButton text={'Vin'} icon={'🍷'} />
-      <DrinkPreferenceButton text={'Öl'} icon={'🍺'} />
-      <DrinkPreferenceButton text={'Coctail'} icon={'🍹'} />
-      <DrinkPreferenceButton text={'Pinne'} icon={'🥃'} />
-      <DrinkPreferenceButton text={'Billigt Bubbel'} icon={'🥂'} />
-      <DrinkPreferenceButton text={'Alkoholfritt'} icon={'🧉'} />
-      <DrinkPreferenceButton text={'Pommes'} icon={'🍟'} />
-      <DrinkPreferenceButton text={'Kaffe'} icon={'☕️'} />
-      <DrinkPreferenceButton text={'Dyrt bubbel'} icon={'🍾'} />
+      <DrinkPreferenceButton text={'Vin'} type={'wine'} />
+      <DrinkPreferenceButton text={'Öl'} type={'beer'} />
+      <DrinkPreferenceButton text={'Coctail'} type={'cocktail'} />
+      <DrinkPreferenceButton text={'Pinne'} type={'whiskey'} />
+      <DrinkPreferenceButton text={'Billigt Bubbel'} type={'cheap'} />
+      <DrinkPreferenceButton text={'Alkoholfritt'} type={'non-alcohole'} />
+      <DrinkPreferenceButton text={'Pommes'} type={'pommes'} />
+      <DrinkPreferenceButton text={'Snacks'} type={'snacks'} />
+      <DrinkPreferenceButton text={'Dyrt bubbel'} type={'expensive'} />
     </View>
   );
 };

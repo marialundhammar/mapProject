@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import styleMargin from '../../../styles/styleMargin';
 
 import styleTexts from '../../../styles/styleTexts';
 
@@ -17,7 +18,7 @@ const StepOne = () => {
       }}
     >
       <View style={{ marginLeft: 0 }}>
-        <Text style={styleTexts.h3}>Vad gillar du? </Text>
+        <Text style={[styleTexts.h3, styleMargin.m10]}>Vad gillar du? </Text>
       </View>
       <DrinkPreferences />
     </View>

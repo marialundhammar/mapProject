@@ -23,4 +23,9 @@ export const arrayOfBarTours: BarTourTypes[] = [
     numbersOfBars: 2,
     bars: [arrayOfBars[3], arrayOfBars[1]],
   },
+  {
+    title: 'Vinhaggans bästa barer',
+    numbersOfBars: 2,
+    bars: [arrayOfBars[3], arrayOfBars[1]],
+  },
 ];
