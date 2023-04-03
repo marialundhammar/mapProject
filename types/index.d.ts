@@ -7,6 +7,7 @@ export type BarType = {
   distance?: number;
   description?: string;
   challenges?: number;
+  text?: string;
 };
 
 export type GroupType = {

@@ -41,7 +41,7 @@ const ImageUpload = () => {
         )}
       </View> */}
 
-      <View style={{ height: 300, width: 300 }}>
+      <View style={{ height: 300, width: 360 }}>
         <Camera
           style={{ flex: 1 }}
           type={type}

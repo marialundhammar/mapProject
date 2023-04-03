@@ -39,8 +39,6 @@ export const BarModal = ({
 }: ModalType) => {
   const imagePath = image ? image : null;
 
-  console.log('content', content);
-
   return (
     <View>
       <Modal isVisible={visible} onBackdropPress={onClose}>

@@ -97,7 +97,6 @@ const Map = ({ navigation }) => {
   //add userLocation
 
   const pinColor = '#000000';
-  console.log('currentBar', currentBar);
 
   return (
     <>

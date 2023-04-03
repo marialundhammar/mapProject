@@ -17,6 +17,13 @@ const TimeLine = ({ navigation }) => {
     setShowAllEvents(!showAllEvents);
   };
 
+  const texts = [];
+  events.map((item) => {
+    texts.push(item.text);
+  });
+
+  console.log('events', texts);
+
   return (
     <Pressable
       style={styleComponents.barContentContainer}
@@ -26,11 +33,12 @@ const TimeLine = ({ navigation }) => {
         <Text style={styleTexts.h3}>Tidslinjen </Text>
         {/*         <Timer navigation={navigation} />
          */}
+
         {showAllEvents
-          ? events.map((item, i) => (
+          ? texts.map((item, i) => (
               <TimeLineEvent timeLineEvent={item} key={i} />
             ))
-          : events
+          : texts
               .slice(0, 3)
               .map((item, i) => <TimeLineEvent timeLineEvent={item} key={i} />)}
       </View>
