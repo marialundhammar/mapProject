@@ -7,7 +7,7 @@ const TextEditor = () => {
   return (
     <View style={styleComponents.barContentContainer}>
       <TextInput
-        style={styleTexts.bodyTextdsfdgfhgjh}
+        style={[styleTexts.bodyText, styleComponents.height150]}
         multiline={true}
         numberOfLines={4}
       />

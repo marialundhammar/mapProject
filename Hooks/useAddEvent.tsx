@@ -18,7 +18,7 @@ const useAddEvent = (user) => {
 
   const prevEvents = useGetEvents(user);
   const currentTime = new Date().toLocaleTimeString();
-  const { currentBar } = useContext(ContextStore);
+  const { currentBar, setCurrentBar } = useContext(ContextStore);
 
   const fetchEvents = async () => {
     const querySnapshot = await getDocs(userQuery);
@@ -44,7 +44,6 @@ const useAddEvent = (user) => {
             barId: '',
             createDate: currentTime,
             mediaUrl: '',
-            mediaType: '',
           },
           ...prevEvents,
         ],
@@ -62,6 +61,7 @@ const useAddEvent = (user) => {
       case 'leftBar':
         setLoading(true);
         saveEvents(`${currentTime} lämnade ${currentBar.name}`, type);
+
         break;
       case 'enteredBar':
         setLoading(true);

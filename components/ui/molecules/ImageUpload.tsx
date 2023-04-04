@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Pressable, TouchableOpacity } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
+import styleButtons from '../../../styles/styleButtons';
+import { LinearGradient } from 'expo-linear-gradient';
+import styleComponents from '../../../styles/styleComponents';
+
 let camera: Camera;
 
-const ImageUpload = () => {
+const ImageUpload = ({ onClick, turnOnCamera }) => {
   const [type, setType] = useState(CameraType.back);
   const [capturedImage, setCapturedImage] = useState<any>(null);
   const [cameraRef, setCameraRef] = useState(null);
@@ -20,10 +24,10 @@ const ImageUpload = () => {
   }, []);
 
   const takePic = async () => {
-    console.log('klick');
+    /*     console.log('klick');
     const photo: any = await camera.takePictureAsync();
     setCapturedImage(photo);
-    console.log(capturedImage);
+    console.log(capturedImage); */
   };
 
   const toggleCameraType = () => {
@@ -41,37 +45,63 @@ const ImageUpload = () => {
         )}
       </View> */}
 
-      <View style={{ height: 300, width: 360 }}>
-        <Camera
-          style={{ flex: 1 }}
-          type={type}
-          ref={(ref) => setCameraRef(ref)}
+      {!turnOnCamera ? (
+        <LinearGradient
+          colors={['#F46D6D', '#CE7C7C']}
+          style={{ borderRadius: 8 }}
         >
-          <View>
-            <Pressable onPress={toggleCameraType}>
-              <Text>Flip Camera</Text>
-            </Pressable>
-          </View>
           <View
             style={{
-              alignSelf: 'center',
-              flex: 1,
+              width: 370,
+              height: 250,
+              justifyContent: 'center',
               alignItems: 'center',
             }}
           >
-            <TouchableOpacity
-              onPress={takePic}
-              style={{
-                width: 70,
-                height: 70,
-                bottom: 0,
-                borderRadius: 50,
-                backgroundColor: '#fff',
-              }}
-            />
+            <Pressable
+              onPress={onClick}
+              style={[styleButtons.buttonDefault, styleButtons.buttonBorder]}
+            >
+              <Text style={styleButtons.buttonDefaultText}>
+                Sätt igång kamera
+              </Text>
+            </Pressable>
           </View>
-        </Camera>
-      </View>
+        </LinearGradient>
+      ) : (
+        <View style={{ flex: 1 }}>
+          <Camera
+            style={{ height: '100%', width: 400 }}
+            type={type}
+            ref={(ref) => setCameraRef(ref)}
+          >
+            <View>
+              <Pressable onPress={toggleCameraType}>
+                <Text>Flip Camera</Text>
+              </Pressable>
+            </View>
+            <View
+              style={{
+                alignSelf: 'center',
+                flex: 1,
+                alignItems: 'center',
+              }}
+            >
+              <TouchableOpacity
+                onPress={onClick}
+                style={{
+                  width: 70,
+                  height: 70,
+                  bottom: 0,
+                  borderRadius: 50,
+                  backgroundColor: '#fff',
+                  position: 'absolute',
+                }}
+              />
+            </View>
+          </Camera>
+        </View>
+      )}
       {/*       <Text>Image Upload</Text>
       <Pressable onPress={pickImage}>
         <Text>Upload Image</Text>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { challenges2 } from '../../../configs/challenges';
 import styleComponents from '../../../styles/styleComponents';

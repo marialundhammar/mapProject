@@ -140,6 +140,10 @@ const styleModals = StyleSheet.create({
     marginTop: 8,
     zIndex: -10,
   },
+
+  height150: {
+    height: 150,
+  },
 });
 
 export default styleModals;
