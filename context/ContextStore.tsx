@@ -13,6 +13,14 @@ const ContextStoreProvider = ({ children }) => {
     long: 13.01675573718772,
   });
 
+  const [currentChallenge, setCurrentChallenge] = useState({
+    id: '',
+    name: '',
+    description: '',
+    type: '',
+    mediaType: '',
+  });
+
   const [currentBar, setCurrentBar] = useState(null);
 
   console.log('Here is currentbar', currentBar);
@@ -30,9 +38,10 @@ const ContextStoreProvider = ({ children }) => {
         setUserLocation,
         currentBar,
         setCurrentBar,
-
         setOnBar,
         onBar,
+        currentChallenge,
+        setCurrentChallenge,
       }}
     >
       {children}
