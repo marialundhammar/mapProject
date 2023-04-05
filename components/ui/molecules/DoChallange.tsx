@@ -7,19 +7,12 @@ import styleTexts from '../../../styles/styleTexts';
 import NavigationButton from '../atoms/NavigatonButton';
 
 const DoChallenge = ({ navigation }) => {
-  const currentTime = new Date().toLocaleTimeString();
-  const { setCurrentChallenge } = useContext(ContextStore);
-
-  const challenges = challenges2;
-
-  const challenge = challenges2[Math.floor(Math.random() * challenges.length)];
-  setCurrentChallenge(challenge);
+  const { currentChallenge } = useContext(ContextStore);
 
   return (
     <View style={styleComponents.barContentContainer}>
-      <Text style={styleTexts.h3}>{challenge.name} </Text>
-      <Text style={styleTexts.bodyText}>{challenge.description} </Text>
-
+      <Text style={styleTexts.h3}>{currentChallenge.name} </Text>
+      <Text style={styleTexts.bodyText}>{currentChallenge.description} </Text>
       <View style={styleComponents.centered}>
         <NavigationButton
           navigation={navigation}

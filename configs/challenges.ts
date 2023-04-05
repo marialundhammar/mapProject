@@ -27,4 +27,4 @@ export const challenges1 = {
   preChallenges: [challenge3],
   countdown: [challenge1, challenge2, challenge3],
 };
-export const challenges2 = [challenge2, challenge3, challenges1];
+export const challenges2 = [challenge2, challenge3, challenge1];

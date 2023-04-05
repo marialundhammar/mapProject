@@ -9,6 +9,7 @@ import {
 import { db } from '../firebase/firebase';
 import useGetEvents from './useGetEvents';
 import { ContextStore } from '../context/ContextStore';
+import { BarType } from '../types';
 
 const useAddEvent = (user) => {
   const userCollectionRef = collection(db, 'users');
@@ -51,7 +52,7 @@ const useAddEvent = (user) => {
     setLoading(false);
   };
 
-  const addEvents = async (type: string, bar: string) => {
+  const addEvents = async (type: string, bar: BarType) => {
     await fetchEvents();
 
     switch (type) {

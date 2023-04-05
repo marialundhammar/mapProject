@@ -13,12 +13,20 @@ import useGetEvent from '../../Hooks/useGetEvents';
 import Map from '../ui/molecules/Map';
 import styleComponents from '../../styles/styleComponents';
 import BarContent from '../ui/molecules/BarContent';
+import { challenges2 } from '../../configs/challenges';
 
 const BarScreen = ({ navigation }) => {
   const navigateTo = 'Map';
-  const { user, currentBar, onBar } = useContext(ContextStore);
+  const { user, currentBar, onBar, setCurrentChallenge, currentChallenge } =
+    useContext(ContextStore);
 
   const events = useGetEvent(user);
+
+  useEffect(() => {
+    const challenge =
+      challenges2[Math.floor(Math.random() * challenges2.length)];
+    setCurrentChallenge(challenge);
+  }, []);
 
   return (
     <View
