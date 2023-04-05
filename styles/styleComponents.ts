@@ -16,6 +16,22 @@ const styleModals = StyleSheet.create({
     padding: 8,
   },
 
+  imageContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+
+  imageContainerBig: {
+    margin: 'auto',
+  },
+
+  imageSmall: {
+    width: 110,
+    height: 110,
+    margin: 2,
+    borderRadius: 2,
+  },
+
   bottomContainerOpen: {
     height: 400,
     padding: 8,
@@ -123,7 +139,7 @@ const styleModals = StyleSheet.create({
   },
 
   cardStyle: {
-    height: 120,
+    height: 110,
     width: '90%',
     backgroundColor: '#1B274A',
     borderRadius: 10,
@@ -134,11 +150,12 @@ const styleModals = StyleSheet.create({
   cardStyleIsFilled: {
     height: 140,
     width: '90%',
-    borderColor: '#FFD3D3',
-    borderWidth: 1,
+    backgroundColor: '#1B274A',
+
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,
+    borderColor: '#445385',
   },
 
   height150: {

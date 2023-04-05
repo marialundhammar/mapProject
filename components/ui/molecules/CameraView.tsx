@@ -15,7 +15,7 @@ const CameraView = ({ onClick, turnOnCamera }) => {
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(null);
   const [image, setImage] = useState(null);
-  const { user } = useContext(ContextStore);
+  const { user, setNewPhotoUploaded } = useContext(ContextStore);
 
   const [imageList, setImageList] = useState([]);
 
@@ -49,7 +49,7 @@ const CameraView = ({ onClick, turnOnCamera }) => {
       contentType: 'image/jpeg',
     });
 
-    const photoURL = await getDownloadURL(uploadResult.ref);
+    setNewPhotoUploaded(true);
   };
 
   const takePic = async () => {

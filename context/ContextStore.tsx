@@ -8,6 +8,7 @@ const ContextStoreProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [currentBarTour, setCurrentBarTour] = useState(null);
   const [onBar, setOnBar] = useState(true);
+  const [newPhotoUploaded, setNewPhotoUploaded] = useState(false);
   const [userLocation, setUserLocation] = useState({
     lat: 55.592296775105524,
     long: 13.01675573718772,
@@ -40,6 +41,8 @@ const ContextStoreProvider = ({ children }) => {
         onBar,
         currentChallenge,
         setCurrentChallenge,
+        newPhotoUploaded,
+        setNewPhotoUploaded,
       }}
     >
       {children}

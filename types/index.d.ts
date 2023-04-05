@@ -56,4 +56,6 @@ export type ContextStoreType = {
   onBar: boolean;
   currentChallenge: CurrentChallengeType;
   setCurrentChallenge: (CurrentChallengeType) => void;
+  newPhotoUploaded: boolean;
+  setNewPhotoUploaded: (boolean) => void;
 };
