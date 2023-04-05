@@ -7,7 +7,7 @@ import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
 import Button from '../ui/atoms/NavigatonButton';
 import TextEditor from '../ui/atoms/TextEditor';
-import ImageUpload from '../ui/molecules/ImageUpload';
+import CameraView from '../ui/molecules/CameraView';
 
 const ChallengeScreen = ({ navigation }) => {
   const [turnOnCamera, setTurnOnCamera] = useState(false);
@@ -17,17 +17,20 @@ const ChallengeScreen = ({ navigation }) => {
     setTurnOnCamera(!turnOnCamera);
   };
 
-  console.log('FROM DO CHALLENGE', currentChallenge);
-
   return (
     <View style={styleScreens.defaultScreen}>
-      <Text style={styleTexts.h1}>UTMANING!!</Text>
-      <View style={styleMargin.p10}>
-        <Text style={styleTexts.h3}>{currentChallenge.name}</Text>
-        <Text style={styleTexts.bodyText}>{currentChallenge.description}</Text>
-      </View>
-
-      <ImageUpload
+      {!turnOnCamera && (
+        <>
+          <Text style={styleTexts.h1}>UTMANING!!</Text>
+          <View style={styleMargin.p10}>
+            <Text style={styleTexts.h3}>{currentChallenge.name}</Text>
+            <Text style={styleTexts.bodyText}>
+              {currentChallenge.description}
+            </Text>
+          </View>
+        </>
+      )}
+      <CameraView
         onClick={() => setTurnOnCamera(!turnOnCamera)}
         turnOnCamera={turnOnCamera}
       />

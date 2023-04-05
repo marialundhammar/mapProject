@@ -22,8 +22,6 @@ const TimeLine = ({ navigation }) => {
     texts.push(item.text);
   });
 
-  console.log('events', texts);
-
   return (
     <Pressable
       style={styleComponents.barContentContainer}

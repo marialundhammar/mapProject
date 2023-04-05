@@ -33,10 +33,7 @@ const NavigationButton = ({
     navigation.navigate(navigateTo);
 
     if (buttonText === 'Yes det stämmer') {
-      console.log('INSIDE');
-
       await setCurrentBar(currentBar);
-      console.log('####', currentBar);
 
       onClose();
       addEvents('enteredBar', currentBar);

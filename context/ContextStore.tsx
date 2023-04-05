@@ -23,8 +23,6 @@ const ContextStoreProvider = ({ children }) => {
 
   const [currentBar, setCurrentBar] = useState(null);
 
-  console.log('Here is currentbar', currentBar);
-
   return (
     <ContextStore.Provider
       value={{

@@ -8,8 +8,6 @@ import styleTexts from '../../../styles/styleTexts';
 const BarContent = () => {
   const { currentBar } = useContext(ContextStore);
 
-  console.log(currentBar.image);
-
   return (
     <>
       <View style={styleComponents.centered}>

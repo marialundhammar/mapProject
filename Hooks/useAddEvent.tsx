@@ -24,7 +24,6 @@ const useAddEvent = (user) => {
     const querySnapshot = await getDocs(userQuery);
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      console.log(data);
       if (data.events) {
         setEvents(data.events);
       }
@@ -52,24 +51,21 @@ const useAddEvent = (user) => {
     setLoading(false);
   };
 
-  console.log('####', currentBar);
-
-  const addEvents = async (type: string, bar) => {
+  const addEvents = async (type: string, bar: string) => {
     await fetchEvents();
 
     switch (type) {
       case 'leftBar':
-        setLoading(true);
         saveEvents(`${currentTime} lämnade ${currentBar.name}`, type);
-
         break;
       case 'enteredBar':
-        setLoading(true);
         saveEvents(`${currentTime} kom till baren `, type);
         break;
 
+      case 'challenge':
+        saveEvents(`${currentTime} genomförde utmaningen`, type);
+
       default:
-        setLoading(true);
         saveEvents('random event', type);
     }
   };

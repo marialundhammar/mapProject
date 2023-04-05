@@ -134,8 +134,8 @@ const styleModals = StyleSheet.create({
   cardStyleIsFilled: {
     height: 140,
     width: '90%',
-    borderColor: '#1B274A',
-    borderWidth: 2,
+    borderColor: '#FFD3D3',
+    borderWidth: 1,
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,
