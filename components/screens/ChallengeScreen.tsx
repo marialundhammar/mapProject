@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { View, Text } from 'react-native';
 import { ContextStore } from '../../context/ContextStore';
 import styleMargin from '../../styles/styleMargin';
-
 import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
 import Button from '../ui/atoms/NavigatonButton';

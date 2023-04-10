@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { View, Text, ScrollView } from 'react-native';
 import { ContextStore } from '../../context/ContextStore';
 import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
@@ -12,23 +12,11 @@ import Map from '../ui/molecules/Map';
 import styleComponents from '../../styles/styleComponents';
 import BarContent from '../ui/molecules/BarContent';
 import { challenges2 } from '../../configs/challenges';
-import { ref, listAll, getDownloadURL } from 'firebase/storage';
-
-import { storage } from '../../firebase/firebase';
+import PhotoStream from '../ui/molecules/PhotoStream';
 
 const BarScreen = ({ navigation }) => {
-  const navigateTo = 'Map';
-  const {
-    user,
-    currentBar,
-    onBar,
-    setCurrentChallenge,
-    currentChallenge,
-    setNewPhotoUploaded,
-    newPhotoUploaded,
-  } = useContext(ContextStore);
-
-  const [photoUrls, setPhotoUrls] = useState([]);
+  const { user, currentBar, onBar, setCurrentChallenge } =
+    useContext(ContextStore);
 
   const events = useGetEvent(user);
 
@@ -37,29 +25,6 @@ const BarScreen = ({ navigation }) => {
       challenges2[Math.floor(Math.random() * challenges2.length)];
     setCurrentChallenge(challenge);
   }, []);
-
-  useEffect(() => {
-    getAllImages();
-  }, [newPhotoUploaded]);
-
-  const getAllImages = async () => {
-    const listRef = ref(storage, `images/${user.email}`);
-
-    try {
-      const res = await listAll(listRef);
-      const urls = await Promise.all(
-        res.items.map(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          return url;
-        })
-      );
-      setPhotoUrls(urls);
-    } catch (error) {
-      console.error(error);
-    }
-
-    setNewPhotoUploaded(false);
-  };
 
   return (
     <View
@@ -74,7 +39,6 @@ const BarScreen = ({ navigation }) => {
       {onBar ? (
         <>
           <ScrollView>
-            <View></View>
             <View style={styleScreens.onboardingScreen}>
               <Text style={styleTexts.h2}>
                 VÄLKOMMEN TILL {currentBar.name}
@@ -88,13 +52,9 @@ const BarScreen = ({ navigation }) => {
                 <Text style={styleTexts.h3}>
                   Sist du var här såg det ut såhär
                 </Text>
+
                 <View style={styleComponents.imageContainer}>
-                  {photoUrls.map((photoUrls, i) => (
-                    <Image
-                      source={{ uri: photoUrls }}
-                      style={styleComponents.imageSmall}
-                    />
-                  ))}
+                  <PhotoStream path={`${user.email}/${currentBar.name}`} />
                 </View>
               </View>
             </View>

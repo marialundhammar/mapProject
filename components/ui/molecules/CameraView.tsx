@@ -15,13 +15,9 @@ const CameraView = ({ onClick, turnOnCamera }) => {
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] =
     useState(null);
   const [image, setImage] = useState(null);
-  const { user, setNewPhotoUploaded } = useContext(ContextStore);
-
-  const [imageList, setImageList] = useState([]);
+  const { user, setNewPhotoUploaded, currentBar } = useContext(ContextStore);
 
   const cameraRef = useRef(null);
-
-  useEffect(() => {});
 
   useEffect(() => {
     (async () => {
@@ -42,7 +38,10 @@ const CameraView = ({ onClick, turnOnCamera }) => {
   const uploadImage = async (data) => {
     const fileName = `${new Date().getTime()}.jpg`;
 
-    const storageRef = ref(storage, `images/${user.email}/${fileName}`);
+    const storageRef = ref(
+      storage,
+      `images/${user.email}/${currentBar.name}/${fileName}`
+    );
     const response = await fetch(data.uri);
     const blob = await response.blob();
     const uploadResult = await uploadBytes(storageRef, blob, {
@@ -107,9 +106,9 @@ const CameraView = ({ onClick, turnOnCamera }) => {
       )}
 
       {turnOnCamera && !image && (
-        <View style={{ flex: 1 }}>
+        <View>
           <Camera
-            style={{ height: '100%', width: 400 }}
+            style={{ height: 600, width: 400 }}
             type={type}
             ref={(ref) => (cameraRef.current = ref)}
           >
