@@ -1,6 +1,6 @@
 const challenge1 = {
   id: 'test-1',
-  name: 'Fråga bartendern',
+  name: 'Fota er! ',
   description: 'T en bild på dig och ditt sällskap framför ',
   type: 'countdown',
   mediaType: 'video',
@@ -27,4 +27,4 @@ export const challenges1 = {
   preChallenges: [challenge3],
   countdown: [challenge1, challenge2, challenge3],
 };
-export const challenges2 = [challenge2, challenge3];
+export const challenges2 = [challenge2, challenge3, challenge1];

@@ -9,6 +9,7 @@ import {
 import { db } from '../firebase/firebase';
 import useGetEvents from './useGetEvents';
 import { ContextStore } from '../context/ContextStore';
+import { BarType } from '../types';
 
 const useAddEvent = (user) => {
   const userCollectionRef = collection(db, 'users');
@@ -18,13 +19,12 @@ const useAddEvent = (user) => {
 
   const prevEvents = useGetEvents(user);
   const currentTime = new Date().toLocaleTimeString();
-  const { currentBar } = useContext(ContextStore);
+  const { currentBar, setCurrentBar } = useContext(ContextStore);
 
   const fetchEvents = async () => {
     const querySnapshot = await getDocs(userQuery);
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      console.log(data);
       if (data.events) {
         setEvents(data.events);
       }
@@ -44,7 +44,6 @@ const useAddEvent = (user) => {
             barId: '',
             createDate: currentTime,
             mediaUrl: '',
-            mediaType: '',
           },
           ...prevEvents,
         ],
@@ -53,23 +52,21 @@ const useAddEvent = (user) => {
     setLoading(false);
   };
 
-  console.log('####', currentBar);
-
-  const addEvents = async (type: string, bar) => {
+  const addEvents = async (type: string, bar: BarType) => {
     await fetchEvents();
 
     switch (type) {
       case 'leftBar':
-        setLoading(true);
         saveEvents(`${currentTime} lämnade ${currentBar.name}`, type);
         break;
       case 'enteredBar':
-        setLoading(true);
         saveEvents(`${currentTime} kom till baren `, type);
         break;
 
+      case 'challenge':
+        saveEvents(`${currentTime} genomförde utmaningen`, type);
+
       default:
-        setLoading(true);
         saveEvents('random event', type);
     }
   };

@@ -14,6 +14,7 @@ interface NavigationButtonType {
   isFilled?: boolean;
   currentBar?: BarType;
   onClose?: () => void;
+  challenge?: any;
 }
 
 const NavigationButton = ({
@@ -23,20 +24,23 @@ const NavigationButton = ({
   isFilled = true,
   currentBar,
   onClose,
+  challenge,
 }: NavigationButtonType) => {
   const { setCurrentBar, user, currentBarTour } = useContext(ContextStore);
   const [bar, setBar] = useState(null);
 
   const { addEvents } = useAddEvent(user);
+  const { setCurrentChallenge } = useContext(ContextStore);
+
+  if (challenge) {
+    setCurrentChallenge(challenge);
+  }
 
   const handleNavigation = async () => {
     navigation.navigate(navigateTo);
 
     if (buttonText === 'Yes det stämmer') {
-      console.log('INSIDE');
-
       await setCurrentBar(currentBar);
-      console.log('####', currentBar);
 
       onClose();
       addEvents('enteredBar', currentBar);

@@ -33,8 +33,6 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
     const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
     const barTour = arrayOfBarTours.find((bar) => bar.title === text);
 
-    console.log('CARD', barTour);
-
     setCurrentBarTour(barTour);
 
     getDocs(userQuery)

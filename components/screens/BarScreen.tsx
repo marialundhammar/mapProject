@@ -1,24 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, ScrollView, Pressable } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { View, Text, ScrollView } from 'react-native';
 import { ContextStore } from '../../context/ContextStore';
-import useAddEvents from '../../Hooks/useAddEvent';
 import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
 import Button from '../ui/atoms/NavigatonButton';
 import DoChallenge from '../ui/molecules/DoChallange';
 import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
-
 import useGetEvent from '../../Hooks/useGetEvents';
 import Map from '../ui/molecules/Map';
 import styleComponents from '../../styles/styleComponents';
 import BarContent from '../ui/molecules/BarContent';
+import { challenges2 } from '../../configs/challenges';
+import PhotoStream from '../ui/molecules/PhotoStream';
 
 const BarScreen = ({ navigation }) => {
-  const navigateTo = 'Map';
-  const { user, currentBar, onBar } = useContext(ContextStore);
+  const { user, currentBar, onBar, setCurrentChallenge } =
+    useContext(ContextStore);
 
   const events = useGetEvent(user);
+
+  useEffect(() => {
+    const challenge =
+      challenges2[Math.floor(Math.random() * challenges2.length)];
+    setCurrentChallenge(challenge);
+  }, []);
 
   return (
     <View
@@ -33,7 +39,6 @@ const BarScreen = ({ navigation }) => {
       {onBar ? (
         <>
           <ScrollView>
-            <View></View>
             <View style={styleScreens.onboardingScreen}>
               <Text style={styleTexts.h2}>
                 VÄLKOMMEN TILL {currentBar.name}
@@ -43,6 +48,15 @@ const BarScreen = ({ navigation }) => {
               <TimeLine navigation={navigation} />
 
               <DoChallenge navigation={navigation} />
+              <View style={styleComponents.imageContainerBig}>
+                <Text style={styleTexts.h3}>
+                  Sist du var här såg det ut såhär
+                </Text>
+
+                <View style={styleComponents.imageContainer}>
+                  <PhotoStream path={`${user.email}/${currentBar.name}`} />
+                </View>
+              </View>
             </View>
           </ScrollView>
           <View style={styleComponents.centered}>

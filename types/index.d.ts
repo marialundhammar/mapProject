@@ -33,6 +33,14 @@ interface CoordsType {
   long: number;
 }
 
+interface CurrentChallengeType {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  mediaType: string;
+}
+
 export type ContextStoreType = {
   step: number;
   setStep: (number) => void;
@@ -44,7 +52,10 @@ export type ContextStoreType = {
   setUserLocation: (CoordsType) => void;
   currentBar: BarType;
   setCurrentBar: (BarType) => void;
-
   setOnBar: (boolean) => void;
   onBar: boolean;
+  currentChallenge: CurrentChallengeType;
+  setCurrentChallenge: (CurrentChallengeType) => void;
+  newPhotoUploaded: boolean;
+  setNewPhotoUploaded: (boolean) => void;
 };
