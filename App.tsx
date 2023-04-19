@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import * as Font from 'expo-font';
+import React, { useCallback, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './components/screens/HomeScreen';
@@ -8,23 +7,48 @@ import BarScreen from './components/screens/BarScreen';
 import RegisterScreen from './components/screens/RegisterScreen';
 import LogInScreen from './components/screens/LogInScreen';
 import OnboardingScreen from './components/screens/OnboardingScreen';
-
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import ChallengeScreen from './components/screens/ChallengeScreen';
 import ProfileScreen from './components/screens/ProfileScreen';
-import { StatusBar } from 'react-native';
-import { ProviderContext } from 'react-native-maps/lib/decorateMapComponent';
 import ContextStoreProvider from './context/ContextStore';
+import registerNNPushToken from 'native-notify';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import { useNotifications } from './Hooks/useNotifications';
 
 const Stack = createNativeStackNavigator();
 
-const App = () => {
+export default function App() {
   const [fontsLoaded] = useFonts({
     'Passion-One': require('./assets/fonts/PassionOne-Regular.ttf'),
   });
 
-  const onLayoutRootView = useCallback(async () => {
+  const { registerForPushNotificationsAsync, handleNotificationResponse } =
+    useNotifications();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync();
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: true,
+      }),
+    });
+
+    const responseListener =
+      Notifications.addNotificationResponseReceivedListener(
+        handleNotificationResponse
+      );
+
+    return () => {
+      if (responseListener)
+        Notifications.removeNotificationSubscription(responseListener);
+    };
+  }, []);
+
+  useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
@@ -83,6 +107,4 @@ const App = () => {
       </NavigationContainer>
     </ContextStoreProvider>
   );
-};
-
-export default App;
+}

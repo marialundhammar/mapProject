@@ -1,14 +1,15 @@
 {
+  "icon": "./assets/loga-second.png",
   "expo": {
-    "name": "MapProject",
-    "slug": "map",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+    "icon": "./assets/loga-second.png",
+    "notification": {
+      "icon": "./assets/loga-second.png",
+      "color": "#311b92"
     },
+    "UIBackgroundModes": [
+      "location",
+      "fetch"
+    ],
     "plugins": [
       [
         "expo-camera",
@@ -17,24 +18,71 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "isAccessMediaLocationEnable": "true"
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysPermission": "Allow $(PRODUCT_NAME) to use your location.",
+          "isIosBackgroundLocationEnabled": "Allow $(PRODUCT_NAME) to use your location"
+        }
+      ],
+      [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        }
       ]
     ],
+    "name": "MapProject",
+    "slug": "map",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#1B274A",
+      "image": "./assets/laddar.png",
+      "resizeMode": 100
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
+      "icon": "./assets/loga-next.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.mariah4ara.Map",
       "config": {
         "googleMapsApiKey": "AIzaSyDgUVls77NjkK8OXXqdX3MshQJqHb-ISb4"
+      },
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ],
+        "NSLocationWhenInUseUsageDescription": "text",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "text",
+        "NSLocationAlwaysUsageDescription": "text",
+        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
       }
     },
-
+    "permissions": [
+      "LOCATION",
+      "BACKGROUND_LOCATION"
+    ],
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE"
+      ],
+      "package": "com.mariah4ara.Map"
     },
     "web": {},
     "extra": {

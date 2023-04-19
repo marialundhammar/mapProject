@@ -1,16 +1,31 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import styleTexts from '../../../styles/styleTexts';
 import { Entypo } from '@expo/vector-icons';
 import styleMargin from '../../../styles/styleMargin';
+import styleComponents from '../../../styles/styleComponents';
 
-const TimeLineEvent = ({ timeLineEvent }) => {
+const TimeLineEvent = ({
+  timeLineTitle,
+  timeLineComment = '',
+  timeLineImage = null,
+}) => {
   return (
-    <View>
-      <Text style={[styleTexts.bodyText]}>
-        <Entypo name="circle" size={14} color="#FFD3D3" />
-        {timeLineEvent}
-      </Text>
+    <View style={styleComponents.cardStyle}>
+      <Text style={styleTexts.h4}>{timeLineTitle}</Text>
+
+      {timeLineComment && (
+        <View style={[styleTexts.bodyText]}>
+          <Text style={styleTexts.bodyText}>Kommentar: {timeLineComment}</Text>
+        </View>
+      )}
+
+      {timeLineImage && (
+        <Image
+          source={{ uri: timeLineImage }}
+          style={{ width: 100, height: 50 }}
+        />
+      )}
     </View>
   );
 };

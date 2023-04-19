@@ -11,6 +11,13 @@ import useGetEvents from './useGetEvents';
 import { ContextStore } from '../context/ContextStore';
 import { BarType } from '../types';
 
+interface AddEventType {
+  type: string;
+  bar: BarType;
+  textInputValue?: string;
+  image?: string;
+}
+
 const useAddEvent = (user) => {
   const userCollectionRef = collection(db, 'users');
   const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
@@ -19,7 +26,8 @@ const useAddEvent = (user) => {
 
   const prevEvents = useGetEvents(user);
   const currentTime = new Date().toLocaleTimeString();
-  const { currentBar, setCurrentBar } = useContext(ContextStore);
+  const { currentBar, setCurrentBar, currentChallenge } =
+    useContext(ContextStore);
 
   const fetchEvents = async () => {
     const querySnapshot = await getDocs(userQuery);
@@ -31,7 +39,7 @@ const useAddEvent = (user) => {
     });
   };
 
-  const saveEvents = async (text, type) => {
+  const saveEvents = async (text, type, textInputValue = '', imageUri = '') => {
     const querySnapshot = await getDocs(userQuery);
     querySnapshot.forEach(async (doc) => {
       const userDocRef = doc.ref;
@@ -43,7 +51,8 @@ const useAddEvent = (user) => {
             type: type,
             barId: '',
             createDate: currentTime,
-            mediaUrl: '',
+            mediaUrl: imageUri,
+            comment: textInputValue,
           },
           ...prevEvents,
         ],
@@ -52,7 +61,12 @@ const useAddEvent = (user) => {
     setLoading(false);
   };
 
-  const addEvents = async (type: string, bar: BarType) => {
+  const addEvents = async (
+    type: string,
+    bar: BarType,
+    textInputValue: string,
+    image: string
+  ) => {
     await fetchEvents();
 
     switch (type) {
@@ -64,11 +78,19 @@ const useAddEvent = (user) => {
         break;
 
       case 'challenge':
-        saveEvents(`${currentTime} genomförde utmaningen`, type);
+        saveEvents(
+          `${currentTime} genomförde utmaningen ${currentChallenge.name}`,
+          type,
+          textInputValue,
+          image
+        );
+        break;
 
       default:
         saveEvents('random event', type);
     }
+
+    //modify so that the same challenge will not be displayed again
   };
 
   return { loading, addEvents };

@@ -17,9 +17,13 @@ const TimeLine = ({ navigation }) => {
     setShowAllEvents(!showAllEvents);
   };
 
-  const texts = [];
+  const eventList = [];
   events.map((item) => {
-    texts.push(item.text);
+    eventList.push({
+      title: item.text,
+      comment: item.comment,
+      image: item.mediaUrl,
+    });
   });
 
   return (
@@ -33,12 +37,24 @@ const TimeLine = ({ navigation }) => {
          */}
 
         {showAllEvents
-          ? texts.map((item, i) => (
-              <TimeLineEvent timeLineEvent={item} key={i} />
+          ? eventList.map((item, i) => (
+              <TimeLineEvent
+                timeLineTitle={item.title}
+                timeLineComment={item.comment}
+                timeLineImage={item.image}
+                key={i}
+              />
             ))
-          : texts
+          : eventList
               .slice(0, 3)
-              .map((item, i) => <TimeLineEvent timeLineEvent={item} key={i} />)}
+              .map((item, i) => (
+                <TimeLineEvent
+                  timeLineTitle={item.title}
+                  timeLineComment={item.comment}
+                  timeLineImage={item.image}
+                  key={i}
+                />
+              ))}
       </View>
     </Pressable>
   );

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { ContextStore } from '../../context/ContextStore';
 import styleScreens from '../../styles/styleScreens';
@@ -7,7 +7,6 @@ import Button from '../ui/atoms/NavigatonButton';
 import DoChallenge from '../ui/molecules/DoChallange';
 import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
-import useGetEvent from '../../Hooks/useGetEvents';
 import Map from '../ui/molecules/Map';
 import styleComponents from '../../styles/styleComponents';
 import BarContent from '../ui/molecules/BarContent';
@@ -15,16 +14,36 @@ import { challenges2 } from '../../configs/challenges';
 import PhotoStream from '../ui/molecules/PhotoStream';
 
 const BarScreen = ({ navigation }) => {
-  const { user, currentBar, onBar, setCurrentChallenge } =
+  const { user, currentBar, onBar, setCurrentChallenge, completedChallenges } =
     useContext(ContextStore);
 
-  const events = useGetEvent(user);
+  const [showChallenge, setShowChallenge] = useState(true);
+
+  const checkIfCompleted = (challenge: {
+    id: string;
+    name: string;
+    description: string;
+    type: string;
+    mediaType: string;
+  }) => {
+    return completedChallenges.some((checkChallenge) => {
+      return checkChallenge.name === challenge.name;
+    });
+  };
 
   useEffect(() => {
-    const challenge =
-      challenges2[Math.floor(Math.random() * challenges2.length)];
+    let challenge = challenges2[Math.floor(Math.random() * challenges2.length)];
+
+    while (checkIfCompleted(challenge)) {
+      challenge = challenges2[Math.floor(Math.random() * challenges2.length)];
+    }
     setCurrentChallenge(challenge);
-  }, []);
+    console.log(completedChallenges.length, challenges2.length);
+
+    if (completedChallenges.length == challenges2.length - 1) {
+      setShowChallenge(false);
+    }
+  }, [completedChallenges]);
 
   return (
     <View
@@ -47,12 +66,9 @@ const BarScreen = ({ navigation }) => {
               <BarContent />
               <TimeLine navigation={navigation} />
 
-              <DoChallenge navigation={navigation} />
-              <View style={styleComponents.imageContainerBig}>
-                <Text style={styleTexts.h3}>
-                  Sist du var här såg det ut såhär
-                </Text>
+              {showChallenge && <DoChallenge navigation={navigation} />}
 
+              <View style={styleComponents.imageContainerBig}>
                 <View style={styleComponents.imageContainer}>
                   <PhotoStream path={`${user.email}/${currentBar.name}`} />
                 </View>

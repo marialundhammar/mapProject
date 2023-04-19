@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ScrollView, View, Text, Image, SafeAreaView } from 'react-native';
 import { arrayOfBarTours } from '../../configs/barTours';
 import styleScreens from '../../styles/styleScreens';
@@ -6,7 +6,13 @@ import styleTexts from '../../styles/styleTexts';
 import GroupCard from '../ui/atoms/GroupCard';
 import Button from '../ui/atoms/NavigatonButton';
 import TopHeader from '../ui/molecules/TopHeader';
-const HomeScreen = ({ navigation }) => {
+import { ContextStore } from '../../context/ContextStore';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+
+export default function HomeScreen({ navigation }) {
+  const { user } = useContext(ContextStore);
+
   return (
     <View style={styleScreens.container}>
       <TopHeader navigation={navigation} showBackButton={false} />
@@ -75,6 +81,4 @@ const HomeScreen = ({ navigation }) => {
       />
     </View>
   );
-};
-
-export default HomeScreen;
+}

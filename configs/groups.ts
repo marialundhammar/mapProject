@@ -4,5 +4,10 @@ export const arrayOfGroups: GroupType[] = [
   { title: 'tjejkväll' },
   { title: 'datenight <3' },
   { title: 'Party med polarna' },
-  { title: 'Jöbbet' },
+  { title: 'AW med Jöbbet' },
+  { title: 'Barndomskompisarna' },
+  { title: 'Nya kompisen' },
+  { title: 'Gamla kompisen' },
+  { title: 'Första dejten' },
+  { title: 'typ tredje dejten' },
 ];

@@ -21,8 +21,8 @@ const StepThree = ({ navigation }) => {
 
       <View
         style={{
-          justifyContent: 'center',
-          alignItems: 'center',
+          width: '100%',
+
           flexDirection: 'column',
         }}
       >

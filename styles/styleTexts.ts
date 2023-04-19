@@ -32,6 +32,12 @@ const styleTexts = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 
+  h4: {
+    fontFamily: 'Passion-One',
+    fontSize: 20,
+    color: '#FFD3D3',
+  },
+
   bodyText: {
     fontSize: 14,
     paddingVertical: 4,

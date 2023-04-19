@@ -7,8 +7,9 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ContextStore } from '../../context/ContextStore';
+import { registerIndieID } from 'native-notify';
 
-const LogInScreen = ({ navigation }) => {
+export default function LogInScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -22,6 +23,11 @@ const LogInScreen = ({ navigation }) => {
         password
       );
       setUser(userCredential.user);
+      registerIndieID(
+        `${userCredential.user.uid}`,
+        7462,
+        'dIdIJN6PHVKebyumEisJ0u'
+      );
 
       await navigation.navigate('Home');
     } catch (error) {
@@ -76,6 +82,4 @@ const LogInScreen = ({ navigation }) => {
       </View>
     </View>
   );
-};
-
-export default LogInScreen;
+}

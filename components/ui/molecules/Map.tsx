@@ -9,7 +9,8 @@ import DistanceBanner from '../atoms/DistanceBanner';
 import mapStyle from '../../../assets/mapStyle';
 import { ContextStore } from '../../../context/ContextStore';
 import { BarType } from '../../../types';
-import BarMapNavigation from '../atoms/BarMapNavigation';
+
+import { useNotifications } from '../../../Hooks/useNotifications';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -24,6 +25,11 @@ interface CalculateUserAndBarType extends CalculateDistanceFunctionType {
 
 const Map = ({ navigation }) => {
   const [status, setStatus] = useState('');
+  const [statusBackground, setStatusBackground] = useState('');
+  const [userLocationBackground, setUserLocationBackground] = useState({
+    lat: 0,
+    long: 0,
+  });
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const [barModal, setBarModal] = useState({ visible: false, content: null });
   const {
@@ -33,8 +39,11 @@ const Map = ({ navigation }) => {
     setUserLocation,
     currentBar,
     onBar,
+    user,
   } = useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
+  const { sendNotificationOnBar } = useNotifications();
+  const LOCATION_TASK_NAME = 'background-location-task';
 
   const bars = currentBarTour.bars;
   const getClosestBar = () => {
@@ -59,15 +68,19 @@ const Map = ({ navigation }) => {
     return closeBars[0];
   };
 
-  const checkDistanceToAllBars = (bars: BarType[]) => {
+  const checkDistanceToAllBars = async () => {
     const closestBar = getClosestBar();
 
     setDistanceBar({
       distance: closestBar.distance,
       name: closestBar.name,
     });
-    if (closestBar.distance < 0.09 && currentBar === null) {
+    if (closestBar.distance < 0.2 && currentBar === null) {
+      //if foreground
       setBarModal({ visible: true, content: closestBar });
+
+      await delay(5000);
+      sendNotificationOnBar();
     }
   };
 
@@ -75,11 +88,10 @@ const Map = ({ navigation }) => {
     setShowMarkerModal(true);
   };
 
-  //onMount and every time userLocation is updated. Not sure if this is the correct way due to delay function??
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
-      /*     let { status } = await Location.requestForegroundPermissionsAsync();
+      /*       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setStatus('Permission to access location was denied');
         return;
@@ -91,10 +103,19 @@ const Map = ({ navigation }) => {
           long: location.coords.longitude,
         });
       } */
+
+      checkDistanceToAllBars();
+    })();
+  }, []);
+  //add userLocation
+
+  /* 
+  useEffect(() => {
+    (async () => {
+      await requestBackground();
       checkDistanceToAllBars(bars);
     })();
-  }, [userLocation]);
-  //add userLocation
+  }, []); */
 
   const pinColor = '#000000';
 
