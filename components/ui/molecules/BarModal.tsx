@@ -39,18 +39,22 @@ export const BarModal = ({
 }: ModalType) => {
   const imagePath = image ? image : null;
 
-  console.log('image', image);
-
   return (
     <View>
       <Modal isVisible={visible} onBackdropPress={onClose}>
         <View style={styleComponents.modalStyle}>
-          <View style={styleModals.header}>
-            <Text style={styleText.h1}>{header}</Text>
-
+          <View
+            style={{
+              justifyContent: 'flex-end',
+              alignItems: 'flex-end',
+            }}
+          >
             <Pressable style={styleButtons.closeIcon} onPress={onClose}>
               <AntDesign name="closecircleo" size={24} color="#FFD3D3" />
             </Pressable>
+          </View>
+          <View style={styleModals.header}>
+            <Text style={styleText.h1}>{header}</Text>
           </View>
 
           <View style={styleComponents.content}>
@@ -63,20 +67,22 @@ export const BarModal = ({
               </Text>
             )}
 
-            {showButton && (
-              <DefaultButton onClose={onClose} text={'Nej gick bara förbi'} />
-            )}
-
             <View style={styleComponents.centered}>
               {showButton && (
-                <NavigationButton
-                  navigation={navigation}
-                  navigateTo={'Bar'}
-                  buttonText={'Yes det stämmer'}
-                  isFilled={false}
-                  currentBar={currentBar}
-                  onClose={onClose}
-                />
+                <>
+                  <DefaultButton
+                    onClose={onClose}
+                    text={'Nej gick bara förbi'}
+                  />
+                  <NavigationButton
+                    navigation={navigation}
+                    navigateTo={'Bar'}
+                    buttonText={'Yes det stämmer'}
+                    isFilled={false}
+                    currentBar={currentBar}
+                    onClose={onClose}
+                  />
+                </>
               )}
             </View>
           </View>

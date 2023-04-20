@@ -13,8 +13,12 @@ const Button = ({ text, onClose }: DefaultButtonType) => {
       style={{
         justifyContent: 'center',
         alignItems: 'center',
-
+        borderWidth: 2,
         marginTop: 36,
+        borderRadius: 8,
+        borderColor: '#FFD3D3',
+        height: 50,
+        width: 224,
       }}
     >
       <Pressable onPress={onClose} style={styleButtons.buttonDefault}>

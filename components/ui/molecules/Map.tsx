@@ -85,14 +85,12 @@ const Map = ({ navigation }) => {
     });
     if (closestBar.distance < 0.4 && currentBar === null) {
       setBarModal({ visible: true, content: closestBar });
-
-      setShowNotification(true);
+      sendNotificationOnBar();
+      //setShowNotification(true);
     }
   };
 
   if (showNotification) {
-    sendNotificationOnBar();
-
     setShowNotification(false);
   }
 
