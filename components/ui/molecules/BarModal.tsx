@@ -21,10 +21,10 @@ type ModalType = {
   header: string;
   showButton?: boolean;
   image?: any;
-  navigation: any;
+  navigation?: any;
   visible: boolean;
   onClose?: () => void;
-  currentBar: BarType;
+  currentBar?: BarType;
 };
 
 export const BarModal = ({
@@ -39,6 +39,8 @@ export const BarModal = ({
 }: ModalType) => {
   const imagePath = image ? image : null;
 
+  console.log('image', image);
+
   return (
     <View>
       <Modal isVisible={visible} onBackdropPress={onClose}>
@@ -52,12 +54,18 @@ export const BarModal = ({
           </View>
 
           <View style={styleComponents.content}>
-            {image && <Image source={imagePath} style={styleModals.image} />}
-            <Text style={styleText.bodyText}>
-              Du verkar befinna dig på {content?.name}, stämmer det?
-            </Text>
+            {image && (
+              <Image source={{ uri: imagePath }} style={styleModals.image} />
+            )}
+            {currentBar && (
+              <Text style={styleText.bodyText}>
+                Du verkar befinna dig på {content?.name}, stämmer det?
+              </Text>
+            )}
 
-            <DefaultButton onClose={onClose} text={'Nej gick bara förbi'} />
+            {showButton && (
+              <DefaultButton onClose={onClose} text={'Nej gick bara förbi'} />
+            )}
 
             <View style={styleComponents.centered}>
               {showButton && (

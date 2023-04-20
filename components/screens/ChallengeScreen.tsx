@@ -150,7 +150,7 @@ const ChallengeScreen = ({ navigation }) => {
           ) : (
             <Text>
               Du måste ladda upp en bild först för att kunna spara utmaningen,
-              vad är annars poängen?
+              vad är annars poängen?{' '}
             </Text>
           )}
         </>

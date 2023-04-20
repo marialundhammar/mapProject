@@ -15,7 +15,6 @@ const MapScreen = ({ navigation }) => {
   return (
     <View>
       <TopHeader navigation={navigation} showBackButton={true} />
-      <View></View>
 
       <View style={styleScreens.mapScreen}>
         <Map navigation={navigation} />

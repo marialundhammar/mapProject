@@ -39,7 +39,7 @@ const styleTexts = StyleSheet.create({
   },
 
   bodyText: {
-    fontSize: 14,
+    fontSize: 16,
     paddingVertical: 4,
     color: '#FFD3D3',
   },

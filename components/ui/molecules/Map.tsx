@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import styleMap from '../../../styles/styleMap';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import * as Location from 'expo-location';
 import { calculateDistanceFunction, delay } from '../../../utils/helpers';
 import { BarModal } from './BarModal';
@@ -11,6 +11,7 @@ import { ContextStore } from '../../../context/ContextStore';
 import { BarType } from '../../../types';
 
 import { useNotifications } from '../../../Hooks/useNotifications';
+import styleTexts from '../../../styles/styleTexts';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -31,6 +32,7 @@ const Map = ({ navigation }) => {
     long: 0,
   });
   const [showMarkerModal, setShowMarkerModal] = useState(false);
+  const [markerLocation, setMarkerLocation] = useState({ x: 0, y: 0 });
   const [barModal, setBarModal] = useState({ visible: false, content: null });
   const {
     currentBarTour,
@@ -42,8 +44,10 @@ const Map = ({ navigation }) => {
     user,
   } = useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
+  const [markerBar, setMarkerBar] = useState('');
   const { sendNotificationOnBar } = useNotifications();
   const LOCATION_TASK_NAME = 'background-location-task';
+  const mapView = useRef(null);
 
   const bars = currentBarTour.bars;
   const getClosestBar = () => {
@@ -75,19 +79,23 @@ const Map = ({ navigation }) => {
       distance: closestBar.distance,
       name: closestBar.name,
     });
-    if (closestBar.distance < 0.2 && currentBar === null) {
-      //if foreground
+    if (closestBar.distance < 0.4 && currentBar === null) {
       setBarModal({ visible: true, content: closestBar });
 
       await delay(5000);
-      sendNotificationOnBar();
+      // sendNotificationOnBar();
     }
   };
 
-  const onPressMarker = () => {
-    setShowMarkerModal(true);
-  };
+  /*   const onPressMarker = async (marker) => {
+    const pixelCoords = await getPixelCoords(marker.lat, marker.long);
 
+    const barName = marker.name;
+    console.log('hej', marker);
+    setMarkerLocation(pixelCoords);
+    setMarkerBar(barName);
+    setShowMarkerModal(true);
+  }; */
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
@@ -106,16 +114,8 @@ const Map = ({ navigation }) => {
 
       checkDistanceToAllBars();
     })();
-  }, []);
+  }, [userLocation]);
   //add userLocation
-
-  /* 
-  useEffect(() => {
-    (async () => {
-      await requestBackground();
-      checkDistanceToAllBars(bars);
-    })();
-  }, []); */
 
   const pinColor = '#000000';
 
@@ -149,8 +149,20 @@ const Map = ({ navigation }) => {
                 longitude: bar.long,
               }}
               key={i}
-              onPress={onPressMarker}
-            />
+            >
+              <Callout
+                tooltip={true}
+                style={{
+                  backgroundColor: '#E68383',
+                  padding: 10,
+                  margin: 0,
+                  borderRadius: 5,
+                  borderWidth: 0,
+                }}
+              >
+                <Text style={styleTexts.h3}>{bar.name}</Text>
+              </Callout>
+            </Marker>
           ))}
 
           <Marker
@@ -162,6 +174,21 @@ const Map = ({ navigation }) => {
             pinColor={pinColor}
           />
         </MapView>
+
+        {/*     {showMarkerModal && (
+          <View
+            style={{
+              position: 'absolute',
+              top: markerLocation.y,
+              left: markerLocation.x,
+              backgroundColor: '#FFFFFF',
+              borderRadius: 8,
+              padding: 8,
+            }}
+          >
+            <Text style={styleTexts.h3}>{markerBar}</Text>
+          </View>
+        )} */}
 
         <BarModal
           showButton={true}

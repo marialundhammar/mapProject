@@ -4,10 +4,11 @@ export const arrayOfBars: BarType[] = [
   {
     lat: 55.59120904137383,
     long: 13.009875047105016,
-    name: 'Majsans Ölhak',
-    id: 'majsans-olhak',
-    image: require('../assets/bar-example.jpg'),
-    description: 'Vi är specialister på goda drinkar och rökig wh🍹',
+    name: 'Far i Hatten',
+    id: 'far-i-hatten',
+    image: require('../assets/far-i-hatten.jpeg'),
+    description:
+      'Mitt i Folketspark hittar du Far i hatten. Här kan du supa dig full på TT för 56kr, Leeeets goooo',
     challenges: 3,
   },
   {

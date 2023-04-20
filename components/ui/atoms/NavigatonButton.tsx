@@ -26,7 +26,8 @@ const NavigationButton = ({
   onClose,
   challenge,
 }: NavigationButtonType) => {
-  const { setCurrentBar, user, currentBarTour } = useContext(ContextStore);
+  const { setCurrentBar, user, currentBarTour, setOnBar } =
+    useContext(ContextStore);
   const [bar, setBar] = useState(null);
 
   const { addEvents } = useAddEvent(user);

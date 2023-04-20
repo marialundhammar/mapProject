@@ -1,4 +1,4 @@
-import { View, Image, Text, Animated } from 'react-native';
+import { View, Image, Text, Animated, ActivityIndicator } from 'react-native';
 import styleComponents from '../../../styles/styleComponents';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
@@ -16,6 +16,7 @@ LogBox.ignoreLogs([
 
 const PhotoStream = ({ path }) => {
   const [photoUrls, setPhotoUrls] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
   const [lightboxImageIndex, setLightboxImageIndex] = useState(null);
 
   const { user, currentBar } = useContext(ContextStore);
@@ -33,6 +34,7 @@ const PhotoStream = ({ path }) => {
       );
 
       await setPhotoUrls(urls);
+      setLoading(false); // Set loading state to false when images are fetched
     } catch (error) {
       console.error(error);
     }
@@ -58,8 +60,10 @@ const PhotoStream = ({ path }) => {
 
   return (
     <>
-      {photoUrls.length > 0 && (
-        <>
+      {loading ? (
+        <ActivityIndicator size="large" color="#000" /> // Show loading indicator while images are being fetched
+      ) : photoUrls.length > 0 ? (
+        <View>
           <Text style={styleTexts.h3}>Sist du var här såg det ut såhär </Text>
           <View style={styleComponents.imageContainer}>
             {photoUrls.reverse().map((photoUrls, i) => (
@@ -77,7 +81,9 @@ const PhotoStream = ({ path }) => {
               </Lightbox>
             ))}
           </View>
-        </>
+        </View>
+      ) : (
+        <Text>No photos found</Text>
       )}
     </>
   );

@@ -34,6 +34,7 @@ export default function HomeScreen({ navigation }) {
           bottom: -200,
           marginLeft: '5%',
           height: '70%',
+          paddingTop: 20,
         }}
       >
         <Text style={styleTexts.h1}>FÖRESLAGNA RUNDOR</Text>
@@ -45,7 +46,14 @@ export default function HomeScreen({ navigation }) {
           }}
         ></SafeAreaView>
 
-        <ScrollView style={{ height: 300, marginBottom: 200 }}>
+        <ScrollView
+          style={{
+            height: '90%',
+            marginBottom: 200,
+
+            width: '90%',
+          }}
+        >
           {arrayOfBarTours.map((group, i) => (
             <GroupCard
               navigation={navigation}

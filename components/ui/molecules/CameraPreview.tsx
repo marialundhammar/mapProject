@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, Pressable } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import { LinearGradient } from 'expo-linear-gradient';
 import styleButtons from '../../../styles/styleButtons';
-
+import { MaterialIcons } from '@expo/vector-icons';
 const CameraPreview = ({
   type,
   image,
@@ -15,7 +15,74 @@ const CameraPreview = ({
 }) => {
   return (
     <View>
-      {!turnOnCamera && !image ? (
+      {turnOnCamera && !image && (
+        <Camera
+          style={{ flex: 1, marginTop: 12, width: 412 }}
+          type={type}
+          ref={cameraRef}
+        >
+          <View
+            style={{
+              alignSelf: 'center',
+              flex: 1,
+              alignItems: 'center',
+              position: 'absolute',
+              height: '12%',
+              bottom: 0,
+              width: '100%',
+              opacity: 0.6,
+              backgroundColor: '#E68383',
+            }}
+          ></View>
+          <View
+            style={{
+              alignSelf: 'center',
+              flex: 1,
+              alignItems: 'center',
+              position: 'absolute',
+              height: '12%',
+              bottom: 0,
+              width: '100%',
+            }}
+          >
+            <Pressable
+              onPress={toggleCameraType}
+              style={{
+                bottom: 32,
+                left: 60,
+                borderRadius: 50,
+                position: 'absolute',
+              }}
+            >
+              <Text>
+                <MaterialIcons
+                  name="flip-camera-android"
+                  size={42}
+                  color="white"
+                />
+              </Text>
+            </Pressable>
+
+            <TouchableOpacity
+              onPress={takePic}
+              style={{
+                width: 70,
+                height: 70,
+                bottom: 16,
+                borderRadius: 50,
+                backgroundColor: '#fff',
+                position: 'absolute',
+              }}
+            />
+          </View>
+        </Camera>
+      )}
+
+      {image && !turnOnCamera && (
+        <Image source={{ uri: image }} style={{ width: 370, height: 400 }} />
+      )}
+
+      {!turnOnCamera && !image && (
         <LinearGradient
           colors={['#F46D6D', '#CE7C7C']}
           style={{ borderRadius: 8 }}
@@ -38,43 +105,6 @@ const CameraPreview = ({
             </Pressable>
           </View>
         </LinearGradient>
-      ) : (
-        <Image source={{ uri: image }} style={{ width: 370, height: 250 }} />
-      )}
-
-      {turnOnCamera && !image && (
-        <View>
-          <Camera
-            style={{ height: 600, width: 400 }}
-            type={type}
-            ref={cameraRef}
-          >
-            <View>
-              <Pressable onPress={toggleCameraType}>
-                <Text>Flip Camera</Text>
-              </Pressable>
-            </View>
-            <View
-              style={{
-                alignSelf: 'center',
-                flex: 1,
-                alignItems: 'center',
-              }}
-            >
-              <TouchableOpacity
-                onPress={takePic}
-                style={{
-                  width: 70,
-                  height: 70,
-                  bottom: 0,
-                  borderRadius: 50,
-                  backgroundColor: '#fff',
-                  position: 'absolute',
-                }}
-              />
-            </View>
-          </Camera>
-        </View>
       )}
     </View>
   );

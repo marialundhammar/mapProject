@@ -22,13 +22,14 @@ const styleModals = StyleSheet.create({
   },
 
   imageContainerBig: {
-    margin: 'auto',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   imageSmall: {
     width: 110,
     height: 110,
-    margin: 2,
+    margin: 4,
     borderRadius: 2,
   },
 
@@ -80,7 +81,7 @@ const styleModals = StyleSheet.create({
   },
 
   barContentContainer: {
-    borderWidth: 1,
+    borderWidth: 0.4,
     borderColor: '#FFD3D3',
     width: '95%',
     borderRadius: 8,
@@ -96,6 +97,7 @@ const styleModals = StyleSheet.create({
     backgroundColor: '#1B274A',
     height: 90,
     padding: 16,
+    width: '100%',
     paddingTop: 46,
   },
   leftComponent: {
@@ -139,18 +141,18 @@ const styleModals = StyleSheet.create({
   },
 
   cardStyle: {
-    width: '90%',
+    width: '100%',
     backgroundColor: '#1B274A',
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,
     borderColor: '#445385',
-    borderWidth: 1,
+    borderWidth: 2,
     paddingBottom: 10,
   },
 
   cardStyleIsFilled: {
-    width: '90%',
+    width: '100%',
     backgroundColor: '#1B274A',
     borderWidth: 2,
     borderColor: '#445385',

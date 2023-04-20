@@ -8,6 +8,7 @@ import DoChallenge from '../ui/molecules/DoChallange';
 import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
 import Map from '../ui/molecules/Map';
+
 import styleComponents from '../../styles/styleComponents';
 import BarContent from '../ui/molecules/BarContent';
 import { challenges2 } from '../../configs/challenges';
@@ -45,37 +46,47 @@ const BarScreen = ({ navigation }) => {
     }
   }, [completedChallenges]);
 
+  console.log('onBAr', onBar);
+
   return (
     <View
       style={{
         flex: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#1B274A',
+        width: '100%',
       }}
     >
-      <TopHeader navigation={navigation} showBackButton={false} />
+      <TopHeader
+        navigation={navigation}
+        showBackButton={false}
+        showBarMap={true}
+      />
 
       {onBar ? (
         <>
           <ScrollView>
-            <View style={styleScreens.onboardingScreen}>
-              <Text style={styleTexts.h2}>
-                VÄLKOMMEN TILL {currentBar.name}
-              </Text>
-
+            <View style={{ alignItems: 'center', flex: 1, paddingTop: 12 }}>
               <BarContent />
+
               <TimeLine navigation={navigation} />
 
               {showChallenge && <DoChallenge navigation={navigation} />}
 
-              <View style={styleComponents.imageContainerBig}>
-                <View style={styleComponents.imageContainer}>
-                  <PhotoStream path={`${user.email}/${currentBar.name}`} />
-                </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  margin: 24,
+                }}
+              >
+                <PhotoStream path={`${user.email}/${currentBar.name}`} />
               </View>
             </View>
           </ScrollView>
-          <View style={styleComponents.centered}>
+          <View style={{ alignItems: 'center', padding: 12 }}>
             <Button
               navigation={navigation}
               navigateTo={'Map'}

@@ -10,10 +10,16 @@ const BarContent = () => {
 
   return (
     <>
-      <View style={styleComponents.centered}>
-        <Image source={currentBar.image} style={{ width: 400, height: 200 }} />
+      <View style={{ paddingBottom: 12 }}>
+        <Text style={styleTexts.h2}>VÄLKOMMEN TILL {currentBar.name}</Text>
+        <Text style={styleTexts.bodyText}>{currentBar.description}</Text>
+        <View style={{ paddingTop: 24 }}>
+          <Image
+            source={currentBar.image}
+            style={{ width: 400, height: 200 }}
+          />
+        </View>
       </View>
-      <Text style={styleTexts.bodyText}>{currentBar.description}</Text>
     </>
   );
 };

@@ -71,15 +71,15 @@ const useAddEvent = (user) => {
 
     switch (type) {
       case 'leftBar':
-        saveEvents(`${currentTime} lämnade ${currentBar.name}`, type);
+        saveEvents(`${currentTime} - lämnade ${currentBar.name}`, type);
         break;
       case 'enteredBar':
-        saveEvents(`${currentTime} kom till baren `, type);
+        saveEvents(`${currentTime} - kom till baren  ${bar.name} `, type);
         break;
 
       case 'challenge':
         saveEvents(
-          `${currentTime} genomförde utmaningen ${currentChallenge.name}`,
+          `Kl. ${currentTime} genomförde utmaningen:  ${currentChallenge.name}`,
           type,
           textInputValue,
           image
