@@ -58,4 +58,6 @@ export type ContextStoreType = {
   setCurrentChallenge: (CurrentChallengeType) => void;
   completedChallenges: CurrentChallengeType[];
   setCompletedChallenges: (challenges: CurrentChallengeType[]) => void;
+  finishedTour: boolean;
+  setFinishedTour: (boolean) => void;
 };

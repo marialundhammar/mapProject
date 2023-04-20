@@ -17,6 +17,14 @@ const firebaseConfig = {
   appId: '1:436523406860:web:f62f6965f9dfb7268b0029',
 };
 
+/* const firebaseConfig = {
+  apiKey: 'AIzaSyAQunm5x4PRSf2rHbI_vbhQI2zAaBTKWNI',
+  authDomain: 'appen-test-22bc9.firebaseapp.com',
+  projectId: 'appen-test-22bc9',
+  storageBucket: 'appen-test-22bc9.appspot.com',
+  messagingSenderId: '786304024944',
+  appId: '1:786304024944:web:4bcc1151f89e110d9f4fb5',
+}; */
 const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),

@@ -6,10 +6,7 @@
       "icon": "./assets/loga-second.png",
       "color": "#311b92"
     },
-    "UIBackgroundModes": [
-      "location",
-      "fetch"
-    ],
+    "UIBackgroundModes": ["location", "fetch"],
     "plugins": [
       [
         "expo-camera",
@@ -46,31 +43,23 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "icon": "./assets/loga-next.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.mariah4ara.Map",
       "config": {
-        "googleMapsApiKey": "AIzaSyDgUVls77NjkK8OXXqdX3MshQJqHb-ISb4"
+        "googleMapsApiKey": "AIzaSyAQunm5x4PRSf2rHbI_vbhQI2zAaBTKWNI"
       },
       "infoPlist": {
-        "UIBackgroundModes": [
-          "location",
-          "fetch"
-        ],
+        "UIBackgroundModes": ["location", "fetch"],
         "NSLocationWhenInUseUsageDescription": "text",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "text",
         "NSLocationAlwaysUsageDescription": "text",
         "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
       }
     },
-    "permissions": [
-      "LOCATION",
-      "BACKGROUND_LOCATION"
-    ],
+    "permissions": ["LOCATION", "BACKGROUND_LOCATION"],
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"

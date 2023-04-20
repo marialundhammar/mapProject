@@ -8,11 +8,14 @@ import styleTexts from '../../../styles/styleTexts';
 import Button from '../atoms/Button';
 import { Animated } from 'react-native';
 import TimeLine from './TimeLine';
+import { LinearGradient } from 'expo-linear-gradient';
+import { NavigationContainerRefContext } from '@react-navigation/native';
 
 const BottomContainer = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [roundStarted, setRoundIsStarted] = useState(false);
-  const { currentBarTour } = useContext(ContextStore);
+  const { currentBarTour, setFinishedTour, setCurrentBarTour } =
+    useContext(ContextStore);
   const [animation] = useState(new Animated.Value(0));
 
   const arrayOfBars = currentBarTour.bars;
@@ -25,6 +28,12 @@ const BottomContainer = ({ navigation }) => {
       easing: Easing.inOut(Easing.ease),
     }).start();
   }, [isOpen]);
+
+  const handleFinishedTour = () => {
+    console.log('finsihed tour');
+    setFinishedTour(true);
+    navigation.navigate('Profile');
+  };
 
   return (
     <View
@@ -88,7 +97,17 @@ const BottomContainer = ({ navigation }) => {
               <Pressable onPress={() => setIsOpen(false)}>
                 <Text style={styleTexts.h2}>{currentBarTour.title}</Text>
                 <View style={styleComponents.centered}>
-                  <Button buttonText={'AVSLUTA'} />
+                  <Pressable onPress={handleFinishedTour}>
+                    <LinearGradient
+                      colors={['#F46D6D', '#CE7C7C']}
+                      style={styleButtons.buttonDefault}
+                    >
+                      <Text style={styleButtons.buttonDefaultText}>
+                        {' '}
+                        AVSLUTA
+                      </Text>
+                    </LinearGradient>
+                  </Pressable>
                 </View>
               </Pressable>
             </Animated.View>

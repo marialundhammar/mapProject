@@ -24,6 +24,7 @@ const ContextStoreProvider = ({ children }) => {
 
   const [currentBar, setCurrentBar] = useState(null);
   const [completedChallenges, setCompletedChallenges] = useState([]);
+  const [finishedTour, setFinishedTour] = useState(false);
 
   return (
     <ContextStore.Provider
@@ -44,6 +45,8 @@ const ContextStoreProvider = ({ children }) => {
         setCurrentChallenge,
         completedChallenges,
         setCompletedChallenges,
+        finishedTour,
+        setFinishedTour,
       }}
     >
       {children}

@@ -11,7 +11,7 @@ import PhotoStream from '../ui/molecules/PhotoStream';
 
 const ProfileScreen = ({ navigation }) => {
   const navigateTo = 'Map';
-  const { user } = useContext(ContextStore);
+  const { user, finishedTour } = useContext(ContextStore);
 
   const handleLogOut = () => {
     const auth = getAuth();
@@ -25,10 +25,10 @@ const ProfileScreen = ({ navigation }) => {
       });
   };
 
-  console.log(user);
+  console.log('finsihedTour', finishedTour);
 
   return (
-    <View>
+    <View style={[{ height: '100%' }, styleScreens.defaultScreen]}>
       <>
         <ScrollView>
           <TopHeader navigation={navigation} showBackButton={false} />
@@ -36,7 +36,6 @@ const ProfileScreen = ({ navigation }) => {
             <PhotoStream path={`${user.email}`} />
             <View>
               <TimeLine navigation={navigation} />
-
               <Button
                 navigation={navigation}
                 navigateTo={'Map'}

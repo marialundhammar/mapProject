@@ -45,6 +45,8 @@ const Map = ({ navigation }) => {
   } = useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
   const [markerBar, setMarkerBar] = useState('');
+  const [closestBarModalShown, setClosestBarModal] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const { sendNotificationOnBar } = useNotifications();
   const LOCATION_TASK_NAME = 'background-location-task';
   const mapView = useRef(null);
@@ -75,6 +77,8 @@ const Map = ({ navigation }) => {
   const checkDistanceToAllBars = async () => {
     const closestBar = getClosestBar();
 
+    console.log('BARMODAL', barModal.visible);
+
     setDistanceBar({
       distance: closestBar.distance,
       name: closestBar.name,
@@ -82,20 +86,16 @@ const Map = ({ navigation }) => {
     if (closestBar.distance < 0.4 && currentBar === null) {
       setBarModal({ visible: true, content: closestBar });
 
-      await delay(5000);
-      // sendNotificationOnBar();
+      setShowNotification(true);
     }
   };
 
-  /*   const onPressMarker = async (marker) => {
-    const pixelCoords = await getPixelCoords(marker.lat, marker.long);
+  if (showNotification) {
+    sendNotificationOnBar();
 
-    const barName = marker.name;
-    console.log('hej', marker);
-    setMarkerLocation(pixelCoords);
-    setMarkerBar(barName);
-    setShowMarkerModal(true);
-  }; */
+    setShowNotification(false);
+  }
+
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
@@ -117,7 +117,8 @@ const Map = ({ navigation }) => {
   }, [userLocation]);
   //add userLocation
 
-  const pinColor = '#000000';
+  const pinColorUser = '#000000';
+  const pinColorBar = '#E68383';
 
   return (
     <>
@@ -149,6 +150,7 @@ const Map = ({ navigation }) => {
                 longitude: bar.long,
               }}
               key={i}
+              pinColor={pinColorBar}
             >
               <Callout
                 tooltip={true}
@@ -171,7 +173,7 @@ const Map = ({ navigation }) => {
               latitude: userLocation.lat,
               longitude: userLocation.long,
             }}
-            pinColor={pinColor}
+            pinColor={pinColorUser}
           />
         </MapView>
 

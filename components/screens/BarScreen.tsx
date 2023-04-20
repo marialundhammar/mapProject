@@ -46,8 +46,6 @@ const BarScreen = ({ navigation }) => {
     }
   }, [completedChallenges]);
 
-  console.log('onBAr', onBar);
-
   return (
     <View
       style={{
@@ -72,7 +70,14 @@ const BarScreen = ({ navigation }) => {
 
               <TimeLine navigation={navigation} />
 
-              {showChallenge && <DoChallenge navigation={navigation} />}
+              {showChallenge && (
+                <View style={{ paddingTop: 24 }}>
+                  <Text style={styleTexts.h3}>
+                    Medan du väntar på nästa utmaning, gör denna?{' '}
+                  </Text>
+                  <DoChallenge navigation={navigation} />
+                </View>
+              )}
 
               <View
                 style={{

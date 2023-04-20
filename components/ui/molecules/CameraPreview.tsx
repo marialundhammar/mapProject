@@ -4,6 +4,7 @@ import { Camera, CameraType } from 'expo-camera';
 import { LinearGradient } from 'expo-linear-gradient';
 import styleButtons from '../../../styles/styleButtons';
 import { MaterialIcons } from '@expo/vector-icons';
+import styleTexts from '../../../styles/styleTexts';
 const CameraPreview = ({
   type,
   image,
@@ -17,7 +18,7 @@ const CameraPreview = ({
     <View>
       {turnOnCamera && !image && (
         <Camera
-          style={{ flex: 1, marginTop: 12, width: 412 }}
+          style={{ flex: 1, marginTop: 0, width: 412 }}
           type={type}
           ref={cameraRef}
         >
@@ -79,7 +80,10 @@ const CameraPreview = ({
       )}
 
       {image && !turnOnCamera && (
-        <Image source={{ uri: image }} style={{ width: 370, height: 400 }} />
+        <Image
+          source={{ uri: image }}
+          style={{ width: 390, height: 400, borderRadius: 8 }}
+        />
       )}
 
       {!turnOnCamera && !image && (
@@ -89,12 +93,16 @@ const CameraPreview = ({
         >
           <View
             style={{
-              width: 370,
+              width: 390,
               height: 250,
               justifyContent: 'center',
               alignItems: 'center',
             }}
           >
+            <Text style={[styleTexts.bodyText, { marginBottom: 12 }]}>
+              Ta ett foto som bevis på att du utfört utmaningen{' '}
+            </Text>
+
             <Pressable
               onPress={onClick}
               style={[styleButtons.buttonDefault, styleButtons.buttonBorder]}

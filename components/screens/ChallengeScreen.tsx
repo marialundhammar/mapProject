@@ -15,6 +15,8 @@ import styleScreens from '../../styles/styleScreens';
 import styleComponents from '../../styles/styleComponents';
 import styleTexts from '../../styles/styleTexts';
 
+import * as ImageManipulator from 'expo-image-manipulator';
+
 const ChallengeScreen = ({ navigation }) => {
   const cameraRef = useRef(null);
   const {
@@ -54,7 +56,15 @@ const ChallengeScreen = ({ navigation }) => {
       storage,
       `images/${user.email}/${currentBar.name}/${fileName}`
     );
-    const response = await fetch(takenPhoto.uri);
+
+    const resizedPhoto = await ImageManipulator.manipulateAsync(
+      takenPhoto.uri,
+      [{ resize: { width: 800 } }],
+      { compress: 0.2 }
+    );
+
+    const response = await fetch(resizedPhoto.uri);
+
     const blob = await response.blob();
     await uploadBytes(storageRef, blob, {
       contentType: 'image/jpeg',
@@ -106,9 +116,22 @@ const ChallengeScreen = ({ navigation }) => {
 
   return (
     <View style={styleScreens.defaultScreen}>
-      <View style={styleComponents.start}>
-        <Text style={styleTexts.h2}>{currentChallenge.name}</Text>
-      </View>
+      {!turnOnCamera && (
+        <View
+          style={[
+            styleComponents.start,
+            {
+              flexDirection: 'columns',
+              justifyContent: 'center',
+              marginBottom: 12,
+              width: '92%',
+            },
+          ]}
+        >
+          <Text style={styleTexts.h2}>{currentChallenge.name}</Text>
+          <Text style={styleTexts.h3}>{currentChallenge.description}</Text>
+        </View>
+      )}
 
       <CameraPreview
         type={type}
@@ -128,14 +151,11 @@ const ChallengeScreen = ({ navigation }) => {
               numberOfLines={4}
               onChangeText={(text) => setTextInputValue(text)}
               onSubmitEditing={() => Keyboard.dismiss()}
+              placeholder="Ingen kommentar ännu 😡"
+              placeholderTextColor={'white'}
             />
           </View>
-          <Button
-            navigation={navigation}
-            navigateTo={'Bar'}
-            buttonText={'Skit i det här'}
-            isFilled={false}
-          />
+
           {!isSaveDisabled ? (
             <Pressable onPress={handleSaveChallenge} disabled={isSaveDisabled}>
               <LinearGradient
@@ -148,11 +168,17 @@ const ChallengeScreen = ({ navigation }) => {
               </LinearGradient>
             </Pressable>
           ) : (
-            <Text>
+            <Text style={[styleTexts.h4, { marginBottom: 12, width: '95%' }]}>
               Du måste ladda upp en bild först för att kunna spara utmaningen,
               vad är annars poängen?{' '}
             </Text>
           )}
+          <Button
+            navigation={navigation}
+            navigateTo={'Bar'}
+            buttonText={'Skit i det här'}
+            isFilled={false}
+          />
         </>
       )}
     </View>

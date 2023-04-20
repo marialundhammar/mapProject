@@ -33,8 +33,6 @@ const TimeLine = ({ navigation }) => {
     >
       <View>
         <Text style={styleTexts.h3}>Tidslinjen </Text>
-        {/*         <Timer navigation={navigation} />
-         */}
 
         {showAllEvents
           ? eventList.map((item, i) => (

@@ -64,8 +64,8 @@ const useAddEvent = (user) => {
   const addEvents = async (
     type: string,
     bar: BarType,
-    textInputValue: string,
-    image: string
+    textInputValue?: string,
+    image?: string
   ) => {
     await fetchEvents();
 
