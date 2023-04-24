@@ -33,9 +33,8 @@ const useAddEvent = (user) => {
     const querySnapshot = await getDocs(userQuery);
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      if (data.events) {
-        setEvents(data.events);
-      }
+
+      setEvents(data.events);
     });
   };
 
@@ -89,8 +88,6 @@ const useAddEvent = (user) => {
       default:
         saveEvents('random event', type);
     }
-
-    //modify so that the same challenge will not be displayed again
   };
 
   return { loading, addEvents };

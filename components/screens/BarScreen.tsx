@@ -39,7 +39,6 @@ const BarScreen = ({ navigation }) => {
       challenge = challenges2[Math.floor(Math.random() * challenges2.length)];
     }
     setCurrentChallenge(challenge);
-    console.log(completedChallenges.length, challenges2.length);
 
     if (completedChallenges.length == challenges2.length - 1) {
       setShowChallenge(false);
@@ -65,14 +64,22 @@ const BarScreen = ({ navigation }) => {
       {onBar ? (
         <>
           <ScrollView>
-            <View style={{ alignItems: 'center', flex: 1, paddingTop: 12 }}>
+            <View
+              style={{
+                alignItems: 'center',
+                flex: 1,
+                paddingTop: 42,
+                justifyContent: 'center',
+                width: '100%',
+              }}
+            >
               <BarContent />
 
               <TimeLine navigation={navigation} />
 
               {showChallenge && (
-                <View style={{ paddingTop: 24 }}>
-                  <Text style={styleTexts.h3}>
+                <View style={{ paddingTop: 24, width: '95%' }}>
+                  <Text style={styleTexts.h4}>
                     Medan du väntar på nästa utmaning, gör denna?{' '}
                   </Text>
                   <DoChallenge navigation={navigation} />
@@ -81,10 +88,9 @@ const BarScreen = ({ navigation }) => {
 
               <View
                 style={{
-                  flex: 1,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  margin: 24,
+                  width: '95%',
                 }}
               >
                 <PhotoStream path={`${user.email}/${currentBar.name}`} />

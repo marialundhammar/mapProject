@@ -8,10 +8,16 @@ const TimeLineEvent = ({
   timeLineTitle,
   timeLineComment = '',
   timeLineImage = null,
+  bartour = false,
+  navigation,
 }) => {
   const [showChallengeModal, setShowChallengeModal] = useState(false);
+
   const handleNavigate = () => {
-    console.log('hejhejhej');
+    if (bartour) {
+      navigation.navigate('Home');
+    }
+
     setChallengeModal({ visible: true, content: 'hejhejhej' });
     console.log('timeLineImage', timeLineImage);
   };
@@ -22,7 +28,11 @@ const TimeLineEvent = ({
   });
 
   return (
-    <View style={timeLineImage ? styleComponents.cardStyle : { marginTop: 2 }}>
+    <View
+      style={
+        timeLineImage || bartour ? styleComponents.cardStyle : { marginTop: 2 }
+      }
+    >
       <Text style={[styleTexts.h4, { padding: 4 }]}>{timeLineTitle}</Text>
 
       <Pressable onPress={handleNavigate}>
@@ -40,6 +50,8 @@ const TimeLineEvent = ({
               </Text>
             </View>
           )}
+
+          {bartour && <View style={[styleTexts.bodyText]}></View>}
         </View>
       </Pressable>
 

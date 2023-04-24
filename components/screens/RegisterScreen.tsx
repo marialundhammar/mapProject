@@ -73,7 +73,6 @@ const RegisterScreen = ({ navigation }) => {
 
     if (!errorMessage) {
       setEmailOk(true);
-      console.log('userOk', setEmailOk);
     }
   };
 

@@ -22,6 +22,7 @@
     "expo": "^47.0.11",
     "expo-app-loading": "^2.1.1",
     "expo-camera": "~13.1.0",
+    "expo-dev-client": "~2.0.1",
     "expo-device": "~5.0.0",
     "expo-firebase-app": "^2.0.0",
     "expo-firebase-auth": "^2.0.0",
@@ -37,7 +38,6 @@
     "expo-task-manager": "~11.0.1",
     "expo-tracking-transparency": "~3.0.1",
     "firebase": "^9.17.1",
-    "formik": "^2.2.9",
     "install": "^0.13.0",
     "latest": "^0.2.0",
     "native-notify": "^3.0.4",
@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@types/node": "^18.15.13",
     "concurrently": "^7.6.0",
     "postcss": "^8.4.21"
   },

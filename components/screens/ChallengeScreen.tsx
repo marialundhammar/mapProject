@@ -68,9 +68,7 @@ const ChallengeScreen = ({ navigation }) => {
     const blob = await response.blob();
     await uploadBytes(storageRef, blob, {
       contentType: 'image/jpeg',
-    }).then((snapshot) => {
-      console.log('####uploaded');
-    });
+    }).then((snapshot) => {});
     const url = await getDownloadURL(storageRef);
 
     await setImage(url);

@@ -42,7 +42,7 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
         querySnapshot.forEach((doc) => {
           const userDocRef = doc.ref;
           return updateDoc(userDocRef, {
-            barTour: barTour,
+            currentBarTour: barTour,
           });
         });
       })

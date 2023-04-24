@@ -10,13 +10,13 @@ const BarContent = () => {
 
   return (
     <>
-      <View style={{ paddingBottom: 12 }}>
+      <View style={{ paddingBottom: 12, width: '95%' }}>
         <Text style={styleTexts.h2}>VÄLKOMMEN TILL {currentBar.name}</Text>
         <Text style={styleTexts.bodyText}>{currentBar.description}</Text>
         <View style={{ paddingTop: 24 }}>
           <Image
             source={currentBar.image}
-            style={{ width: 400, height: 200 }}
+            style={{ width: '100%', height: 200 }}
           />
         </View>
       </View>

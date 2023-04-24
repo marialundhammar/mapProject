@@ -19,6 +19,7 @@ const styleModals = StyleSheet.create({
   imageContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyCOntent: 'center',
   },
 
   imageContainerBig: {
@@ -27,8 +28,8 @@ const styleModals = StyleSheet.create({
   },
 
   imageSmall: {
-    width: 110,
-    height: 110,
+    width: 100,
+    height: 100,
     margin: 4,
     borderRadius: 2,
   },

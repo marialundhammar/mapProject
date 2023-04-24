@@ -28,11 +28,17 @@
           <string>com.mariah4ara.Map</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+map</string>
+        </array>
+      </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>GMSApiKey</key>
-    <string>AIzaSyDgUVls77NjkK8OXXqdX3MshQJqHb-ISb4</string>
+    <string>AIzaSyAQunm5x4PRSf2rHbI_vbhQI2zAaBTKWNI</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
@@ -51,11 +57,11 @@
     <key>NSCameraUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to access your camera.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>text</string>
+    <string>Allow the app to access your location even when it's not in use, to provide personalized recommendations based on your location.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to use your location.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>text</string>
+    <string>Allow the app to access your location while you use it to find nearby stores and services.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to access your microphone</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
@@ -66,6 +72,7 @@
     <string>This identifier will be used to deliver personalized ads to you.</string>
     <key>UIBackgroundModes</key>
     <array>
+      <string/>
       <string>location</string>
       <string>fetch</string>
     </array>

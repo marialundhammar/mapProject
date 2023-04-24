@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import styleMap from '../../../styles/styleMap';
 import { View, Text } from 'react-native';
-import * as Location from 'expo-location';
 import { calculateDistanceFunction, delay } from '../../../utils/helpers';
 import { BarModal } from './BarModal';
 import DistanceBanner from '../atoms/DistanceBanner';
 import mapStyle from '../../../assets/mapStyle';
 import { ContextStore } from '../../../context/ContextStore';
 import { BarType } from '../../../types';
+import * as Location from 'expo-location';
+import * as TaskManager from 'expo-task-manager';
 
 import { useNotifications } from '../../../Hooks/useNotifications';
 import styleTexts from '../../../styles/styleTexts';
@@ -50,6 +51,39 @@ const Map = ({ navigation }) => {
   const { sendNotificationOnBar } = useNotifications();
   const LOCATION_TASK_NAME = 'background-location-task';
   const mapView = useRef(null);
+  /* 
+  TaskManager.defineTask('locationTask', async ({ data, error }) => {
+    if (error) {
+      console.log('TaskManager error:', error);
+      return;
+    }
+    if (data) {
+      console.log('data', data);
+    
+      const { latitude, longitude } = data.coords;
+      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`); 
+      // Do something with the location data
+    }
+  });
+
+  const startLocationTracking = async () => {
+    let { status } = await Location.requestBackgroundPermissionsAsync();
+    if (status !== 'granted') {
+      console.log('Permission to access location was denied');
+      return;
+    }
+    await Location.startLocationUpdatesAsync('locationTask', {
+      accuracy: Location.Accuracy.Highest,
+      timeInterval: 60 * 1000, // 1 minute
+      distanceInterval: 0, // minimum distance
+      deferredUpdatesInterval: 0, // minimum time between updates
+      foregroundService: {
+        notificationTitle: 'Location tracking',
+        notificationBody: 'Location tracking is running',
+      },
+    });
+  };
+  startLocationTracking();*/
 
   const bars = currentBarTour.bars;
   const getClosestBar = () => {
@@ -83,9 +117,13 @@ const Map = ({ navigation }) => {
       distance: closestBar.distance,
       name: closestBar.name,
     });
+    console.log('distance', closestBar.distance, currentBar);
+
     if (closestBar.distance < 0.4 && currentBar === null) {
+      console.log('hejehje');
+
       setBarModal({ visible: true, content: closestBar });
-      sendNotificationOnBar();
+      //sendNotificationOnBar();
       //setShowNotification(true);
     }
   };
@@ -97,7 +135,7 @@ const Map = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
-      /*       let { status } = await Location.requestForegroundPermissionsAsync();
+      /*    let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setStatus('Permission to access location was denied');
         return;

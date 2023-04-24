@@ -40,9 +40,9 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 {
   RCTAppSetupPrepareApp(application);
 
-// @generated begin react-native-maps-init - expo prebuild (DO NOT MODIFY) sync-16f7081966d8e423a168877bcaa923848323960e
+// @generated begin react-native-maps-init - expo prebuild (DO NOT MODIFY) sync-669f6fd5a34a03b9f1cbc2575d32310543ac743d
 #if __has_include(<GoogleMaps/GoogleMaps.h>)
-  [GMSServices provideAPIKey:@"AIzaSyDgUVls77NjkK8OXXqdX3MshQJqHb-ISb4"];
+  [GMSServices provideAPIKey:@"AIzaSyAQunm5x4PRSf2rHbI_vbhQI2zAaBTKWNI"];
 #endif
 // @generated end react-native-maps-init
   RCTBridge *bridge = [self.reactDelegate createBridgeWithDelegate:self launchOptions:launchOptions];

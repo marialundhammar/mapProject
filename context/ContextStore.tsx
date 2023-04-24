@@ -1,12 +1,12 @@
 import { createContext, useState } from 'react';
 import { arrayOfBarTours } from '../configs/barTours';
-import { ContextStoreType } from '../types/index';
+import { ContextStoreType, BarType } from '../types/index';
 
 export const ContextStore = createContext<ContextStoreType | null>(null!);
 
 const ContextStoreProvider = ({ children }) => {
   const [step, setStep] = useState(1);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({ email: '', uid: 0 });
   const [currentBarTour, setCurrentBarTour] = useState(arrayOfBarTours[1]);
   const [onBar, setOnBar] = useState(true);
   const [userLocation, setUserLocation] = useState({

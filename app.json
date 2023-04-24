@@ -38,7 +38,7 @@
     "splash": {
       "backgroundColor": "#1B274A",
       "image": "./assets/laddar.png",
-      "resizeMode": 100
+      "resizeMode": "contain"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -51,11 +51,11 @@
       "config": {
         "googleMapsApiKey": "AIzaSyAQunm5x4PRSf2rHbI_vbhQI2zAaBTKWNI"
       },
+      "UIBackgroundModes": ["location", "fetch"],
       "infoPlist": {
-        "UIBackgroundModes": ["location", "fetch"],
-        "NSLocationWhenInUseUsageDescription": "text",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "text",
-        "NSLocationAlwaysUsageDescription": "text",
+        "NSLocationWhenInUseUsageDescription": "Allow the app to access your location while you use it to find nearby stores and services.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow the app to access your location even when it's not in use, to provide personalized recommendations based on your location.",
+        "NSLocationAlwaysUsageDescription": "Allow the app to access your location even when it's not in use, to provide personalized recommendations based on your location.",
         "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
       }
     },

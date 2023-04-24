@@ -10,15 +10,29 @@ import { Animated } from 'react-native';
 import TimeLine from './TimeLine';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainerRefContext } from '@react-navigation/native';
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
+import { db } from '../../../firebase/firebase';
+import useGetBarTours from '../../../Hooks/useGetBarTours';
 
 const BottomContainer = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [roundStarted, setRoundIsStarted] = useState(false);
-  const { currentBarTour, setFinishedTour, setCurrentBarTour } =
+  const [finishedToursArray, setFinishedToursArray] = useState([]);
+  const { currentBarTour, setFinishedTour, setCurrentBarTour, user } =
     useContext(ContextStore);
   const [animation] = useState(new Animated.Value(0));
 
   const arrayOfBars = currentBarTour.bars;
+
+  const userCollectionRef = collection(db, 'users');
+  const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
 
   useEffect(() => {
     Animated.timing(animation, {
@@ -29,9 +43,38 @@ const BottomContainer = ({ navigation }) => {
     }).start();
   }, [isOpen]);
 
-  const handleFinishedTour = () => {
-    console.log('finsihed tour');
-    setFinishedTour(true);
+  const prevBarTours = useGetBarTours(user);
+  const d = new Date();
+
+  const fetchEvents = async () => {
+    const querySnapshot = await getDocs(userQuery);
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      setFinishedTour(data.finishedTours);
+    });
+  };
+
+  const handleFinishedTour = async () => {
+    const querySnapshot = await getDocs(userQuery);
+    querySnapshot.forEach(async (doc) => {
+      const userDocRef = doc.ref;
+
+      await updateDoc(userDocRef, {
+        finishedTours: [
+          { date: new Date(), ...currentBarTour },
+          ...prevBarTours,
+        ],
+      });
+    });
+
+    console.log(
+      'date',
+      finishedToursArray,
+      d.getDate(),
+      d.getMonth() + 1,
+      d.getFullYear()
+    );
+
     navigation.navigate('Profile');
   };
 
