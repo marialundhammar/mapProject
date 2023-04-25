@@ -32,6 +32,8 @@ const TimeLineEvent = ({
     content: null,
   });
 
+  console.log('EVENTS', events);
+
   const toggleEvents = () => {
     console.log('toggle');
     console.log('timeline', events);
@@ -72,9 +74,12 @@ const TimeLineEvent = ({
             {bartour && (
               <View style={[styleTexts.bodyText]}>
                 {events && showBarTourEvents && (
-                  <TimeLine navigation={navigation} />
+                  <TimeLine
+                    navigation={navigation}
+                    events={events}
+                    profilePage={true}
+                  />
                 )}
-                <Text>hej</Text>
               </View>
             )}
           </Pressable>

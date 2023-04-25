@@ -8,23 +8,34 @@ import styleTexts from '../../../styles/styleTexts';
 import TimeLineEvent from '../atoms/TimeLineEvent';
 import Timer from '../atoms/Timer';
 
-const TimeLine = ({ navigation }) => {
+const TimeLine = ({ navigation, events, profilePage }) => {
   const [showAllEvents, setShowAllEvents] = useState(false);
   const { user } = useContext(ContextStore);
 
-  const events = useGetEvents(user);
+  const currentBarEvents = useGetEvents(user);
   const handleOpenTimeLine = () => {
     setShowAllEvents(!showAllEvents);
   };
 
   const eventList = [];
-  events.map((item) => {
-    eventList.push({
-      title: item.text,
-      comment: item.comment,
-      image: item.mediaUrl,
+
+  if (profilePage) {
+    events.map((item) => {
+      eventList.push({
+        title: item.text,
+        comment: item.comment,
+        image: item.mediaUrl,
+      });
     });
-  });
+  } else {
+    currentBarEvents.map((item) => {
+      eventList.push({
+        title: item.text,
+        comment: item.comment,
+        image: item.mediaUrl,
+      });
+    });
+  }
 
   return (
     <Pressable

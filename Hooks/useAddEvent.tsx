@@ -42,18 +42,20 @@ const useAddEvent = (user) => {
     querySnapshot.forEach(async (doc) => {
       const userDocRef = doc.ref;
       await updateDoc(userDocRef, {
-        events: [
-          {
-            id: '',
-            text: text,
-            type: type,
-            barId: '',
-            createDate: currentTime,
-            mediaUrl: imageUri,
-            comment: textInputValue,
-          },
-          ...prevEvents,
-        ],
+        currentBarTour: {
+          events: [
+            {
+              id: '',
+              text: text,
+              type: type,
+              barId: '',
+              createDate: currentTime,
+              mediaUrl: imageUri,
+              comment: textInputValue,
+            },
+            ...prevEvents,
+          ],
+        },
       });
     });
     setLoading(false);

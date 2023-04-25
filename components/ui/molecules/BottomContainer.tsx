@@ -65,15 +65,6 @@ const BottomContainer = ({ navigation }) => {
         ],
       });
     });
-
-    console.log(
-      'date',
-      finishedToursArray,
-      d.getDate(),
-      d.getMonth() + 1,
-      d.getFullYear()
-    );
-
     navigation.navigate('Profile');
   };
 

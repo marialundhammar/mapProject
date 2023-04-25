@@ -134,25 +134,6 @@ const ProfileScreen = ({ navigation }) => {
     completedBarTours.forEach((item) => {
       completedBarTitle.push(item.name);
     });
-
-    console.log('%%%%%%%', completedBarTitle);
-
-    /* 
-    arrayOfBarTours.forEach((item1) => {
-      const trofeeItem = completedBarTours.find(
-        (item2) => item2.title === item1.title
-      );
-      if (trofeeItem) {
-        console.log('####', item1);
-
-        trofeeUri.push(item1.trofee);
-        console.log('trofeUri####', trofeeUri);
-      }
-    });
-
-    console.log('trofeUriList', arrayOfBarTours[0].trofee);
-
-    return trofeeUri; */
   };
 
   useEffect(() => {

@@ -15,6 +15,16 @@ import { db } from '../firebase/firebase';
 const useGetEvents = (user) => {
   const [events, setEvents] = useState([]);
 
+  /*   await updateDoc(userDocRef, {
+    finishedTours: [
+      { date: new Date(), events: events, ...currentBarTour },
+      ...prevBarTours,
+    ],
+    currentBarTour: {
+      events: [],
+    },
+  }); */
+
   useEffect(() => {
     const userCollectionRef = collection(db, 'users');
     const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
@@ -23,8 +33,9 @@ const useGetEvents = (user) => {
       (querySnapshot) => {
         const userDoc = querySnapshot.docs[0];
         const data = userDoc.data();
-        if (data.events) {
-          setEvents(data.events);
+
+        if (data.currentBarTour && data.currentBarTour.events) {
+          setEvents(data.currentBarTour.events);
         }
       },
       (error) => {
