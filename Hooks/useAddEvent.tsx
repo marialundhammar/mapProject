@@ -33,7 +33,6 @@ const useAddEvent = (user) => {
     const querySnapshot = await getDocs(userQuery);
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-
       setEvents(data.events);
     });
   };

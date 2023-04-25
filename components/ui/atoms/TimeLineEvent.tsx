@@ -3,29 +3,40 @@ import { Text, View, Image, Pressable } from 'react-native';
 import styleTexts from '../../../styles/styleTexts';
 import styleComponents from '../../../styles/styleComponents';
 import { BarModal } from '../molecules/BarModal';
+import TimeLine from '../molecules/TimeLine';
 
 const TimeLineEvent = ({
   timeLineTitle,
   timeLineComment = '',
   timeLineImage = null,
   bartour = false,
+  timeLineEvents = [],
   navigation,
+  events = [],
+  date = '',
 }) => {
   const [showChallengeModal, setShowChallengeModal] = useState(false);
+  const [showBarTourEvents, setShowBarTourEvents] = useState(false);
 
   const handleNavigate = () => {
     if (bartour) {
-      navigation.navigate('Home');
+      setShowBarTourEvents(true);
     }
-
-    setChallengeModal({ visible: true, content: 'hejhejhej' });
-    console.log('timeLineImage', timeLineImage);
+    if (!bartour) {
+      setChallengeModal({ visible: true, content: 'hejhejhej' });
+    }
   };
 
   const [challengeModal, setChallengeModal] = useState({
     visible: false,
     content: null,
   });
+
+  const toggleEvents = () => {
+    console.log('toggle');
+    console.log('timeline', events);
+    setShowBarTourEvents(!showBarTourEvents);
+  };
 
   return (
     <View
@@ -51,7 +62,22 @@ const TimeLineEvent = ({
             </View>
           )}
 
-          {bartour && <View style={[styleTexts.bodyText]}></View>}
+          <Pressable
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+            onPress={toggleEvents}
+          >
+            {bartour && (
+              <View style={[styleTexts.bodyText]}>
+                {events && showBarTourEvents && (
+                  <TimeLine navigation={navigation} />
+                )}
+                <Text>hej</Text>
+              </View>
+            )}
+          </Pressable>
         </View>
       </Pressable>
 

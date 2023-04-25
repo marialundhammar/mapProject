@@ -37,6 +37,11 @@ const styleTexts = StyleSheet.create({
     fontSize: 20,
     color: '#FFD3D3',
   },
+  h5: {
+    fontFamily: 'Passion-One',
+    fontSize: 16,
+    color: '#FFD3D3',
+  },
 
   bodyText: {
     fontSize: 16,

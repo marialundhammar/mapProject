@@ -19,6 +19,7 @@ export type BarTourTypes = {
   numbersOfBars: number;
   bars: BarType[];
   description?: string;
+  trofee?: any;
 };
 
 interface CalculateDistanceFunctionType {
@@ -41,6 +42,18 @@ interface CurrentChallengeType {
   mediaType: string;
 }
 
+const enum Page {
+  Profile,
+  Rounds,
+  Trofees,
+}
+
+interface PageType {
+  profile: string;
+  rounds: string;
+  trofees: string;
+}
+
 export type ContextStoreType = {
   step: number;
   setStep: (number) => void;
@@ -60,4 +73,6 @@ export type ContextStoreType = {
   setCompletedChallenges: (challenges: CurrentChallengeType[]) => void;
   finishedTour: boolean;
   setFinishedTour: (boolean) => void;
+  pageProfile: string;
+  setPageProfile: (string) => void;
 };

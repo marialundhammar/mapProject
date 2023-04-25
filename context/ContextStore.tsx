@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import { arrayOfBarTours } from '../configs/barTours';
-import { ContextStoreType, BarType } from '../types/index';
+import { ContextStoreType, BarType, Page } from '../types/index';
 
 export const ContextStore = createContext<ContextStoreType | null>(null!);
 
@@ -25,6 +25,7 @@ const ContextStoreProvider = ({ children }) => {
   const [currentBar, setCurrentBar] = useState(null);
   const [completedChallenges, setCompletedChallenges] = useState([]);
   const [finishedTour, setFinishedTour] = useState(false);
+  const [pageProfile, setPageProfile] = useState('rounds');
 
   return (
     <ContextStore.Provider
@@ -47,6 +48,8 @@ const ContextStoreProvider = ({ children }) => {
         setCompletedChallenges,
         finishedTour,
         setFinishedTour,
+        pageProfile,
+        setPageProfile,
       }}
     >
       {children}

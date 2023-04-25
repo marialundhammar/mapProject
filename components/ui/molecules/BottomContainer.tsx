@@ -20,6 +20,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../../firebase/firebase';
 import useGetBarTours from '../../../Hooks/useGetBarTours';
+import useGetEvents from '../../../Hooks/useGetEvents';
 
 const BottomContainer = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +35,8 @@ const BottomContainer = ({ navigation }) => {
   const userCollectionRef = collection(db, 'users');
   const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
 
+  const events = useGetEvents(user);
+
   useEffect(() => {
     Animated.timing(animation, {
       toValue: 0,
@@ -43,25 +46,21 @@ const BottomContainer = ({ navigation }) => {
     }).start();
   }, [isOpen]);
 
-  const prevBarTours = useGetBarTours(user);
+  let prevBarTours = useGetBarTours(user);
   const d = new Date();
-
-  const fetchEvents = async () => {
-    const querySnapshot = await getDocs(userQuery);
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      setFinishedTour(data.finishedTours);
-    });
-  };
 
   const handleFinishedTour = async () => {
     const querySnapshot = await getDocs(userQuery);
     querySnapshot.forEach(async (doc) => {
       const userDocRef = doc.ref;
 
+      if (prevBarTours === undefined) {
+        prevBarTours = [];
+      }
+
       await updateDoc(userDocRef, {
         finishedTours: [
-          { date: new Date(), ...currentBarTour },
+          { date: new Date(), events: events, ...currentBarTour },
           ...prevBarTours,
         ],
       });

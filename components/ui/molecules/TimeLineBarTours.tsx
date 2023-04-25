@@ -8,19 +8,28 @@ import styleTexts from '../../../styles/styleTexts';
 import TimeLineEvent from '../atoms/TimeLineEvent';
 import Timer from '../atoms/Timer';
 
+interface barTourType {
+  title?: string;
+  visitedBars?: [];
+  date?: string;
+}
+
 const TimeLineBarTours = ({ navigation, bartours }) => {
   const [showAllEvents, setShowAllEvents] = useState(false);
 
   const handleOpenTimeLine = () => {
-    console.log('HAJJJ');
-
     setShowAllEvents(!showAllEvents);
   };
 
   const eventList = [];
   bartours.map((item) => {
+    console.log('items events', item.events);
+
     eventList.push({
       title: item.title,
+      visitedBars: item.bars.length,
+      date: item.date,
+      events: item.events,
     });
   });
 
@@ -37,16 +46,22 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
               <TimeLineEvent
                 timeLineTitle={item.title}
                 bartour={true}
+                timeLineEvents={item.events}
                 navigation={navigation}
+                events={item.events}
+                date={item.date}
               />
             ))
           : eventList
-              .slice(0, 3)
+              .slice(0, 2)
               .map((item, i) => (
                 <TimeLineEvent
                   timeLineTitle={item.title}
                   bartour={true}
+                  timeLineEvents={item.events}
                   navigation={navigation}
+                  events={item.events}
+                  date={item.date}
                 />
               ))}
       </View>

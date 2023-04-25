@@ -32,15 +32,19 @@ import { LogBox } from 'react-native';
 import styleComponents from '../../styles/styleComponents';
 import styleTexts from '../../styles/styleTexts';
 import TimeLineBarTours from '../ui/molecules/TimeLineBarTours';
+import ProfileNavigationBar from '../ui/molecules/ProfileNavigationBar';
+import { arrayOfBarTours } from '../../configs/barTours';
 
 const ProfileScreen = ({ navigation }) => {
   const navigateTo = 'Map';
-  const { user, finishedTour } = useContext(ContextStore);
+  const { user, finishedTour, pageProfile } = useContext(ContextStore);
   const [photoUrls, setPhotoUrls] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
   const photos = [];
   const [lightboxImageIndex, setLightboxImageIndex] = useState(null);
   const [completedBarTours, setCompletedBarTours] = useState([]);
+  const [completedBarTourstrofee, setCompletedBarToursTrofee] = useState([]);
+  const trofeeList = [];
 
   const handleLogOut = () => {
     const auth = getAuth();
@@ -78,7 +82,6 @@ const ProfileScreen = ({ navigation }) => {
           console.log('Error: ', error);
         }
       );
-      console.log('completed tours', completedBarTours.length);
       return unsubscribe;
     }, [user]);
   };
@@ -94,6 +97,7 @@ const ProfileScreen = ({ navigation }) => {
       />
     );
   };
+
   const getAllImages = async () => {
     const listRef = ref(storage, `images/${user.email}`);
 
@@ -119,9 +123,44 @@ const ProfileScreen = ({ navigation }) => {
     }
   };
 
+  const getTrofeeUri = () => {
+    const arrayOfBarTitle = [];
+    const completedBarTitle = [];
+
+    arrayOfBarTours.forEach((item) => {
+      arrayOfBarTitle.push(item.title);
+    });
+
+    completedBarTours.forEach((item) => {
+      completedBarTitle.push(item.name);
+    });
+
+    console.log('%%%%%%%', completedBarTitle);
+
+    /* 
+    arrayOfBarTours.forEach((item1) => {
+      const trofeeItem = completedBarTours.find(
+        (item2) => item2.title === item1.title
+      );
+      if (trofeeItem) {
+        console.log('####', item1);
+
+        trofeeUri.push(item1.trofee);
+        console.log('trofeUri####', trofeeUri);
+      }
+    });
+
+    console.log('trofeUriList', arrayOfBarTours[0].trofee);
+
+    return trofeeUri; */
+  };
+
   useEffect(() => {
     getAllImages();
+    getTrofeeUri();
   }, []);
+
+  const displayedTitles = [];
 
   return (
     <View
@@ -139,60 +178,114 @@ const ProfileScreen = ({ navigation }) => {
         <ScrollView horizontal={false}>
           <TopHeader navigation={navigation} showBackButton={false} />
           <ProfileHeader />
+          <ProfileNavigationBar />
           <View
             style={{
               width: '95%',
               alignItems: 'center',
               flex: 1,
-
               justifyContent: 'center',
             }}
           >
-            <>
-              <TimeLineBarTours
-                navigation={navigation}
-                bartours={completedBarTours}
-              />
-            </>
-            <>
-              {loading ? (
-                <ActivityIndicator size="large" color="#000" /> // Show loading indicator while images are being fetched
-              ) : photoUrls.length > 0 ? (
-                <View>
-                  <View style={styleComponents.imageContainer}>
-                    {photoUrls.reverse().map((photoUrl, i) => (
-                      <Lightbox
-                        key={i}
-                        onOpen={() => handleImagePress(i)}
-                        renderContent={() => renderLightboxContent(i)}
-                        style={{ padding: 2 }}
-                      >
-                        <Image
-                          key={i}
-                          source={{ uri: photoUrl }}
-                          style={styleComponents.imageSmall}
-                        />
-                      </Lightbox>
-                    ))}
+            {pageProfile === 'rounds' && (
+              <>
+                <TimeLineBarTours
+                  navigation={navigation}
+                  bartours={completedBarTours}
+                />
+
+                <>
+                  {loading ? (
+                    <ActivityIndicator size="large" color="#000" /> // Show loading indicator while images are being fetched
+                  ) : photoUrls.length > 0 ? (
+                    <View>
+                      <View style={styleComponents.imageContainer}>
+                        {photoUrls.reverse().map((photoUrl, i) => (
+                          <Lightbox
+                            key={i}
+                            onOpen={() => handleImagePress(i)}
+                            renderContent={() => renderLightboxContent(i)}
+                            style={{ padding: 2 }}
+                          >
+                            <Image
+                              key={i}
+                              source={{ uri: photoUrl }}
+                              style={styleComponents.imageSmall}
+                            />
+                          </Lightbox>
+                        ))}
+                      </View>
+                    </View>
+                  ) : (
+                    <Text>No photos found</Text>
+                  )}
+                </>
+              </>
+            )}
+
+            {pageProfile === 'profile' && (
+              <>
+                <Button
+                  navigation={navigation}
+                  navigateTo={'Home'}
+                  buttonText={'GÅ TILL hem'}
+                />
+
+                <Pressable
+                  style={styleButtons.buttonDefaultBorder}
+                  onPress={handleLogOut}
+                >
+                  <Text>Logga ut</Text>
+                </Pressable>
+              </>
+            )}
+
+            {/*         {pageProfile === 'trofees' && (
+              <>
+                {completedBarTours.map((item, i) => (
+                  <View>
+                    <Text>{item.title}</Text>
+
+                    <Image source={arrayOfBarTours[i].trofee} />
                   </View>
-                </View>
-              ) : (
-                <Text>No photos found</Text>
-              )}
-            </>
-            <View>
-              <Button
-                navigation={navigation}
-                navigateTo={'Home'}
-                buttonText={'GÅ TILL hem'}
-              />
-            </View>
-            <Pressable
-              style={styleButtons.buttonDefaultBorder}
-              onPress={handleLogOut}
-            >
-              <Text>Logga ut</Text>
-            </Pressable>
+                ))}
+                <Text>trofees</Text>
+              </>
+            )} */}
+
+            {pageProfile === 'trofees' && (
+              <>
+                {completedBarTours
+                  .filter((item) =>
+                    arrayOfBarTours.some(
+                      (barTour) => barTour.title === item.title
+                    )
+                  )
+                  .map((item, i) => {
+                    const isTitleDisplayed = displayedTitles.includes(
+                      item.title
+                    );
+                    if (!isTitleDisplayed) {
+                      displayedTitles.push(item.title);
+                      return (
+                        <View key={i}>
+                          <Text>{item.title}</Text>
+                          <Image
+                            source={
+                              arrayOfBarTours.find(
+                                (barTour) => barTour.title === item.title
+                              ).trofee
+                            }
+                          />
+                        </View>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+                <Text>trofees</Text>
+              </>
+            )}
           </View>
         </ScrollView>
       </>

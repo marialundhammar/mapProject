@@ -7,6 +7,7 @@ import BarScreen from './components/screens/BarScreen';
 import RegisterScreen from './components/screens/RegisterScreen';
 import LogInScreen from './components/screens/LogInScreen';
 import OnboardingScreen from './components/screens/OnboardingScreen';
+import BarTourTimelineScreen from './components/screens/BarTourTimelineScreen';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import ChallengeScreen from './components/screens/ChallengeScreen';
@@ -101,6 +102,11 @@ export default function App() {
           <Stack.Screen
             name="Profile"
             component={ProfileScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="BarTourTimelineScreen"
+            component={BarTourTimelineScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

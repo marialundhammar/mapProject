@@ -8,7 +8,7 @@ import styleTexts from '../../../styles/styleTexts';
 
 const ProfileHeader = () => {
   const { user } = useContext(ContextStore);
-  const [username, setUsername] = useState('');
+  const [userData, setUserData] = useState({ username: '', finishedTours: [] });
 
   const getUserInfo = async (user) => {
     const userCollectionRef = collection(db, 'users');
@@ -19,10 +19,12 @@ const ProfileHeader = () => {
       const data = doc.data();
 
       if (data.username) {
-        setUsername(data.username);
+        setUserData({
+          username: data.username,
+          finishedTours: data.finishedTours,
+        });
       }
     });
-    console.log('usernmae', username);
   };
 
   getUserInfo(user);
@@ -31,14 +33,17 @@ const ProfileHeader = () => {
       <View
         style={{
           flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <View
           style={{
-            width: 120,
+            width: '30%',
             backgroundColor: 'grey',
-            height: 140,
+            height: '100%',
             borderRadius: 12,
+            marginRight: 4,
           }}
         ></View>
 
@@ -50,16 +55,16 @@ const ProfileHeader = () => {
             }}
           >
             <Text style={styleTexts.h3}> Hallå där</Text>
-            <Text style={styleTexts.h2}> {username}</Text>
+            <Text style={styleTexts.h2}> {userData.username}</Text>
           </View>
 
-          <View>
-            <Text style={styleTexts.h4}>
-              {' '}
-              👉 Du har totalt besökt {username}
+          <View style={{ width: '90%' }}>
+            <Text style={styleTexts.h5}>
+              👉 Du har totalt genomfört {userData.finishedTours.length}{' '}
+              barrundor
             </Text>
-            <Text style={styleTexts.h4}>👉 Genomfört {username}</Text>
-            <Text style={styleTexts.h4}>👉 Samlat på dig {username}</Text>
+            <Text style={styleTexts.h5}>👉 Genomfört x antal utmaningar </Text>
+            <Text style={styleTexts.h5}>👉 Samlat på dig x antal troféer </Text>
           </View>
         </View>
       </View>
