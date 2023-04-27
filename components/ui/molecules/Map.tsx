@@ -120,8 +120,6 @@ const Map = ({ navigation }) => {
     console.log('distance', closestBar.distance, currentBar);
 
     if (closestBar.distance < 0.4 && currentBar === null) {
-      console.log('hejehje');
-
       setBarModal({ visible: true, content: closestBar });
       //sendNotificationOnBar();
       //setShowNotification(true);
@@ -165,7 +163,7 @@ const Map = ({ navigation }) => {
         />
       )}
 
-      <View style={{ flex: 1 }}>
+      <View style={!onBar ? { flex: 1 } : { flex: 0.8 }}>
         <MapView
           style={styleMap.container}
           customMapStyle={mapStyle}
@@ -192,7 +190,7 @@ const Map = ({ navigation }) => {
                 tooltip={true}
                 style={{
                   backgroundColor: '#E68383',
-                  padding: 10,
+                  padding: 6,
                   margin: 0,
                   borderRadius: 5,
                   borderWidth: 0,

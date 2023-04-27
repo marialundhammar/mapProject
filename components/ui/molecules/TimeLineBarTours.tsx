@@ -3,6 +3,7 @@ import { Pressable, View, Text } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
 import useGetEvents from '../../../Hooks/useGetEvents';
 import useEvents from '../../../Hooks/useGetEvents';
+import styleButtons from '../../../styles/styleButtons';
 import styleComponents from '../../../styles/styleComponents';
 import styleTexts from '../../../styles/styleTexts';
 import TimeLineEvent from '../atoms/TimeLineEvent';
@@ -26,7 +27,7 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
     console.log('items events', item.events);
 
     eventList.push({
-      title: item.title,
+      title: `Runda:  ${item.title}`,
       visitedBars: item.bars.length,
       date: item.date,
       events: item.events,
@@ -64,6 +65,15 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
                   date={item.date}
                 />
               ))}
+      </View>
+
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Pressable
+          onPress={handleOpenTimeLine}
+          style={styleButtons.buttonDefaultBorder}
+        >
+          {!showAllEvents ? <Text>Se fler barrundor</Text> : <Text>Stäng</Text>}
+        </Pressable>
       </View>
     </Pressable>
   );

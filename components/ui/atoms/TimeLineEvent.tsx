@@ -19,12 +19,9 @@ const TimeLineEvent = ({
   const [showBarTourEvents, setShowBarTourEvents] = useState(false);
 
   const handleNavigate = () => {
-    if (bartour) {
-      setShowBarTourEvents(true);
-    }
-    if (!bartour) {
-      setChallengeModal({ visible: true, content: 'hejhejhej' });
-    }
+    console.log('bartour', bartour);
+
+    setChallengeModal({ visible: true, content: 'hejhejhej' });
   };
 
   const [challengeModal, setChallengeModal] = useState({
@@ -32,11 +29,7 @@ const TimeLineEvent = ({
     content: null,
   });
 
-  console.log('EVENTS', events);
-
   const toggleEvents = () => {
-    console.log('toggle');
-    console.log('timeline', events);
     setShowBarTourEvents(!showBarTourEvents);
   };
 
@@ -48,8 +41,8 @@ const TimeLineEvent = ({
     >
       <Text style={[styleTexts.h4, { padding: 4 }]}>{timeLineTitle}</Text>
 
-      <Pressable onPress={handleNavigate}>
-        <View style={{ flexDirection: 'row', padding: 4 }}>
+      <View style={{ flexDirection: 'row', padding: 4 }}>
+        <Pressable onPress={handleNavigate}>
           {timeLineImage && (
             <Image
               source={{ uri: timeLineImage }}
@@ -63,28 +56,30 @@ const TimeLineEvent = ({
               </Text>
             </View>
           )}
+        </Pressable>
 
-          <Pressable
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-            onPress={toggleEvents}
-          >
-            {bartour && (
-              <View style={[styleTexts.bodyText]}>
-                {events && showBarTourEvents && (
+        <Pressable onPress={toggleEvents}>
+          {bartour && (
+            <View style={{ borderWidth: 3, width: '100%' }}>
+              {events && showBarTourEvents ? (
+                <View>
                   <TimeLine
                     navigation={navigation}
                     events={events}
                     profilePage={true}
                   />
-                )}
-              </View>
-            )}
-          </Pressable>
-        </View>
-      </Pressable>
+                </View>
+              ) : (
+                <View
+                  style={{ justifyContent: 'center', alignItems: 'center' }}
+                >
+                  <Text>Visa kvällens bravader tidslinje</Text>
+                </View>
+              )}
+            </View>
+          )}
+        </Pressable>
+      </View>
 
       <BarModal
         header={timeLineTitle}

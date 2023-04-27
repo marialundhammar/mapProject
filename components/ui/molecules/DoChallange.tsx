@@ -13,7 +13,7 @@ const DoChallenge = ({ navigation }) => {
     <View
       style={{
         borderWidth: 0.4,
-        borderColor: '#FFD3D3',
+        backgroundColor: '#4F5487',
         borderRadius: 8,
         marginBottom: 16,
         marginTop: 16,

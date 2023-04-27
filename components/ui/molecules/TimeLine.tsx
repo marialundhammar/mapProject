@@ -39,34 +39,51 @@ const TimeLine = ({ navigation, events, profilePage }) => {
 
   return (
     <Pressable
-      style={styleComponents.barContentContainer}
+      style={
+        eventList.length > 0
+          ? styleComponents.barContentContainer
+          : { marginTop: 20 }
+      }
       onPress={handleOpenTimeLine}
     >
       <View>
-        <Text style={styleTexts.h3}>Tidslinjen </Text>
-
-        {showAllEvents
-          ? eventList.map((item, i) => (
-              <TimeLineEvent
-                timeLineTitle={item.title}
-                timeLineComment={item.comment}
-                timeLineImage={item.image}
-                key={i}
-                navigation={navigation}
-              />
-            ))
-          : eventList
-              .slice(0, 3)
-              .map((item, i) => (
-                <TimeLineEvent
-                  timeLineTitle={item.title}
-                  timeLineComment={item.comment}
-                  timeLineImage={item.image}
-                  key={i}
-                  navigation={navigation}
-                />
-              ))}
+        {eventList.length > 0 ? (
+          <>
+            <Text style={styleTexts.h3}>Tidslinjen </Text>
+            {showAllEvents
+              ? eventList.map((item, i) => (
+                  <TimeLineEvent
+                    timeLineTitle={item.title}
+                    timeLineComment={item.comment}
+                    timeLineImage={item.image}
+                    key={i}
+                    navigation={navigation}
+                  />
+                ))
+              : eventList
+                  .slice(0, 3)
+                  .map((item, i) => (
+                    <TimeLineEvent
+                      timeLineTitle={item.title}
+                      timeLineComment={item.comment}
+                      timeLineImage={item.image}
+                      key={i}
+                      navigation={navigation}
+                    />
+                  ))}
+          </>
+        ) : (
+          <>
+            <Text style={styleTexts.h4}> Inga event gjorda ännu ..</Text>
+          </>
+        )}
       </View>
+
+      {showAllEvents && (
+        <Pressable onPress={handleOpenTimeLine}>
+          <Text> Stäng</Text>
+        </Pressable>
+      )}
     </Pressable>
   );
 };

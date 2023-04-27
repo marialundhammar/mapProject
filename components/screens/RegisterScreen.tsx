@@ -7,6 +7,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase/firebase';
 import styleScreens from '../../styles/styleScreens';
 import { LinearGradient } from 'expo-linear-gradient';
+import { profileImages } from '../../configs/profileImage';
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ const RegisterScreen = ({ navigation }) => {
   const [errorMessage, setErrorMessage] = useState('hej');
   const [emailOk, setEmailOk] = useState(false);
   const [usernameOk, setUsernameOk] = useState(false);
+  const [profileImage, setProfileImage] = useState('');
 
   const resetForm = () => {
     setEmail('');
@@ -42,6 +44,8 @@ const RegisterScreen = ({ navigation }) => {
     }
   };
 
+  console.log('profileImages', profileImages);
+
   const signUpUser = async (email, password, username) => {
     await validateEmail(email);
 
@@ -61,6 +65,7 @@ const RegisterScreen = ({ navigation }) => {
         uid: auth.currentUser.uid,
         username: username,
         email: email,
+        profileImage: profileImages[0].title,
       });
 
       await resetForm();

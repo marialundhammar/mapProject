@@ -1,14 +1,19 @@
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useContext, useState } from 'react';
-import { View, Text, Pressable, ScrollView } from 'react-native';
+import { View, Text, Pressable, ScrollView, Image } from 'react-native';
 import mapStyle from '../../../assets/mapStyle';
 import { ContextStore } from '../../../context/ContextStore';
 import { db } from '../../../firebase/firebase';
+import styleComponents from '../../../styles/styleComponents';
 import styleTexts from '../../../styles/styleTexts';
 
-const ProfileHeader = () => {
+const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
   const { user } = useContext(ContextStore);
-  const [userData, setUserData] = useState({ username: '', finishedTours: [] });
+  const [userData, setUserData] = useState({
+    username: '',
+    finishedTours: [],
+    profileImage: '',
+  });
 
   const getUserInfo = async (user) => {
     const userCollectionRef = collection(db, 'users');
@@ -22,6 +27,7 @@ const ProfileHeader = () => {
         setUserData({
           username: data.username,
           finishedTours: data.finishedTours,
+          profileImage: imagePath,
         });
       }
     });
@@ -35,17 +41,24 @@ const ProfileHeader = () => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
+          borderWidth: 3,
+          borderColor: 'pink',
+          width: '100%',
         }}
       >
         <View
           style={{
             width: '30%',
-            backgroundColor: 'grey',
-            height: '100%',
-            borderRadius: 12,
-            marginRight: 4,
+            height: '90%',
+            borderRadius: 70,
+            marginRight: 12,
           }}
-        ></View>
+        >
+          <Image
+            source={require('../../../assets/pofileImages/livstrom.png')}
+            style={{ width: 120, height: 110, marginTop: 10 }}
+          />
+        </View>
 
         <View>
           <View
@@ -63,8 +76,16 @@ const ProfileHeader = () => {
               👉 Du har totalt genomfört {userData.finishedTours.length}{' '}
               barrundor
             </Text>
-            <Text style={styleTexts.h5}>👉 Genomfört x antal utmaningar </Text>
-            <Text style={styleTexts.h5}>👉 Samlat på dig x antal troféer </Text>
+            {amountOfTrofees.length > 1 ? (
+              <Text style={styleTexts.h5}>
+                👉 Samlat på dig {amountOfTrofees.length} stycken troféer{' '}
+              </Text>
+            ) : (
+              <Text style={styleTexts.h5}>
+                {' '}
+                👉 Samlat på dig en trofé hittills
+              </Text>
+            )}
           </View>
         </View>
       </View>

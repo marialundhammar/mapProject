@@ -25,6 +25,7 @@ const ChallengeScreen = ({ navigation }) => {
     currentBar,
     completedChallenges,
     setCompletedChallenges,
+    setOnProfile,
   } = useContext(ContextStore);
   const [type, setType] = useState(CameraType.back);
   const [turnOnCamera, setTurnOnCamera] = useState(false);
@@ -35,7 +36,6 @@ const ChallengeScreen = ({ navigation }) => {
     useState(null);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [textInputValue, setTextInputValue] = useState('');
-  const [photoUrls, setPhotoUrls] = useState([]);
 
   const { addEvents } = useAddEvent(user);
 
@@ -71,9 +71,11 @@ const ChallengeScreen = ({ navigation }) => {
     }).then((snapshot) => {});
     const url = await getDownloadURL(storageRef);
 
+    console.log('URL', url);
+
     await setImage(url);
 
-    addEvents('challenge', currentBar, textInputValue, image);
+    addEvents('challenge', currentBar, textInputValue, url);
     setIsSaveDisabled(true);
     const newCompletedChallenges = [...completedChallenges, currentChallenge];
     await setCompletedChallenges(newCompletedChallenges);

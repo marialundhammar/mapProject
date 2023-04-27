@@ -34,17 +34,19 @@ import styleTexts from '../../styles/styleTexts';
 import TimeLineBarTours from '../ui/molecules/TimeLineBarTours';
 import ProfileNavigationBar from '../ui/molecules/ProfileNavigationBar';
 import { arrayOfBarTours } from '../../configs/barTours';
+import { profileImages } from '../../configs/profileImage';
 
 const ProfileScreen = ({ navigation }) => {
   const navigateTo = 'Map';
   const { user, finishedTour, pageProfile } = useContext(ContextStore);
   const [photoUrls, setPhotoUrls] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const photos = [];
   const [lightboxImageIndex, setLightboxImageIndex] = useState(null);
   const [completedBarTours, setCompletedBarTours] = useState([]);
   const [completedBarTourstrofee, setCompletedBarToursTrofee] = useState([]);
   const trofeeList = [];
+  const [profileImage, setProfileImage] = useState('');
 
   const handleLogOut = () => {
     const auth = getAuth();
@@ -77,6 +79,10 @@ const ProfileScreen = ({ navigation }) => {
           if (data.finishedTours) {
             setCompletedBarTours(data.finishedTours);
           }
+
+          if (data.profileImage) {
+            setProfileImage(data.profileImage);
+          }
         },
         (error) => {
           console.log('Error: ', error);
@@ -97,6 +103,7 @@ const ProfileScreen = ({ navigation }) => {
       />
     );
   };
+  const displayedTitles = [];
 
   const getAllImages = async () => {
     const listRef = ref(storage, `images/${user.email}`);
@@ -141,14 +148,22 @@ const ProfileScreen = ({ navigation }) => {
     getTrofeeUri();
   }, []);
 
-  const displayedTitles = [];
+  let isTitleDisplayed = false;
+
+  const getProfileImage = () => {
+    const imagePath = profileImages.find((item) => item.title === profileImage);
+
+    console.log('IMAGE', imagePath);
+
+    return imagePath;
+  };
 
   return (
     <View
       style={[
         {
           height: '100%',
-          width: '95%',
+          width: '100%',
           justifyContent: 'center',
           alignItems: 'center',
         },
@@ -156,20 +171,17 @@ const ProfileScreen = ({ navigation }) => {
       ]}
     >
       <>
+        <TopHeader navigation={navigation} showBackButton={false} />
+        <ProfileHeader
+          amountOfTrofees={displayedTitles}
+          imagePath={() => getProfileImage()}
+        />
+
         <ScrollView horizontal={false}>
-          <TopHeader navigation={navigation} showBackButton={false} />
-          <ProfileHeader />
           <ProfileNavigationBar />
-          <View
-            style={{
-              width: '95%',
-              alignItems: 'center',
-              flex: 1,
-              justifyContent: 'center',
-            }}
-          >
+          <View style={{}}>
             {pageProfile === 'rounds' && (
-              <>
+              <View style={{ alignItems: 'center', width: '100%' }}>
                 <TimeLineBarTours
                   navigation={navigation}
                   bartours={completedBarTours}
@@ -177,10 +189,30 @@ const ProfileScreen = ({ navigation }) => {
 
                 <>
                   {loading ? (
-                    <ActivityIndicator size="large" color="#000" /> // Show loading indicator while images are being fetched
+                    <ActivityIndicator size="large" color="#000" />
                   ) : photoUrls.length > 0 ? (
-                    <View>
-                      <View style={styleComponents.imageContainer}>
+                    <View
+                      style={{
+                        alignContent: 'center',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginTop: 20,
+                      }}
+                    >
+                      <View>
+                        <Text style={styleTexts.h2}>Tidigare tagna bilder</Text>
+                      </View>
+                      <View
+                        style={{
+                          alignContent: 'center',
+                          alignItems: 'center',
+                          justifyContent: 'space-around',
+                          flexDirection: 'row',
+                          flexWrap: 'wrap',
+                          padding: 12,
+                          marginTop: 20,
+                        }}
+                      >
                         {photoUrls.reverse().map((photoUrl, i) => (
                           <Lightbox
                             key={i}
@@ -198,74 +230,96 @@ const ProfileScreen = ({ navigation }) => {
                       </View>
                     </View>
                   ) : (
-                    <Text>No photos found</Text>
+                    <Text style={styleTexts.h4}>
+                      Inga foton tagna här ännu :({' '}
+                    </Text>
                   )}
                 </>
-              </>
+              </View>
             )}
 
             {pageProfile === 'profile' && (
-              <>
+              <View
+                style={{
+                  alignItems: 'center',
+                  alignContent: 'center',
+                  height: '100%',
+
+                  flexDirection: 'column-reverse',
+                }}
+              >
                 <Button
                   navigation={navigation}
                   navigateTo={'Home'}
-                  buttonText={'GÅ TILL hem'}
+                  buttonText={'NY BARRUNDA'}
                 />
 
                 <Pressable
                   style={styleButtons.buttonDefaultBorder}
                   onPress={handleLogOut}
                 >
-                  <Text>Logga ut</Text>
+                  <Text style={styleTexts.h4}>Logga ut</Text>
                 </Pressable>
-              </>
+              </View>
             )}
 
-            {/*         {pageProfile === 'trofees' && (
-              <>
-                {completedBarTours.map((item, i) => (
-                  <View>
-                    <Text>{item.title}</Text>
-
-                    <Image source={arrayOfBarTours[i].trofee} />
-                  </View>
-                ))}
-                <Text>trofees</Text>
-              </>
-            )} */}
-
             {pageProfile === 'trofees' && (
-              <>
-                {completedBarTours
-                  .filter((item) =>
-                    arrayOfBarTours.some(
-                      (barTour) => barTour.title === item.title
+              <View
+                style={{
+                  alignItems: 'center',
+                  flex: 1,
+                  paddingTop: 42,
+
+                  width: '100%',
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    margin: 8,
+                  }}
+                >
+                  {completedBarTours
+                    .filter((item) =>
+                      arrayOfBarTours.some(
+                        (barTour) => barTour.title === item.title
+                      )
                     )
-                  )
-                  .map((item, i) => {
-                    const isTitleDisplayed = displayedTitles.includes(
-                      item.title
-                    );
-                    if (!isTitleDisplayed) {
-                      displayedTitles.push(item.title);
-                      return (
-                        <View key={i}>
-                          <Text>{item.title}</Text>
-                          <Image
-                            source={
-                              arrayOfBarTours.find(
-                                (barTour) => barTour.title === item.title
-                              ).trofee
-                            }
-                          />
-                        </View>
+                    .map((item, i) => {
+                      const isTitleDisplayed = displayedTitles.includes(
+                        item.title
                       );
-                    } else {
-                      return null;
-                    }
-                  })}
-                <Text>trofees</Text>
-              </>
+                      if (!isTitleDisplayed) {
+                        displayedTitles.push(item.title);
+                        return (
+                          <View
+                            style={{
+                              flexDirection: 'column',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              margin: 14,
+                            }}
+                            key={i}
+                          >
+                            <Image
+                              style={styleComponents.imageSmall}
+                              source={
+                                arrayOfBarTours.find(
+                                  (barTour) => barTour.title === item.title
+                                ).trofee
+                              }
+                            />
+                            <Text style={styleTexts.h4}>{item.title}</Text>
+                          </View>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
+                </View>
+              </View>
             )}
           </View>
         </ScrollView>

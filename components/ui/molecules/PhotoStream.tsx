@@ -83,7 +83,9 @@ const PhotoStream = ({ path }) => {
           </View>
         </View>
       ) : (
-        <Text>No photos found</Text>
+        <View>
+          <Text style={styleTexts.h2}>Första gången här? skärpning</Text>
+        </View>
       )}
     </>
   );

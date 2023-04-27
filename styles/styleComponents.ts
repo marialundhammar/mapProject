@@ -20,6 +20,7 @@ const styleModals = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyCOntent: 'center',
+    alignItems: 'center',
   },
 
   imageContainerBig: {
@@ -30,24 +31,25 @@ const styleModals = StyleSheet.create({
   imageSmall: {
     width: 100,
     height: 100,
-    margin: 4,
-    borderRadius: 2,
+    borderRadius: 6,
+    margin: 2,
   },
 
   bottomContainerOpen: {
-    height: 400,
+    paddingBottom: 20,
+    justifyContent: 'center',
+    width: '100%',
     padding: 8,
   },
 
   bottomContainer: {
+    justifyContent: 'center',
+    width: '100%',
     padding: 8,
-    paddingBottom: 60,
-    height: 260,
   },
 
   centered: {
     alignItems: 'center',
-    padding: 8,
   },
 
   start: {
@@ -82,8 +84,6 @@ const styleModals = StyleSheet.create({
   },
 
   barContentContainer: {
-    borderWidth: 0.4,
-    borderColor: '#FFD3D3',
     width: '95%',
     borderRadius: 8,
     marginBottom: 16,
@@ -100,6 +100,8 @@ const styleModals = StyleSheet.create({
     padding: 16,
     width: '100%',
     paddingTop: 46,
+
+    borderColor: 'pink',
   },
   leftComponent: {
     flexDirection: 'column',
@@ -148,6 +150,17 @@ const styleModals = StyleSheet.create({
     marginTop: 8,
     zIndex: -10,
     borderColor: '#445385',
+    borderWidth: 2,
+    paddingBottom: 10,
+  },
+
+  cardStyleBar: {
+    width: '100%',
+    backgroundColor: '#445385',
+    borderRadius: 10,
+    marginTop: 8,
+    zIndex: -10,
+
     borderWidth: 2,
     paddingBottom: 10,
   },

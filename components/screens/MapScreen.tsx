@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
+import { Animated, Dimensions, View } from 'react-native';
 import Map from '../ui/molecules/Map';
 import { BarModal } from '../ui/molecules/BarModal';
 import { arrayOfBars } from '../../configs/bars';
@@ -10,6 +10,7 @@ import FakeUserLocationButton from '../ui/atoms/FakeButtons';
 import DistanceBanner from '../ui/atoms/DistanceBanner';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
+import styleComponents from '../../styles/styleComponents';
 
 const MapScreen = ({ navigation }) => {
   return (
@@ -17,9 +18,18 @@ const MapScreen = ({ navigation }) => {
       <TopHeader navigation={navigation} showBackButton={true} />
 
       <View style={styleScreens.mapScreen}>
-        <Map navigation={navigation} />
         <FakeUserLocationButton />
-        <BottomContainer navigation={navigation} />
+        <View style={{ flex: 1 }}>
+          <Map navigation={navigation} />
+          <View
+            style={{
+              flex: 0,
+              justifyContent: 'center',
+            }}
+          >
+            <BottomContainer navigation={navigation} />
+          </View>
+        </View>
       </View>
     </View>
   );

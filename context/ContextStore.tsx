@@ -6,7 +6,7 @@ export const ContextStore = createContext<ContextStoreType | null>(null!);
 
 const ContextStoreProvider = ({ children }) => {
   const [step, setStep] = useState(1);
-  const [user, setUser] = useState({ email: '', uid: 0 });
+  const [user, setUser] = useState({ email: '', uid: 0, profileImage: '' });
   const [currentBarTour, setCurrentBarTour] = useState(arrayOfBarTours[1]);
   const [onBar, setOnBar] = useState(true);
   const [userLocation, setUserLocation] = useState({
@@ -26,6 +26,7 @@ const ContextStoreProvider = ({ children }) => {
   const [completedChallenges, setCompletedChallenges] = useState([]);
   const [finishedTour, setFinishedTour] = useState(false);
   const [pageProfile, setPageProfile] = useState('rounds');
+  const [onProfile, setOnProfile] = useState(false);
 
   return (
     <ContextStore.Provider
@@ -50,6 +51,8 @@ const ContextStoreProvider = ({ children }) => {
         setFinishedTour,
         pageProfile,
         setPageProfile,
+        onProfile,
+        setOnProfile,
       }}
     >
       {children}

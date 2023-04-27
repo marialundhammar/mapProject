@@ -54,10 +54,15 @@ interface PageType {
   trofees: string;
 }
 
+interface ProfileImageType {
+  title: string;
+  profileImages: any;
+}
+
 export type ContextStoreType = {
   step: number;
   setStep: (number) => void;
-  user: { email: string; uid: number };
+  user: { email: string; uid: number; profileImage: string };
   setUser: (number) => void;
   currentBarTour: BarTourTypes;
   setCurrentBarTour: (object) => void;
@@ -75,4 +80,6 @@ export type ContextStoreType = {
   setFinishedTour: (boolean) => void;
   pageProfile: string;
   setPageProfile: (string) => void;
+  onProfile: boolean;
+  setOnProfile: (boolean) => void;
 };

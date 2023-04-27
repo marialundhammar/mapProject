@@ -66,21 +66,23 @@ const BarScreen = ({ navigation }) => {
           <ScrollView>
             <View
               style={{
-                alignItems: 'center',
                 flex: 1,
                 paddingTop: 42,
-                justifyContent: 'center',
                 width: '100%',
               }}
             >
               <BarContent />
 
-              <TimeLine navigation={navigation} />
+              <TimeLine
+                navigation={navigation}
+                events={undefined}
+                profilePage={undefined}
+              />
 
               {showChallenge && (
                 <View style={{ paddingTop: 24, width: '95%' }}>
-                  <Text style={styleTexts.h4}>
-                    Medan du väntar på nästa utmaning, gör denna?{' '}
+                  <Text style={styleTexts.h3}>
+                    Mellan ölklunkarna, gör en utmaning?{' '}
                   </Text>
                   <DoChallenge navigation={navigation} />
                 </View>
@@ -97,7 +99,15 @@ const BarScreen = ({ navigation }) => {
               </View>
             </View>
           </ScrollView>
-          <View style={{ alignItems: 'center', padding: 12 }}>
+          <View
+            style={{
+              alignItems: 'center',
+              paddingBottom: 32,
+              paddingTop: 2,
+              justifyContent: 'center',
+              width: '100%',
+            }}
+          >
             <Button
               navigation={navigation}
               navigateTo={'Map'}

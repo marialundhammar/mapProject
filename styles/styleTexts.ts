@@ -29,7 +29,6 @@ const styleTexts = StyleSheet.create({
     fontFamily: 'Passion-One',
     fontSize: 24,
     color: '#1B274A',
-    textDecorationLine: 'underline',
   },
 
   h4: {
@@ -41,6 +40,11 @@ const styleTexts = StyleSheet.create({
     fontFamily: 'Passion-One',
     fontSize: 16,
     color: '#FFD3D3',
+  },
+  h5Dark: {
+    fontFamily: 'Passion-One',
+    fontSize: 16,
+    color: '#1B274A',
   },
 
   bodyText: {
