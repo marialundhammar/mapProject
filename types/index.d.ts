@@ -20,6 +20,7 @@ export type BarTourTypes = {
   bars: BarType[];
   description?: string;
   trofee?: any;
+  area: string;
 };
 
 interface CalculateDistanceFunctionType {

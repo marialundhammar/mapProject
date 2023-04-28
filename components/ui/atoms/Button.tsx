@@ -1,6 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Pressable, Text } from 'react-native';
+import { ContextStore } from '../../../context/ContextStore';
+import useAddEvent from '../../../Hooks/useAddEvent';
 import styleButtons from '../../../styles/styleButtons';
 
 interface NavigationButtonType {
@@ -18,9 +20,15 @@ const Button = ({
   isOpen,
   onStartedRound,
 }: NavigationButtonType) => {
+  const { user, currentBarTour } = useContext(ContextStore);
+
+  const { addEvents } = useAddEvent(user);
+
   const handlePressable = () => {
     onStartedRound();
     onIsOpen();
+
+    addEvents('started');
   };
 
   return (

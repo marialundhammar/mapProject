@@ -41,9 +41,8 @@ const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          borderWidth: 3,
-          borderColor: 'pink',
           width: '100%',
+          paddingBottom: 12,
         }}
       >
         <View

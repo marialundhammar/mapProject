@@ -59,6 +59,7 @@ export default function HomeScreen({ navigation }) {
               navigation={navigation}
               text={group.title}
               numberOfBars={group.numbersOfBars}
+              area={group.area}
               key={i}
             />
           ))}

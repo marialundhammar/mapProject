@@ -7,14 +7,19 @@ import ProfileNavigation from '../atoms/ProfileNavigation';
 import BarMapNavigation from '../atoms/BarMapNavigation';
 import { ContextStore } from '../../../context/ContextStore';
 
-const TopHeader = ({ navigation, showBackButton, showBarMap = false }) => {
+const TopHeader = ({
+  navigation,
+  showBackButton,
+  showBarMap = false,
+  showProfile = true,
+}) => {
   const { currentBar, onBar } = useContext(ContextStore);
 
   return (
     <View>
       <View style={styleComponents.topHeader}>
         <View>{showBackButton && <BackButton navigation={navigation} />}</View>
-        <ProfileNavigation navigation={navigation} />
+        {showProfile && <ProfileNavigation navigation={navigation} />}
       </View>
 
       {currentBar && showBarMap && <BarMapNavigation navigation={navigation} />}

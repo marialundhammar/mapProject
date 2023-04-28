@@ -6,6 +6,7 @@ import styleTexts from '../../../styles/styleTexts';
 import { db } from '../../../firebase/firebase';
 import { ContextStore } from '../../../context/ContextStore';
 import { arrayOfBarTours } from '../../../configs/barTours';
+import { Ionicons } from '@expo/vector-icons';
 import {
   collection,
   getDocs,
@@ -18,15 +19,18 @@ type GroupCardType = {
   text: string;
   numberOfBars?: number;
   navigation?: any;
+  area?: string;
 };
 
-const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
+const GroupCard = ({ text, numberOfBars, navigation, area }: GroupCardType) => {
   const [isClicked, setIsClicked] = useState(false);
   const { user, setCurrentBarTour, setFinishedTour } = useContext(ContextStore);
 
   const handleIsClicked = () => {
     setIsClicked(!isClicked);
   };
+
+  console.log('AREA', area);
 
   const chooseBarTourHandler = () => {
     const userCollectionRef = collection(db, 'users');
@@ -63,15 +67,32 @@ const GroupCard = ({ text, numberOfBars, navigation }: GroupCardType) => {
       }
     >
       <View style={{ padding: 8 }}>
-        <Text style={styleTexts.h3}>{text}</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text style={styleTexts.h3}>{text}</Text>
+          {numberOfBars && (
+            <Text
+              style={[styleTexts.miniText, { marginTop: 4, marginRight: 12 }]}
+            >
+              Antal stopp {numberOfBars}
+            </Text>
+          )}
+        </View>
+
         {numberOfBars && (
-          <Text style={styleTexts.miniText}>Antal stopp {numberOfBars}</Text>
+          <View style={{ flexDirection: 'row', marginTop: 4 }}>
+            <Text style={styleTexts.miniText}>
+              <Ionicons name="md-location-sharp" size={16} color="#FFD3D3" />
+            </Text>
+            <Text style={styleTexts.miniText}> {area}</Text>
+          </View>
         )}
         {isClicked && numberOfBars && (
-          <View>
-            <Text style={styleTexts.miniText}>Show all bars here ...</Text>
-            <Pressable onPress={chooseBarTourHandler}>
-              <Text style={styleButtons.buttonDefaultText}>VÄLJ RUNDA</Text>
+          <View style={{ alignItems: 'center' }}>
+            <Pressable
+              onPress={chooseBarTourHandler}
+              style={styleButtons.buttonDefaultSmallPink}
+            >
+              <Text style={styleTexts.h4}>VÄLJ RUNDA</Text>
             </Pressable>
           </View>
         )}

@@ -51,7 +51,7 @@ const BarScreen = ({ navigation }) => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#1B274A',
+        backgroundColor: '#000826',
         width: '100%',
       }}
     >
@@ -90,9 +90,8 @@ const BarScreen = ({ navigation }) => {
 
               <View
                 style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '95%',
+                  width: '100%',
+                  marginTop: 24,
                 }}
               >
                 <PhotoStream path={`${user.email}/${currentBar.name}`} />

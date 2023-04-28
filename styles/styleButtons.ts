@@ -27,8 +27,19 @@ const styleButtons = StyleSheet.create({
     paddingTop: 12,
     borderColor: '#FFD3D3',
     borderWidth: 1,
-    backgroundColor: '#1B274A',
+    backgroundColor: '#000826',
   },
+
+  buttonDefaultSmallPink: {
+    height: 34,
+    width: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    marginTop: 8,
+    backgroundColor: '#E68383',
+  },
+
   buttonDisable: {
     height: 50,
     width: 224,

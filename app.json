@@ -36,7 +36,7 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
-      "backgroundColor": "#1B274A",
+      "backgroundColor": "#000826",
       "image": "./assets/laddar.png",
       "resizeMode": "contain"
     },

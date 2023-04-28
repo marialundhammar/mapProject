@@ -75,7 +75,6 @@ const BottomContainer = ({ navigation }) => {
     const querySnapshot = await getDocs(userQuery);
     querySnapshot.forEach(async (doc) => {
       const userDocRef = doc.ref;
-
       if (prevBarTours === undefined) {
         prevBarTours = [];
       }
@@ -94,28 +93,6 @@ const BottomContainer = ({ navigation }) => {
   const snapToOffsets = sectionHeights.map((height, index) =>
     sectionHeights.slice(0, index + 1).reduce((a, b) => a + b)
   );
-
-  const panResponder = PanResponder.create({
-    onMoveShouldSetPanResponder: (evt, gestureState) => {
-      // Only respond to upward swipes
-      return gestureState.dy < 0;
-    },
-    onPanResponderMove: (evt, gestureState) => {
-      // Set the translateY value based on the gesture movement
-      setTranslateY(Dimensions.get('window').height + gestureState.dy);
-    },
-    onPanResponderRelease: (evt, gestureState) => {
-      // If the gesture distance is greater than half of the container height, open it fully
-      if (Math.abs(gestureState.dy) > Dimensions.get('window').height / 2) {
-        setIsOpen(true);
-        setTranslateY(0);
-      } else {
-        // Otherwise, close it back to the initial position
-        setIsOpen(false);
-        setTranslateY(Dimensions.get('window').height);
-      }
-    },
-  });
 
   return (
     <ScrollView>
@@ -180,11 +157,12 @@ const BottomContainer = ({ navigation }) => {
           {isOpen && (
             <>
               <Animated.View
-                {...panResponder.panHandlers}
                 style={[{ transform: [{ translateY: translateY }] }]}
               >
                 <Pressable onPress={() => setIsOpen(false)}>
-                  <Text style={styleTexts.h2}>{currentBarTour.title}</Text>
+                  <Text style={[styleTexts.h2, { marginBottom: 12 }]}>
+                    {currentBarTour.title}
+                  </Text>
                   <View style={styleComponents.centered}>
                     <Pressable onPress={handleFinishedTour}>
                       <LinearGradient
@@ -192,7 +170,6 @@ const BottomContainer = ({ navigation }) => {
                         style={styleButtons.buttonDefault}
                       >
                         <Text style={styleButtons.buttonDefaultText}>
-                          {' '}
                           AVSLUTA RUNDA
                         </Text>
                       </LinearGradient>

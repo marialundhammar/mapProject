@@ -105,7 +105,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="BarTourTimelineScreen"
+            name="BarTourTimeline"
             component={BarTourTimelineScreen}
             options={{ headerShown: false }}
           />

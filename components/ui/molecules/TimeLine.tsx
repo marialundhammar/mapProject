@@ -8,7 +8,12 @@ import styleTexts from '../../../styles/styleTexts';
 import TimeLineEvent from '../atoms/TimeLineEvent';
 import Timer from '../atoms/Timer';
 
-const TimeLine = ({ navigation, events, profilePage }) => {
+const TimeLine = ({
+  navigation,
+  events,
+  profilePage,
+  timeLinePage = false,
+}) => {
   const [showAllEvents, setShowAllEvents] = useState(false);
   const { user } = useContext(ContextStore);
 
@@ -48,9 +53,9 @@ const TimeLine = ({ navigation, events, profilePage }) => {
     >
       <View>
         {eventList.length > 0 ? (
-          <>
+          <View>
             <Text style={styleTexts.h3}>Tidslinjen </Text>
-            {showAllEvents
+            {showAllEvents || timeLinePage
               ? eventList.map((item, i) => (
                   <TimeLineEvent
                     timeLineTitle={item.title}
@@ -71,7 +76,7 @@ const TimeLine = ({ navigation, events, profilePage }) => {
                       navigation={navigation}
                     />
                   ))}
-          </>
+          </View>
         ) : (
           <>
             <Text style={styleTexts.h4}> Inga event gjorda ännu ..</Text>

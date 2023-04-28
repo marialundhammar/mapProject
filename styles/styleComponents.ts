@@ -21,6 +21,7 @@ const styleModals = StyleSheet.create({
     flexWrap: 'wrap',
     justifyCOntent: 'center',
     alignItems: 'center',
+    marginBottom: 40,
   },
 
   imageContainerBig: {
@@ -33,6 +34,14 @@ const styleModals = StyleSheet.create({
     height: 100,
     borderRadius: 6,
     margin: 2,
+  },
+
+  timeLineEvent: {
+    backgroundColor: '#000826',
+    marginLeft: 2,
+    padding: 8,
+    borderRadius: 8,
+    opacity: 0.9,
   },
 
   bottomContainerOpen: {
@@ -89,20 +98,22 @@ const styleModals = StyleSheet.create({
     marginBottom: 16,
     marginTop: 16,
     padding: 8,
+    borderWidth: 1,
+    borderColor: '#445385',
   },
 
   topHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#1B274A',
+    backgroundColor: '#000826',
     height: 90,
     padding: 16,
     width: '100%',
     paddingTop: 46,
-
     borderColor: 'pink',
   },
+
   leftComponent: {
     flexDirection: 'column',
     marginLeft: 'auto',
@@ -145,11 +156,11 @@ const styleModals = StyleSheet.create({
 
   cardStyle: {
     width: '100%',
-    backgroundColor: '#1B274A',
+    backgroundColor: '#000826',
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,
-    borderColor: '#445385',
+
     borderWidth: 2,
     paddingBottom: 10,
   },
@@ -160,20 +171,20 @@ const styleModals = StyleSheet.create({
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,
-
     borderWidth: 2,
     paddingBottom: 10,
   },
 
   cardStyleIsFilled: {
     width: '100%',
-    backgroundColor: '#1B274A',
+    backgroundColor: '#000826',
     borderWidth: 2,
     borderColor: '#445385',
     height: 110,
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,
+    paddingBottom: 10,
   },
 
   height150: {

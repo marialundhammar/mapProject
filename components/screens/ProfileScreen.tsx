@@ -35,6 +35,7 @@ import TimeLineBarTours from '../ui/molecules/TimeLineBarTours';
 import ProfileNavigationBar from '../ui/molecules/ProfileNavigationBar';
 import { arrayOfBarTours } from '../../configs/barTours';
 import { profileImages } from '../../configs/profileImage';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ProfileScreen = ({ navigation }) => {
   const navigateTo = 'Map';
@@ -170,160 +171,173 @@ const ProfileScreen = ({ navigation }) => {
         styleScreens.defaultScreen,
       ]}
     >
-      <>
-        <TopHeader navigation={navigation} showBackButton={false} />
-        <ProfileHeader
-          amountOfTrofees={displayedTitles}
-          imagePath={() => getProfileImage()}
-        />
-
-        <ScrollView horizontal={false}>
+      <LinearGradient colors={['#020B29', '#334F96']}>
+        <>
+          <TopHeader navigation={navigation} showBackButton={false} />
+          <ProfileHeader
+            amountOfTrofees={displayedTitles}
+            imagePath={() => getProfileImage()}
+          />
           <ProfileNavigationBar />
-          <View style={{}}>
-            {pageProfile === 'rounds' && (
-              <View style={{ alignItems: 'center', width: '100%' }}>
-                <TimeLineBarTours
-                  navigation={navigation}
-                  bartours={completedBarTours}
-                />
+          <ScrollView horizontal={false}>
+            <View style={{}}>
+              {pageProfile === 'rounds' && (
+                <View style={{ alignItems: 'center', width: '100%' }}>
+                  <View style={{ width: '100%' }}>
+                    <TimeLineBarTours
+                      navigation={navigation}
+                      bartours={completedBarTours}
+                    />
+                  </View>
 
-                <>
-                  {loading ? (
-                    <ActivityIndicator size="large" color="#000" />
-                  ) : photoUrls.length > 0 ? (
-                    <View
-                      style={{
-                        alignContent: 'center',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: 20,
-                      }}
-                    >
-                      <View>
-                        <Text style={styleTexts.h2}>Tidigare tagna bilder</Text>
-                      </View>
+                  <>
+                    {loading ? (
+                      <ActivityIndicator size="large" color="#000" />
+                    ) : photoUrls.length > 0 ? (
                       <View
                         style={{
-                          alignContent: 'center',
-                          alignItems: 'center',
-                          justifyContent: 'space-around',
-                          flexDirection: 'row',
-                          flexWrap: 'wrap',
-                          padding: 12,
-                          marginTop: 20,
+                          marginTop: 30,
+                          width: '100%',
+                          backgroundColor: '#020B29',
                         }}
                       >
-                        {photoUrls.reverse().map((photoUrl, i) => (
-                          <Lightbox
-                            key={i}
-                            onOpen={() => handleImagePress(i)}
-                            renderContent={() => renderLightboxContent(i)}
-                            style={{ padding: 2 }}
+                        <View style={{ justifyContent: 'center', margin: 12 }}>
+                          <Text
+                            style={[
+                              styleTexts.h2,
+                              {
+                                padding: 8,
+                                width: '100%',
+                              },
+                            ]}
                           >
-                            <Image
+                            All tidigare foton
+                          </Text>
+                        </View>
+                        <View
+                          style={{
+                            alignContent: 'center',
+                            alignItems: 'center',
+                            justifyContent: 'space-around',
+                            flexDirection: 'row',
+                            flexWrap: 'wrap',
+                            padding: 12,
+                            marginTop: 20,
+                          }}
+                        >
+                          {photoUrls.reverse().map((photoUrl, i) => (
+                            <Lightbox
                               key={i}
-                              source={{ uri: photoUrl }}
-                              style={styleComponents.imageSmall}
-                            />
-                          </Lightbox>
-                        ))}
+                              onOpen={() => handleImagePress(i)}
+                              renderContent={() => renderLightboxContent(i)}
+                              style={{ padding: 2 }}
+                            >
+                              <Image
+                                key={i}
+                                source={{ uri: photoUrl }}
+                                style={styleComponents.imageSmall}
+                              />
+                            </Lightbox>
+                          ))}
+                        </View>
                       </View>
-                    </View>
-                  ) : (
-                    <Text style={styleTexts.h4}>
-                      Inga foton tagna här ännu :({' '}
-                    </Text>
-                  )}
-                </>
-              </View>
-            )}
+                    ) : (
+                      <Text style={styleTexts.h4}>
+                        Inga foton tagna här ännu :({' '}
+                      </Text>
+                    )}
+                  </>
+                </View>
+              )}
 
-            {pageProfile === 'profile' && (
-              <View
-                style={{
-                  alignItems: 'center',
-                  alignContent: 'center',
-                  height: '100%',
-
-                  flexDirection: 'column-reverse',
-                }}
-              >
-                <Button
-                  navigation={navigation}
-                  navigateTo={'Home'}
-                  buttonText={'NY BARRUNDA'}
-                />
-
-                <Pressable
-                  style={styleButtons.buttonDefaultBorder}
-                  onPress={handleLogOut}
-                >
-                  <Text style={styleTexts.h4}>Logga ut</Text>
-                </Pressable>
-              </View>
-            )}
-
-            {pageProfile === 'trofees' && (
-              <View
-                style={{
-                  alignItems: 'center',
-                  flex: 1,
-                  paddingTop: 42,
-
-                  width: '100%',
-                }}
-              >
+              {pageProfile === 'profile' && (
                 <View
                   style={{
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    margin: 8,
+                    alignItems: 'center',
+                    alignContent: 'center',
+                    height: '100%',
+                    paddingTop: 64,
+
+                    flexDirection: 'column-reverse',
                   }}
                 >
-                  {completedBarTours
-                    .filter((item) =>
-                      arrayOfBarTours.some(
-                        (barTour) => barTour.title === item.title
-                      )
-                    )
-                    .map((item, i) => {
-                      const isTitleDisplayed = displayedTitles.includes(
-                        item.title
-                      );
-                      if (!isTitleDisplayed) {
-                        displayedTitles.push(item.title);
-                        return (
-                          <View
-                            style={{
-                              flexDirection: 'column',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              margin: 14,
-                            }}
-                            key={i}
-                          >
-                            <Image
-                              style={styleComponents.imageSmall}
-                              source={
-                                arrayOfBarTours.find(
-                                  (barTour) => barTour.title === item.title
-                                ).trofee
-                              }
-                            />
-                            <Text style={styleTexts.h4}>{item.title}</Text>
-                          </View>
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
+                  <Button
+                    navigation={navigation}
+                    navigateTo={'Home'}
+                    buttonText={'NY BARRUNDA'}
+                  />
+
+                  <Pressable
+                    style={styleButtons.buttonDefaultBorder}
+                    onPress={handleLogOut}
+                  >
+                    <Text style={styleTexts.h4}>Logga ut</Text>
+                  </Pressable>
                 </View>
-              </View>
-            )}
-          </View>
-        </ScrollView>
-      </>
+              )}
+
+              {pageProfile === 'trofees' && (
+                <View
+                  style={{
+                    alignItems: 'center',
+                    flex: 1,
+                    paddingTop: 12,
+
+                    width: '100%',
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      flexWrap: 'wrap',
+                      justifyContent: 'center',
+                      margin: 8,
+                    }}
+                  >
+                    {completedBarTours
+                      .filter((item) =>
+                        arrayOfBarTours.some(
+                          (barTour) => barTour.title === item.title
+                        )
+                      )
+                      .map((item, i) => {
+                        const isTitleDisplayed = displayedTitles.includes(
+                          item.title
+                        );
+                        if (!isTitleDisplayed) {
+                          displayedTitles.push(item.title);
+                          return (
+                            <View
+                              style={{
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                margin: 14,
+                              }}
+                              key={i}
+                            >
+                              <Image
+                                style={styleComponents.imageSmall}
+                                source={
+                                  arrayOfBarTours.find(
+                                    (barTour) => barTour.title === item.title
+                                  ).trofee
+                                }
+                              />
+                              <Text style={styleTexts.h4}>{item.title}</Text>
+                            </View>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })}
+                  </View>
+                </View>
+              )}
+            </View>
+          </ScrollView>
+        </>
+      </LinearGradient>
     </View>
   );
 };

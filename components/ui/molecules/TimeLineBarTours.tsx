@@ -8,6 +8,7 @@ import styleComponents from '../../../styles/styleComponents';
 import styleTexts from '../../../styles/styleTexts';
 import TimeLineEvent from '../atoms/TimeLineEvent';
 import Timer from '../atoms/Timer';
+import { AntDesign } from '@expo/vector-icons';
 
 interface barTourType {
   title?: string;
@@ -23,24 +24,33 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
   };
 
   const eventList = [];
-  bartours.map((item) => {
-    console.log('items events', item.events);
 
-    eventList.push({
-      title: `Runda:  ${item.title}`,
-      visitedBars: item.bars.length,
-      date: item.date,
-      events: item.events,
+  if (bartours) {
+    bartours.map((item) => {
+      console.log('items events', item.date);
+      eventList.push({
+        title: `Runda:  ${item.title}`,
+        visitedBars: item.bars.length,
+        date: item.date,
+        events: item.events,
+      });
     });
-  });
+  }
 
   return (
     <Pressable
-      style={styleComponents.barContentContainer}
+      style={{ justifyContent: 'center', margin: 12 }}
       onPress={handleOpenTimeLine}
     >
       <View>
-        <Text style={styleTexts.h3}>Tidslinjen </Text>
+        <Text
+          style={[
+            styleTexts.h3,
+            { marginBottom: 12, marginTop: 12, margin: 4 },
+          ]}
+        >
+          Tidigare barrundor{' '}
+        </Text>
 
         {showAllEvents
           ? eventList.map((item, i) => (
@@ -54,7 +64,7 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
               />
             ))
           : eventList
-              .slice(0, 2)
+              .slice(0, 3)
               .map((item, i) => (
                 <TimeLineEvent
                   timeLineTitle={item.title}
@@ -72,7 +82,16 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
           onPress={handleOpenTimeLine}
           style={styleButtons.buttonDefaultBorder}
         >
-          {!showAllEvents ? <Text>Se fler barrundor</Text> : <Text>Stäng</Text>}
+          {!showAllEvents ? (
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styleTexts.h4}>Se fler barrundor</Text>
+              <Text>
+                <AntDesign name="arrowdown" size={24} color="white" />
+              </Text>
+            </View>
+          ) : (
+            <Text>Stäng</Text>
+          )}
         </Pressable>
       </View>
     </Pressable>

@@ -63,7 +63,7 @@ const useAddEvent = (user) => {
 
   const addEvents = async (
     type: string,
-    bar: BarType,
+    bar?: BarType,
     textInputValue?: string,
     image?: string
   ) => {
@@ -84,6 +84,10 @@ const useAddEvent = (user) => {
           textInputValue,
           image
         );
+        break;
+
+      case 'started':
+        saveEvents(`Kl. ${currentTime} Barrunda startade 💥`, type);
         break;
 
       default:

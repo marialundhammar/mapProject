@@ -11,7 +11,7 @@ const styleScreens = StyleSheet.create({
   },
 
   onboardingScreen: {
-    backgroundColor: '#1B274A',
+    backgroundColor: '#000826',
     width: '100%',
     height: '100%',
     padding: 8,
@@ -19,7 +19,7 @@ const styleScreens = StyleSheet.create({
   },
 
   mapScreen: {
-    backgroundColor: '#1B274A',
+    backgroundColor: '#000826',
     width: '100%',
     height: '95%',
     flexDirection: 'column',
@@ -35,7 +35,7 @@ const styleScreens = StyleSheet.create({
   center: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1B274A',
+    backgroundColor: '#000826',
   },
 
   space: {

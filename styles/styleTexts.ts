@@ -28,7 +28,7 @@ const styleTexts = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Passion-One',
     fontSize: 24,
-    color: '#1B274A',
+    color: '#000826',
   },
 
   h4: {
@@ -44,7 +44,7 @@ const styleTexts = StyleSheet.create({
   h5Dark: {
     fontFamily: 'Passion-One',
     fontSize: 16,
-    color: '#1B274A',
+    color: '#000826',
   },
 
   bodyText: {

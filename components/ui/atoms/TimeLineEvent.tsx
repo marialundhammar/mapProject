@@ -4,6 +4,9 @@ import styleTexts from '../../../styles/styleTexts';
 import styleComponents from '../../../styles/styleComponents';
 import { BarModal } from '../molecules/BarModal';
 import TimeLine from '../molecules/TimeLine';
+import styleButtons from '../../../styles/styleButtons';
+import { Entypo } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const TimeLineEvent = ({
   timeLineTitle,
@@ -12,8 +15,8 @@ const TimeLineEvent = ({
   bartour = false,
   timeLineEvents = [],
   navigation,
-  events = [],
-  date = '',
+  events,
+  date = { seconds: 0, nanoseconds: 0 },
 }) => {
   const [showChallengeModal, setShowChallengeModal] = useState(false);
   const [showBarTourEvents, setShowBarTourEvents] = useState(false);
@@ -33,62 +36,102 @@ const TimeLineEvent = ({
     setShowBarTourEvents(!showBarTourEvents);
   };
 
+  const handleNavigateTimeLine = () => {
+    navigation.navigate('BarTourTimeline', { events: events });
+  };
+
+  const newDate = new Date(date.seconds * 1000);
+  const options = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    locale: 'sv-SE',
+  };
+
+  const dateString = newDate.toLocaleString('sv-SE', options);
+
   return (
-    <View
-      style={
-        timeLineImage || bartour ? styleComponents.cardStyle : { marginTop: 2 }
-      }
-    >
-      <Text style={[styleTexts.h4, { padding: 4 }]}>{timeLineTitle}</Text>
-
-      <View style={{ flexDirection: 'row', padding: 4 }}>
-        <Pressable onPress={handleNavigate}>
-          {timeLineImage && (
-            <Image
-              source={{ uri: timeLineImage }}
-              style={{ width: 100, height: 50, margin: 8 }}
-            />
-          )}
-          {timeLineComment && (
-            <View style={[styleTexts.bodyText]}>
-              <Text style={styleTexts.bodyText}>
-                Kommentar: {timeLineComment}
-              </Text>
-            </View>
-          )}
-        </Pressable>
-
-        <Pressable onPress={toggleEvents}>
-          {bartour && (
-            <View style={{ borderWidth: 3, width: '100%' }}>
-              {events && showBarTourEvents ? (
-                <View>
-                  <TimeLine
-                    navigation={navigation}
-                    events={events}
-                    profilePage={true}
-                  />
-                </View>
-              ) : (
-                <View
-                  style={{ justifyContent: 'center', alignItems: 'center' }}
-                >
-                  <Text>Visa kvällens bravader tidslinje</Text>
-                </View>
-              )}
-            </View>
-          )}
-        </Pressable>
-      </View>
-
-      <BarModal
-        header={timeLineTitle}
-        visible={challengeModal.visible}
-        image={timeLineImage}
-        onClose={() =>
-          setChallengeModal((current) => ({ ...current, visible: false }))
+    <View>
+      <View
+        style={
+          timeLineImage || bartour
+            ? styleComponents.timeLineEvent
+            : { marginTop: 2, padding: 4 }
         }
-      />
+      >
+        <Text style={[styleTexts.h4, { padding: 4 }]}>{timeLineTitle}</Text>
+        {bartour && (
+          <Text style={[styleTexts.h4, { padding: 4 }]}>
+            Genomfördes: {dateString}
+          </Text>
+        )}
+
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 4,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Pressable onPress={handleNavigate}>
+            {timeLineImage && (
+              <Image
+                source={{ uri: timeLineImage }}
+                style={{ width: 100, height: 50, margin: 8 }}
+              />
+            )}
+            {timeLineComment && (
+              <View style={[styleTexts.bodyText]}>
+                <Text style={styleTexts.bodyText}>
+                  Kommentar: {timeLineComment}
+                </Text>
+              </View>
+            )}
+          </Pressable>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              padding: 4,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {bartour && (
+              <>
+                <View>
+                  <Pressable
+                    onPress={handleNavigateTimeLine}
+                    style={styleButtons.buttonDefaultSmallPink}
+                  >
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Text style={styleTexts.h5}>Visa mer</Text>
+                    </View>
+                  </Pressable>
+                </View>
+              </>
+            )}
+          </View>
+        </View>
+
+        <BarModal
+          header={timeLineTitle}
+          visible={challengeModal.visible}
+          image={timeLineImage}
+          onClose={() =>
+            setChallengeModal((current) => ({ ...current, visible: false }))
+          }
+        />
+      </View>
+      <Text>
+        <Entypo name="flow-line" size={24} color="#000826" />
+      </Text>
     </View>
   );
 };
