@@ -4,50 +4,57 @@ import styleComponents from '../../../styles/styleComponents';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { ContextStore } from '../../../context/ContextStore';
 import { Entypo } from '@expo/vector-icons';
+import { getAuth, signOut } from 'firebase/auth';
 
 const ProfileNavigation = ({ navigation }) => {
   const { setOnBar, finishedTour, currentBar, setOnProfile, onProfile } =
     useContext(ContextStore);
 
+  const handleLogOut = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log('user signed out');
+        navigation.navigate('LogIn');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const onPressProfile = () => {
-    setOnProfile(true);
-    setOnBar(false);
-    if (!finishedTour) {
-      navigation.navigate('Profile');
-    }
+    navigation.navigate('Profile');
   };
 
   const onPressMap = () => {
-    setOnProfile(false);
-    if (!finishedTour) {
-      navigation.navigate('Map');
-    } else {
-      navigation.navigate('Home');
-    }
+    navigation.navigate('Map');
+  };
+
+  const onPressGenerate = () => {
+    navigation.navigate('Home');
+  };
+  const onPressLogOut = () => {
+    handleLogOut();
   };
 
   return (
     <View style={styleComponents.leftComponent}>
-      {!onProfile && !finishedTour && (
-        <Pressable onPress={onPressProfile}>
-          <FontAwesome5 name="user" size={24} color="#FFD3D3" />
-        </Pressable>
-      )}
+      <Pressable onPress={onPressProfile}>
+        <FontAwesome5 name="user" size={24} color="#FFD3D3" />
+      </Pressable>
 
-      {onProfile && !finishedTour && (
-        <Pressable onPress={onPressMap}>
-          <Entypo name="map" size={24} color="#FFD3D3" />
-        </Pressable>
-      )}
+      <Pressable onPress={onPressMap}>
+        <Entypo name="map" size={24} color="#FFD3D3" />
+      </Pressable>
+      <Pressable onPress={onPressGenerate}>
+        <FontAwesome5 name="dice" size={24} color="#FFD3D3" />
+      </Pressable>
 
-      {
-        finishedTour && <Text></Text>
-        /* (
-        <Pressable onPress={() => navigation.navigate('Home')}>
-          <Entypo name="home" size={24} color="#FFD3D3" />
-        </Pressable>
-      ) */
-      }
+      <Pressable onPress={onPressLogOut}>
+        <Text>
+          <Entypo name="log-out" size={24} color="#FFD3D3" />
+        </Text>
+      </Pressable>
     </View>
   );
 };
