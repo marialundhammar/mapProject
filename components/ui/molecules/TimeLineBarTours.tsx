@@ -57,24 +57,22 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
               <TimeLineEvent
                 timeLineTitle={item.title}
                 bartour={true}
-                timeLineEvents={item.events}
+                /*        timeLineEvents={item.events} */
                 navigation={navigation}
                 events={item.events}
                 date={item.date}
               />
             ))
-          : eventList
-              .slice(0, 3)
-              .map((item, i) => (
-                <TimeLineEvent
-                  timeLineTitle={item.title}
-                  bartour={true}
-                  timeLineEvents={item.events}
-                  navigation={navigation}
-                  events={item.events}
-                  date={item.date}
-                />
-              ))}
+          : eventList.slice(0, 3).map((item, i) => (
+              <TimeLineEvent
+                timeLineTitle={item.title}
+                bartour={true}
+                /*                   timeLineEvents={item.events}
+                 */ navigation={navigation}
+                events={item.events}
+                date={item.date}
+              />
+            ))}
       </View>
 
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>

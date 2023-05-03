@@ -43,6 +43,7 @@ const Map = ({ navigation }) => {
     currentBar,
     onBar,
     user,
+    roundStarted,
   } = useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
   const [markerBar, setMarkerBar] = useState('');
@@ -163,7 +164,16 @@ const Map = ({ navigation }) => {
         />
       )}
 
-      <View style={!onBar ? { flex: 1 } : { flex: 0.8 }}>
+      <View
+        style={
+          onBar
+            ? { flex: 0.8, width: '100%' }
+            : {
+                flex: 1,
+                width: '100%',
+              }
+        }
+      >
         <MapView
           style={styleMap.container}
           customMapStyle={mapStyle}

@@ -70,7 +70,7 @@ export default function LogInScreen({ navigation }) {
         style={styleButtons.buttonDefault}
       >
         <Pressable onPress={() => logInUser(auth, email, password)}>
-          <Text style={styleButtons.buttonDefaultText}>LOG IN</Text>
+          <Text style={styleButtons.buttonDefaultText}>LOGGA IN</Text>
         </Pressable>
       </LinearGradient>
 

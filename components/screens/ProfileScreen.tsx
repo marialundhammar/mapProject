@@ -154,8 +154,6 @@ const ProfileScreen = ({ navigation }) => {
   const getProfileImage = () => {
     const imagePath = profileImages.find((item) => item.title === profileImage);
 
-    console.log('IMAGE', imagePath);
-
     return imagePath;
   };
 
@@ -167,6 +165,7 @@ const ProfileScreen = ({ navigation }) => {
           width: '100%',
           justifyContent: 'center',
           alignItems: 'center',
+          borderWidth: 3,
         },
         styleScreens.defaultScreen,
       ]}
@@ -247,32 +246,6 @@ const ProfileScreen = ({ navigation }) => {
                       </Text>
                     )}
                   </>
-                </View>
-              )}
-
-              {pageProfile === 'profile' && (
-                <View
-                  style={{
-                    alignItems: 'center',
-                    alignContent: 'center',
-                    height: '100%',
-                    paddingTop: 64,
-
-                    flexDirection: 'column-reverse',
-                  }}
-                >
-                  <Button
-                    navigation={navigation}
-                    navigateTo={'Home'}
-                    buttonText={'NY BARRUNDA'}
-                  />
-
-                  <Pressable
-                    style={styleButtons.buttonDefaultBorder}
-                    onPress={handleLogOut}
-                  >
-                    <Text style={styleTexts.h4}>Logga ut</Text>
-                  </Pressable>
                 </View>
               )}
 

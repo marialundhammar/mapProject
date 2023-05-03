@@ -26,12 +26,12 @@ const NavigationButton = ({
   onClose,
   challenge,
 }: NavigationButtonType) => {
-  const { setCurrentBar, user, currentBarTour, setOnBar } =
+  const { setCurrentBar, user, currentBarTour, setOnBar, setOnHome } =
     useContext(ContextStore);
   const [bar, setBar] = useState(null);
 
   const { addEvents } = useAddEvent(user);
-  const { setCurrentChallenge } = useContext(ContextStore);
+  const { setCurrentChallenge, setPageHandler } = useContext(ContextStore);
 
   if (challenge) {
     setCurrentChallenge(challenge);
@@ -40,8 +40,13 @@ const NavigationButton = ({
   const handleNavigation = async () => {
     navigation.navigate(navigateTo);
 
+    if (buttonText === 'SKAPA RUNDA') {
+      setOnHome(false);
+    }
+
     if (buttonText === 'Yes det stämmer') {
       await setCurrentBar(currentBar);
+      setPageHandler('Bar');
 
       onClose();
       addEvents('enteredBar', currentBar);
@@ -49,6 +54,7 @@ const NavigationButton = ({
 
     if (buttonText === 'GÅ FRÅN BAR') {
       addEvents('leftBar', currentBar);
+      setPageHandler('Map');
       setCurrentBar(null);
     }
   };

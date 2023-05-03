@@ -63,6 +63,7 @@ const TimeLine = ({
                     timeLineImage={item.image}
                     key={i}
                     navigation={navigation}
+                    events={undefined}
                   />
                 ))
               : eventList
@@ -74,6 +75,7 @@ const TimeLine = ({
                       timeLineImage={item.image}
                       key={i}
                       navigation={navigation}
+                      events={undefined}
                     />
                   ))}
           </View>

@@ -89,6 +89,7 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <View style={styleScreens.defaultScreen}>
       <TextInput
+        autoCapitalize="none"
         style={styleTexts.textInput}
         placeholder="Användarnam"
         onChangeText={(text) => setUsername(text)}
@@ -101,9 +102,11 @@ const RegisterScreen = ({ navigation }) => {
         onChangeText={(text) => setEmail(text)}
         value={email}
         placeholderTextColor={'#FFD3D3'}
+        autoCapitalize="none"
       />
 
       <TextInput
+        autoCapitalize="none"
         style={styleTexts.textInput}
         placeholder="Password"
         onChangeText={(text) => setPassword(text)}
@@ -127,12 +130,16 @@ const RegisterScreen = ({ navigation }) => {
           <Text style={styleButtons.buttonDefaultText}>REGGA MIG</Text>
         </Pressable>
       </LinearGradient>
-
-      <View>
+      <LinearGradient
+        colors={['#F46D6D', '#CE7C7C']}
+        style={[styleButtons.buttonDefault, { marginTop: 12 }]}
+      >
         <Pressable onPress={() => navigation.navigate('LogIn')}>
-          <Text style={styleTexts.bodyText}>Tillbaka till login</Text>
+          <Text style={styleButtons.buttonDefaultText}>
+            Tillbaka till logga in
+          </Text>
         </Pressable>
-      </View>
+      </LinearGradient>
     </View>
   );
 };

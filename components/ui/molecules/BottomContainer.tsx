@@ -40,6 +40,7 @@ const BottomContainer = ({ navigation }) => {
     setCurrentBarTour,
     setOnProfile,
     user,
+    setPageHandler,
   } = useContext(ContextStore);
   const [animation] = useState(new Animated.Value(0));
   const arrayOfBars = currentBarTour.bars;
@@ -86,6 +87,7 @@ const BottomContainer = ({ navigation }) => {
         ],
       });
     });
+    setPageHandler('Profile');
     navigation.navigate('Profile');
   };
 
@@ -103,7 +105,7 @@ const BottomContainer = ({ navigation }) => {
             : styleComponents.bottomContainerOpen
         }
       >
-        <Pressable onPress={() => setIsOpen(!isOpen)}>
+        <Pressable onPress={roundStarted ? () => setIsOpen(!isOpen) : null}>
           {!isOpen && (
             <>
               <View
@@ -170,6 +172,7 @@ const BottomContainer = ({ navigation }) => {
                         style={styleButtons.buttonDefault}
                       >
                         <Text style={styleButtons.buttonDefaultText}>
+                          {' '}
                           AVSLUTA RUNDA
                         </Text>
                       </LinearGradient>

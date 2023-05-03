@@ -14,7 +14,7 @@ import styleComponents from '../../styles/styleComponents';
 
 const MapScreen = ({ navigation }) => {
   return (
-    <View>
+    <View style={{ flex: 1, height: '100%' }}>
       <TopHeader navigation={navigation} showBackButton={true} />
 
       <View style={styleScreens.mapScreen}>
@@ -23,7 +23,6 @@ const MapScreen = ({ navigation }) => {
           <Map navigation={navigation} />
           <View
             style={{
-              flex: 0,
               justifyContent: 'center',
             }}
           >

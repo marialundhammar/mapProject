@@ -55,6 +55,7 @@ const styleModals = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     padding: 8,
+    flex: 0.2,
   },
 
   centered: {
@@ -104,14 +105,13 @@ const styleModals = StyleSheet.create({
 
   topHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    borderWidth: 3,
+    borderColor: 'pink',
     alignItems: 'center',
     backgroundColor: '#000826',
-    height: 90,
-    padding: 16,
+
     width: '100%',
-    paddingTop: 46,
-    borderColor: 'pink',
+    justifyContent: 'space-between',
   },
 
   leftComponent: {

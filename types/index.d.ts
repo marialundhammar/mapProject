@@ -83,4 +83,10 @@ export type ContextStoreType = {
   setPageProfile: (string) => void;
   onProfile: boolean;
   setOnProfile: (boolean) => void;
+  onHome: boolean;
+  setOnHome: (boolean) => void;
+  pageHandler: string;
+  setPageHandler: (string) => void;
+  roundStarted: boolean;
+  setRoundIsStarted: (boolean) => void;
 };

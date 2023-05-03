@@ -24,6 +24,7 @@ const ProfileNavigation = ({ navigation }) => {
 
   const onPressProfile = () => {
     navigation.navigate('Profile');
+    setOnProfile(true);
   };
 
   const onPressMap = () => {
@@ -38,23 +39,35 @@ const ProfileNavigation = ({ navigation }) => {
   };
 
   return (
-    <View style={styleComponents.leftComponent}>
-      <Pressable onPress={onPressProfile}>
-        <FontAwesome5 name="user" size={24} color="#FFD3D3" />
-      </Pressable>
-
-      <Pressable onPress={onPressMap}>
-        <Entypo name="map" size={24} color="#FFD3D3" />
-      </Pressable>
-      <Pressable onPress={onPressGenerate}>
-        <FontAwesome5 name="dice" size={24} color="#FFD3D3" />
-      </Pressable>
-
+    <View
+      style={[
+        {
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          width: '100%',
+        },
+      ]}
+    >
       <Pressable onPress={onPressLogOut}>
         <Text>
           <Entypo name="log-out" size={24} color="#FFD3D3" />
         </Text>
       </Pressable>
+      {onProfile ? (
+        <Pressable onPress={onPressProfile}>
+          <FontAwesome5 name="user" size={24} color="#FFD3D3" />
+        </Pressable>
+      ) : (
+        <Pressable onPress={onPressMap}>
+          <Entypo name="map" size={24} color="#FFD3D3" />
+        </Pressable>
+      )}
+
+      {finishedTour && (
+        <Pressable onPress={onPressGenerate}>
+          <FontAwesome5 name="dice" size={24} color="#FFD3D3" />
+        </Pressable>
+      )}
     </View>
   );
 };

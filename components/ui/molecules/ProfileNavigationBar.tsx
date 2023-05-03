@@ -10,11 +10,6 @@ const ProfileNavigationBar = () => {
 
   const handleOnPress = (page: string) => {
     switch (page) {
-      case 'profile':
-        console.log('PROFILE');
-        setPageProfile('profile');
-        break;
-
       case 'rounds':
         console.log('ROUNDS');
         setPageProfile('rounds');
@@ -39,18 +34,6 @@ const ProfileNavigationBar = () => {
         },
       ]}
     >
-      <View>
-        <Pressable onPress={() => handleOnPress('profile')}>
-          <Text
-            style={
-              pageProfile === 'profile' ? styleTexts.h3 : styleTexts.h3dark
-            }
-          >
-            Profil
-          </Text>
-        </Pressable>
-      </View>
-
       <View style={[styleComponents.barNavigationItem]}>
         <Pressable onPress={() => handleOnPress('rounds')}>
           <Text

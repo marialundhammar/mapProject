@@ -55,11 +55,7 @@ const BarScreen = ({ navigation }) => {
         width: '100%',
       }}
     >
-      <TopHeader
-        navigation={navigation}
-        showBackButton={false}
-        showBarMap={true}
-      />
+      <TopHeader navigation={navigation} showBackButton={false} />
 
       {onBar ? (
         <>

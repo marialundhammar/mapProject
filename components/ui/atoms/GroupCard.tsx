@@ -24,7 +24,8 @@ type GroupCardType = {
 
 const GroupCard = ({ text, numberOfBars, navigation, area }: GroupCardType) => {
   const [isClicked, setIsClicked] = useState(false);
-  const { user, setCurrentBarTour, setFinishedTour } = useContext(ContextStore);
+  const { user, setCurrentBarTour, setFinishedTour, setPageHandler } =
+    useContext(ContextStore);
 
   const handleIsClicked = () => {
     setIsClicked(!isClicked);
@@ -54,6 +55,7 @@ const GroupCard = ({ text, numberOfBars, navigation, area }: GroupCardType) => {
         console.log('Error: ', error);
       });
 
+    setPageHandler('Map');
     navigation.navigate('Map');
   };
 
