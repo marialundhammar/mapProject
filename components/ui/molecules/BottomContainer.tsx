@@ -29,6 +29,7 @@ import {
 import { db } from '../../../firebase/firebase';
 import useGetBarTours from '../../../Hooks/useGetBarTours';
 import useGetEvents from '../../../Hooks/useGetEvents';
+import { BarModal } from './BarModal';
 
 const BottomContainer = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,6 +42,7 @@ const BottomContainer = ({ navigation }) => {
     setOnProfile,
     user,
     setPageHandler,
+    visitedBars,
   } = useContext(ContextStore);
   const [animation] = useState(new Animated.Value(0));
   const arrayOfBars = currentBarTour.bars;
@@ -69,26 +71,50 @@ const BottomContainer = ({ navigation }) => {
   const d = new Date();
 
   const [translateY, setTranslateY] = useState(Dimensions.get('window').height);
+  const [showFinishedModal, setShowFinishedModal] = useState({
+    visible: false,
+    content: '',
+  });
 
   const handleFinishedTour = async () => {
-    setOnProfile(true);
-    setFinishedTour(true);
-    const querySnapshot = await getDocs(userQuery);
-    querySnapshot.forEach(async (doc) => {
-      const userDocRef = doc.ref;
-      if (prevBarTours === undefined) {
-        prevBarTours = [];
-      }
+    console.log('visitedBars', visitedBars.length);
 
-      await updateDoc(userDocRef, {
-        finishedTours: [
-          { date: new Date(), events: events, ...currentBarTour },
-          ...prevBarTours,
-        ],
+    if (visitedBars.length === currentBarTour.numbersOfBars) {
+      console.log('DU har gjort hela rundan');
+
+      setOnProfile(true);
+      setFinishedTour(true);
+      const querySnapshot = await getDocs(userQuery);
+      querySnapshot.forEach(async (doc) => {
+        const userDocRef = doc.ref;
+        if (prevBarTours === undefined) {
+          prevBarTours = [];
+        }
+
+        await updateDoc(userDocRef, {
+          finishedTours: [
+            {
+              date: new Date(),
+              events: events,
+              completedBarTour: true,
+              ...currentBarTour,
+            },
+            ...prevBarTours,
+          ],
+        });
       });
-    });
-    setPageHandler('Profile');
-    navigation.navigate('Profile');
+      setPageHandler('Profile');
+      navigation.navigate('Profile');
+      setShowFinishedModal({ visible: true, content: 'FINITOO' });
+    } else {
+      console.log('Några stopp kvar');
+      setShowFinishedModal({
+        visible: true,
+        content: `DU har ju bara besökt ${visitedBars.length} bar. Du har ${
+          currentBarTour.numbersOfBars - visitedBars.length
+        } kvar `,
+      });
+    }
   };
 
   const sectionHeights = [200, 300, 400];
@@ -97,94 +123,110 @@ const BottomContainer = ({ navigation }) => {
   );
 
   return (
-    <ScrollView>
-      <View
-        style={
-          isOpen
-            ? styleComponents.bottomContainer
-            : styleComponents.bottomContainerOpen
-        }
-      >
-        <Pressable onPress={roundStarted ? () => setIsOpen(!isOpen) : null}>
-          {!isOpen && (
-            <>
-              <View
-                style={{
-                  flexWrap: 'wrap',
-                }}
-              >
-                <Text style={styleTexts.h2}>{currentBarTour.title}</Text>
-                <Text style={styleTexts.bodyText}>
-                  Antal stopp {currentBarTour.numbersOfBars}
-                </Text>
-              </View>
-              {currentBarTour.description && (
-                <Text style={[styleTexts.bodyText, { flexWrap: 'wrap' }]}>
-                  {currentBarTour.description}
-                </Text>
-              )}
-
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                {arrayOfBars.map((bar, i) => (
-                  <Text style={[styleTexts.bodyText]} key={i}>
-                    {bar.name} |{' '}
+    <>
+      <ScrollView>
+        <View
+          style={
+            isOpen
+              ? styleComponents.bottomContainer
+              : styleComponents.bottomContainerOpen
+          }
+        >
+          <Pressable onPress={roundStarted ? () => setIsOpen(!isOpen) : null}>
+            {!isOpen && (
+              <>
+                <View
+                  style={{
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <Text style={styleTexts.h2}>{currentBarTour.title}</Text>
+                  <Text style={styleTexts.bodyText}>
+                    Antal stopp {currentBarTour.numbersOfBars}
                   </Text>
-                ))}
-              </View>
-
-              {!roundStarted && (
-                <View style={styleComponents.centered}>
-                  <Button
-                    buttonText={"LET'S GO"}
-                    onIsOpen={() => setIsOpen(true)}
-                    isOpen={isOpen}
-                    onStartedRound={() => setRoundIsStarted(true)}
-                  />
-                  <Button buttonText={'GENERERA NY RUNDA'} isFilled={false} />
                 </View>
-              )}
-
-              {roundStarted && (
-                <View>
-                  <TimeLine
-                    navigation={navigation}
-                    events={undefined}
-                    profilePage={false}
-                  />
-                </View>
-              )}
-            </>
-          )}
-
-          {isOpen && (
-            <>
-              <Animated.View
-                style={[{ transform: [{ translateY: translateY }] }]}
-              >
-                <Pressable onPress={() => setIsOpen(false)}>
-                  <Text style={[styleTexts.h2, { marginBottom: 12 }]}>
-                    {currentBarTour.title}
+                {currentBarTour.description && (
+                  <Text style={[styleTexts.bodyText, { flexWrap: 'wrap' }]}>
+                    {currentBarTour.description}
                   </Text>
+                )}
+
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                  {arrayOfBars.map((bar, i) => (
+                    <Text style={[styleTexts.bodyText]} key={i}>
+                      {bar.name} |{' '}
+                    </Text>
+                  ))}
+                </View>
+
+                {!roundStarted && (
                   <View style={styleComponents.centered}>
-                    <Pressable onPress={handleFinishedTour}>
-                      <LinearGradient
-                        colors={['#F46D6D', '#CE7C7C']}
-                        style={styleButtons.buttonDefault}
-                      >
-                        <Text style={styleButtons.buttonDefaultText}>
-                          {' '}
-                          AVSLUTA RUNDA
-                        </Text>
-                      </LinearGradient>
-                    </Pressable>
+                    <Button
+                      buttonText={"LET'S GO"}
+                      onIsOpen={() => setIsOpen(true)}
+                      isOpen={isOpen}
+                      onStartedRound={() => setRoundIsStarted(true)}
+                    />
+                    <Button buttonText={'GENERERA NY RUNDA'} isFilled={false} />
                   </View>
-                </Pressable>
-              </Animated.View>
-            </>
-          )}
-        </Pressable>
-      </View>
-    </ScrollView>
+                )}
+
+                {roundStarted && (
+                  <View>
+                    <TimeLine
+                      navigation={navigation}
+                      events={undefined}
+                      profilePage={false}
+                    />
+                  </View>
+                )}
+              </>
+            )}
+
+            {isOpen && (
+              <>
+                <Animated.View
+                  style={[{ transform: [{ translateY: translateY }] }]}
+                >
+                  <Pressable onPress={() => setIsOpen(false)}>
+                    <Text style={[styleTexts.h2, { marginBottom: 12 }]}>
+                      {currentBarTour.title}
+                    </Text>
+                    <View style={styleComponents.centered}>
+                      <Pressable onPress={handleFinishedTour}>
+                        <LinearGradient
+                          colors={['#F46D6D', '#CE7C7C']}
+                          style={styleButtons.buttonDefault}
+                        >
+                          <Text style={styleButtons.buttonDefaultText}>
+                            AVSLUTA RUNDA
+                          </Text>
+                        </LinearGradient>
+                      </Pressable>
+                    </View>
+                  </Pressable>
+                </Animated.View>
+              </>
+            )}
+          </Pressable>
+        </View>
+      </ScrollView>
+
+      <BarModal
+        header={
+          visitedBars.length === currentBarTour.numbersOfBars
+            ? 'YOU MADE IT!!'
+            : 'Redan Game Over?? '
+        }
+        text={showFinishedModal.content}
+        visible={showFinishedModal.visible}
+        onClose={() =>
+          setShowFinishedModal((current) => ({ ...current, visible: false }))
+        }
+        finishedRound={true}
+        navigation={navigation}
+      />
+    </>
   );
 };
 

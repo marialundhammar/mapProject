@@ -18,6 +18,7 @@ const TopHeader = ({ navigation, showBackButton }) => {
     currentBarTour,
     pageHandler,
     setPageHandler,
+    roundStarted,
   } = useContext(ContextStore);
   const { canGoBack } = navigation;
 
@@ -61,13 +62,19 @@ const TopHeader = ({ navigation, showBackButton }) => {
   const handleGoBack = () => {
     if (canGoBack()) {
       navigation.goBack();
+    }
+    if (pageHandler === 'BarTourTimeline') {
+      setPageHandler('Profile');
+    }
+    if (pageHandler === 'Onboarding') {
+      setPageHandler('Home');
     } else {
       console.warn('Ingen skärm att gå tillbaka till :( ');
     }
   };
 
   return (
-    <View style={{ width: '100%' }}>
+    <>
       <View
         style={{
           alignItems: 'center',
@@ -76,12 +83,9 @@ const TopHeader = ({ navigation, showBackButton }) => {
           flexDirection: 'row-reverse',
           justifyContent: 'space-between',
           padding: 24,
-          width: '100%',
         }}
       >
-        {(pageHandler === 'Home' ||
-          pageHandler === 'Map' ||
-          pageHandler === 'Bar') && (
+        {(pageHandler === 'Home' || pageHandler === 'Map') && (
           <Pressable onPress={onPressProfile}>
             <FontAwesome5 name="user" size={24} color="#FFD3D3" />
           </Pressable>
@@ -93,7 +97,7 @@ const TopHeader = ({ navigation, showBackButton }) => {
           </Pressable>
         )}
 
-        {showBackButton && (
+        {showBackButton && !roundStarted && (
           <Pressable onPress={handleGoBack}>
             <Ionicons name="arrow-back" size={24} color="#FFD3D3" />
           </Pressable>
@@ -116,18 +120,24 @@ const TopHeader = ({ navigation, showBackButton }) => {
           </Pressable>
         )}
 
+        {pageHandler === 'Profile' && (
+          <Pressable onPress={onPressLogOut}>
+            <Entypo name="log-out" size={24} color="#FFD3D3" />
+          </Pressable>
+        )}
+
         {pageHandler === 'Home' && (
           <Pressable onPress={onPressLogOut}>
             <Entypo name="log-out" size={24} color="#FFD3D3" />
           </Pressable>
         )}
       </View>
-      <View>
-        {currentBar && pageHandler === 'Bar' && (
+      {currentBar && (
+        <View style={{ width: '100%' }}>
           <BarMapNavigation navigation={navigation} />
-        )}
-      </View>
-    </View>
+        </View>
+      )}
+    </>
   );
 };
 

@@ -71,10 +71,17 @@ const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
           </View>
 
           <View style={{ width: '90%' }}>
-            <Text style={styleTexts.h5}>
-              👉 Du har totalt genomfört {userData.finishedTours.length}{' '}
-              barrundor
-            </Text>
+            {userData.finishedTours ? (
+              <Text style={styleTexts.h5}>
+                👉 Du har totalt genomfört {userData.finishedTours.length}{' '}
+                barrundor
+              </Text>
+            ) : (
+              <Text style={styleTexts.h5}>
+                {' '}
+                👉 Inga genomförda barrundor ännu
+              </Text>
+            )}
             {amountOfTrofees.length > 1 ? (
               <Text style={styleTexts.h5}>
                 👉 Samlat på dig {amountOfTrofees.length} stycken troféer{' '}
@@ -82,7 +89,7 @@ const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
             ) : (
               <Text style={styleTexts.h5}>
                 {' '}
-                👉 Samlat på dig en trofé hittills
+                👉 Inga troféer insamlade hittills
               </Text>
             )}
           </View>

@@ -27,12 +27,13 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
 
   if (bartours) {
     bartours.map((item) => {
-      console.log('items events', item.date);
+      console.log('completedBartorus', item.completedBarTour);
       eventList.push({
         title: `Runda:  ${item.title}`,
         visitedBars: item.bars.length,
         date: item.date,
         events: item.events,
+        completedBarTour: item.completedBarTour,
       });
     });
   }
@@ -42,38 +43,42 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
       style={{ justifyContent: 'center', margin: 12 }}
       onPress={handleOpenTimeLine}
     >
-      <View>
-        <Text
-          style={[
-            styleTexts.h3,
-            { marginBottom: 12, marginTop: 12, margin: 4 },
-          ]}
-        >
-          Tidigare barrundor{' '}
-        </Text>
+      {bartours.length > 0 && (
+        <View>
+          <Text
+            style={[
+              styleTexts.h3,
+              { marginBottom: 12, marginTop: 12, margin: 4 },
+            ]}
+          >
+            Tidigare barrundor{' '}
+          </Text>
 
-        {showAllEvents
-          ? eventList.map((item, i) => (
-              <TimeLineEvent
-                timeLineTitle={item.title}
-                bartour={true}
-                /*        timeLineEvents={item.events} */
-                navigation={navigation}
-                events={item.events}
-                date={item.date}
-              />
-            ))
-          : eventList.slice(0, 3).map((item, i) => (
-              <TimeLineEvent
-                timeLineTitle={item.title}
-                bartour={true}
-                /*                   timeLineEvents={item.events}
-                 */ navigation={navigation}
-                events={item.events}
-                date={item.date}
-              />
-            ))}
-      </View>
+          {showAllEvents
+            ? eventList.map((item, i) => (
+                <TimeLineEvent
+                  timeLineTitle={item.title}
+                  bartour={true}
+                  /*        timeLineEvents={item.events} */
+                  navigation={navigation}
+                  events={item.events}
+                  date={item.date}
+                  completedBarTour={item.completedBarTour}
+                />
+              ))
+            : eventList.slice(0, 3).map((item, i) => (
+                <TimeLineEvent
+                  timeLineTitle={item.title}
+                  bartour={true}
+                  /*                   timeLineEvents={item.events}
+                   */ navigation={navigation}
+                  events={item.events}
+                  date={item.date}
+                  completedBarTour={item.completedBarTour}
+                />
+              ))}
+        </View>
+      )}
 
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <Pressable

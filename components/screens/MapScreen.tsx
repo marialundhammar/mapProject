@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Dimensions, View } from 'react-native';
+import { Animated, Dimensions, SafeAreaView, View } from 'react-native';
 import Map from '../ui/molecules/Map';
 import { BarModal } from '../ui/molecules/BarModal';
 import { arrayOfBars } from '../../configs/bars';
@@ -14,7 +14,7 @@ import styleComponents from '../../styles/styleComponents';
 
 const MapScreen = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, height: '100%' }}>
+    <SafeAreaView style={{ flex: 1, height: '100%' }}>
       <TopHeader navigation={navigation} showBackButton={true} />
 
       <View style={styleScreens.mapScreen}>
@@ -30,7 +30,7 @@ const MapScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

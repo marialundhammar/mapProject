@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, View, Image, Pressable } from 'react-native';
 import styleTexts from '../../../styles/styleTexts';
 import styleComponents from '../../../styles/styleComponents';
 import { BarModal } from '../molecules/BarModal';
 import styleButtons from '../../../styles/styleButtons';
 import { Entypo } from '@expo/vector-icons';
+import { ContextStore } from '../../../context/ContextStore';
 
 const TimeLineEvent = ({
   timeLineTitle,
@@ -14,9 +15,13 @@ const TimeLineEvent = ({
   navigation,
   events,
   date = { seconds: 0, nanoseconds: 0 },
+  completedBarTour,
 }) => {
   const [showChallengeModal, setShowChallengeModal] = useState(false);
+  const { setPageHandler } = useContext(ContextStore);
   const [showBarTourEvents, setShowBarTourEvents] = useState(false);
+
+  console.log('completed', completedBarTour);
 
   const handleNavigate = () => {
     console.log('bartour', bartour);
@@ -34,6 +39,7 @@ const TimeLineEvent = ({
   };
 
   const handleNavigateTimeLine = () => {
+    setPageHandler('BarTourTimeline');
     navigation.navigate('BarTourTimeline', { events: events });
   };
 
@@ -51,14 +57,20 @@ const TimeLineEvent = ({
         style={
           timeLineImage || bartour
             ? styleComponents.timeLineEvent
-            : { marginTop: 2, padding: 4 }
+            : { marginTop: 2 }
         }
       >
-        <Text style={[styleTexts.h4, { padding: 4 }]}>{timeLineTitle}</Text>
+        <Text style={[styleTexts.h4]}>{timeLineTitle}</Text>
         {bartour && (
-          <Text style={[styleTexts.h4, { padding: 4 }]}>
-            Genomfördes: {dateString}
-          </Text>
+          <>
+            <Text style={[styleTexts.h4]}>Genomfördes: {dateString}</Text>
+
+            {completedBarTour ? (
+              <Text style={styleTexts.h4}>
+                Du gjorde hela rundan!!{completedBarTour}
+              </Text>
+            ) : null}
+          </>
         )}
 
         <View

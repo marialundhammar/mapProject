@@ -26,9 +26,7 @@ import {
 import { db, storage } from '../../firebase/firebase';
 import useGetEvents from '../../Hooks/useGetEvents';
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
-import { useFocusEffect } from '@react-navigation/native';
 import Lightbox from 'react-native-lightbox';
-import { LogBox } from 'react-native';
 import styleComponents from '../../styles/styleComponents';
 import styleTexts from '../../styles/styleTexts';
 import TimeLineBarTours from '../ui/molecules/TimeLineBarTours';
@@ -45,6 +43,7 @@ const ProfileScreen = ({ navigation }) => {
   const photos = [];
   const [lightboxImageIndex, setLightboxImageIndex] = useState(null);
   const [completedBarTours, setCompletedBarTours] = useState([]);
+  const [allBarTours, setAllBarTours] = useState([]);
   const [completedBarTourstrofee, setCompletedBarToursTrofee] = useState([]);
   const trofeeList = [];
   const [profileImage, setProfileImage] = useState('');
@@ -76,9 +75,15 @@ const ProfileScreen = ({ navigation }) => {
           const data = userDoc.data();
 
           console.log('data', data.finishedTours);
-
           if (data.finishedTours) {
-            setCompletedBarTours(data.finishedTours);
+            const newCompletedBarTours = [];
+            data.finishedTours.forEach((tour) => {
+              if (tour.completedBarTour) {
+                newCompletedBarTours.push(tour);
+              }
+            });
+            setCompletedBarTours(newCompletedBarTours);
+            setAllBarTours(data.finishedTours);
           }
 
           if (data.profileImage) {
@@ -92,7 +97,10 @@ const ProfileScreen = ({ navigation }) => {
       return unsubscribe;
     }, [user]);
   };
-
+  useEffect(() => {
+    console.log('completedBarTours:', completedBarTours);
+    console.log('allBarTours:', allBarTours);
+  }, [completedBarTours, allBarTours]);
   getBarTours();
 
   const renderLightboxContent = (index) => {
@@ -135,7 +143,7 @@ const ProfileScreen = ({ navigation }) => {
     const arrayOfBarTitle = [];
     const completedBarTitle = [];
 
-    arrayOfBarTours.forEach((item) => {
+    completedBarTitle.forEach((item) => {
       arrayOfBarTitle.push(item.title);
     });
 
@@ -159,16 +167,10 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <View
-      style={[
-        {
-          height: '100%',
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderWidth: 3,
-        },
-        styleScreens.defaultScreen,
-      ]}
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
     >
       <LinearGradient colors={['#020B29', '#334F96']}>
         <>
@@ -179,13 +181,13 @@ const ProfileScreen = ({ navigation }) => {
           />
           <ProfileNavigationBar />
           <ScrollView horizontal={false}>
-            <View style={{}}>
+            <View>
               {pageProfile === 'rounds' && (
                 <View style={{ alignItems: 'center', width: '100%' }}>
                   <View style={{ width: '100%' }}>
                     <TimeLineBarTours
                       navigation={navigation}
-                      bartours={completedBarTours}
+                      bartours={allBarTours}
                     />
                   </View>
 
@@ -210,7 +212,7 @@ const ProfileScreen = ({ navigation }) => {
                               },
                             ]}
                           >
-                            All tidigare foton
+                            All tidigare tagna foton
                           </Text>
                         </View>
                         <View

@@ -89,4 +89,6 @@ export type ContextStoreType = {
   setPageHandler: (string) => void;
   roundStarted: boolean;
   setRoundIsStarted: (boolean) => void;
+  visitedBars: BarType[];
+  setVisitedBars: (visitedBars: BarType[]) => void;
 };

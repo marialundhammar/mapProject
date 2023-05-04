@@ -38,4 +38,11 @@ export const arrayOfBarTours: BarTourTypes[] = [
     trofee: require('../assets/trofees/beeroclock.png'),
     area: 'Möllan',
   },
+  {
+    title: 'KORTIS',
+    numbersOfBars: 3,
+    bars: [arrayOfBars[3], arrayOfBars[4], arrayOfBars[5]],
+    trofee: require('../assets/trofees/beeroclock.png'),
+    area: 'Möllan',
+  },
 ];

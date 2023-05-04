@@ -8,8 +8,6 @@ import DoChallenge from '../ui/molecules/DoChallange';
 import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
 import Map from '../ui/molecules/Map';
-
-import styleComponents from '../../styles/styleComponents';
 import BarContent from '../ui/molecules/BarContent';
 import { challenges2 } from '../../configs/challenges';
 import PhotoStream from '../ui/molecules/PhotoStream';
@@ -108,6 +106,7 @@ const BarScreen = ({ navigation }) => {
               navigateTo={'Map'}
               buttonText={'GÅ FRÅN BAR'}
               isFilled={true}
+              currentBar={currentBar}
             />
           </View>
         </>

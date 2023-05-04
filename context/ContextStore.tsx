@@ -30,6 +30,7 @@ const ContextStoreProvider = ({ children }) => {
   const [onHome, setOnHome] = useState(true);
   const [pageHandler, setPageHandler] = useState('Home');
   const [roundStarted, setRoundIsStarted] = useState(false);
+  const [visitedBars, setVisitedBars] = useState([]);
 
   return (
     <ContextStore.Provider
@@ -62,6 +63,8 @@ const ContextStoreProvider = ({ children }) => {
         setPageHandler,
         roundStarted,
         setRoundIsStarted,
+        visitedBars,
+        setVisitedBars,
       }}
     >
       {children}

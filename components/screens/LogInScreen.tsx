@@ -13,7 +13,7 @@ export default function LogInScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const { user, setUser } = useContext(ContextStore);
+  const { user, setUser, setPageHandler } = useContext(ContextStore);
 
   const logInUser = async (auth, email, password) => {
     try {
@@ -30,6 +30,7 @@ export default function LogInScreen({ navigation }) {
       );
 
       await navigation.navigate('Home');
+      setPageHandler('Home');
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
         setErrorMessage('Användare finns inte');

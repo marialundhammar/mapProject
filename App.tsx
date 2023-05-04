@@ -87,7 +87,12 @@ export default function App() {
           <Stack.Screen
             name="Map"
             component={MapScreen}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false,
+              headerLeft: null,
+              gestureEnabled: false,
+              gestureDirection: 'horizontal',
+            }}
           />
           <Stack.Screen
             name="Bar"
@@ -102,7 +107,12 @@ export default function App() {
           <Stack.Screen
             name="Profile"
             component={ProfileScreen}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false,
+              headerLeft: null,
+              gestureEnabled: false,
+              gestureDirection: 'horizontal',
+            }}
           />
           <Stack.Screen
             name="BarTourTimeline"

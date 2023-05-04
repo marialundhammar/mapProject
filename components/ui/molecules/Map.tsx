@@ -44,11 +44,14 @@ const Map = ({ navigation }) => {
     onBar,
     user,
     roundStarted,
+    visitedBars,
   } = useContext(ContextStore);
   const [distanceBar, setDistanceBar] = useState({ distance: 0, name: '' });
   const [markerBar, setMarkerBar] = useState('');
   const [closestBarModalShown, setClosestBarModal] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showedBarModals, setShowedBarModals] = useState([]);
+
   const { sendNotificationOnBar } = useNotifications();
   const LOCATION_TASK_NAME = 'background-location-task';
   const mapView = useRef(null);
@@ -120,8 +123,18 @@ const Map = ({ navigation }) => {
     });
     console.log('distance', closestBar.distance, currentBar);
 
-    if (closestBar.distance < 0.4 && currentBar === null) {
-      setBarModal({ visible: true, content: closestBar });
+    if (closestBar.distance < 0.02 && currentBar === null) {
+      console.log('visited bars', visitedBars);
+
+      const isAlreadyShown = showedBarModals.some(
+        (bar) => bar.name === closestBar.name
+      );
+      if (!isAlreadyShown) {
+        setBarModal({ visible: true, content: closestBar });
+        delay(5000);
+        setShowedBarModals([...showedBarModals, closestBar]);
+      }
+
       //sendNotificationOnBar();
       //setShowNotification(true);
     }
@@ -134,13 +147,13 @@ const Map = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
-      /*    let { status } = await Location.requestForegroundPermissionsAsync();
+      /*      let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setStatus('Permission to access location was denied');
         return;
       } else {
         let location = await Location.getCurrentPositionAsync({});
-        await delay(1000);
+        await delay(5000);
         await setUserLocation({
           lat: location.coords.latitude,
           long: location.coords.longitude,
@@ -153,7 +166,8 @@ const Map = ({ navigation }) => {
   //add userLocation
 
   const pinColorUser = '#000000';
-  const pinColorBar = '#E68383';
+  const pinColorBar = '#6C87CB';
+  const pinColorVisited = '#E68383';
 
   return (
     <>
@@ -182,59 +196,52 @@ const Map = ({ navigation }) => {
           initialRegion={{
             latitude: 55.59542958317019,
             longitude: 13.009905375241077,
-            //The region is defined by the center coordinates and the span of coordinates to display.
             latitudeDelta: 0.022,
             longitudeDelta: 0.021,
           }}
         >
-          {bars.map((bar, i) => (
-            <Marker
-              coordinate={{
-                latitude: bar.lat,
-                longitude: bar.long,
-              }}
-              key={i}
-              pinColor={pinColorBar}
-            >
-              <Callout
-                tooltip={true}
-                style={{
-                  backgroundColor: '#E68383',
-                  padding: 6,
-                  margin: 0,
-                  borderRadius: 5,
-                  borderWidth: 0,
+          {bars.map((bar, i) => {
+            // Check if the current bar is in the visitedBars array
+            const isVisited = visitedBars.some(
+              (visitedBar) => visitedBar.id === bar.id
+            );
+
+            // Set the pinColor based on whether the bar has been visited
+            const pinColor = isVisited ? pinColorVisited : pinColorBar;
+
+            return (
+              <Marker
+                coordinate={{
+                  latitude: bar.lat,
+                  longitude: bar.long,
                 }}
+                key={i}
+                pinColor={pinColor}
               >
-                <Text style={styleTexts.h3}>{bar.name}</Text>
-              </Callout>
-            </Marker>
-          ))}
+                <Callout
+                  tooltip={true}
+                  style={{
+                    backgroundColor: '#E68383',
+                    padding: 6,
+                    margin: 0,
+                    borderRadius: 5,
+                    borderWidth: 0,
+                  }}
+                >
+                  <Text style={styleTexts.h3}>{bar.name}</Text>
+                </Callout>
+              </Marker>
+            );
+          })}
 
-          <Marker
-            //fake users location
-            coordinate={{
-              latitude: userLocation.lat,
-              longitude: userLocation.long,
-            }}
-            pinColor={pinColorUser}
-          />
+          {/*<Marker
+    coordinate={{
+      latitude: userLocation.lat,
+      longitude: userLocation.long,
+    }}
+    pinColor={pinColorUser}
+  />*/}
         </MapView>
-
-        {/*     {showMarkerModal && (
-          <View
-            style={{
-              position: 'absolute',
-              top: markerLocation.y,
-              left: markerLocation.x,
-              backgroundColor: '#FFFFFF',
-              borderRadius: 8,
-              padding: 8,
-            }}
-          >
-            <Text style={styleTexts.h3}>{markerBar}</Text>
-          </View>
-        )} */}
 
         <BarModal
           showButton={true}

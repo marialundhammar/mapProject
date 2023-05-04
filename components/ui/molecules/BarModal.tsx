@@ -10,6 +10,17 @@ import styleComponents from '../../../styles/styleComponents';
 import { BarType } from '../../../types';
 import { ContextStore } from '../../../context/ContextStore';
 import DefaultButton from '../atoms/DefaultButton';
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
+import { db } from '../../../firebase/firebase';
+import useGetBarTours from '../../../Hooks/useGetBarTours';
+import useGetEvents from '../../../Hooks/useGetEvents';
 
 type ModalType = {
   content?: {
@@ -25,6 +36,9 @@ type ModalType = {
   visible: boolean;
   onClose?: () => void;
   currentBar?: BarType;
+  text?: string;
+  finishedRound?: boolean;
+  isFinished?: boolean;
 };
 
 export const BarModal = ({
@@ -36,8 +50,47 @@ export const BarModal = ({
   visible,
   onClose,
   currentBar,
+  text,
+  finishedRound,
+  isFinished,
 }: ModalType) => {
   const imagePath = image ? image : null;
+
+  const {
+    currentBarTour,
+    setFinishedTour,
+    setCurrentBarTour,
+    setOnProfile,
+    user,
+    setPageHandler,
+    visitedBars,
+  } = useContext(ContextStore);
+
+  const events = useGetEvents(user);
+  let prevBarTours = useGetBarTours(user);
+  const userCollectionRef = collection(db, 'users');
+  const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
+
+  const handleFinishedBarTour = async () => {
+    setOnProfile(true);
+    setFinishedTour(true);
+    const querySnapshot = await getDocs(userQuery);
+    querySnapshot.forEach(async (doc) => {
+      const userDocRef = doc.ref;
+      if (prevBarTours === undefined) {
+        prevBarTours = [];
+      }
+
+      await updateDoc(userDocRef, {
+        finishedTours: [
+          { date: new Date(), events: events, ...currentBarTour },
+          ...prevBarTours,
+        ],
+      });
+    });
+    setPageHandler('Profile');
+    navigation.navigate('Profile');
+  };
 
   return (
     <View>
@@ -66,6 +119,7 @@ export const BarModal = ({
                 Du verkar befinna dig på {content?.name}, stämmer det?
               </Text>
             )}
+            {text && <Text style={styleText.bodyText}>{text}</Text>}
 
             <View style={styleComponents.centered}>
               {showButton && (
@@ -80,6 +134,21 @@ export const BarModal = ({
                     buttonText={'Yes det stämmer'}
                     isFilled={false}
                     currentBar={currentBar}
+                    onClose={onClose}
+                  />
+                </>
+              )}
+              {finishedRound && (
+                <>
+                  <DefaultButton
+                    onClose={onClose}
+                    text={'Ops, vill såklart fortsätta'}
+                  />
+                  <NavigationButton
+                    navigation={navigation}
+                    navigateTo={'Profile'}
+                    buttonText={'Avsluta barrunda ändå'}
+                    isFilled={false}
                     onClose={onClose}
                   />
                 </>
