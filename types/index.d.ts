@@ -1,13 +1,14 @@
 export type BarType = {
-  lat: number;
-  long: number;
-  name: string;
+  lat?: number;
+  long?: number;
+  name?: string;
   id?: string;
   image?: any;
   distance?: number;
   description?: string;
   challenges?: number;
   text?: string;
+  address?: string;
 };
 
 export type GroupType = {

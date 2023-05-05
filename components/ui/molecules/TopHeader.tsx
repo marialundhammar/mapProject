@@ -10,6 +10,7 @@ import { ContextStore } from '../../../context/ContextStore';
 import { FontAwesome5 } from '@expo/vector-icons';
 import styleButtons from '../../../styles/styleButtons';
 import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 const TopHeader = ({ navigation, showBackButton }) => {
   const {
@@ -79,7 +80,7 @@ const TopHeader = ({ navigation, showBackButton }) => {
         style={{
           alignItems: 'center',
           backgroundColor: '#000826',
-          height: 100,
+          height: 80,
           flexDirection: 'row-reverse',
           justifyContent: 'space-between',
           padding: 24,
@@ -122,13 +123,13 @@ const TopHeader = ({ navigation, showBackButton }) => {
 
         {pageHandler === 'Profile' && (
           <Pressable onPress={onPressLogOut}>
-            <Entypo name="log-out" size={24} color="#FFD3D3" />
+            <Feather name="log-out" size={28} color="#FFD3D3" />
           </Pressable>
         )}
 
         {pageHandler === 'Home' && (
           <Pressable onPress={onPressLogOut}>
-            <Entypo name="log-out" size={24} color="#FFD3D3" />
+            <Feather name="log-out" size={28} color="#FFD3D3" />
           </Pressable>
         )}
       </View>

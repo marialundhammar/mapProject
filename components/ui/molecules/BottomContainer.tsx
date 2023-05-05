@@ -101,11 +101,18 @@ const BottomContainer = ({ navigation }) => {
             },
             ...prevBarTours,
           ],
+          currentBarTour: {
+            events: [],
+          },
         });
       });
       setPageHandler('Profile');
+
       navigation.navigate('Profile');
-      setShowFinishedModal({ visible: true, content: 'FINITOO' });
+      setShowFinishedModal({
+        visible: true,
+        content: 'Du klarade hela rundan!!',
+      });
     } else {
       console.log('Några stopp kvar');
       setShowFinishedModal({
@@ -189,10 +196,17 @@ const BottomContainer = ({ navigation }) => {
                   style={[{ transform: [{ translateY: translateY }] }]}
                 >
                   <Pressable onPress={() => setIsOpen(false)}>
-                    <Text style={[styleTexts.h2, { marginBottom: 12 }]}>
+                    <Text
+                      style={[
+                        styleTexts.h2,
+                        {
+                          marginBottom: 12,
+                        },
+                      ]}
+                    >
                       {currentBarTour.title}
                     </Text>
-                    <View style={styleComponents.centered}>
+                    <View style={[styleComponents.centered, { marginTop: 8 }]}>
                       <Pressable onPress={handleFinishedTour}>
                         <LinearGradient
                           colors={['#F46D6D', '#CE7C7C']}

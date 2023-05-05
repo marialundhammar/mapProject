@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   ActivityIndicator,
+  SafeAreaView,
 } from 'react-native';
 import Button from '../ui/atoms/NavigatonButton';
 import styleButtons from '../../styles/styleButtons';
@@ -166,10 +167,11 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#000826',
       }}
     >
       <LinearGradient colors={['#020B29', '#334F96']}>
@@ -254,10 +256,8 @@ const ProfileScreen = ({ navigation }) => {
               {pageProfile === 'trofees' && (
                 <View
                   style={{
-                    alignItems: 'center',
                     flex: 1,
                     paddingTop: 12,
-
                     width: '100%',
                   }}
                 >
@@ -266,6 +266,7 @@ const ProfileScreen = ({ navigation }) => {
                       flexDirection: 'row',
                       flexWrap: 'wrap',
                       justifyContent: 'center',
+                      width: '40%',
                       margin: 8,
                     }}
                   >
@@ -282,25 +283,26 @@ const ProfileScreen = ({ navigation }) => {
                         if (!isTitleDisplayed) {
                           displayedTitles.push(item.title);
                           return (
-                            <View
-                              style={{
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                margin: 14,
-                              }}
-                              key={i}
-                            >
-                              <Image
-                                style={styleComponents.imageSmall}
-                                source={
-                                  arrayOfBarTours.find(
-                                    (barTour) => barTour.title === item.title
-                                  ).trofee
-                                }
-                              />
-                              <Text style={styleTexts.h4}>{item.title}</Text>
-                            </View>
+                            <>
+                              <View
+                                style={{
+                                  flexDirection: 'column',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                                key={i}
+                              >
+                                <Image
+                                  style={styleComponents.imageSmall}
+                                  source={
+                                    arrayOfBarTours.find(
+                                      (barTour) => barTour.title === item.title
+                                    ).trofee
+                                  }
+                                />
+                                <Text style={styleTexts.h4}>{item.title}</Text>
+                              </View>
+                            </>
                           );
                         } else {
                           return null;
@@ -313,7 +315,7 @@ const ProfileScreen = ({ navigation }) => {
           </ScrollView>
         </>
       </LinearGradient>
-    </View>
+    </SafeAreaView>
   );
 };
 

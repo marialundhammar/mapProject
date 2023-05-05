@@ -51,6 +51,7 @@
       "config": {
         "googleMapsApiKey": "AIzaSyAQunm5x4PRSf2rHbI_vbhQI2zAaBTKWNI"
       },
+      "backgroundColor": "#1B274A",
       "UIBackgroundModes": ["location", "fetch"],
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Allow the app to access your location while you use it to find nearby stores and services.",
@@ -62,7 +63,7 @@
     "permissions": ["LOCATION", "BACKGROUND_LOCATION"],
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#1B274A"
       },
       "permissions": [
         "android.permission.CAMERA",

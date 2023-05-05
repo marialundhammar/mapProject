@@ -17,6 +17,7 @@ import registerNNPushToken from 'native-notify';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { useNotifications } from './Hooks/useNotifications';
+import { View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 

@@ -64,6 +64,7 @@ const TimeLine = ({
                     key={i}
                     navigation={navigation}
                     events={undefined}
+                    completedBarTour={undefined}
                   />
                 ))
               : eventList
@@ -76,6 +77,7 @@ const TimeLine = ({
                       key={i}
                       navigation={navigation}
                       events={undefined}
+                      completedBarTour={undefined}
                     />
                   ))}
           </View>

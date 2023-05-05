@@ -37,7 +37,9 @@ const styleModals = StyleSheet.create({
   },
 
   timeLineEvent: {
-    backgroundColor: '#000826',
+    backgroundColor: '#1B274A',
+    borderWidth: 0.2,
+    borderColor: 'white',
     marginLeft: 2,
     padding: 8,
     borderRadius: 8,
@@ -99,8 +101,6 @@ const styleModals = StyleSheet.create({
     marginBottom: 16,
     marginTop: 16,
     padding: 8,
-    borderWidth: 1,
-    borderColor: '#445385',
   },
 
   topHeader: {
@@ -109,7 +109,6 @@ const styleModals = StyleSheet.create({
     borderColor: 'pink',
     alignItems: 'center',
     backgroundColor: '#000826',
-
     width: '100%',
     justifyContent: 'space-between',
   },
@@ -160,8 +159,17 @@ const styleModals = StyleSheet.create({
     borderRadius: 10,
     marginTop: 8,
     zIndex: -10,
+    paddingBottom: 10,
+  },
 
-    borderWidth: 2,
+  cardStyleIsFilled: {
+    width: '100%',
+    backgroundColor: '#000826',
+
+    height: 110,
+    borderRadius: 10,
+    marginTop: 8,
+    zIndex: -10,
     paddingBottom: 10,
   },
 
@@ -172,18 +180,6 @@ const styleModals = StyleSheet.create({
     marginTop: 8,
     zIndex: -10,
     borderWidth: 2,
-    paddingBottom: 10,
-  },
-
-  cardStyleIsFilled: {
-    width: '100%',
-    backgroundColor: '#000826',
-    borderWidth: 2,
-    borderColor: '#445385',
-    height: 110,
-    borderRadius: 10,
-    marginTop: 8,
-    zIndex: -10,
     paddingBottom: 10,
   },
 

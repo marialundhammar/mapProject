@@ -51,6 +51,7 @@ const Map = ({ navigation }) => {
   const [closestBarModalShown, setClosestBarModal] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showedBarModals, setShowedBarModals] = useState([]);
+  const [latestShownBarModal, setLatestShownBarModal] = useState('');
 
   const { sendNotificationOnBar } = useNotifications();
   const LOCATION_TASK_NAME = 'background-location-task';
@@ -126,13 +127,18 @@ const Map = ({ navigation }) => {
     if (closestBar.distance < 0.02 && currentBar === null) {
       console.log('visited bars', visitedBars);
 
-      const isAlreadyShown = showedBarModals.some(
+      const isAlreadyShown = closestBar.name === latestShownBarModal;
+
+      /*       const isAlreadyShown = showedBarModals.some(
         (bar) => bar.name === closestBar.name
-      );
+      ); */
       if (!isAlreadyShown) {
         setBarModal({ visible: true, content: closestBar });
-        delay(5000);
-        setShowedBarModals([...showedBarModals, closestBar]);
+        setLatestShownBarModal(closestBar.name);
+        console.log('HAJJJ');
+
+        //delay(2000);
+        //setShowedBarModals([...showedBarModals, closestBar]);
       }
 
       //sendNotificationOnBar();
@@ -147,7 +153,7 @@ const Map = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
-      /*      let { status } = await Location.requestForegroundPermissionsAsync();
+      let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setStatus('Permission to access location was denied');
         return;
@@ -158,7 +164,7 @@ const Map = ({ navigation }) => {
           lat: location.coords.latitude,
           long: location.coords.longitude,
         });
-      } */
+      }
 
       checkDistanceToAllBars();
     })();
@@ -166,8 +172,8 @@ const Map = ({ navigation }) => {
   //add userLocation
 
   const pinColorUser = '#000000';
-  const pinColorBar = '#6C87CB';
-  const pinColorVisited = '#E68383';
+  const pinColorBar = '#E68383';
+  const pinColorVisited = '#6C87CB';
 
   return (
     <>
@@ -181,7 +187,7 @@ const Map = ({ navigation }) => {
       <View
         style={
           onBar
-            ? { flex: 0.8, width: '100%' }
+            ? { flex: 0.9, width: '100%' }
             : {
                 flex: 1,
                 width: '100%',

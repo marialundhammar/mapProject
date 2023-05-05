@@ -14,7 +14,7 @@ export default function HomeScreen({ navigation }) {
   const { user } = useContext(ContextStore);
 
   return (
-    <View style={styleScreens.container}>
+    <SafeAreaView style={styleScreens.container}>
       <TopHeader navigation={navigation} showBackButton={false} />
 
       <View style={styleScreens.halfScreenTop}>
@@ -50,7 +50,6 @@ export default function HomeScreen({ navigation }) {
           style={{
             height: '90%',
             marginBottom: 200,
-
             width: '90%',
           }}
         >
@@ -88,6 +87,6 @@ export default function HomeScreen({ navigation }) {
         }}
         source={require('../../assets/gubbarna.png')}
       />
-    </View>
+    </SafeAreaView>
   );
 }

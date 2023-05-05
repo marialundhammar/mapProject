@@ -50,7 +50,7 @@ const styleScreens = StyleSheet.create({
   },
 
   container: {
-    backgroundColor: '#1B274A',
+    backgroundColor: '#000826',
     flex: 1,
     flexDirection: 'column',
   },

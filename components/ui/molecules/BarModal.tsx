@@ -21,6 +21,8 @@ import {
 import { db } from '../../../firebase/firebase';
 import useGetBarTours from '../../../Hooks/useGetBarTours';
 import useGetEvents from '../../../Hooks/useGetEvents';
+import styleTexts from '../../../styles/styleTexts';
+import { arrayOfBarTours } from '../../../configs/barTours';
 
 type ModalType = {
   content?: {
@@ -38,7 +40,6 @@ type ModalType = {
   currentBar?: BarType;
   text?: string;
   finishedRound?: boolean;
-  isFinished?: boolean;
 };
 
 export const BarModal = ({
@@ -52,45 +53,15 @@ export const BarModal = ({
   currentBar,
   text,
   finishedRound,
-  isFinished,
 }: ModalType) => {
   const imagePath = image ? image : null;
 
-  const {
-    currentBarTour,
-    setFinishedTour,
-    setCurrentBarTour,
-    setOnProfile,
-    user,
-    setPageHandler,
-    visitedBars,
-  } = useContext(ContextStore);
+  const { currentBarTour, user, visitedBars } = useContext(ContextStore);
 
   const events = useGetEvents(user);
   let prevBarTours = useGetBarTours(user);
   const userCollectionRef = collection(db, 'users');
   const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
-
-  const handleFinishedBarTour = async () => {
-    setOnProfile(true);
-    setFinishedTour(true);
-    const querySnapshot = await getDocs(userQuery);
-    querySnapshot.forEach(async (doc) => {
-      const userDocRef = doc.ref;
-      if (prevBarTours === undefined) {
-        prevBarTours = [];
-      }
-
-      await updateDoc(userDocRef, {
-        finishedTours: [
-          { date: new Date(), events: events, ...currentBarTour },
-          ...prevBarTours,
-        ],
-      });
-    });
-    setPageHandler('Profile');
-    navigation.navigate('Profile');
-  };
 
   return (
     <View>
@@ -106,7 +77,7 @@ export const BarModal = ({
               <AntDesign name="closecircleo" size={24} color="#FFD3D3" />
             </Pressable>
           </View>
-          <View style={styleModals.header}>
+          <View>
             <Text style={styleText.h1}>{header}</Text>
           </View>
 
@@ -138,18 +109,33 @@ export const BarModal = ({
                   />
                 </>
               )}
-              {finishedRound && (
+              {finishedRound &&
+                visitedBars.length !== currentBarTour.numbersOfBars && (
+                  <>
+                    <DefaultButton
+                      onClose={onClose}
+                      text={'Ops, vill såklart fortsätta'}
+                    />
+                    <NavigationButton
+                      navigation={navigation}
+                      navigateTo={'Profile'}
+                      buttonText={'Avsluta barrunda ändå'}
+                      isFilled={false}
+                      onClose={onClose}
+                    />
+                  </>
+                )}
+
+              {visitedBars.length === currentBarTour.numbersOfBars && (
                 <>
-                  <DefaultButton
-                    onClose={onClose}
-                    text={'Ops, vill såklart fortsätta'}
-                  />
-                  <NavigationButton
-                    navigation={navigation}
-                    navigateTo={'Profile'}
-                    buttonText={'Avsluta barrunda ändå'}
-                    isFilled={false}
-                    onClose={onClose}
+                  <Text style={styleTexts.h5}>{currentBarTour.title}</Text>
+                  <Image
+                    style={styleComponents.imageSmall}
+                    source={
+                      arrayOfBarTours.find(
+                        (barTour) => barTour.title === currentBarTour.title
+                      ).trofee
+                    }
                   />
                 </>
               )}

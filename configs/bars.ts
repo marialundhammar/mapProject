@@ -53,4 +53,33 @@ export const arrayOfBars: BarType[] = [
     image: require('../assets/far-i-hatten.jpeg'),
     description: 'Mums kaffe',
   },
+  {
+    lat: 55.59512476877623,
+    long: 13.016939408784317,
+    name: 'Jord',
+    id: 'jord',
+    image: require('../assets/barimages/jord.png'),
+    description:
+      'Välkommen in till vår ljusa lokal på hörnläget Falsterbogatan 1 i Malmö. Här kan du välja att sitta inne eller ute på vår soldränkta uteservering.',
+  },
+
+  {
+    lat: 55.59629185436936,
+    long: 13.014164120370333,
+    name: 'Café nr 6',
+    id: 'cafe-nr-6',
+    image: require('../assets/far-i-hatten.jpeg'),
+    description: 'Mysigt café på st Knut ☕️',
+  },
+
+  {
+    lat: 55.59667918264727,
+    long: 13.014283064563864,
+    name: 'Söderberg & Sara',
+    address: '',
+    id: 'soderberg-och-sara',
+    image: require('../assets/barimages/soderberg-sara.jpeg'),
+    description:
+      'Söderberg & Sara St Knut, Mäster Danielsgatan 3,  Malmö, 040-125810',
+  },
 ];

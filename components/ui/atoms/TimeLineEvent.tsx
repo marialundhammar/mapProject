@@ -6,6 +6,7 @@ import { BarModal } from '../molecules/BarModal';
 import styleButtons from '../../../styles/styleButtons';
 import { Entypo } from '@expo/vector-icons';
 import { ContextStore } from '../../../context/ContextStore';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const TimeLineEvent = ({
   timeLineTitle,
@@ -57,10 +58,13 @@ const TimeLineEvent = ({
         style={
           timeLineImage || bartour
             ? styleComponents.timeLineEvent
-            : { marginTop: 2 }
+            : { marginTop: 0 }
         }
       >
-        <Text style={[styleTexts.h4]}>{timeLineTitle}</Text>
+        <View style={bartour ? null : [styleComponents.timeLineEvent]}>
+          <Text style={[styleTexts.h4]}>{timeLineTitle}</Text>
+        </View>
+
         {bartour && (
           <>
             <Text style={[styleTexts.h4]}>Genomfördes: {dateString}</Text>
@@ -76,16 +80,22 @@ const TimeLineEvent = ({
         <View
           style={{
             flexDirection: 'row',
-            padding: 4,
-            justifyContent: 'center',
-            alignItems: 'center',
+
+            /*      justifyContent: 'center',
+            alignItems: 'center', */
           }}
         >
-          <Pressable onPress={handleNavigate}>
+          <Pressable
+            onPress={handleNavigate}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
             {timeLineImage && (
               <Image
                 source={{ uri: timeLineImage }}
-                style={{ width: 100, height: 50, margin: 8 }}
+                style={{ width: 100, height: 100, borderRadius: 8 }}
               />
             )}
             {timeLineComment && (
@@ -95,12 +105,24 @@ const TimeLineEvent = ({
                 </Text>
               </View>
             )}
+            {!bartour && (
+              <Text
+                style={{
+                  color: '#1B274A',
+                  fontSize: 32,
+                  marginLeft: 4,
+                  marginBottom: 4,
+                  fontWeight: 'bold',
+                }}
+              >
+                |
+              </Text>
+            )}
           </Pressable>
 
           <View
             style={{
               flexDirection: 'row',
-              padding: 4,
               justifyContent: 'center',
               alignItems: 'center',
             }}
@@ -136,9 +158,19 @@ const TimeLineEvent = ({
           }
         />
       </View>
-      <Text>
-        <Entypo name="flow-line" size={24} color="#000826" />
-      </Text>
+      {bartour && (
+        <Text
+          style={{
+            color: '#1B274A',
+            fontSize: 32,
+            marginLeft: 4,
+            marginBottom: 4,
+            fontWeight: 'bold',
+          }}
+        >
+          |
+        </Text>
+      )}
     </View>
   );
 };

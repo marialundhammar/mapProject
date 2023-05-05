@@ -93,7 +93,7 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
               </Text>
             </View>
           ) : (
-            <Text>Stäng</Text>
+            <Text></Text>
           )}
         </Pressable>
       </View>

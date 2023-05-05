@@ -14,8 +14,10 @@ import styleComponents from '../../styles/styleComponents';
 
 const MapScreen = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1, height: '100%' }}>
-      <TopHeader navigation={navigation} showBackButton={true} />
+    <SafeAreaView
+      style={{ flex: 1, height: '100%', backgroundColor: '#000826' }}
+    >
+      <TopHeader navigation={navigation} showBackButton={false} />
 
       <View style={styleScreens.mapScreen}>
         <FakeUserLocationButton />
