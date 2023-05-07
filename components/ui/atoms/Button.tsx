@@ -27,8 +27,7 @@ const Button = ({
   const handlePressable = () => {
     onStartedRound();
     onIsOpen();
-
-    addEvents('started');
+    addEvents('started', currentBarTour);
   };
 
   return (

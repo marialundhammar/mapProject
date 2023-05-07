@@ -126,7 +126,7 @@ export const BarModal = ({
                   </>
                 )}
 
-              {visitedBars.length === currentBarTour.numbersOfBars && (
+              {visitedBars?.length === currentBarTour?.numbersOfBars && (
                 <>
                   <Text style={styleTexts.h5}>{currentBarTour.title}</Text>
                   <Image

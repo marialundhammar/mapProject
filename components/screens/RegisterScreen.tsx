@@ -24,6 +24,10 @@ const RegisterScreen = ({ navigation }) => {
     setUsername('');
   };
 
+  const generateRandomNumber = () => {
+    return Math.floor(Math.random() * 7);
+  };
+
   const validateEmail = (value) => {
     let error;
     if (!value) {
@@ -65,7 +69,7 @@ const RegisterScreen = ({ navigation }) => {
         uid: auth.currentUser.uid,
         username: username,
         email: email,
-        profileImage: profileImages[0].title,
+        profileImage: profileImages[generateRandomNumber()].title,
       });
 
       await resetForm();
@@ -75,7 +79,6 @@ const RegisterScreen = ({ navigation }) => {
 
   const onChangeEmail = async (text) => {
     await validateEmail(text);
-
     if (!errorMessage) {
       setEmailOk(true);
     }

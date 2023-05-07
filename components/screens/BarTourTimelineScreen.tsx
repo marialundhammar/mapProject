@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import TimeLine from '../ui/molecules/TimeLine';
 import styleScreens from '../../styles/styleScreens';
@@ -30,7 +30,7 @@ const BarTourTimelineScreen = ({
   console.log('events', events);
 
   return (
-    <View>
+    <SafeAreaView style={{ backgroundColor: '#000826' }}>
       <LinearGradient colors={['#020B29', '#334F96']}>
         <TopHeader navigation={navigation} showBackButton={true} />
 
@@ -49,7 +49,7 @@ const BarTourTimelineScreen = ({
           />
         </View>
       </LinearGradient>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -99,13 +99,18 @@ const TopHeader = ({ navigation, showBackButton }) => {
         )}
 
         {showBackButton && !roundStarted && (
-          <Pressable onPress={handleGoBack}>
-            <Ionicons name="arrow-back" size={24} color="#FFD3D3" />
-          </Pressable>
+          <>
+            <BackButton navigation={navigation} />
+          </>
         )}
         {pageHandler === 'Map' && !currentBarTour && (
           <Pressable onPress={handleGoBack}>
             <Ionicons name="arrow-back" size={24} color="#FFD3D3" />
+          </Pressable>
+        )}
+        {pageHandler === 'Home' && (
+          <Pressable onPress={onPressLogOut}>
+            <Feather name="log-out" size={28} color="#FFD3D3" />
           </Pressable>
         )}
 
@@ -120,16 +125,14 @@ const TopHeader = ({ navigation, showBackButton }) => {
             <FontAwesome5 name="dice" size={24} color="#FFD3D3" />
           </Pressable>
         )}
-
         {pageHandler === 'Profile' && (
           <Pressable onPress={onPressLogOut}>
             <Feather name="log-out" size={28} color="#FFD3D3" />
           </Pressable>
         )}
-
-        {pageHandler === 'Home' && (
-          <Pressable onPress={onPressLogOut}>
-            <Feather name="log-out" size={28} color="#FFD3D3" />
+        {pageHandler === 'Bar' && (
+          <Pressable onPress={onPressProfile}>
+            <FontAwesome5 name="user" size={24} color="#FFD3D3" />
           </Pressable>
         )}
       </View>

@@ -30,11 +30,11 @@ import { db } from '../../../firebase/firebase';
 import useGetBarTours from '../../../Hooks/useGetBarTours';
 import useGetEvents from '../../../Hooks/useGetEvents';
 import { BarModal } from './BarModal';
+import useAddEvent from '../../../Hooks/useAddEvent';
 
 const BottomContainer = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [roundStarted, setRoundIsStarted] = useState(false);
-  const [finishedToursArray, setFinishedToursArray] = useState([]);
   const {
     currentBarTour,
     setFinishedTour,
@@ -49,15 +49,6 @@ const BottomContainer = ({ navigation }) => {
   const userCollectionRef = collection(db, 'users');
   const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
   const events = useGetEvents(user);
-
-  /*   useEffect(() => {
-    Animated.timing(animation, {
-      toValue: 0,
-      duration: 5000,
-      useNativeDriver: true,
-      easing: Easing.inOut(Easing.ease),
-    }).start();
-  }, [isOpen]); */
 
   useEffect(() => {
     if (isOpen) {
@@ -76,11 +67,15 @@ const BottomContainer = ({ navigation }) => {
     content: '',
   });
 
+  const { addEvents } = useAddEvent(user);
+
   const handleFinishedTour = async () => {
     console.log('visitedBars', visitedBars.length);
 
     if (visitedBars.length === currentBarTour.numbersOfBars) {
       console.log('DU har gjort hela rundan');
+
+      await addEvents('ended');
 
       setOnProfile(true);
       setFinishedTour(true);
@@ -96,6 +91,7 @@ const BottomContainer = ({ navigation }) => {
             {
               date: new Date(),
               events: events,
+
               completedBarTour: true,
               ...currentBarTour,
             },
@@ -174,7 +170,15 @@ const BottomContainer = ({ navigation }) => {
                       isOpen={isOpen}
                       onStartedRound={() => setRoundIsStarted(true)}
                     />
-                    <Button buttonText={'GENERERA NY RUNDA'} isFilled={false} />
+
+                    <Pressable
+                      style={styleButtons.buttonDefaultBorder}
+                      onPress={() => navigation.navigate('Home')}
+                    >
+                      <Text style={styleButtons.buttonDefaultText}>
+                        GENERERA NY RUNDA
+                      </Text>
+                    </Pressable>
                   </View>
                 )}
 

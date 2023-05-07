@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import { ContextStore } from '../../context/ContextStore';
 import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
@@ -44,78 +44,80 @@ const BarScreen = ({ navigation }) => {
   }, [completedChallenges]);
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#000826',
-        width: '100%',
       }}
     >
       <TopHeader navigation={navigation} showBackButton={false} />
 
-      {onBar ? (
-        <>
-          <ScrollView>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          alignContent: 'center',
+          backgroundColor: '#000826',
+          width: '100%',
+        }}
+      >
+        {onBar ? (
+          <>
+            <ScrollView>
+              <View
+                style={{
+                  flex: 1,
+                  paddingTop: 42,
+                  width: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <BarContent />
+
+                <TimeLine
+                  navigation={navigation}
+                  events={undefined}
+                  profilePage={undefined}
+                />
+                {showChallenge && (
+                  <View style={{ paddingTop: 24, width: '95%' }}>
+                    <Text style={styleTexts.h3}>
+                      Mellan ölklunkarna, gör en utmaning?{' '}
+                    </Text>
+                    <DoChallenge navigation={navigation} />
+                  </View>
+                )}
+
+                <PhotoStream path={`${user.email}/${currentBar.name}`} />
+              </View>
+            </ScrollView>
             <View
               style={{
-                flex: 1,
-                paddingTop: 42,
+                alignItems: 'center',
+                paddingBottom: 32,
+                paddingTop: 2,
+                justifyContent: 'center',
                 width: '100%',
               }}
             >
-              <BarContent />
-
-              <TimeLine
+              <Button
                 navigation={navigation}
-                events={undefined}
-                profilePage={undefined}
+                navigateTo={'Map'}
+                buttonText={'GÅ FRÅN BAR'}
+                isFilled={true}
+                currentBar={currentBar}
               />
-
-              {showChallenge && (
-                <View style={{ paddingTop: 24, width: '95%' }}>
-                  <Text style={styleTexts.h3}>
-                    Mellan ölklunkarna, gör en utmaning?{' '}
-                  </Text>
-                  <DoChallenge navigation={navigation} />
-                </View>
-              )}
-
-              <View
-                style={{
-                  width: '100%',
-                  marginTop: 24,
-                }}
-              >
-                <PhotoStream path={`${user.email}/${currentBar.name}`} />
-              </View>
             </View>
-          </ScrollView>
-          <View
-            style={{
-              alignItems: 'center',
-              paddingBottom: 32,
-              paddingTop: 2,
-              justifyContent: 'center',
-              width: '100%',
-            }}
-          >
-            <Button
-              navigation={navigation}
-              navigateTo={'Map'}
-              buttonText={'GÅ FRÅN BAR'}
-              isFilled={true}
-              currentBar={currentBar}
-            />
-          </View>
-        </>
-      ) : (
-        <>
-          <Map navigation={navigation} />
-        </>
-      )}
-    </View>
+          </>
+        ) : (
+          <>
+            <Map navigation={navigation} />
+          </>
+        )}
+      </View>
+    </SafeAreaView>
   );
 };
 

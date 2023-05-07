@@ -16,10 +16,8 @@ LogBox.ignoreLogs([
 
 const PhotoStream = ({ path }) => {
   const [photoUrls, setPhotoUrls] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
-  const [lightboxImageIndex, setLightboxImageIndex] = useState(null);
-
-  const { user, currentBar } = useContext(ContextStore);
+  const [loading, setLoading] = useState(true);
+  const [setLightboxImageIndex] = useState(null);
 
   const getAllImages = async () => {
     const listRef = ref(storage, `images/${path}`);
@@ -34,7 +32,7 @@ const PhotoStream = ({ path }) => {
       );
 
       await setPhotoUrls(urls);
-      setLoading(false); // Set loading state to false when images are fetched
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -63,7 +61,11 @@ const PhotoStream = ({ path }) => {
       {loading ? (
         <ActivityIndicator size="large" color="#000" /> // Show loading indicator while images are being fetched
       ) : photoUrls.length > 0 ? (
-        <View>
+        <View
+          style={{
+            width: '100%',
+          }}
+        >
           <Text style={styleTexts.h3}>Sist du var här såg det ut såhär </Text>
           <View style={styleComponents.imageContainer}>
             {photoUrls.reverse().map((photoUrls, i) => (

@@ -158,13 +158,29 @@ const ProfileScreen = ({ navigation }) => {
     getTrofeeUri();
   }, []);
 
+  const getDisplayedItems = (completedBarTours, arrayOfBarTours) => {
+    const displayedTitles = [];
+    return completedBarTours
+      .filter((item) =>
+        arrayOfBarTours.some((barTour) => barTour.title === item.title)
+      )
+      .filter((item) => {
+        const isTitleDisplayed = displayedTitles.includes(item.title);
+        if (!isTitleDisplayed) {
+          displayedTitles.push(item.title);
+          return true;
+        } else {
+          return false;
+        }
+      });
+  };
+
+  const imagePath = profileImages.find((item) => item.title === profileImage);
+  console.log('Image');
+
   let isTitleDisplayed = false;
 
-  const getProfileImage = () => {
-    const imagePath = profileImages.find((item) => item.title === profileImage);
-
-    return imagePath;
-  };
+  const displayedItems = getDisplayedItems(completedBarTours, arrayOfBarTours);
 
   return (
     <SafeAreaView
@@ -178,8 +194,10 @@ const ProfileScreen = ({ navigation }) => {
         <>
           <TopHeader navigation={navigation} showBackButton={false} />
           <ProfileHeader
-            amountOfTrofees={displayedTitles}
-            imagePath={() => getProfileImage()}
+            amountOfTrofees={displayedItems}
+            imagePath={profileImages.find(
+              (item) => item.title === profileImage
+            )}
           />
           <ProfileNavigationBar />
           <ScrollView horizontal={false}>
@@ -270,44 +288,28 @@ const ProfileScreen = ({ navigation }) => {
                       margin: 8,
                     }}
                   >
-                    {completedBarTours
-                      .filter((item) =>
-                        arrayOfBarTours.some(
-                          (barTour) => barTour.title === item.title
-                        )
-                      )
-                      .map((item, i) => {
-                        const isTitleDisplayed = displayedTitles.includes(
-                          item.title
-                        );
-                        if (!isTitleDisplayed) {
-                          displayedTitles.push(item.title);
-                          return (
-                            <>
-                              <View
-                                style={{
-                                  flexDirection: 'column',
-                                  justifyContent: 'center',
-                                  alignItems: 'center',
-                                }}
-                                key={i}
-                              >
-                                <Image
-                                  style={styleComponents.imageSmall}
-                                  source={
-                                    arrayOfBarTours.find(
-                                      (barTour) => barTour.title === item.title
-                                    ).trofee
-                                  }
-                                />
-                                <Text style={styleTexts.h4}>{item.title}</Text>
-                              </View>
-                            </>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })}
+                    <>
+                      {displayedItems.map((item, i) => (
+                        <View
+                          style={{
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}
+                          key={i}
+                        >
+                          <Image
+                            style={styleComponents.imageSmall}
+                            source={
+                              arrayOfBarTours.find(
+                                (barTour) => barTour.title === item.title
+                              ).trofee
+                            }
+                          />
+                          <Text style={styleTexts.h4}>{item.title}</Text>
+                        </View>
+                      ))}
+                    </>
                   </View>
                 </View>
               )}

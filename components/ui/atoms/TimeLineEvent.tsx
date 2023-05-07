@@ -61,35 +61,35 @@ const TimeLineEvent = ({
             : { marginTop: 0 }
         }
       >
-        <View style={bartour ? null : [styleComponents.timeLineEvent]}>
-          <Text style={[styleTexts.h4]}>{timeLineTitle}</Text>
-        </View>
-
-        {bartour && (
-          <>
-            <Text style={[styleTexts.h4]}>Genomfördes: {dateString}</Text>
-
-            {completedBarTour ? (
-              <Text style={styleTexts.h4}>
-                Du gjorde hela rundan!!{completedBarTour}
-              </Text>
-            ) : null}
-          </>
-        )}
-
-        <View
+        <Pressable
+          onPress={handleNavigate}
           style={{
-            flexDirection: 'row',
-
-            /*      justifyContent: 'center',
-            alignItems: 'center', */
+            flexDirection: 'column',
+            justifyContent: 'space-between',
           }}
         >
-          <Pressable
-            onPress={handleNavigate}
+          <View style={bartour ? null : [styleComponents.timeLineEvent]}>
+            <Text style={[styleTexts.h4]}>{timeLineTitle}</Text>
+          </View>
+
+          {bartour && (
+            <>
+              <Text style={[styleTexts.h4]}>Genomfördes: {dateString}</Text>
+
+              {completedBarTour ? (
+                <Text style={styleTexts.h4}>
+                  Du gjorde hela rundan!!{completedBarTour}
+                </Text>
+              ) : null}
+            </>
+          )}
+
+          <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-between',
+
+              /*      justifyContent: 'center',
+            alignItems: 'center', */
             }}
           >
             {timeLineImage && (
@@ -118,45 +118,45 @@ const TimeLineEvent = ({
                 |
               </Text>
             )}
-          </Pressable>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            {bartour && (
-              <>
-                <View>
-                  <Pressable
-                    onPress={handleNavigateTimeLine}
-                    style={styleButtons.buttonDefaultSmallPink}
-                  >
-                    <View
-                      style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              {bartour && (
+                <>
+                  <View>
+                    <Pressable
+                      onPress={handleNavigateTimeLine}
+                      style={styleButtons.buttonDefaultSmallPink}
                     >
-                      <Text style={styleTexts.h5}>Visa mer</Text>
-                    </View>
-                  </Pressable>
-                </View>
-              </>
-            )}
+                      <View
+                        style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Text style={styleTexts.h5}>Visa mer</Text>
+                      </View>
+                    </Pressable>
+                  </View>
+                </>
+              )}
+            </View>
           </View>
-        </View>
 
-        <BarModal
-          header={timeLineTitle}
-          visible={challengeModal.visible}
-          image={timeLineImage}
-          onClose={() =>
-            setChallengeModal((current) => ({ ...current, visible: false }))
-          }
-        />
+          <BarModal
+            header={timeLineTitle}
+            visible={challengeModal.visible}
+            image={timeLineImage}
+            onClose={() =>
+              setChallengeModal((current) => ({ ...current, visible: false }))
+            }
+          />
+        </Pressable>
       </View>
       {bartour && (
         <Text

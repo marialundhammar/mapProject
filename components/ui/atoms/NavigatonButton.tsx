@@ -6,7 +6,7 @@ import {
   getDocs,
   updateDoc,
 } from 'firebase/firestore';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Pressable, Text } from 'react-native';
 import { ContextStore } from '../../../context/ContextStore';
 import { db } from '../../../firebase/firebase';
@@ -52,9 +52,9 @@ const NavigationButton = ({
   const userCollectionRef = collection(db, 'users');
   const userQuery = query(userCollectionRef, where('uid', '==', user.uid));
   const events = useGetEvents(user);
+  let prevBarTours = useGetBarTours(user);
 
   const prevVisitedBars = visitedBars;
-  let prevBarTours = useGetBarTours(user);
 
   if (challenge) {
     setCurrentChallenge(challenge);
@@ -91,12 +91,13 @@ const NavigationButton = ({
     }
 
     if (buttonText === 'Avsluta barrunda ändå') {
+      await addEvents('ended');
       onClose();
       setPageHandler('Profile');
       setVisitedBars([]);
-
       setOnProfile(true);
       setFinishedTour(true);
+
       const querySnapshot = await getDocs(userQuery);
       querySnapshot.forEach(async (doc) => {
         const userDocRef = doc.ref;
@@ -114,7 +115,9 @@ const NavigationButton = ({
             },
             ...prevBarTours,
           ],
-          currentBarTour: {},
+          currentBarTour: {
+            events: [],
+          },
         });
       });
     }

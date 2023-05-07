@@ -19,14 +19,15 @@ const styleModals = StyleSheet.create({
   imageContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyCOntent: 'center',
-    alignItems: 'center',
     marginBottom: 40,
+    alignItems: 'center',
+    width: '100%',
   },
 
   imageContainerBig: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
   },
 
   imageSmall: {

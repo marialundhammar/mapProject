@@ -1,5 +1,6 @@
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { useContext, useState } from 'react';
+
+import { useContext, useEffect, useState } from 'react';
 import { View, Text, Pressable, ScrollView, Image } from 'react-native';
 import mapStyle from '../../../assets/mapStyle';
 import { ContextStore } from '../../../context/ContextStore';
@@ -27,13 +28,16 @@ const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
         setUserData({
           username: data.username,
           finishedTours: data.finishedTours,
-          profileImage: imagePath,
+          profileImage: imagePath?.profileImages,
         });
       }
     });
   };
 
-  getUserInfo(user);
+  useEffect(() => {
+    getUserInfo(user);
+  }, []);
+
   return (
     <>
       <View
@@ -48,13 +52,13 @@ const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
         <View
           style={{
             width: '30%',
-            height: '90%',
+            height: '100%',
             borderRadius: 70,
             marginRight: 12,
           }}
         >
           <Image
-            source={require('../../../assets/pofileImages/livstrom.png')}
+            source={imagePath?.profileImages}
             style={{ width: 120, height: 110, marginTop: 10 }}
           />
         </View>
@@ -64,6 +68,7 @@ const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
             style={{
               flexDirection: 'row',
               alignItems: 'center',
+              flexWrap: 'wrap',
             }}
           >
             <Text style={styleTexts.h3}> Hallå där</Text>
@@ -82,15 +87,16 @@ const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
                 👉 Inga genomförda barrundor ännu
               </Text>
             )}
-            {amountOfTrofees.length > 1 ? (
+            {amountOfTrofees < 1 ? (
+              <Text style={styleTexts.h5}>
+                👉 Samlat på dig {amountOfTrofees.length} stycken troféer{' '}
+              </Text>
+            ) : amountOfTrofees.length > 1 ? (
               <Text style={styleTexts.h5}>
                 👉 Samlat på dig {amountOfTrofees.length} stycken troféer{' '}
               </Text>
             ) : (
-              <Text style={styleTexts.h5}>
-                {' '}
-                👉 Inga troféer insamlade hittills
-              </Text>
+              <Text style={styleTexts.h5}> 👉 En trofé insamlad hittills</Text>
             )}
           </View>
         </View>

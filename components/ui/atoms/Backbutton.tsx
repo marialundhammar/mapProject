@@ -1,20 +1,30 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Pressable, Text } from 'react-native';
 import styleButtons from '../../../styles/styleButtons';
 import { Ionicons } from '@expo/vector-icons';
+import { ContextStore } from '../../../context/ContextStore';
 
 interface BackButtonType {
   navigation: any;
 }
 
 const BackButton = ({ navigation }) => {
+  const { setPageHandler, pageHandler } = useContext(ContextStore);
+
   function handleGoBack() {
     const { canGoBack } = navigation;
     if (canGoBack()) {
       navigation.goBack();
+      if (pageHandler === 'BarTourTimeline') {
+        setPageHandler('Profile');
+      }
+      if (pageHandler === 'Onboarding') {
+        setPageHandler('Home');
+      } else {
+        console.warn('Ingen skärm att gå tillbaka till :( ');
+      }
     } else {
-      console.warn('Ingen skärm att gå tillbaka till :( ');
     }
   }
 

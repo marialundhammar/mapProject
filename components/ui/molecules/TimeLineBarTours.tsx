@@ -59,6 +59,7 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
                 <TimeLineEvent
                   timeLineTitle={item.title}
                   bartour={true}
+                  key={i}
                   /*        timeLineEvents={item.events} */
                   navigation={navigation}
                   events={item.events}
@@ -70,6 +71,7 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
                 <TimeLineEvent
                   timeLineTitle={item.title}
                   bartour={true}
+                  key={i}
                   /*                   timeLineEvents={item.events}
                    */ navigation={navigation}
                   events={item.events}

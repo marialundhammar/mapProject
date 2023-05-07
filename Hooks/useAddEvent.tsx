@@ -89,13 +89,26 @@ const useAddEvent = (user) => {
       case 'started':
         saveEvents(`Kl. ${currentTime} Barrunda startade 💥`, type);
         break;
+      case 'ended':
+        saveEvents(`Kl. ${currentTime} Barrunda tog slut 👻`, type);
+        break;
 
       default:
         saveEvents('random event', type);
     }
   };
 
-  return { loading, addEvents };
+  const addEndedEventAndFetch = async (
+    type: string,
+    bar?: BarType,
+    textInputValue?: string,
+    image?: string
+  ) => {
+    await addEvents('ended');
+    await addEvents(type, bar, textInputValue, image);
+  };
+
+  return { loading, addEvents: addEndedEventAndFetch };
 };
 
 export default useAddEvent;
