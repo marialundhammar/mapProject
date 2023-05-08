@@ -30,6 +30,7 @@ const TimeLine = ({
         title: item.text,
         comment: item.comment,
         image: item.mediaUrl,
+        date: item.createDate,
       });
     });
   } else {
@@ -38,6 +39,7 @@ const TimeLine = ({
         title: item.text,
         comment: item.comment,
         image: item.mediaUrl,
+        date: item.createDate,
       });
     });
   }
@@ -51,10 +53,12 @@ const TimeLine = ({
       }
       onPress={handleOpenTimeLine}
     >
-      <View>
+      <View style={{ width: '90%' }}>
         {eventList.length > 0 ? (
           <View>
-            <Text style={styleTexts.h3}>Tidslinjen </Text>
+            <Text style={[styleTexts.h3, { marginBottom: 8 }]}>
+              Tidslinjen{' '}
+            </Text>
             {showAllEvents || timeLinePage
               ? eventList.map((item, i) => (
                   <TimeLineEvent
@@ -64,7 +68,10 @@ const TimeLine = ({
                     key={i}
                     navigation={navigation}
                     events={undefined}
+                    createDate={item.date}
                     completedBarTour={undefined}
+                    isFirst={i === 0}
+                    isLast={i === eventList.length}
                   />
                 ))
               : eventList
@@ -78,6 +85,9 @@ const TimeLine = ({
                       navigation={navigation}
                       events={undefined}
                       completedBarTour={undefined}
+                      createDate={item.date}
+                      isFirst={i == 0}
+                      isLast={i === eventList.length}
                     />
                   ))}
           </View>

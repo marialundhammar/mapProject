@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Text, View, Image, Pressable } from 'react-native';
+import Svg, { Line } from 'react-native-svg';
+
+import { Text, View, Image, Pressable, Dimensions } from 'react-native';
 import styleTexts from '../../../styles/styleTexts';
 import styleComponents from '../../../styles/styleComponents';
 import { BarModal } from '../molecules/BarModal';
@@ -7,6 +9,7 @@ import styleButtons from '../../../styles/styleButtons';
 import { Entypo } from '@expo/vector-icons';
 import { ContextStore } from '../../../context/ContextStore';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 const TimeLineEvent = ({
   timeLineTitle,
@@ -17,16 +20,18 @@ const TimeLineEvent = ({
   events,
   date = { seconds: 0, nanoseconds: 0 },
   completedBarTour,
+  createDate = '',
+  isFirst = false,
+  isLast = false,
 }) => {
   const [showChallengeModal, setShowChallengeModal] = useState(false);
   const { setPageHandler } = useContext(ContextStore);
   const [showBarTourEvents, setShowBarTourEvents] = useState(false);
 
   console.log('completed', completedBarTour);
+  const { width } = Dimensions.get('window');
 
   const handleNavigate = () => {
-    console.log('bartour', bartour);
-
     setChallengeModal({ visible: true, content: 'hejhejhej' });
   };
 
@@ -51,6 +56,7 @@ const TimeLineEvent = ({
     month: 'long',
     year: 'numeric',
   });
+  console.log('createdate', createDate, events);
 
   return (
     <View>
@@ -62,16 +68,81 @@ const TimeLineEvent = ({
         }
       >
         <Pressable
-          onPress={handleNavigate}
           style={{
-            flexDirection: 'column',
-            justifyContent: 'space-between',
+            flexDirection: 'row',
           }}
         >
-          <View style={bartour ? null : [styleComponents.timeLineEvent]}>
-            <Text style={[styleTexts.h4]}>{timeLineTitle}</Text>
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+              width: '15%',
+              height: 60,
+            }}
+          >
+            {/* {!isLast ? (
+              <Svg height="35%" width="2">
+                <Line
+                  x1="1"
+                  y1="0"
+                  x2="1"
+                  y2="100%"
+                  stroke="white"
+                  strokeWidth="0.5"
+                />
+              </Svg>
+            ) : null} */}
+            <Text style={{ marginTop: 10 }}>
+              <Feather name="circle" size={24} color="#E68383" />
+            </Text>
+
+            {/*    {!isFirst ? (
+              <Svg height="35%" width="2">
+                <Line
+                  x1="1"
+                  y1="0"
+                  x2="1"
+                  y2="100%"
+                  stroke="white"
+                  strokeWidth="0.5"
+                />
+              </Svg>
+            ) : null} */}
           </View>
 
+          <View
+            style={
+              bartour
+                ? null
+                : [styleComponents.timeLineEvent, { marginTop: 14 }]
+            }
+          >
+            <Text style={[styleTexts.miniText]}>{createDate}</Text>
+            <Text style={[styleTexts.h4]}>{timeLineTitle}</Text>
+            <View style={{ flexDirection: 'row' }}>
+              {timeLineImage && (
+                <Image
+                  source={{ uri: timeLineImage }}
+                  style={{
+                    width: 100,
+                    height: 100,
+                    borderRadius: 8,
+                    marginRight: 8,
+                    marginTop: 8,
+                  }}
+                />
+              )}
+              {timeLineComment && (
+                <View style={[styleTexts.bodyText]}>
+                  <Text style={styleTexts.bodyText}>
+                    Kommentar: {timeLineComment}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </View>
           {bartour && (
             <>
               <Text style={[styleTexts.h4]}>Genomfördes: {dateString}</Text>
@@ -83,42 +154,14 @@ const TimeLineEvent = ({
               ) : null}
             </>
           )}
-
           <View
             style={{
-              flexDirection: 'row',
+              flexDirection: 'column',
 
               /*      justifyContent: 'center',
             alignItems: 'center', */
             }}
           >
-            {timeLineImage && (
-              <Image
-                source={{ uri: timeLineImage }}
-                style={{ width: 100, height: 100, borderRadius: 8 }}
-              />
-            )}
-            {timeLineComment && (
-              <View style={[styleTexts.bodyText]}>
-                <Text style={styleTexts.bodyText}>
-                  Kommentar: {timeLineComment}
-                </Text>
-              </View>
-            )}
-            {!bartour && (
-              <Text
-                style={{
-                  color: '#1B274A',
-                  fontSize: 32,
-                  marginLeft: 4,
-                  marginBottom: 4,
-                  fontWeight: 'bold',
-                }}
-              >
-                |
-              </Text>
-            )}
-
             <View
               style={{
                 flexDirection: 'row',
@@ -147,7 +190,6 @@ const TimeLineEvent = ({
               )}
             </View>
           </View>
-
           <BarModal
             header={timeLineTitle}
             visible={challengeModal.visible}

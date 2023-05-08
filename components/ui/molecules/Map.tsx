@@ -13,6 +13,7 @@ import * as TaskManager from 'expo-task-manager';
 
 import { useNotifications } from '../../../Hooks/useNotifications';
 import styleTexts from '../../../styles/styleTexts';
+import styleComponents from '../../../styles/styleComponents';
 
 interface CalculateDistanceFunctionType {
   lat1: number;
@@ -34,6 +35,7 @@ const Map = ({ navigation }) => {
   });
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const [markerLocation, setMarkerLocation] = useState({ x: 0, y: 0 });
+  const [loading, setLoading] = useState(true);
   const [barModal, setBarModal] = useState({ visible: false, content: null });
   const {
     currentBarTour,
@@ -116,17 +118,12 @@ const Map = ({ navigation }) => {
   const checkDistanceToAllBars = async () => {
     const closestBar = getClosestBar();
 
-    console.log('BARMODAL', barModal.visible);
-
     setDistanceBar({
       distance: closestBar.distance,
       name: closestBar.name,
     });
-    console.log('distance', closestBar.distance, currentBar);
 
     if (closestBar.distance < 0.02 && currentBar === null) {
-      console.log('visited bars', visitedBars);
-
       const isAlreadyShown = closestBar.name === latestShownBarModal;
 
       /*       const isAlreadyShown = showedBarModals.some(
@@ -135,9 +132,8 @@ const Map = ({ navigation }) => {
       if (!isAlreadyShown) {
         setBarModal({ visible: true, content: closestBar });
         setLatestShownBarModal(closestBar.name);
-        console.log('HAJJJ');
 
-        //delay(2000);
+        delay(5000);
         //setShowedBarModals([...showedBarModals, closestBar]);
       }
 
@@ -164,20 +160,25 @@ const Map = ({ navigation }) => {
           lat: location.coords.latitude,
           long: location.coords.longitude,
         });
-      }
- */
+      } */
+
       checkDistanceToAllBars();
+      await setLoading(false);
     })();
   }, [userLocation]);
   //add userLocation
 
   const pinColorUser = '#000000';
   const pinColorBar = '#E68383';
-  const pinColorVisited = '#6C87CB';
+  const pinColorVisited = 'blue';
 
   return (
     <>
-      {!currentBar && (
+      {loading && !currentBar ? (
+        <View style={styleComponents.distanceBanner}>
+          <Text style={styleTexts.bodyText}>Hämtar din position ...</Text>
+        </View>
+      ) : (
         <DistanceBanner
           distance={distanceBar.distance}
           barName={distanceBar.name}
@@ -207,13 +208,9 @@ const Map = ({ navigation }) => {
           }}
         >
           {bars.map((bar, i) => {
-            // Check if the current bar is in the visitedBars array
             const isVisited = visitedBars.some(
-              (visitedBar) => visitedBar.id === bar.id
+              (visitedBar) => visitedBar.name === bar.name
             );
-
-            // Set the pinColor based on whether the bar has been visited
-            const pinColor = isVisited ? pinColorVisited : pinColorBar;
 
             return (
               <Marker
@@ -222,7 +219,7 @@ const Map = ({ navigation }) => {
                   longitude: bar.long,
                 }}
                 key={i}
-                pinColor={pinColor}
+                pinColor={isVisited ? pinColorVisited : pinColorBar}
               >
                 <Callout
                   tooltip={true}
@@ -235,6 +232,11 @@ const Map = ({ navigation }) => {
                   }}
                 >
                   <Text style={styleTexts.h3}>{bar.name}</Text>
+                  {isVisited && (
+                    <Text style={styleTexts.miniText}>
+                      Du har redan varit här
+                    </Text>
+                  )}
                 </Callout>
               </Marker>
             );

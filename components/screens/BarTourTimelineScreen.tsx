@@ -15,6 +15,7 @@ const TimelineEvent = ({ event }: TimelineEventProps) => {
 type RouteParams = {
   events: any;
 };
+const currentTime = new Date().toLocaleTimeString();
 
 type BarTourTimelineScreenProps = {
   navigation: any;

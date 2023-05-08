@@ -1,29 +1,9 @@
-//ta ett event
-
-//pushar events
-
-//spara till firebase
-
-//CurrentBarTour ska ha id, name, events, bars
-
-//events: [{ id: '', text: '', type: 'enteredBar/challenge/leftBar', barId: '', createDate: '', mediaUrl:'', mediaType: '' }]
-
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 const useGetEvents = (user) => {
   const [events, setEvents] = useState([]);
-
-  /*   await updateDoc(userDocRef, {
-    finishedTours: [
-      { date: new Date(), events: events, ...currentBarTour },
-      ...prevBarTours,
-    ],
-    currentBarTour: {
-      events: [],
-    },
-  }); */
 
   useEffect(() => {
     const userCollectionRef = collection(db, 'users');

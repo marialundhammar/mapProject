@@ -21,6 +21,7 @@ const MapScreen = ({ navigation }) => {
 
       <View style={styleScreens.mapScreen}>
         <FakeUserLocationButton />
+
         <View style={{ flex: 1 }}>
           <Map navigation={navigation} />
           <View

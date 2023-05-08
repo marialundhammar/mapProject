@@ -82,7 +82,7 @@ const CameraPreview = ({
       {image && !turnOnCamera && (
         <Image
           source={{ uri: image }}
-          style={{ width: 390, height: 400, borderRadius: 8 }}
+          style={{ width: 390, height: 300, borderRadius: 8 }}
         />
       )}
 
@@ -94,7 +94,7 @@ const CameraPreview = ({
           <View
             style={{
               width: 390,
-              height: 250,
+              height: 300,
               justifyContent: 'center',
               alignItems: 'center',
             }}

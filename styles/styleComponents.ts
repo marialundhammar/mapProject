@@ -38,11 +38,7 @@ const styleModals = StyleSheet.create({
   },
 
   timeLineEvent: {
-    backgroundColor: '#1B274A',
-    borderWidth: 0.2,
-    borderColor: 'white',
     marginLeft: 2,
-    padding: 8,
     borderRadius: 8,
     opacity: 0.9,
   },
@@ -97,9 +93,9 @@ const styleModals = StyleSheet.create({
   },
 
   barContentContainer: {
-    width: '95%',
+    width: '100%',
     borderRadius: 8,
-    marginBottom: 16,
+    marginBottom: 32,
     marginTop: 16,
     padding: 8,
   },

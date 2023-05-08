@@ -9,6 +9,7 @@ import styleTexts from '../../../styles/styleTexts';
 import TimeLineEvent from '../atoms/TimeLineEvent';
 import Timer from '../atoms/Timer';
 import { AntDesign } from '@expo/vector-icons';
+import TimeLineEventBarTour from './TimeLineEventBarTour';
 
 interface barTourType {
   title?: string;
@@ -27,7 +28,6 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
 
   if (bartours) {
     bartours.map((item) => {
-      console.log('completedBartorus', item.completedBarTour);
       eventList.push({
         title: `Runda:  ${item.title}`,
         visitedBars: item.bars.length,
@@ -56,7 +56,7 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
 
           {showAllEvents
             ? eventList.map((item, i) => (
-                <TimeLineEvent
+                <TimeLineEventBarTour
                   timeLineTitle={item.title}
                   bartour={true}
                   key={i}
@@ -68,7 +68,7 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
                 />
               ))
             : eventList.slice(0, 3).map((item, i) => (
-                <TimeLineEvent
+                <TimeLineEventBarTour
                   timeLineTitle={item.title}
                   bartour={true}
                   key={i}
@@ -82,23 +82,25 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
         </View>
       )}
 
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Pressable
-          onPress={handleOpenTimeLine}
-          style={styleButtons.buttonDefaultBorder}
-        >
-          {!showAllEvents ? (
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styleTexts.h4}>Se fler barrundor</Text>
-              <Text>
-                <AntDesign name="arrowdown" size={24} color="white" />
-              </Text>
-            </View>
-          ) : (
-            <Text></Text>
-          )}
-        </Pressable>
-      </View>
+      {bartours.length > 0 && (
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Pressable
+            onPress={handleOpenTimeLine}
+            style={styleButtons.buttonDefaultBorder}
+          >
+            {!showAllEvents ? (
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styleTexts.h4}>Se fler barrundor</Text>
+                <Text>
+                  <AntDesign name="arrowdown" size={24} color="white" />
+                </Text>
+              </View>
+            ) : (
+              <Text style={styleTexts.h4}>Stäng</Text>
+            )}
+          </Pressable>
+        </View>
+      )}
     </Pressable>
   );
 };

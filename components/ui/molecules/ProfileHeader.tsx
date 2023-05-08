@@ -71,11 +71,11 @@ const ProfileHeader = ({ amountOfTrofees, imagePath }) => {
               flexWrap: 'wrap',
             }}
           >
-            <Text style={styleTexts.h3}> Hallå där</Text>
-            <Text style={styleTexts.h2}> {userData.username}</Text>
+            <Text style={styleTexts.h2}> Hallå där</Text>
+            <Text style={[styleTexts.h2, ,]}> {userData.username}</Text>
           </View>
 
-          <View style={{ width: '90%' }}>
+          <View style={{ width: '90%', marginLeft: 8 }}>
             {userData.finishedTours ? (
               <Text style={styleTexts.h5}>
                 👉 Du har totalt genomfört {userData.finishedTours.length}{' '}

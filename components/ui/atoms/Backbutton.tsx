@@ -18,11 +18,13 @@ const BackButton = ({ navigation }) => {
       navigation.goBack();
       if (pageHandler === 'BarTourTimeline') {
         setPageHandler('Profile');
+        console.log('PROFILE');
       }
+
       if (pageHandler === 'Onboarding') {
         setPageHandler('Home');
+        console.log('HOME');
       } else {
-        console.warn('Ingen skärm att gå tillbaka till :( ');
       }
     } else {
     }

@@ -34,7 +34,6 @@ import useAddEvent from '../../../Hooks/useAddEvent';
 
 const BottomContainer = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [roundStarted, setRoundIsStarted] = useState(false);
   const {
     currentBarTour,
     setFinishedTour,
@@ -43,6 +42,9 @@ const BottomContainer = ({ navigation }) => {
     user,
     setPageHandler,
     visitedBars,
+    setVisitedBars,
+    setRoundIsStarted,
+    roundStarted,
   } = useContext(ContextStore);
   const [animation] = useState(new Animated.Value(0));
   const arrayOfBars = currentBarTour.bars;
@@ -70,11 +72,7 @@ const BottomContainer = ({ navigation }) => {
   const { addEvents } = useAddEvent(user);
 
   const handleFinishedTour = async () => {
-    console.log('visitedBars', visitedBars.length);
-
     if (visitedBars.length === currentBarTour.numbersOfBars) {
-      console.log('DU har gjort hela rundan');
-
       await addEvents('ended');
 
       setOnProfile(true);
@@ -107,13 +105,13 @@ const BottomContainer = ({ navigation }) => {
       navigation.navigate('Profile');
       setShowFinishedModal({
         visible: true,
-        content: 'Du klarade hela rundan!!',
+        content: 'Du klarade hela rundan!! och har därmed förtjänat en trofé',
       });
     } else {
       console.log('Några stopp kvar');
       setShowFinishedModal({
         visible: true,
-        content: `DU har ju bara besökt ${visitedBars.length} bar. Du har ${
+        content: `Du har ju bara besökt ${visitedBars.length} bar. Du har ${
           currentBarTour.numbersOfBars - visitedBars.length
         } kvar `,
       });
@@ -157,7 +155,9 @@ const BottomContainer = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                   {arrayOfBars.map((bar, i) => (
                     <Text style={[styleTexts.bodyText]} key={i}>
-                      {bar.name} |{' '}
+                      {i === arrayOfBars.length - 1
+                        ? bar.name
+                        : `${bar.name} | `}
                     </Text>
                   ))}
                 </View>

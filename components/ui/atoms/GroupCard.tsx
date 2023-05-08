@@ -24,8 +24,13 @@ type GroupCardType = {
 
 const GroupCard = ({ text, numberOfBars, navigation, area }: GroupCardType) => {
   const [isClicked, setIsClicked] = useState(false);
-  const { user, setCurrentBarTour, setFinishedTour, setPageHandler } =
-    useContext(ContextStore);
+  const {
+    user,
+    setCurrentBarTour,
+    setFinishedTour,
+    setPageHandler,
+    setVisitedBars,
+  } = useContext(ContextStore);
 
   const handleIsClicked = () => {
     setIsClicked(!isClicked);
@@ -39,6 +44,7 @@ const GroupCard = ({ text, numberOfBars, navigation, area }: GroupCardType) => {
     const barTour = arrayOfBarTours.find((bar) => bar.title === text);
 
     setFinishedTour(false);
+    setVisitedBars([]);
 
     setCurrentBarTour(barTour);
 

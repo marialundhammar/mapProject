@@ -36,9 +36,34 @@ const challenge5 = {
   type: 'default',
   mediaType: 'image',
 };
+const challenge6 = {
+  id: 'test-6',
+  name: 'Ta en selfie med ditt sällskap',
+  description: 'Ta en selfie med ditt sällskap inne på caféet',
+  type: 'default',
+  mediaType: 'image',
+};
+const challenge7 = {
+  id: 'test-7',
+  name: 'Beställ något du aldrig beställt förut',
+  description:
+    'Beställ något du aldrig beställt förut, dokumentera beställningen med ett foto :) ',
+  type: 'default',
+  mediaType: 'image',
+};
+const challenge8 = {
+  id: 'test-8',
+  name: 'Gå från caféet ',
+  description:
+    'Gå från caféet men innan du går betygsätt besöket, dokumentera din betygsättning med ett foto',
+  type: 'default',
+  mediaType: 'image',
+};
 
 export const challenges1 = {
   preChallenges: [challenge3],
   countdown: [challenge1, challenge2, challenge3],
 };
 export const challenges2 = [challenge2, challenge3, challenge1, challenge4];
+
+export const challengeKaffe = [challenge6, challenge7, challenge8];

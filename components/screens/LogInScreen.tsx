@@ -3,6 +3,7 @@ import { Pressable, TextInput, View, Text } from 'react-native';
 import styleTexts from '../../styles/styleTexts';
 import styleButtons from '../../styles/styleButtons';
 import styleScreens from '../../styles/styleScreens';
+
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -47,7 +48,6 @@ export default function LogInScreen({ navigation }) {
 
   return (
     <View style={styleScreens.defaultScreen}>
-      {errorMessage && <Text> {errorMessage}</Text>}
       <View style={styleScreens.space}>
         <TextInput
           style={styleTexts.textInput}
@@ -65,6 +65,9 @@ export default function LogInScreen({ navigation }) {
           placeholderTextColor={'#FFD3D3'}
         />
       </View>
+      {errorMessage && (
+        <Text style={[styleTexts.h4, { margin: 8 }]}> {errorMessage}</Text>
+      )}
 
       <LinearGradient
         colors={['#F46D6D', '#CE7C7C']}

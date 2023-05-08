@@ -10,7 +10,7 @@ const BarContent = () => {
 
   return (
     <>
-      <View style={{ paddingBottom: 12, width: '95%' }}>
+      <View style={{ paddingBottom: 12, width: '100%', padding: 8 }}>
         <Text style={styleTexts.h2}>VÄLKOMMEN TILL {currentBar.name}</Text>
         <Text style={styleTexts.bodyText}>{currentBar.description}</Text>
         <View style={{ paddingTop: 24 }}>

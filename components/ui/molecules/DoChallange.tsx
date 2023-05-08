@@ -19,7 +19,7 @@ const DoChallenge = ({ navigation }) => {
         marginTop: 16,
         padding: 8,
         marginBottom: 46,
-        borderColor: '#445385',
+        backgroundColor: '#2A3D78',
       }}
     >
       <Text style={styleTexts.h3}>{currentChallenge.name} </Text>

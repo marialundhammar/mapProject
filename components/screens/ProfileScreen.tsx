@@ -98,10 +98,7 @@ const ProfileScreen = ({ navigation }) => {
       return unsubscribe;
     }, [user]);
   };
-  useEffect(() => {
-    console.log('completedBarTours:', completedBarTours);
-    console.log('allBarTours:', allBarTours);
-  }, [completedBarTours, allBarTours]);
+  useEffect(() => {}, [completedBarTours, allBarTours]);
   getBarTours();
 
   const renderLightboxContent = (index) => {

@@ -85,8 +85,8 @@ const PhotoStream = ({ path }) => {
           </View>
         </View>
       ) : (
-        <View>
-          <Text style={styleTexts.h2}>Första gången här? skärpning</Text>
+        <View style={{ width: '95%' }}>
+          <Text style={styleTexts.h2}>Inga foton tagna här ännu</Text>
         </View>
       )}
     </>

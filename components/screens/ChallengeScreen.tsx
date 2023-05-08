@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { View, Text, Pressable, TextInput, Keyboard } from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  TextInput,
+  Keyboard,
+  SafeAreaView,
+} from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
@@ -115,7 +122,7 @@ const ChallengeScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styleScreens.defaultScreen}>
+    <SafeAreaView style={styleScreens.defaultScreen}>
       {!turnOnCamera && (
         <View
           style={[
@@ -151,7 +158,7 @@ const ChallengeScreen = ({ navigation }) => {
               numberOfLines={4}
               onChangeText={(text) => setTextInputValue(text)}
               onSubmitEditing={() => Keyboard.dismiss()}
-              placeholder="Ingen kommentar ännu 😡"
+              placeholder="Skriv en kommentar till bilden så du inte glömmer bort 🧠 "
               placeholderTextColor={'white'}
             />
           </View>
@@ -181,7 +188,7 @@ const ChallengeScreen = ({ navigation }) => {
           />
         </>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

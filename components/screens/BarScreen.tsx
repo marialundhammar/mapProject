@@ -9,7 +9,7 @@ import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
 import Map from '../ui/molecules/Map';
 import BarContent from '../ui/molecules/BarContent';
-import { challenges2 } from '../../configs/challenges';
+import { challenges2, challengeKaffe } from '../../configs/challenges';
 import PhotoStream from '../ui/molecules/PhotoStream';
 
 const BarScreen = ({ navigation }) => {
@@ -31,10 +31,12 @@ const BarScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    let challenge = challenges2[Math.floor(Math.random() * challenges2.length)];
+    let challenge =
+      challengeKaffe[Math.floor(Math.random() * challengeKaffe.length)];
 
     while (checkIfCompleted(challenge)) {
-      challenge = challenges2[Math.floor(Math.random() * challenges2.length)];
+      challenge =
+        challengeKaffe[Math.floor(Math.random() * challengeKaffe.length)];
     }
     setCurrentChallenge(challenge);
 
@@ -75,22 +77,21 @@ const BarScreen = ({ navigation }) => {
                 }}
               >
                 <BarContent />
+                {showChallenge && (
+                  <View style={{ paddingTop: 36, width: '98%' }}>
+                    <Text style={styleTexts.h3}>Utmaning </Text>
+                    <DoChallenge navigation={navigation} />
+                  </View>
+                )}
 
                 <TimeLine
                   navigation={navigation}
                   events={undefined}
                   profilePage={undefined}
                 />
-                {showChallenge && (
-                  <View style={{ paddingTop: 24, width: '95%' }}>
-                    <Text style={styleTexts.h3}>
-                      Mellan ölklunkarna, gör en utmaning?{' '}
-                    </Text>
-                    <DoChallenge navigation={navigation} />
-                  </View>
-                )}
-
-                <PhotoStream path={`${user.email}/${currentBar.name}`} />
+                <View>
+                  <PhotoStream path={`${user.email}/${currentBar.name}`} />
+                </View>
               </View>
             </ScrollView>
             <View

@@ -26,6 +26,7 @@ const useAddEvent = (user) => {
 
   const prevEvents = useGetEvents(user);
   const currentTime = new Date().toLocaleTimeString();
+
   const { currentBar, setCurrentBar, currentChallenge } =
     useContext(ContextStore);
 
@@ -71,15 +72,15 @@ const useAddEvent = (user) => {
 
     switch (type) {
       case 'leftBar':
-        saveEvents(`${currentTime} - lämnade ${currentBar.name}`, type);
+        saveEvents(`Lämnade ${currentBar.name}`, type);
         break;
       case 'enteredBar':
-        saveEvents(`${currentTime} - kom till baren  ${bar.name} `, type);
+        saveEvents(`Kom till baren ${bar.name} `, type);
         break;
 
       case 'challenge':
         saveEvents(
-          `Kl. ${currentTime} genomförde utmaningen:  ${currentChallenge.name}`,
+          `Gjorde utmaningen: ${currentChallenge.name}`,
           type,
           textInputValue,
           image
@@ -87,10 +88,10 @@ const useAddEvent = (user) => {
         break;
 
       case 'started':
-        saveEvents(`Kl. ${currentTime} Barrunda startade 💥`, type);
+        saveEvents(`Barrunda startade`, type);
         break;
       case 'ended':
-        saveEvents(`Kl. ${currentTime} Barrunda tog slut 👻`, type);
+        saveEvents(`Barrunda tog slut 👻`, type);
         break;
 
       default:
@@ -98,17 +99,7 @@ const useAddEvent = (user) => {
     }
   };
 
-  const addEndedEventAndFetch = async (
-    type: string,
-    bar?: BarType,
-    textInputValue?: string,
-    image?: string
-  ) => {
-    await addEvents('ended');
-    await addEvents(type, bar, textInputValue, image);
-  };
-
-  return { loading, addEvents: addEndedEventAndFetch };
+  return { loading, addEvents };
 };
 
 export default useAddEvent;

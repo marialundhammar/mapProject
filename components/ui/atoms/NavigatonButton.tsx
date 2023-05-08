@@ -85,8 +85,6 @@ const NavigationButton = ({
       const uniqueBars = visitedBars.filter((item, index) => {
         return visitedBars.findIndex((obj) => obj.name === item.name) === index;
       });
-
-      console.log('uniqBArs', uniqueBars.length);
       setVisitedBars(uniqueBars);
     }
 
@@ -94,9 +92,15 @@ const NavigationButton = ({
       await addEvents('ended');
       onClose();
       setPageHandler('Profile');
-      setVisitedBars([]);
+      setCurrentBar(null);
       setOnProfile(true);
       setFinishedTour(true);
+      const currentTime = new Date().toLocaleTimeString();
+
+      const newEvents = [
+        { text: `Barrunda avslutades✨!`, createDate: currentTime },
+        ...events,
+      ];
 
       const querySnapshot = await getDocs(userQuery);
       querySnapshot.forEach(async (doc) => {
@@ -109,7 +113,7 @@ const NavigationButton = ({
           finishedTours: [
             {
               date: new Date(),
-              events: events,
+              events: newEvents,
               completedBarTour: false,
               ...currentBarTour,
             },

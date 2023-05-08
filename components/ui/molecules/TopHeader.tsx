@@ -61,16 +61,19 @@ const TopHeader = ({ navigation, showBackButton }) => {
   };
 
   const handleGoBack = () => {
+    console.log('pagehandler', pageHandler);
+
     if (canGoBack()) {
+      if (pageHandler === 'BarTourTimeLine') {
+        setPageHandler('Profile');
+      }
+      if (pageHandler === 'Onboarding') {
+        setPageHandler('Home');
+      } else {
+        console.log('HEJJJJ');
+      }
+
       navigation.goBack();
-    }
-    if (pageHandler === 'BarTourTimeline') {
-      setPageHandler('Profile');
-    }
-    if (pageHandler === 'Onboarding') {
-      setPageHandler('Home');
-    } else {
-      console.warn('Ingen skärm att gå tillbaka till :( ');
     }
   };
 
@@ -98,9 +101,15 @@ const TopHeader = ({ navigation, showBackButton }) => {
           </Pressable>
         )}
 
-        {showBackButton && !roundStarted && (
+        {showBackButton && (
           <>
-            <BackButton navigation={navigation} />
+            <Pressable onPress={handleGoBack}>
+              <View style={{ padding: 4 }}>
+                <Text style={styleButtons.buttonBackText}>
+                  <Ionicons name="arrow-back" size={24} color="#FFD3D3" />
+                </Text>
+              </View>
+            </Pressable>
           </>
         )}
         {pageHandler === 'Map' && !currentBarTour && (
@@ -136,7 +145,7 @@ const TopHeader = ({ navigation, showBackButton }) => {
           </Pressable>
         )}
       </View>
-      {currentBar && (
+      {currentBar && pageHandler === 'Bar' && (
         <View style={{ width: '100%' }}>
           <BarMapNavigation navigation={navigation} />
         </View>

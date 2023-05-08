@@ -19,17 +19,17 @@ const FakeUserLocationButton = () => {
     <View>
       <Pressable
         onPress={() =>
-          changeUserLocation(55.59527933905798, 13.014008625214757)
+          changeUserLocation(55.59512476877623, 13.016939408784317)
         }
       >
-        <Text style={styleTexts.h3}>COOOP</Text>
+        <Text style={styleTexts.h3}>Jord</Text>
       </Pressable>
       <Pressable
         onPress={() =>
-          changeUserLocation(55.59475798918193, 13.015231712511566)
+          changeUserLocation(55.59667918264727, 13.014283064563864)
         }
       >
-        <Text style={styleTexts.h3}>VIN VANJAS</Text>
+        <Text style={styleTexts.h3}>Söderberg</Text>
       </Pressable>
     </View>
   );
