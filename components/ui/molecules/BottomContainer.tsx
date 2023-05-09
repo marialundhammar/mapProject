@@ -74,8 +74,7 @@ const BottomContainer = ({ navigation }) => {
   const handleFinishedTour = async () => {
     if (visitedBars.length === currentBarTour.numbersOfBars) {
       await addEvents('ended');
-
-      setOnProfile(true);
+      setRoundIsStarted(false), setOnProfile(true);
       setFinishedTour(true);
       const querySnapshot = await getDocs(userQuery);
       querySnapshot.forEach(async (doc) => {
@@ -89,7 +88,6 @@ const BottomContainer = ({ navigation }) => {
             {
               date: new Date(),
               events: events,
-
               completedBarTour: true,
               ...currentBarTour,
             },

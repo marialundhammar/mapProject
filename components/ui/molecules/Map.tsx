@@ -149,7 +149,7 @@ const Map = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
-      /*       let { status } = await Location.requestForegroundPermissionsAsync();
+      /*      let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setStatus('Permission to access location was denied');
         return;

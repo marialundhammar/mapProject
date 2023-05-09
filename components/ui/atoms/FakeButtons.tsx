@@ -25,6 +25,7 @@ const FakeUserLocationButton = () => {
         <Text style={styleTexts.h3}>Jord</Text>
       </Pressable>
       <Pressable
+        style={{ borderWidth: 2, borderColor: 'pink' }}
         onPress={() =>
           changeUserLocation(55.59667918264727, 13.014283064563864)
         }

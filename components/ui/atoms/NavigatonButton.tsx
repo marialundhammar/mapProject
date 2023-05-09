@@ -44,6 +44,7 @@ const NavigationButton = ({
     setOnHome,
     setVisitedBars,
     visitedBars,
+    setRoundIsStarted,
   } = useContext(ContextStore);
 
   const { addEvents } = useAddEvent(user);
@@ -90,8 +91,7 @@ const NavigationButton = ({
 
     if (buttonText === 'Avsluta barrunda ändå') {
       await addEvents('ended');
-      onClose();
-      setPageHandler('Profile');
+      setRoundIsStarted(false), onClose();
       setCurrentBar(null);
       setOnProfile(true);
       setFinishedTour(true);
@@ -125,6 +125,7 @@ const NavigationButton = ({
         });
       });
     }
+    setPageHandler('Profile');
 
     navigation.navigate(navigateTo);
   };

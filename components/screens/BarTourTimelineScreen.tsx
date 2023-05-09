@@ -33,22 +33,23 @@ const BarTourTimelineScreen = ({
   return (
     <SafeAreaView style={{ backgroundColor: '#000826' }}>
       <LinearGradient colors={['#020B29', '#334F96']}>
-        <TopHeader navigation={navigation} showBackButton={true} />
-
-        <View
-          style={{
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            height: '100%',
-          }}
-        >
-          <TimeLine
-            events={events}
-            navigation={navigation}
-            profilePage={true}
-            timeLinePage={true}
-          />
-        </View>
+        <ScrollView style={{ height: '100%' }}>
+          <TopHeader navigation={navigation} showBackButton={true} />
+          <View
+            style={{
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              height: '100%',
+            }}
+          >
+            <TimeLine
+              events={events}
+              navigation={navigation}
+              profilePage={true}
+              timeLinePage={true}
+            />
+          </View>
+        </ScrollView>
       </LinearGradient>
     </SafeAreaView>
   );
