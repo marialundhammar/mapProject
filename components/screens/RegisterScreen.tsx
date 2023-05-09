@@ -17,6 +17,8 @@ const RegisterScreen = ({ navigation }) => {
   const [emailOk, setEmailOk] = useState(false);
   const [usernameOk, setUsernameOk] = useState(false);
   const [profileImage, setProfileImage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
 
   const resetForm = () => {
     setEmail('');
@@ -48,9 +50,24 @@ const RegisterScreen = ({ navigation }) => {
     }
   };
 
-  console.log('profileImages', profileImages);
+  const validatePassword = (value) => {
+    let error;
+    if (!value) {
+      error = 'Required';
+    } else if (value.length < 8) {
+      error = 'Password must be at least 8 characters';
+    } else if (!/[a-z]/.test(value)) {
+      error = 'Password must contain at least one lowercase letter';
+    } else if (!/\d/.test(value)) {
+      error = 'Password must contain at least one number';
+    }
+    setErrorMessage(error);
+    console.log(error);
+    return error;
+  };
 
   const signUpUser = async (email, password, username) => {
+    setLoading(true);
     await validateEmail(email);
 
     console.log(errorMessage);
@@ -75,6 +92,8 @@ const RegisterScreen = ({ navigation }) => {
       await resetForm();
       await navigation.navigate('LogIn');
     }
+
+    setLoading(false);
   };
 
   const onChangeEmail = async (text) => {
@@ -87,36 +106,40 @@ const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
     onChangeEmail(email);
     validateUsername(username);
-  }, [email, username]);
+    validatePassword(password);
+  }, [email, username, password]);
 
   return (
     <View style={styleScreens.defaultScreen}>
-      <TextInput
-        autoCapitalize="none"
-        style={styleTexts.textInput}
-        placeholder="Användarnam"
-        onChangeText={(text) => setUsername(text)}
-        value={username}
-        placeholderTextColor={'#FFD3D3'}
-      />
-      <TextInput
-        style={styleTexts.textInput}
-        placeholder="Email"
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-        placeholderTextColor={'#FFD3D3'}
-        autoCapitalize="none"
-      />
+      <View style={{ margin: 12 }}>
+        <TextInput
+          autoCapitalize="none"
+          style={styleTexts.textInput}
+          placeholder="Användarnam"
+          onChangeText={(text) => setUsername(text)}
+          value={username}
+          placeholderTextColor={'#FFD3D3'}
+        />
+        <TextInput
+          style={styleTexts.textInput}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text.toLowerCase())}
+          value={email}
+          placeholderTextColor={'#FFD3D3'}
+          autoCapitalize="none"
+        />
 
-      <TextInput
-        autoCapitalize="none"
-        style={styleTexts.textInput}
-        placeholder="Password"
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        secureTextEntry
-        placeholderTextColor={'#FFD3D3'}
-      />
+        <TextInput
+          autoCapitalize="none"
+          style={styleTexts.textInput}
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secureTextEntry
+          placeholderTextColor={'#FFD3D3'}
+        />
+      </View>
+
       <Pressable
         disabled={!emailOk}
         onPress={() => signUpUser(email, password, username)}
@@ -129,18 +152,20 @@ const RegisterScreen = ({ navigation }) => {
               : styleButtons.buttonDisable
           }
         >
-          <Text style={styleButtons.buttonDefaultText}>REGGA MIG</Text>
+          {loading ? (
+            <Text style={styleButtons.buttonDefaultText}>Registrerar dig</Text>
+          ) : (
+            <Text style={styleButtons.buttonDefaultText}>REGGA MIG</Text>
+          )}
         </LinearGradient>
       </Pressable>
-      <Pressable onPress={() => navigation.navigate('LogIn')}>
-        <LinearGradient
-          colors={['#F46D6D', '#CE7C7C']}
-          style={[styleButtons.buttonDefault, { marginTop: 12 }]}
-        >
-          <Text style={styleButtons.buttonDefaultText}>
-            Tillbaka till logga in
-          </Text>
-        </LinearGradient>
+      <Pressable
+        onPress={() => navigation.navigate('LogIn')}
+        style={[styleButtons.buttonDefaultBorder, { marginTop: 12 }]}
+      >
+        <Text style={styleButtons.buttonDefaultText}>
+          Tillbaka till logga in
+        </Text>
       </Pressable>
     </View>
   );

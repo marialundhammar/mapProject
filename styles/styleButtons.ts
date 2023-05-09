@@ -45,10 +45,9 @@ const styleButtons = StyleSheet.create({
     width: 224,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
+    borderRadius: 8,
     padding: 8,
     paddingTop: 12,
-    marginTop: 24,
     opacity: 0.4,
   },
 
