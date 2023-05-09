@@ -37,10 +37,7 @@ const Button = ({
       }}
     >
       {!isOpen && (
-        <Pressable
-          onPress={handlePressable}
-          style={{ borderWidth: 4, borderColor: 'green' }}
-        >
+        <Pressable onPress={handlePressable}>
           <LinearGradient
             colors={isFilled ? ['#F46D6D', '#CE7C7C'] : []}
             style={

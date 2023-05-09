@@ -82,34 +82,9 @@ const TimeLineEvent = ({
               height: 60,
             }}
           >
-            {/* {!isLast ? (
-              <Svg height="35%" width="2">
-                <Line
-                  x1="1"
-                  y1="0"
-                  x2="1"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="0.5"
-                />
-              </Svg>
-            ) : null} */}
             <Text style={{ marginTop: 10 }}>
               <Feather name="circle" size={24} color="#E68383" />
             </Text>
-
-            {/*    {!isFirst ? (
-              <Svg height="35%" width="2">
-                <Line
-                  x1="1"
-                  y1="0"
-                  x2="1"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="0.5"
-                />
-              </Svg>
-            ) : null} */}
           </View>
 
           <View

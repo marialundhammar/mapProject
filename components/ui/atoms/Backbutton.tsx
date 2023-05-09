@@ -32,10 +32,7 @@ const BackButton = ({ navigation }) => {
 
   return (
     <View>
-      <Pressable
-        onPress={handleGoBack}
-        style={{ borderWidth: 4, borderColor: 'green' }}
-      >
+      <Pressable onPress={handleGoBack}>
         <View style={{ padding: 4 }}>
           <Text style={styleButtons.buttonBackText}>
             <Ionicons name="arrow-back" size={24} color="#FFD3D3" />

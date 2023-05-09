@@ -90,19 +90,18 @@ const TopHeader = ({ navigation, showBackButton }) => {
         }}
       >
         {(pageHandler === 'Home' || pageHandler === 'Map') && (
-          <Pressable
-            onPress={onPressProfile}
-            style={{ borderWidth: 3, borderColor: 'green' }}
-          >
+          <Pressable onPress={onPressProfile}>
+            <FontAwesome5 name="user" size={24} color="#FFD3D3" />
+          </Pressable>
+        )}
+        {pageHandler === 'Onboarding' && (
+          <Pressable onPress={onPressProfile}>
             <FontAwesome5 name="user" size={24} color="#FFD3D3" />
           </Pressable>
         )}
 
         {pageHandler === 'Profile' && !finishedTour && currentBarTour && (
-          <Pressable
-            onPress={onPressMap}
-            style={{ borderWidth: 3, borderColor: 'green' }}
-          >
+          <Pressable onPress={onPressMap}>
             <Entypo name="map" size={28} color="#FFD3D3" />
           </Pressable>
         )}

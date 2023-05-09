@@ -84,14 +84,14 @@ const BarScreen = ({ navigation }) => {
                     navigation={navigation}
                     showChallenge={showChallenge}
                   />
-                </View>
 
-                <TimeLine
-                  navigation={navigation}
-                  events={undefined}
-                  profilePage={undefined}
-                />
-                <View>
+                  <TimeLine
+                    navigation={navigation}
+                    events={undefined}
+                    profilePage={undefined}
+                  />
+                </View>
+                <View style={{ width: '100%' }}>
                   <PhotoStream path={`${user.email}/${currentBar.name}`} />
                 </View>
               </View>

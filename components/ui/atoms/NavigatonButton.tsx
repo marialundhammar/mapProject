@@ -63,8 +63,8 @@ const NavigationButton = ({
 
   const handleNavigation = async () => {
     if (buttonText === 'SKAPA RUNDA') {
-      setOnHome(false);
       setPageHandler('Onboarding');
+      setOnHome(false);
     }
 
     if (buttonText === 'Yes det stämmer') {

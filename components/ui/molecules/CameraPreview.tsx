@@ -1,5 +1,13 @@
-import React, { useRef } from 'react';
-import { View, Text, Image, TouchableOpacity, Pressable } from 'react-native';
+import React, { useRef, useState } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Pressable,
+  TextInput,
+  Keyboard,
+} from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import { LinearGradient } from 'expo-linear-gradient';
 import styleButtons from '../../../styles/styleButtons';
@@ -13,7 +21,16 @@ const CameraPreview = ({
   takePic,
   toggleCameraType,
   cameraRef,
+  setTextInputValue,
 }) => {
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+  const handleTouchOutside = () => {
+    if (isKeyboardOpen) {
+      Keyboard.dismiss();
+      setIsKeyboardOpen(false);
+    }
+  };
   return (
     <View>
       {turnOnCamera && !image && (
@@ -80,10 +97,49 @@ const CameraPreview = ({
       )}
 
       {image && !turnOnCamera && (
-        <Image
-          source={{ uri: image }}
-          style={{ width: 390, height: 300, borderRadius: 8 }}
-        />
+        <View
+          style={{
+            width: '100%',
+            height: 300,
+            position: 'relative',
+          }}
+        >
+          <Image
+            source={{ uri: image }}
+            style={{
+              width: 390,
+              height: 300,
+              borderRadius: 8,
+            }}
+          />
+
+          <TextInput
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              width: 390,
+              height: 100,
+              backgroundColor: 'rgba(230, 131, 131, 0.7)',
+              color: '#E68383',
+              paddingLeft: 10,
+              paddingRight: 10,
+              paddingTop: 5,
+              paddingBottom: 5,
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 8,
+              borderBottomLeftRadius: 8,
+            }}
+            multiline={true}
+            numberOfLines={4}
+            onSubmitEditing={() => Keyboard.dismiss()}
+            placeholder="Kommentera fotot så du inte glömmer vad i helvete du tänkte 🧠 "
+            placeholderTextColor={'white'}
+            onChangeText={(text) => setTextInputValue(text)}
+            onFocus={() => setIsKeyboardOpen(true)}
+            onPressOut={handleTouchOutside}
+          />
+        </View>
       )}
 
       {!turnOnCamera && !image && (

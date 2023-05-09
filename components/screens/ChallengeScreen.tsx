@@ -78,8 +78,6 @@ const ChallengeScreen = ({ navigation }) => {
     }).then((snapshot) => {});
     const url = await getDownloadURL(storageRef);
 
-    console.log('URL', url);
-
     await setImage(url);
 
     addEvents('challenge', currentBar, textInputValue, url);
@@ -122,7 +120,15 @@ const ChallengeScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styleScreens.defaultScreen}>
+    <SafeAreaView
+      style={{
+        backgroundColor: '#000826',
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        flexDirection: 'column',
+      }}
+    >
       {!turnOnCamera && (
         <View
           style={[
@@ -130,64 +136,85 @@ const ChallengeScreen = ({ navigation }) => {
             {
               flexDirection: 'columns',
               justifyContent: 'center',
-              marginBottom: 12,
-              width: '92%',
+              marginBottom: 4,
+              marginTop: 12,
+              width: '100%',
             },
           ]}
         >
-          <Text style={styleTexts.h2}>{currentChallenge.name}</Text>
-          <Text style={styleTexts.h3}>{currentChallenge.description}</Text>
+          <View
+            style={{
+              backgroundColor: '#E68383',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: 2,
+              paddingBottom: 2,
+              width: '100%',
+              marginBottom: 12,
+            }}
+          >
+            <Text style={[styleTexts.h1, { alignItems: 'center' }]}>
+              UTMANING
+            </Text>
+          </View>
+
+          <View style={{ margin: 8 }}>
+            <Text style={styleTexts.h2}>{currentChallenge.name}</Text>
+            <Text style={styleTexts.h4}>{currentChallenge.description}</Text>
+          </View>
         </View>
       )}
 
-      <CameraPreview
-        type={type}
-        image={image}
-        turnOnCamera={turnOnCamera}
-        onClick={() => setTurnOnCamera(!turnOnCamera)}
-        takePic={takePic}
-        toggleCameraType={toggleCameraType}
-        cameraRef={cameraRef}
-      />
-      {!turnOnCamera && (
-        <>
-          <View style={styleComponents.barContentContainer}>
-            <TextInput
-              style={[styleTexts.bodyText, styleComponents.height150]}
-              multiline={true}
-              numberOfLines={4}
-              onChangeText={(text) => setTextInputValue(text)}
-              onSubmitEditing={() => Keyboard.dismiss()}
-              placeholder="Skriv en kommentar till bilden så du inte glömmer bort 🧠 "
-              placeholderTextColor={'white'}
+      <View
+        style={{
+          width: '100%',
+          height: turnOnCamera ? '100%' : '75%',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+        }}
+      >
+        <CameraPreview
+          type={type}
+          image={image}
+          turnOnCamera={turnOnCamera}
+          onClick={() => setTurnOnCamera(!turnOnCamera)}
+          takePic={takePic}
+          toggleCameraType={toggleCameraType}
+          cameraRef={cameraRef}
+          setTextInputValue={setTextInputValue}
+        />
+        {!turnOnCamera && (
+          <View style={{ justifyContent: 'flex-end', alignItems: 'center' }}>
+            {!isSaveDisabled ? (
+              <Pressable
+                onPress={handleSaveChallenge}
+                disabled={isSaveDisabled}
+              >
+                <LinearGradient
+                  colors={['#F46D6D', '#CE7C7C']}
+                  style={styleButtons.buttonDefault}
+                >
+                  <Text style={styleButtons.buttonDefaultText}>
+                    SAVE FOR LATER
+                  </Text>
+                </LinearGradient>
+              </Pressable>
+            ) : (
+              <Text style={styleTexts.bodyText}>
+                Du måste ladda upp en bild först för att kunna spara utmaningen,
+                vad är annars poängen?{' '}
+              </Text>
+            )}
+            <Button
+              navigation={navigation}
+              navigateTo={'Bar'}
+              buttonText={'Skit i det här'}
+              isFilled={false}
             />
           </View>
-
-          {!isSaveDisabled ? (
-            <Pressable onPress={handleSaveChallenge} disabled={isSaveDisabled}>
-              <LinearGradient
-                colors={['#F46D6D', '#CE7C7C']}
-                style={styleButtons.buttonDefault}
-              >
-                <Text style={styleButtons.buttonDefaultText}>
-                  SAVE FOR LATER
-                </Text>
-              </LinearGradient>
-            </Pressable>
-          ) : (
-            <Text style={[styleTexts.h4, { marginBottom: 12, width: '95%' }]}>
-              Du måste ladda upp en bild först för att kunna spara utmaningen,
-              vad är annars poängen?{' '}
-            </Text>
-          )}
-          <Button
-            navigation={navigation}
-            navigateTo={'Bar'}
-            buttonText={'Skit i det här'}
-            isFilled={false}
-          />
-        </>
-      )}
+        )}
+      </View>
     </SafeAreaView>
   );
 };

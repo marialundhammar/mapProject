@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, SafeAreaView } from 'react-native';
 import styleScreens from '../../styles/styleScreens';
 import Progressbar from '../ui/molecules/Progressbar';
 import StepOne from '../ui/organisms/StepOne';
@@ -25,9 +25,7 @@ const OnboardingScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <TopHeader navigation={navigation} showBackButton={true} />
-
+    <SafeAreaView style={{ backgroundColor: '#000826' }}>
       <View style={styleScreens.onboardingScreen}>
         <Progressbar />
         {step === 1 ? (
@@ -58,7 +56,7 @@ const OnboardingScreen = ({ navigation }) => {
           </View>
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

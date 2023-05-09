@@ -102,8 +102,6 @@ const styleModals = StyleSheet.create({
 
   topHeader: {
     flexDirection: 'row',
-    borderWidth: 3,
-    borderColor: 'pink',
     alignItems: 'center',
     backgroundColor: '#000826',
     width: '100%',

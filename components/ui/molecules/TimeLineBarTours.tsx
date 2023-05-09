@@ -82,7 +82,7 @@ const TimeLineBarTours = ({ navigation, bartours }) => {
         </View>
       )}
 
-      {bartours.length > 0 && (
+      {bartours.length > 3 && (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Pressable
             onPress={handleOpenTimeLine}
