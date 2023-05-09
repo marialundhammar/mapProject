@@ -29,7 +29,6 @@ const BarScreen = ({ navigation }) => {
       return checkChallenge.name === challenge.name;
     });
   };
-
   useEffect(() => {
     let challenge =
       challengeKaffe[Math.floor(Math.random() * challengeKaffe.length)];
@@ -38,9 +37,10 @@ const BarScreen = ({ navigation }) => {
       challenge =
         challengeKaffe[Math.floor(Math.random() * challengeKaffe.length)];
     }
+
     setCurrentChallenge(challenge);
 
-    if (completedChallenges.length == challenges2.length - 1) {
+    if (completedChallenges.length === challengeKaffe.length - 1) {
       setShowChallenge(false);
     }
   }, [completedChallenges]);
@@ -77,12 +77,14 @@ const BarScreen = ({ navigation }) => {
                 }}
               >
                 <BarContent />
-                {showChallenge && (
-                  <View style={{ paddingTop: 36, width: '98%' }}>
-                    <Text style={styleTexts.h3}>Utmaning </Text>
-                    <DoChallenge navigation={navigation} />
-                  </View>
-                )}
+
+                <View style={{ paddingTop: 36, width: '98%' }}>
+                  <Text style={styleTexts.h3}>Utmaning </Text>
+                  <DoChallenge
+                    navigation={navigation}
+                    showChallenge={showChallenge}
+                  />
+                </View>
 
                 <TimeLine
                   navigation={navigation}

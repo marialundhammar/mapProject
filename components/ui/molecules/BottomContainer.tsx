@@ -170,7 +170,7 @@ const BottomContainer = ({ navigation }) => {
                     />
 
                     <Pressable
-                      style={styleButtons.buttonDefaultBorder}
+                      style={[styleButtons.buttonDefaultBorder]}
                       onPress={() => navigation.navigate('Home')}
                     >
                       <Text style={styleButtons.buttonDefaultText}>
@@ -209,16 +209,19 @@ const BottomContainer = ({ navigation }) => {
                       {currentBarTour.title}
                     </Text>
                     <View style={[styleComponents.centered, { marginTop: 8 }]}>
-                      <Pressable onPress={handleFinishedTour}>
-                        <LinearGradient
-                          colors={['#F46D6D', '#CE7C7C']}
-                          style={styleButtons.buttonDefault}
+                      <LinearGradient
+                        colors={['#F46D6D', '#CE7C7C']}
+                        style={styleButtons.buttonDefault}
+                      >
+                        <Pressable
+                          onPress={handleFinishedTour}
+                          style={[styleButtons.buttonDefault]}
                         >
                           <Text style={styleButtons.buttonDefaultText}>
                             AVSLUTA RUNDA
                           </Text>
-                        </LinearGradient>
-                      </Pressable>
+                        </Pressable>
+                      </LinearGradient>
                     </View>
                   </Pressable>
                 </Animated.View>

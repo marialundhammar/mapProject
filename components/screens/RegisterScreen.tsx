@@ -117,32 +117,31 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
         placeholderTextColor={'#FFD3D3'}
       />
-
-      <LinearGradient
-        colors={['#F46D6D', '#CE7C7C']}
-        style={
-          emailOk && usernameOk
-            ? styleButtons.buttonDefault
-            : styleButtons.buttonDisable
-        }
+      <Pressable
+        disabled={!emailOk}
+        onPress={() => signUpUser(email, password, username)}
       >
-        <Pressable
-          disabled={!emailOk}
-          onPress={() => signUpUser(email, password, username)}
+        <LinearGradient
+          colors={['#F46D6D', '#CE7C7C']}
+          style={
+            emailOk && usernameOk
+              ? styleButtons.buttonDefault
+              : styleButtons.buttonDisable
+          }
         >
           <Text style={styleButtons.buttonDefaultText}>REGGA MIG</Text>
-        </Pressable>
-      </LinearGradient>
-      <LinearGradient
-        colors={['#F46D6D', '#CE7C7C']}
-        style={[styleButtons.buttonDefault, { marginTop: 12 }]}
-      >
-        <Pressable onPress={() => navigation.navigate('LogIn')}>
+        </LinearGradient>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate('LogIn')}>
+        <LinearGradient
+          colors={['#F46D6D', '#CE7C7C']}
+          style={[styleButtons.buttonDefault, { marginTop: 12 }]}
+        >
           <Text style={styleButtons.buttonDefaultText}>
             Tillbaka till logga in
           </Text>
-        </Pressable>
-      </LinearGradient>
+        </LinearGradient>
+      </Pressable>
     </View>
   );
 };

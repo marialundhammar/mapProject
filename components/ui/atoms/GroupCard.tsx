@@ -30,6 +30,7 @@ const GroupCard = ({ text, numberOfBars, navigation, area }: GroupCardType) => {
     setFinishedTour,
     setPageHandler,
     setVisitedBars,
+    setCompletedChallenges,
   } = useContext(ContextStore);
 
   const handleIsClicked = () => {
@@ -45,6 +46,7 @@ const GroupCard = ({ text, numberOfBars, navigation, area }: GroupCardType) => {
 
     setFinishedTour(false);
     setVisitedBars([]);
+    setCompletedChallenges([]);
 
     setCurrentBarTour(barTour);
 

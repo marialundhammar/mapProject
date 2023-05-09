@@ -68,15 +68,14 @@ export default function LogInScreen({ navigation }) {
       {errorMessage && (
         <Text style={[styleTexts.h4, { margin: 8 }]}> {errorMessage}</Text>
       )}
-
-      <LinearGradient
-        colors={['#F46D6D', '#CE7C7C']}
-        style={styleButtons.buttonDefault}
-      >
-        <Pressable onPress={() => logInUser(auth, email, password)}>
+      <Pressable onPress={() => logInUser(auth, email, password)}>
+        <LinearGradient
+          colors={['#F46D6D', '#CE7C7C']}
+          style={styleButtons.buttonDefault}
+        >
           <Text style={styleButtons.buttonDefaultText}>LOGGA IN</Text>
-        </Pressable>
-      </LinearGradient>
+        </LinearGradient>
+      </Pressable>
 
       <View style={styleScreens.bottom}>
         <Text style={styleTexts.bodyText}>Inte medlem än? </Text>
