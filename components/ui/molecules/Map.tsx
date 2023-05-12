@@ -10,7 +10,7 @@ import { ContextStore } from '../../../context/ContextStore';
 import { BarType } from '../../../types';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
-
+import { Audio } from 'expo-av';
 import { useNotifications } from '../../../Hooks/useNotifications';
 import styleTexts from '../../../styles/styleTexts';
 import styleComponents from '../../../styles/styleComponents';
@@ -36,6 +36,7 @@ const Map = ({ navigation }) => {
   const [showMarkerModal, setShowMarkerModal] = useState(false);
   const [markerLocation, setMarkerLocation] = useState({ x: 0, y: 0 });
   const [loading, setLoading] = useState(true);
+  const [sound, setSound] = useState(null);
   const [barModal, setBarModal] = useState({ visible: false, content: null });
   const {
     currentBarTour,
@@ -58,42 +59,9 @@ const Map = ({ navigation }) => {
   const { sendNotificationOnBar } = useNotifications();
   const LOCATION_TASK_NAME = 'background-location-task';
   const mapView = useRef(null);
-  /* 
-  TaskManager.defineTask('locationTask', async ({ data, error }) => {
-    if (error) {
-      console.log('TaskManager error:', error);
-      return;
-    }
-    if (data) {
-      console.log('data', data);
-    
-      const { latitude, longitude } = data.coords;
-      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`); 
-      // Do something with the location data
-    }
-  });
-
-  const startLocationTracking = async () => {
-    let { status } = await Location.requestBackgroundPermissionsAsync();
-    if (status !== 'granted') {
-      console.log('Permission to access location was denied');
-      return;
-    }
-    await Location.startLocationUpdatesAsync('locationTask', {
-      accuracy: Location.Accuracy.Highest,
-      timeInterval: 60 * 1000, // 1 minute
-      distanceInterval: 0, // minimum distance
-      deferredUpdatesInterval: 0, // minimum time between updates
-      foregroundService: {
-        notificationTitle: 'Location tracking',
-        notificationBody: 'Location tracking is running',
-      },
-    });
-  };
-  startLocationTracking();*/
 
   const bars = currentBarTour.bars;
-  const getClosestBar = () => {
+  /*   const getClosestBar = () => {
     const closeBars = bars
       .map((bar) => ({
         lat: bar.lat,
@@ -113,17 +81,77 @@ const Map = ({ navigation }) => {
       });
 
     return closeBars[0];
+  }; */
+
+  const getClosestBar = () => {
+    const visitedBarNames = visitedBars.map((bar) => bar.name);
+    const closeBars = bars
+      .filter((bar) => !visitedBarNames.includes(bar.name)) // filter out visited bars
+      .map((bar) => ({
+        lat: bar.lat,
+        long: bar.long,
+        name: bar.name,
+        description: bar.description,
+        image: bar.image,
+        distance: calculateDistanceFunction({
+          lat1: userLocation.lat,
+          lon1: userLocation.long,
+          lat2: bar.lat,
+          lon2: bar.long,
+        }),
+      }))
+      .sort((a, b) => {
+        return a.distance - b.distance;
+      });
+
+    return closeBars[0]; // return the second closest bar (i.e., the one with index 1)
+  };
+
+  /*   const getSecondClosestBar = () => {
+    const closeBars = bars
+      .map((bar) => ({
+        lat: bar.lat,
+        long: bar.long,
+        name: bar.name,
+        description: bar.description,
+        image: bar.image,
+        distance: calculateDistanceFunction({
+          lat1: userLocation.lat,
+          lon1: userLocation.long,
+          lat2: bar.lat,
+          lon2: bar.long,
+        }),
+      }))
+      .sort((a, b) => {
+        return a.distance - b.distance;
+      });
+
+    return closeBars[1];
+  };
+ */
+  const playSound = async () => {
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync(
+      require('../../../assets/yay.mp3')
+    );
+    setSound(sound);
+
+    console.log('Playing Sound');
+    await sound.playAsync();
   };
 
   const checkDistanceToAllBars = async () => {
     const closestBar = getClosestBar();
+    //const secondClosest = getSecondClosestBar();
+    console.log('visitedBars', visitedBars);
 
+    console.log(`${closestBar.name} has not been visited yet.`);
     setDistanceBar({
       distance: closestBar.distance,
       name: closestBar.name,
     });
 
-    if (closestBar.distance < 0.02 && currentBar === null) {
+    if (closestBar.distance < 0.04 && currentBar === null) {
       const isAlreadyShown = closestBar.name === latestShownBarModal;
 
       /*       const isAlreadyShown = showedBarModals.some(
@@ -132,8 +160,9 @@ const Map = ({ navigation }) => {
       if (!isAlreadyShown) {
         setBarModal({ visible: true, content: closestBar });
         setLatestShownBarModal(closestBar.name);
-
-        delay(5000);
+        playSound();
+        /* 
+        delay(5000); */
         //setShowedBarModals([...showedBarModals, closestBar]);
       }
 
@@ -149,7 +178,7 @@ const Map = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       //requestForeground -> only when the app is on, requestBackground while the app is running in the background
-      /*      let { status } = await Location.requestForegroundPermissionsAsync();
+      let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setStatus('Permission to access location was denied');
         return;
@@ -160,13 +189,22 @@ const Map = ({ navigation }) => {
           lat: location.coords.latitude,
           long: location.coords.longitude,
         });
-      } */
+      }
 
       checkDistanceToAllBars();
       await setLoading(false);
     })();
   }, [userLocation]);
   //add userLocation
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log('Unloading Sound');
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
 
   const pinColorUser = '#000000';
   const pinColorBar = '#E68383';

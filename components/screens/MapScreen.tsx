@@ -20,8 +20,8 @@ const MapScreen = ({ navigation }) => {
       <TopHeader navigation={navigation} showBackButton={false} />
 
       <View style={styleScreens.mapScreen}>
-        <FakeUserLocationButton />
-
+        {/*         <FakeUserLocationButton />
+         */}
         <View style={{ flex: 1 }}>
           <Map navigation={navigation} />
           <View

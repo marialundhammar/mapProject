@@ -40,7 +40,6 @@ const NavigationButton = ({
     setCurrentBar,
     user,
     currentBarTour,
-    setOnBar,
     setOnHome,
     setVisitedBars,
     visitedBars,
@@ -68,9 +67,8 @@ const NavigationButton = ({
     }
 
     if (buttonText === 'Yes det stämmer') {
-      await setCurrentBar(currentBar);
       setPageHandler('Bar');
-      console.log('currentbar', currentBar);
+      await setCurrentBar(currentBar);
 
       onClose();
       addEvents('enteredBar', currentBar);

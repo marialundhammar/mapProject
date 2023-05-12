@@ -2,14 +2,13 @@ import { BarType } from '../types';
 
 export const arrayOfBars: BarType[] = [
   {
-    lat: 55.59120904137383,
-    long: 13.009875047105016,
+    lat: 55.59281458578127,
+    long: 13.0141872113387,
     name: 'Far i Hatten',
     id: 'far-i-hatten',
     image: require('../assets/far-i-hatten.jpeg'),
     description:
-      'Mitt i Folketspark hittar du Far i hatten. Här kan du supa dig full på TT för 56kr, Leeeets goooo',
-    challenges: 3,
+      'Hälsa på oss i vår härliga varma restaurang och bar mitt i stugan i Malmö Folkets Park där vi har öppet året runt och fröjdas på den stora och mysiga uteserveringen alla våra öppna timmar! ',
   },
   {
     lat: 55.59332727265217,
@@ -81,5 +80,36 @@ export const arrayOfBars: BarType[] = [
     image: require('../assets/barimages/soderberg-sara.jpeg'),
     description:
       'Söderberg & Sara St Knut, Mäster Danielsgatan 3,  Malmö, 040-125810',
+  },
+  {
+    lat: 55.59335060030541,
+    long: 13.007744630683153,
+    name: 'Malmö Brewing Co & Taproom',
+    address: 'Bergsgatan 33, 214 22 Malmö',
+    id: 'taproom',
+    image: require('../assets/barimages/soderberg-sara.jpeg'),
+    description:
+      'Starting in 2010 we’ve seen the local craft beer community grow from a few enthusiasts to a vibrant local beer scene with an increasing number of local breweries more bars and restaurants serving craft beer. Everyone adding their personality and ideas to make it an even bigger and better community.',
+  },
+
+  {
+    lat: 55.59231690347305,
+    long: 13.008762114986359,
+    name: 'Scandwich',
+    address: 'Kristianstadsgatan 7B, 214 23 Malmö',
+    id: 'scandwich',
+    image: require('../assets/barimages/taproom.png'),
+    description:
+      'Mackorna vi gör på Scandwich är inte så mycket mackor i betydelsen "mackor", utan mackor i betydelsen "väldigt matiga mackor". Tänk alltså inte i termer av ost, skinka, tomat och smör. Tänk i termer av långbakad fläsksida, syltade citroner, smulad yoghurt och kimchimajjo för att förstå vad det är vi gör. Och kom ihåg: det är STOR skillnad på macka och macka.',
+  },
+  {
+    lat: 55.593224210540946,
+    long: 13.01636896900369,
+    name: 'Terassen',
+    address: 'Listergatan 3, 214 36 Malmö',
+    id: 'terassen',
+    image: require('../assets/barimages/terassen.png'),
+    description:
+      'I närheten av Folketspark ligger detta lite undangömda och hemliga ställe. Välkommen hit! OBS!! Adressen är Listergatan 3, Koden är 2747 ',
   },
 ];

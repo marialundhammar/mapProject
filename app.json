@@ -1,9 +1,14 @@
 {
   "icon": "./assets/loga-second.png",
   "expo": {
+    "splash": {
+      "backgroundColor": "#000826",
+      "image": "./assets/laddar.png",
+      "resizeMode": "contain"
+    },
+
     "icon": "./assets/loga-second.png",
     "notification": {
-      "icon": "./assets/loga-second.png",
       "color": "#311b92"
     },
     "UIBackgroundModes": ["location", "fetch"],
@@ -35,17 +40,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
-    "splash": {
-      "backgroundColor": "#000826",
-      "image": "./assets/laddar.png",
-      "resizeMode": "contain"
-    },
+
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "icon": "./assets/loga-next.png",
+      "icon": "./assets/laddar.png",
+
       "supportsTablet": true,
       "bundleIdentifier": "com.mariah4ara.Map",
       "config": {

@@ -55,7 +55,6 @@ const DoChallenge = ({ navigation, showChallenge }) => {
         </View>
       )}
     </View>
-    // </LinearGradient>
   );
 };
 

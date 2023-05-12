@@ -41,14 +41,15 @@ const TopHeader = ({ navigation, showBackButton }) => {
   };
 
   const onPressMap = () => {
-    if (currentBar) {
+    console.log('currentbar', currentBar, pageHandler);
+
+    /*   if (currentBar) {
       navigation.navigate('Bar');
       setPageHandler('Bar');
     }
-    if (!currentBar) {
-      setPageHandler('Map');
-      navigation.navigate('Map');
-    }
+    if (!currentBar) { */
+    setPageHandler('Map');
+    navigation.navigate('Map');
   };
 
   const onPressGenerate = () => {

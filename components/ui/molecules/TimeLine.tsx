@@ -53,12 +53,15 @@ const TimeLine = ({
       }
       onPress={handleOpenTimeLine}
     >
-      <View style={{ width: '90%' }}>
+      <View style={{ width: '95%' }}>
         {eventList.length > 0 ? (
           <View>
-            <Text style={[styleTexts.h3, { marginBottom: 8 }]}>
-              Tidslinjen{' '}
-            </Text>
+            <>
+              <Text style={[styleTexts.h3, { marginBottom: 8 }]}>
+                Tidslinjen{' '}
+              </Text>
+            </>
+
             {showAllEvents || timeLinePage
               ? eventList.map((item, i) => (
                   <TimeLineEvent
@@ -90,6 +93,16 @@ const TimeLine = ({
                       isLast={i === eventList.length}
                     />
                   ))}
+
+            <View style={{ alignItems: 'center' }}>
+              {eventList.length > 3 && !showAllEvents && (
+                <Text style={[styleTexts.bodyText]}> Se fler event </Text>
+              )}
+
+              {eventList.length < 3 && !showAllEvents && (
+                <Text style={[styleTexts.bodyText]}> Stäng</Text>
+              )}
+            </View>
           </View>
         ) : (
           <>
@@ -97,12 +110,6 @@ const TimeLine = ({
           </>
         )}
       </View>
-
-      {showAllEvents && (
-        <Pressable onPress={handleOpenTimeLine}>
-          <Text> Stäng</Text>
-        </Pressable>
-      )}
     </Pressable>
   );
 };

@@ -126,19 +126,20 @@ export const BarModal = ({
                   </>
                 )}
 
-              {visitedBars?.length === currentBarTour?.numbersOfBars && (
-                <>
-                  <Text style={styleTexts.h5}>{currentBarTour.title}</Text>
-                  <Image
-                    style={styleComponents.imageSmall}
-                    source={
-                      arrayOfBarTours.find(
-                        (barTour) => barTour.title === currentBarTour.title
-                      ).trofee
-                    }
-                  />
-                </>
-              )}
+              {visitedBars?.length === currentBarTour?.numbersOfBars &&
+                finishedRound && (
+                  <>
+                    <Text style={styleTexts.h5}>{currentBarTour.title}</Text>
+                    <Image
+                      style={styleComponents.imageSmall}
+                      source={
+                        arrayOfBarTours.find(
+                          (barTour) => barTour.title === currentBarTour.title
+                        ).trofee
+                      }
+                    />
+                  </>
+                )}
             </View>
           </View>
         </View>

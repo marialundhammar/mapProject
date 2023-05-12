@@ -1,5 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { ScrollView, View, Text, Image, SafeAreaView } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+  Pressable,
+} from 'react-native';
 import { arrayOfBarTours } from '../../configs/barTours';
 import styleScreens from '../../styles/styleScreens';
 import styleTexts from '../../styles/styleTexts';
@@ -9,6 +16,8 @@ import TopHeader from '../ui/molecules/TopHeader';
 import { ContextStore } from '../../context/ContextStore';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import styleButtons from '../../styles/styleButtons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function HomeScreen({ navigation }) {
   const { user } = useContext(ContextStore);
@@ -18,11 +27,20 @@ export default function HomeScreen({ navigation }) {
       <TopHeader navigation={navigation} showBackButton={false} />
 
       <View style={styleScreens.halfScreenTop}>
-        <Button
-          navigation={navigation}
-          navigateTo={'Onboarding'}
-          buttonText={'SKAPA RUNDA'}
-        />
+        <View
+          style={{
+            padding: 8,
+          }}
+        >
+          <Pressable>
+            <LinearGradient
+              colors={['#F46D6D', '#CE7C7C']}
+              style={styleButtons.buttonDefault}
+            >
+              <Text style={styleButtons.buttonDefaultText}>SKAPA RUNDA </Text>
+            </LinearGradient>
+          </Pressable>
+        </View>
       </View>
 
       <View
@@ -33,7 +51,7 @@ export default function HomeScreen({ navigation }) {
           zIndex: 200,
           bottom: -200,
           marginLeft: '5%',
-          height: '70%',
+          height: '80%',
           paddingTop: 20,
         }}
       >
@@ -80,7 +98,7 @@ export default function HomeScreen({ navigation }) {
 
       <Image
         style={{
-          height: 400,
+          height: 440,
           width: '105%',
           position: 'absolute',
           bottom: '20%',

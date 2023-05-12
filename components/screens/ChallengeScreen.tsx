@@ -195,9 +195,7 @@ const ChallengeScreen = ({ navigation }) => {
                   colors={['#F46D6D', '#CE7C7C']}
                   style={styleButtons.buttonDefault}
                 >
-                  <Text style={styleButtons.buttonDefaultText}>
-                    SAVE FOR LATER
-                  </Text>
+                  <Text style={styleButtons.buttonDefaultText}>SPARA</Text>
                 </LinearGradient>
               </Pressable>
             ) : (

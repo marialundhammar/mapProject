@@ -4,16 +4,16 @@ import { arrayOfBars } from '../configs/bars';
 export const arrayOfBarTours: BarTourTypes[] = [
   {
     title: 'TALKATIVERUNDAN <3',
-    numbersOfBars: 4,
-    bars: [arrayOfBars[0], arrayOfBars[1], arrayOfBars[2], arrayOfBars[3]],
+    numbersOfBars: 3,
+    bars: [arrayOfBars[9], arrayOfBars[0], arrayOfBars[11]],
     description: 'Det här är den bästa rundan enligt oss/ Talkative',
     trofee: require('../assets/trofees/talkativerundan.png'),
     area: 'Möllan',
   },
   {
     title: 'Snabbisen',
-    numbersOfBars: 2,
-    bars: [arrayOfBars[0], arrayOfBars[1]],
+    numbersOfBars: 1,
+    bars: [arrayOfBars[9]],
     trofee: require('../assets/trofees/snabbisen.png'),
     area: 'Möllan',
   },

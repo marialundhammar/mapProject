@@ -9,7 +9,7 @@ import TimeLine from '../ui/molecules/TimeLine';
 import TopHeader from '../ui/molecules/TopHeader';
 import Map from '../ui/molecules/Map';
 import BarContent from '../ui/molecules/BarContent';
-import { challenges2, challengeKaffe } from '../../configs/challenges';
+import { challengesTalkative } from '../../configs/challenges';
 import PhotoStream from '../ui/molecules/PhotoStream';
 
 const BarScreen = ({ navigation }) => {
@@ -31,16 +31,20 @@ const BarScreen = ({ navigation }) => {
   };
   useEffect(() => {
     let challenge =
-      challengeKaffe[Math.floor(Math.random() * challengeKaffe.length)];
+      challengesTalkative[
+        Math.floor(Math.random() * challengesTalkative.length)
+      ];
 
     while (checkIfCompleted(challenge)) {
       challenge =
-        challengeKaffe[Math.floor(Math.random() * challengeKaffe.length)];
+        challengesTalkative[
+          Math.floor(Math.random() * challengesTalkative.length)
+        ];
     }
 
     setCurrentChallenge(challenge);
 
-    if (completedChallenges.length === challengeKaffe.length - 1) {
+    if (completedChallenges.length === challengesTalkative.length - 1) {
       setShowChallenge(false);
     }
   }, [completedChallenges]);
@@ -70,7 +74,7 @@ const BarScreen = ({ navigation }) => {
               <View
                 style={{
                   flex: 1,
-                  paddingTop: 42,
+                  paddingTop: 16,
                   width: '100%',
                   justifyContent: 'center',
                   alignItems: 'center',

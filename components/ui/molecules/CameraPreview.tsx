@@ -120,7 +120,7 @@ const CameraPreview = ({
               width: 390,
               height: 100,
               backgroundColor: 'rgba(230, 131, 131, 0.7)',
-              color: '#E68383',
+              color: 'black',
               paddingLeft: 10,
               paddingRight: 10,
               paddingTop: 5,

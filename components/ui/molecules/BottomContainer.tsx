@@ -31,6 +31,7 @@ import useGetBarTours from '../../../Hooks/useGetBarTours';
 import useGetEvents from '../../../Hooks/useGetEvents';
 import { BarModal } from './BarModal';
 import useAddEvent from '../../../Hooks/useAddEvent';
+import { AntDesign } from '@expo/vector-icons';
 
 const BottomContainer = ({ navigation }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -139,7 +140,18 @@ const BottomContainer = ({ navigation }) => {
                     flexWrap: 'wrap',
                   }}
                 >
-                  <Text style={styleTexts.h2}>{currentBarTour.title}</Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Text style={styleTexts.h2}>{currentBarTour.title}</Text>
+                    <Text style={[styleTexts.bodyText, { marginRight: 8 }]}>
+                      <AntDesign name="arrowdown" size={24} color="#FFD3D3" />
+                    </Text>
+                  </View>
+
                   <Text style={styleTexts.bodyText}>
                     Antal stopp {currentBarTour.numbersOfBars}
                   </Text>
@@ -198,16 +210,27 @@ const BottomContainer = ({ navigation }) => {
                   style={[{ transform: [{ translateY: translateY }] }]}
                 >
                   <Pressable onPress={() => setIsOpen(false)}>
-                    <Text
-                      style={[
-                        styleTexts.h2,
-                        {
-                          marginBottom: 12,
-                        },
-                      ]}
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}
                     >
-                      {currentBarTour.title}
-                    </Text>
+                      <Text
+                        style={[
+                          styleTexts.h2,
+                          {
+                            marginBottom: 12,
+                          },
+                        ]}
+                      >
+                        {currentBarTour.title}
+                      </Text>
+                      <Text style={[styleTexts.bodyText, { marginRight: 8 }]}>
+                        <AntDesign name="arrowup" size={24} color="#FFD3D3" />
+                      </Text>
+                    </View>
+
                     <View style={[styleComponents.centered, { marginTop: 8 }]}>
                       <LinearGradient
                         colors={['#F46D6D', '#CE7C7C']}
